@@ -4,6 +4,8 @@
  */
 
 import { prisma } from "./prisma";
+import * as Prisma from "@prismagen/client";
+import * as db from "./db";
 import { slugify } from "./utils";
 import type {
     GuildRank,
@@ -626,7 +628,7 @@ export async function deleteAllOfficialData() {
 
     for (const table of tables) {
         try {
-            await (table as { deleteMany: (args: { where: { official: boolean } }) => Promise<unknown> }).deleteMany({
+            await (table as unknown as { deleteMany: (args: { where: { official: boolean } }) => Promise<unknown> }).deleteMany({
                 where: { official: true },
             });
         } catch {

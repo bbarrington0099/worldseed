@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "./prisma";
+import * as Prisma from "@prismagen/client";
 import { CACHE_TAGS } from "./constants";
 import { slugify } from "./utils";
 
@@ -472,25 +473,33 @@ export async function getProfessions() {
 export async function getAvailableProfessions(continentId?: string, townId?: string) {
     const professions = await prisma.nPCProfession.findMany({
         include: {
-            restrictedToContinents: true,
-            restrictedToTowns: true,
+            restrictedToContinents: {
+                include: {
+                    continent: true,
+                },
+            },
+            restrictedToTowns: {
+                include: {
+                    town: true,
+                },
+            },
         },
     });
 
-    return professions.filter((profession: any) => {
+    return professions.filter((profession) => {
         if (profession.restrictionType === "UNRESTRICTED") {
             return true;
         }
 
         if (profession.restrictionType === "CONTINENT" && continentId) {
             return profession.restrictedToContinents.some(
-                (r: any) => r.continentId === continentId
+                (r) => r.continent.id === continentId
             );
         }
 
         if (profession.restrictionType === "TOWN" && townId) {
             return profession.restrictedToTowns.some(
-                (r: any) => r.townId === townId
+                (r) => r.town.id === townId
             );
         }
 

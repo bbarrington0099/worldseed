@@ -47,13 +47,11 @@ $colors-skeleton-base: #1c2029;
 $colors-skeleton-shine: #2a2e38;
 $colors-skeleton-light-base: #e0d9c8;
 $colors-skeleton-light-shine: #f5f0e6;
-
 // FONTS
 $fonts-family-display: 'Cinzel', 'Times New Roman', serif;
 $fonts-family-body: 'Lora', 'Georgia', serif;
 $fonts-family-ui: 'Source Sans 3', 'Segoe UI', sans-serif;
 $fonts-family-mono: 'JetBrains Mono', 'Consolas', monospace;
-
 // SPACING
 $spacing-xs: 0.25rem;
 $spacing-sm: 0.5rem;
@@ -62,30 +60,25 @@ $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
 $spacing-2xl: 3rem;
 $spacing-3xl: 4rem;
-
 // BREAKPOINTS
-$breakpoints-sm: 640px;
-$breakpoints-md: 768px;
-$breakpoints-lg: 1024px;
-$breakpoints-xl: 1280px;
-$breakpoints-2xl: 1536px;
-
+$breakpoints-sm: 640;
+$breakpoints-md: 768;
+$breakpoints-lg: 1024;
+$breakpoints-xl: 1280;
+$breakpoints-2xl: 1536;
 // SHADOWS
 $shadows-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
 $shadows-md: 0 4px 6px rgba(0, 0, 0, 0.4);
 $shadows-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
 $shadows-glow-gold: 0 0 20px rgba(201, 162, 39, 0.4);
 $shadows-glow-mystic: 0 0 20px rgba(74, 63, 107, 0.4);
-
 // TRANSITIONS
 $transitions-fast: 150ms ease;
 $transitions-normal: 250ms ease;
 $transitions-slow: 400ms ease;
-
 // RADII
 $radii-sm: 4px;
 $radii-md: 8px;
 $radii-lg: 12px;
 $radii-xl: 16px;
 $radii-full: 9999px;
-

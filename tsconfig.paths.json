@@ -1,22 +1,13 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
         "paths": {
-            "@/*": [
-                "./*"
-            ],
-            "@components/*": [
-                "./app/_components/*"
-            ],
-            "@actions/*": [
-                "./app/_actions/*"
-            ],
-            "@lib/*": [
-                "./lib/*"
-            ],
-            "@prismagen/*": [
-                "./generated/prisma/*"
-            ]
+            "@components/*": ["./app/_components/*"],
+            "@common/*": ["./app/_components/common/*"],
+            "@actions/*": ["./app/_actions/*"],
+            "@lib/*": ["./lib/*"],
+            "@prismagen/*": ["./generated/prisma/*"],
+            "@prisma/*": ["./node_modules/@prisma/*"],
+            "@/*": ["./*"]
         }
     }
 }

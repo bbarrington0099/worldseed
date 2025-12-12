@@ -1,23 +1,13 @@
 import type { NextConfig } from "next";
 
+export const isDev = process.env.NODE_ENV === 'development';
+
 const nextConfig: NextConfig = {
-    experimental: {
-        ppr: "incremental",
-        dynamicIO: true,
-    },
-    images: {
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "utfs.io",
-                pathname: "/f/*",
-            },
-        ],
-    },
-    sassOptions: {
-        silenceDeprecations: ["legacy-js-api"],
-    },
+  reactCompiler: true,
+  cacheComponents: true,
+  experimental: {
+    browserDebugInfoInTerminal: true,
+  }
 };
 
 export default nextConfig;
-
