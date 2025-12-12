@@ -1,13 +1,22 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./app/_components/*"],
-      "@actions/*": ["./app/_actions/*"],
-      "@lib/*": ["./lib/*"],
-      "@prismagen/*": ["./generated/prisma/*"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./*"
+            ],
+            "@components/*": [
+                "./app/_components/*"
+            ],
+            "@actions/*": [
+                "./app/_actions/*"
+            ],
+            "@lib/*": [
+                "./lib/*"
+            ],
+            "@prismagen/*": [
+                "./generated/prisma/*"
+            ]
+        }
     }
-  }
 }
-

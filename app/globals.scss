@@ -5,220 +5,240 @@
 
 // CSS Custom Properties (for runtime theme switching)
 :root {
-  // Default to dark mode
-  --color-bg-primary: #{$colors-bg-primary};
-  --color-bg-secondary: #{$colors-bg-secondary};
-  --color-bg-tertiary: #{$colors-bg-tertiary};
-  --color-bg-elevated: #{$colors-bg-elevated};
-  --color-fg-primary: #{$colors-fg-primary};
-  --color-fg-secondary: #{$colors-fg-secondary};
-  --color-fg-tertiary: #{$colors-fg-tertiary};
-  --color-border-primary: #{$colors-border-primary};
-  --color-border-secondary: #{$colors-border-secondary};
-  --color-skeleton-base: #{$colors-skeleton-base};
-  --color-skeleton-shine: #{$colors-skeleton-shine};
-  
-  // Accent colors (same in both modes)
-  --color-accent-gold: #{$colors-accent-gold};
-  --color-accent-gold-dim: #{$colors-accent-gold-dim};
-  --color-accent-gold-glow: #{$colors-accent-gold-glow};
-  --color-accent-crimson: #{$colors-accent-crimson};
-  --color-accent-forest: #{$colors-accent-forest};
-  --color-accent-mystic: #{$colors-accent-mystic};
-  --color-accent-ocean: #{$colors-accent-ocean};
-  --color-accent-ember: #{$colors-accent-ember};
-  --color-border-accent: #{$colors-border-accent};
-  
-  // Status colors
-  --color-status-success: #{$colors-status-success};
-  --color-status-warning: #{$colors-status-warning};
-  --color-status-error: #{$colors-status-error};
-  --color-status-info: #{$colors-status-info};
-  
-  // Rank colors
-  --color-rank-coal: #{$colors-rank-coal};
-  --color-rank-copper: #{$colors-rank-copper};
-  --color-rank-iron: #{$colors-rank-iron};
-  --color-rank-silver: #{$colors-rank-silver};
-  --color-rank-gold: #{$colors-rank-gold};
-  --color-rank-platinum: #{$colors-rank-platinum};
-  --color-rank-mithral: #{$colors-rank-mithral};
-  
-  // Influence levels
-  --color-influence-minor: #{$colors-influence-minor};
-  --color-influence-moderate: #{$colors-influence-moderate};
-  --color-influence-major: #{$colors-influence-major};
-  --color-influence-dominant: #{$colors-influence-dominant};
-  --color-influence-hidden: #{$colors-influence-hidden};
-  
-  // Typography
-  --font-display: #{$fonts-family-display};
-  --font-body: #{$fonts-family-body};
-  --font-ui: #{$fonts-family-ui};
-  --font-mono: #{$fonts-family-mono};
-  
-  // Spacing
-  --spacing-xs: #{$spacing-xs};
-  --spacing-sm: #{$spacing-sm};
-  --spacing-md: #{$spacing-md};
-  --spacing-lg: #{$spacing-lg};
-  --spacing-xl: #{$spacing-xl};
-  --spacing-2xl: #{$spacing-2xl};
-  --spacing-3xl: #{$spacing-3xl};
-  
-  // Shadows
-  --shadow-sm: #{$shadows-sm};
-  --shadow-md: #{$shadows-md};
-  --shadow-lg: #{$shadows-lg};
-  --shadow-glow-gold: #{$shadows-glow-gold};
-  --shadow-glow-mystic: #{$shadows-glow-mystic};
-  
-  // Transitions
-  --transition-fast: #{$transitions-fast};
-  --transition-normal: #{$transitions-normal};
-  --transition-slow: #{$transitions-slow};
-  
-  // Border radius
-  --radius-sm: #{$radii-sm};
-  --radius-md: #{$radii-md};
-  --radius-lg: #{$radii-lg};
-  --radius-xl: #{$radii-xl};
-  --radius-full: #{$radii-full};
+    // Default to dark mode
+    --color-bg-primary: #{$colors-bg-primary};
+    --color-bg-secondary: #{$colors-bg-secondary};
+    --color-bg-tertiary: #{$colors-bg-tertiary};
+    --color-bg-elevated: #{$colors-bg-elevated};
+    --color-fg-primary: #{$colors-fg-primary};
+    --color-fg-secondary: #{$colors-fg-secondary};
+    --color-fg-tertiary: #{$colors-fg-tertiary};
+    --color-border-primary: #{$colors-border-primary};
+    --color-border-secondary: #{$colors-border-secondary};
+    --color-skeleton-base: #{$colors-skeleton-base};
+    --color-skeleton-shine: #{$colors-skeleton-shine};
+
+    // Accent colors (same in both modes)
+    --color-accent-gold: #{$colors-accent-gold};
+    --color-accent-gold-dim: #{$colors-accent-gold-dim};
+    --color-accent-gold-glow: #{$colors-accent-gold-glow};
+    --color-accent-crimson: #{$colors-accent-crimson};
+    --color-accent-forest: #{$colors-accent-forest};
+    --color-accent-mystic: #{$colors-accent-mystic};
+    --color-accent-ocean: #{$colors-accent-ocean};
+    --color-accent-ember: #{$colors-accent-ember};
+    --color-border-accent: #{$colors-border-accent};
+
+    // Status colors
+    --color-status-success: #{$colors-status-success};
+    --color-status-warning: #{$colors-status-warning};
+    --color-status-error: #{$colors-status-error};
+    --color-status-info: #{$colors-status-info};
+
+    // Rank colors
+    --color-rank-coal: #{$colors-rank-coal};
+    --color-rank-copper: #{$colors-rank-copper};
+    --color-rank-iron: #{$colors-rank-iron};
+    --color-rank-silver: #{$colors-rank-silver};
+    --color-rank-gold: #{$colors-rank-gold};
+    --color-rank-platinum: #{$colors-rank-platinum};
+    --color-rank-mithral: #{$colors-rank-mithral};
+
+    // Influence levels
+    --color-influence-minor: #{$colors-influence-minor};
+    --color-influence-moderate: #{$colors-influence-moderate};
+    --color-influence-major: #{$colors-influence-major};
+    --color-influence-dominant: #{$colors-influence-dominant};
+    --color-influence-hidden: #{$colors-influence-hidden};
+
+    // Typography
+    --font-display: #{$fonts-family-display};
+    --font-body: #{$fonts-family-body};
+    --font-ui: #{$fonts-family-ui};
+    --font-mono: #{$fonts-family-mono};
+
+    // Spacing
+    --spacing-xs: #{$spacing-xs};
+    --spacing-sm: #{$spacing-sm};
+    --spacing-md: #{$spacing-md};
+    --spacing-lg: #{$spacing-lg};
+    --spacing-xl: #{$spacing-xl};
+    --spacing-2xl: #{$spacing-2xl};
+    --spacing-3xl: #{$spacing-3xl};
+
+    // Shadows
+    --shadow-sm: #{$shadows-sm};
+    --shadow-md: #{$shadows-md};
+    --shadow-lg: #{$shadows-lg};
+    --shadow-glow-gold: #{$shadows-glow-gold};
+    --shadow-glow-mystic: #{$shadows-glow-mystic};
+
+    // Transitions
+    --transition-fast: #{$transitions-fast};
+    --transition-normal: #{$transitions-normal};
+    --transition-slow: #{$transitions-slow};
+
+    // Border radius
+    --radius-sm: #{$radii-sm};
+    --radius-md: #{$radii-md};
+    --radius-lg: #{$radii-lg};
+    --radius-xl: #{$radii-xl};
+    --radius-full: #{$radii-full};
 }
 
 // Light mode theme
 [data-theme="light"] {
-  --color-bg-primary: #{$colors-bg-light-primary};
-  --color-bg-secondary: #{$colors-bg-light-secondary};
-  --color-bg-tertiary: #{$colors-bg-light-tertiary};
-  --color-bg-elevated: #{$colors-bg-light-elevated};
-  --color-fg-primary: #{$colors-fg-light-primary};
-  --color-fg-secondary: #{$colors-fg-light-secondary};
-  --color-fg-tertiary: #{$colors-fg-secondary};
-  --color-border-primary: #{$colors-border-light-primary};
-  --color-border-secondary: #{$colors-border-light-primary};
-  --color-skeleton-base: #{$colors-skeleton-light-base};
-  --color-skeleton-shine: #{$colors-skeleton-light-shine};
+    --color-bg-primary: #{$colors-bg-light-primary};
+    --color-bg-secondary: #{$colors-bg-light-secondary};
+    --color-bg-tertiary: #{$colors-bg-light-tertiary};
+    --color-bg-elevated: #{$colors-bg-light-elevated};
+    --color-fg-primary: #{$colors-fg-light-primary};
+    --color-fg-secondary: #{$colors-fg-light-secondary};
+    --color-fg-tertiary: #{$colors-fg-secondary};
+    --color-border-primary: #{$colors-border-light-primary};
+    --color-border-secondary: #{$colors-border-light-primary};
+    --color-skeleton-base: #{$colors-skeleton-light-base};
+    --color-skeleton-shine: #{$colors-skeleton-light-shine};
 }
 
 // Reset and base styles
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  font-size: 16px;
-  scroll-behavior: smooth;
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-fg-primary);
-  background-color: var(--color-bg-primary);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-fg-primary);
+    background-color: var(--color-bg-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 // Typography
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--color-fg-primary);
-  margin-bottom: var(--spacing-sm);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-fg-primary);
+    margin-bottom: var(--spacing-sm);
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.125rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
 
 p {
-  margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
 
 a {
-  color: var(--color-accent-gold);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-  
-  &:hover {
-    color: var(--color-accent-gold-dim);
-  }
+    color: var(--color-accent-gold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    &:hover {
+        color: var(--color-accent-gold-dim);
+    }
 }
 
 // Focus styles
 :focus-visible {
-  outline: 2px solid var(--color-accent-gold);
-  outline-offset: 2px;
+    outline: 2px solid var(--color-accent-gold);
+    outline-offset: 2px;
 }
 
 // Selection
 ::selection {
-  background-color: var(--color-accent-gold);
-  color: var(--color-bg-primary);
+    background-color: var(--color-accent-gold);
+    color: var(--color-bg-primary);
 }
 
 // Scrollbar styling (webkit)
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-secondary);
-  border-radius: var(--radius-full);
-  
-  &:hover {
-    background: var(--color-accent-gold-dim);
-  }
+    background: var(--color-border-secondary);
+    border-radius: var(--radius-full);
+
+    &:hover {
+        background: var(--color-accent-gold-dim);
+    }
 }
 
 // Utility classes
 .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 // Skeleton animation
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-skeleton-base) 25%,
-    var(--color-skeleton-shine) 50%,
-    var(--color-skeleton-base) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--radius-sm);
+    background: linear-gradient(90deg,
+            var(--color-skeleton-base) 25%,
+            var(--color-skeleton-shine) 50%,
+            var(--color-skeleton-base) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
 }
-

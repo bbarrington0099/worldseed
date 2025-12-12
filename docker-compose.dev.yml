@@ -33,4 +33,3 @@ services:
 volumes:
   postgres_data_dev:
   uploads_data:
-
