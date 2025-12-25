@@ -1026,10 +1026,90 @@ async function main() {
             name: "Ignan",
             description: "A crackling, fiery hiss; sharp and staccato, full of hisses and clicks. It snaps and sparks like flames, evoking the crackle of fire or the pop of burning embers."
         }),
+        goblin: await db.createLanguage({
+            id: "language-goblin-alabastria",
+            name: "Goblin",
+            description: "A guttural tongue of hisses, grunts, and high-pitched chirrs, like a swarm of angry crows squabbling in a dark alley. Its writing often appears as jagged runes, as if clawed or gouged into stone."
+        }),
+        giff: await db.createLanguage({
+            id: "language-giff-alabastria",
+            name: "Giff",
+            description: "Booming and brash, this language rolls out like a cannon blast with low chesty bellows broken by sudden shrieks and rasping chuckles. It has an oddly musical range, jumping from bass-heavy booms to tinny squeaks."
+        }),
+        hadozee: await db.createLanguage({
+            id: "language-hadozee-alabastria",
+            name: "Hadozee",
+            description: "Soft and breezy, this language is made of low rumbling murmurs and owl-like hoots, flowing gently like waves against a wooden hull. Speech is often punctuated by barky clicks and breathy squeals, blending sound with subtle motion."
+        }),
+        quori: await db.createLanguage({
+            id: "language-quori-alabastria",
+            name: "Quori",
+            description: "Sibilant and eerie, this language sounds like serpents whispering through dreams, its words hissing and rumbling with unsettling intent. Its script forms elegant circular sigils, like smoke curling into meaningful shapes."
+        }),
+        kenderspeak: await db.createLanguage({
+            id: "language-kenderspeak-alabastria",
+            name: "Kenderspeak",
+            description: "Wildly whimsical and sprightly, this language dances along in a playful, question-filled rhythm that never seems to sit still. It flits between bright tones and quick babble, sounding as if the words themselves are hopping ahead of the speaker."
+        }),
+        leonin: await db.createLanguage({
+            id: "language-leonin-alabastria",
+            name: "Leonin",
+            description: "Deep and proud, this language rumbles with low, powerful tones like a slow lion’s growl before bursting into thunderous shouts. Every word feels deliberate and forceful, trailing with confidence and sun-warmed strength."
+        }),
+        loxodon: await db.createLanguage({
+            id: "language-loxodon-alabastria",
+            name: "Loxodon",
+            description: "Slow, meditative, and sonorous, this language hums like calm chanting backed by deep drums. Each syllable is drawn out in warm, mellow tones that feel as if they rise from deep within stone."
+        }),
+        minotaur: await db.createLanguage({
+            id: "language-minotaur-alabastria",
+            name: "Minotaur",
+            description: "Guttural and blunt, this language crashes out in short bursts of snorts, growls, and heavy breaths. It often sounds like cattle lowing mixed with sharp bellows, emphasizing strength through sheer volume."
+        }),
+        owlin: await db.createLanguage({
+            id: "language-owlin-alabastria",
+            name: "Owlin",
+            description: "Quiet and melodic, this language flows like a night breeze through feathers, ending phrases with soft hoots or gentle coos. It feels hushed and thoughtful, like lullabies whispered beneath moonlight."
+        }),
+        tabaxi: await db.createLanguage({
+            id: "language-tabaxi-alabastria",
+            name: "Tabaxi",
+            description: "Playful and elastic, this language purrs and trills with rolling sounds, sudden hisses, and curious squeaks. It feels light and energetic, as if each word is chasing something just out of reach."
+        }),
+        thri_kreen: await db.createLanguage({
+            id: "language-thri-kreen-alabastria",
+            name: "Thri-kreen",
+            description: "Alien and chittering, this language clicks, buzzes, and snaps like an insect chorus speaking in perfect rhythm. To most ears it barely registers as speech, sounding more like an intricate machine of mandible-snaps and whistles."
+        }),
+        vedalken: await db.createLanguage({
+            id: "language-vedalken-alabastria",
+            name: "Vedalken",
+            description: "Coolly precise and smooth, this language slides from sound to sound with long vowels and soft sibilants. It feels measured and deliberate, like water flowing over polished stone or ink spreading cleanly across a page."
+        }),
         unknown_dialects: await db.createLanguage({
             id: "language-unknown-dialects-alabastria",
             name: "Unknown Dialects",
             description: "A mysterious babble; unpredictable and varied. It may sound like a jumble of fragments from many tongues, a chaotic and esoteric jumble of sounds that defies easy description."
+        }),
+        any_one: await db.createLanguage({
+            id: "language-any-one-alabastria",
+            name: "Any One Language",
+            description: "The ability to speak and understand any one language of your choice."
+        }),
+        any_two: await db.createLanguage({
+            id: "language-any-two-alabastria",
+            name: "Any Two Languages",
+            description: "The ability to speak and understand any two languages of your choice."
+        }),
+        common_sign_language: await db.createLanguage({
+            id: "language-common-sign-language-alabastria",
+            name: "Common Sign Language",
+            description: "A visual-gestural language using hand signs, facial expressions, and body language to convey meaning without spoken words."
+        }),
+        thieves_cant: await db.createLanguage({
+            id: "language-thieves-cant-alabastria",
+            name: "Thieves' Cant",
+            description: "A secretive language used by rogues and thieves, consisting of coded phrases, slang, symbols, and gestures to communicate covertly."
         })
     };
     // Connect languages to continents
@@ -2224,198 +2304,4177 @@ async function main() {
             modifier: 2
         })
     };
-    // Race Traits
-    const raceTrait: Record<string, Prisma.RaceTraitGetPayload<{}>> = {
-        flight: await db.createRaceTrait({
-            id: "race-trait-flight",
-            name: "Flight",
-            description: "You have a flying speed of 50 feet. To use this speed, you can't be wearing medium or heavy armor.",
-        }),
-        talons: await db.createRaceTrait({
-            id: "race-trait-talons",
-            name: "Talons",
-            description: "You are proficient with your unarmed strikes, which deal 1d4 slashing damage on a hit.",
-        }),
-        darkvision: await db.createRaceTrait({
-            id: "race-trait-darkvision",
-            name: "Darkvision",
-            description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
-        }),
-        celestial_resistance: await db.createRaceTrait({
-            id: "race-trait-celestial-resistance",
-            name: "Celestial Resistance",
-            description: "You have resistance to necrotic damage and radiant damage.",
-        }),
-        healing_hands: await db.createRaceTrait({
-            id: "race-trait-healing-hands",
-            name: "Healing Hands",
-            description: "As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.",
-        }),
-        radiant_soul: await db.createRaceTrait({
-            id: "race-trait-radiant-soul",
-            name: "Radiant Soul",
-            description: "As an action, you can unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
-        }),
-        radiant_consumption: await db.createRaceTrait({
-            id: "race-trait-radiant-consumption",
-            name: "Radiant Consumption",
-            description: "As an action, you can unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
-        }),
-        necrotic_shroud: await db.createRaceTrait({
-            id: "race-trait-necrotic-shroud",
-            name: "Necrotic Shroud",
-            description: "As an action, you can unleash the divine energy within yourself, causing your eyes to turn black and two skeletal, ghostly, flightless wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
-        })
+        // Race Traits
+    const raceTrait = {
+      flight_aarakocra: await db.createRaceTrait({
+        id: "race-trait-flight-aarakocra",
+        name: "Flight",
+        description: "You have a flying speed of 50 feet. To use this speed, you can't be wearing medium or heavy armor.",
+      }),
+      talons_aarakocra: await db.createRaceTrait({
+        id: "race-trait-talons-aarakocra",
+        name: "Talons",
+        description: "You are proficient with your unarmed strikes, which deal 1d4 slashing damage on a hit.",
+      }),
+      darkvision_aasimar: await db.createRaceTrait({
+        id: "race-trait-darkvision-aasimar",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      celestial_resistance_aasimar: await db.createRaceTrait({
+        id: "race-trait-celestial-resistance-aasimar",
+        name: "Celestial Resistance",
+        description: "You have resistance to necrotic damage and radiant damage.",
+      }),
+      healing_hands_aasimar: await db.createRaceTrait({
+        id: "race-trait-healing-hands-aasimar",
+        name: "Healing Hands",
+        description: "As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.",
+      }),
+      radiant_soul_aasimar_protector_aasimar: await db.createRaceTrait({
+        id: "race-trait-radiant-soul-aasimar_protector_aasimar",
+        name: "Radiant Soul",
+        description: "As an action, you can unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
+      }),
+      radiant_consumption_aasimar_scourge_aasimar: await db.createRaceTrait({
+        id: "race-trait-radiant-consumption-aasimar_scourge_aasimar",
+        name: "Radiant Consumption",
+        description: "As an action, you can unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
+      }),
+      necrotic_shroud_aasimar_fallen_aasimar: await db.createRaceTrait({
+        id: "race-trait-necrotic-shroud-aasimar_fallen_aasimar",
+        name: "Necrotic Shroud",
+        description: "As an action, you can unleash the divine energy within yourself, causing your eyes to turn black and two skeletal, ghostly, flightless wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
+      }),
+      constructed_resilience_autognome: await db.createRaceTrait({
+        id: "race-trait-constructed-resilience-autognome",
+        name: "Constructed Resilience",
+        description: "You were created to have remarkable fortitude, represented by the following benefits: You have advantage on saving throws against being poisoned, and you have resistance to poison damage. You don't need to eat, drink, or breathe. You are immune to disease. You don't need to sleep, and magic can't put you to sleep.",
+      }),
+      mechanical_nature_autognome: await db.createRaceTrait({
+        id: "race-trait-mechanical-nature-autognome",
+        name: "Mechanical Nature",
+        description: "Your creature type is construct, rather than humanoid. Spells and other effects that target humanoids don't affect you.",
+      }),
+      sentrys_rest_autognome: await db.createRaceTrait({
+        id: "race-trait-sentrys-rest-autognome",
+        name: "Sentry's Rest",
+        description: "When you take a long rest, you must spend at least 6 hours in an inactive, motionless state, rather than sleeping. In this state, you appear inert, but it doesn't render you unconscious, and you can see and hear as normal.",
+      }),
+      true_life_autognome: await db.createRaceTrait({
+        id: "race-trait-true-life-autognome",
+        name: "True Life",
+        description: "You are a living creature. You can be affected by healing magic, and you can be targeted by spells that target humanoids. You can be raised from the dead.",
+      }),
+      darkvision_bugbear: await db.createRaceTrait({
+        id: "race-trait-darkvision-bugbear",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      long_limbed_bugbear: await db.createRaceTrait({
+        id: "race-trait-long-limbed-bugbear",
+        name: "Long-Limbed",
+        description: "When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.",
+      }),
+      powerful_build_bugbear: await db.createRaceTrait({
+        id: "race-trait-powerful-build-bugbear",
+        name: "Powerful Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      }),
+      sneaky_bugbear: await db.createRaceTrait({
+        id: "race-trait-sneaky-bugbear",
+        name: "Sneaky",
+        description: "You are proficient in the Stealth skill.",
+      }),
+      surprise_attack_bugbear: await db.createRaceTrait({
+        id: "race-trait-surprise-attack-bugbear",
+        name: "Surprise Attack",
+        description: "If you surprise a creature and hit it with an attack on your first turn in combat, the target takes an extra 2d6 damage from the attack.",
+      }),
+      charge_centaur: await db.createRaceTrait({
+        id: "race-trait-charge-centaur",
+        name: "Charge",
+        description: "If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves.",
+      }),
+      hooves_centaur: await db.createRaceTrait({
+        id: "race-trait-hooves-centaur",
+        name: "Hooves",
+        description: "Your hooves are natural melee weapons, which you can use to make unarmed strikes. If you hit with them, you deal bludgeoning damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      equine_build_centaur: await db.createRaceTrait({
+        id: "race-trait-equine-build-centaur",
+        name: "Equine Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift. In addition, any climb that requires hands and feet is especially difficult for you because of your equine legs. When you make such a climb, each foot of movement costs you 4 extra feet, instead of the normal 1 extra foot.",
+      }),
+      survivor_centaur: await db.createRaceTrait({
+        id: "race-trait-survivor-centaur",
+        name: "Survivor",
+        description: "You have proficiency in one of the following skills of your choice: Animal Handling, Medicine, Nature, or Survival.",
+      }),
+      shapechanger_changeling: await db.createRaceTrait({
+        id: "race-trait-shapechanger-changeling",
+        name: "Shapechanger",
+        description: "As an action, you can change your appearance and your voice. You determine the specifics of the changes, including your coloration, hair length, and sex. You can also adjust your height and weight, but not so much that your size changes. You can make yourself appear as a member of another race, though none of your game statistics change. You can't duplicate the appearance of a creature you've never seen, and you must adopt a form that has the same basic arrangement of limbs that you have. Your clothing and equipment aren't changed by this trait. You stay in the new form until you use an action to revert to your true form or until you die.",
+      }),
+      changeling_instincts_changeling: await db.createRaceTrait({
+        id: "race-trait-changeling-instincts-changeling",
+        name: "Changeling Instincts",
+        description: "You gain proficiency with two of the following skills of your choice: Deception, Insight, Intimidation, and Persuasion.",
+      }),
+      divergent_persona_changeling: await db.createRaceTrait({
+        id: "race-trait-divergent-persona-changeling",
+        name: "Divergent Persona",
+        description: "You gain proficiency with one tool of your choice. You also choose two personality traits, one ideal, one bond, and one flaw. While you are in the form of this persona, the chosen personality traits, ideal, bond, and flaw replace those of your background.",
+      }),
+      darkvision_dhampir: await db.createRaceTrait({
+        id: "race-trait-darkvision-dhampir",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      spider_climb_dhampir: await db.createRaceTrait({
+        id: "race-trait-spider-climb-dhampir",
+        name: "Spider Climb",
+        description: "You have a climbing speed equal to your walking speed. In addition, you can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.",
+      }),
+      vampiric_bite_dhampir: await db.createRaceTrait({
+        id: "race-trait-vampiric-bite-dhampir",
+        name: "Vampiric Bite",
+        description: "Your fanged bite is a natural weapon, which counts as a simple melee weapon with which you are proficient. You add your Constitution modifier, instead of your Strength modifier, to the attack and damage rolls when you attack with this bite. It deals 1d4 piercing damage on a hit. While you are missing half or more of your hit points, you have advantage on attack rolls you make with this bite. When you attack with this bite and hit a creature that doesn't have all its hit points, you can empower yourself in one of the following ways: You regain hit points equal to the damage dealt by the bite. You gain a bonus to the next ability check or attack roll you make; the bonus equals the damage dealt by the bite (minimum of +1). Either choice requires no action. You can empower yourself with this bite a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      }),
+      deathless_nature_dhampir: await db.createRaceTrait({
+        id: "race-trait-deathless-nature-dhampir",
+        name: "Deathless Nature",
+        description: "You don't need to breathe.",
+      }),
+      draconic_ancestry_dragonborn: await db.createRaceTrait({
+        id: "race-trait-draconic-ancestry-dragonborn",
+        name: "Draconic Ancestry",
+        description: "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.",
+      }),
+      breath_weapon_dragonborn: await db.createRaceTrait({
+        id: "race-trait-breath-weapon-dragonborn",
+        name: "Breath Weapon",
+        description: "You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can't use it again until you complete a short or long rest.",
+      }),
+      damage_resistance_dragonborn: await db.createRaceTrait({
+        id: "race-trait-damage-resistance-dragonborn",
+        name: "Damage Resistance",
+        description: "You have resistance to the damage type associated with your draconic ancestry.",
+      }),
+      darkvision_dwarf: await db.createRaceTrait({
+        id: "race-trait-darkvision-dwarf",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      dwarven_resilience_dwarf: await db.createRaceTrait({
+        id: "race-trait-dwarven-resilience-dwarf",
+        name: "Dwarven Resilience",
+        description: "You have advantage on saving throws against poison, and you have resistance against poison damage.",
+      }),
+      stonecunning_dwarf: await db.createRaceTrait({
+        id: "race-trait-stonecunning-dwarf",
+        name: "Stonecunning",
+        description: "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.",
+      }),
+      dwarven_toughness_dwarf_hill_dwarf: await db.createRaceTrait({
+        id: "race-trait-dwarven-toughness-dwarf_hill_dwarf",
+        name: "Dwarven Toughness",
+        description: "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.",
+      }),
+      dwarven_armor_training_dwarf_mountain_dwarf: await db.createRaceTrait({
+        id: "race-trait-dwarven-armor-training-dwarf_mountain_dwarf",
+        name: "Dwarven Armor Training",
+        description: "You have proficiency with light and medium armor.",
+      }),
+      duergar_magic_dwarf_duergar: await db.createRaceTrait({
+        id: "race-trait-duergar-magic-dwarf_duergar",
+        name: "Duergar Magic",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the enlarge/reduce spell on yourself once with this trait, without requiring a material component. When you reach 5th level, you can cast the invisibility spell on yourself once with this trait, without requiring a material component. You regain the ability to cast these spells with this trait when you finish a long rest. Intelligence is your spellcasting ability for these spells.",
+      }),
+      duergar_resilience_dwarf_duergar: await db.createRaceTrait({
+        id: "race-trait-duergar-resilience-dwarf_duergar",
+        name: "Duergar Resilience",
+        description: "You have advantage on saving throws against illusions and against being charmed or paralyzed.",
+      }),
+      sunlight_sensitivity_dwarf_duergar: await db.createRaceTrait({
+        id: "race-trait-sunlight-sensitivity-dwarf_duergar",
+        name: "Sunlight Sensitivity",
+        description: "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.",
+      }),
+      darkvision_elf: await db.createRaceTrait({
+        id: "race-trait-darkvision-elf",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      keen_senses_elf: await db.createRaceTrait({
+        id: "race-trait-keen-senses-elf",
+        name: "Keen Senses",
+        description: "You have proficiency in the Perception skill.",
+      }),
+      fey_ancestry_elf: await db.createRaceTrait({
+        id: "race-trait-fey-ancestry-elf",
+        name: "Fey Ancestry",
+        description: "You have advantage on saving throws against being charmed, and magic can't put you to sleep.",
+      }),
+      trance_elf: await db.createRaceTrait({
+        id: "race-trait-trance-elf",
+        name: "Trance",
+        description: "Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.",
+      }),
+      elf_weapon_training_elf_high_elf: await db.createRaceTrait({
+        id: "race-trait-elf-weapon-training-elf_high_elf",
+        name: "Elf Weapon Training",
+        description: "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
+      }),
+      cantrip_elf_high_elf: await db.createRaceTrait({
+        id: "race-trait-cantrip-elf_high_elf",
+        name: "Cantrip",
+        description: "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.",
+      }),
+      extra_language_elf_high_elf: await db.createRaceTrait({
+        id: "race-trait-extra-language-elf_high_elf",
+        name: "Extra Language",
+        description: "You can speak, read, and write one extra language of your choice.",
+      }),
+      elf_weapon_training_elf_wood_elf: await db.createRaceTrait({
+        id: "race-trait-elf-weapon-training-elf_wood_elf",
+        name: "Elf Weapon Training",
+        description: "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
+      }),
+      fleet_of_foot_elf_wood_elf: await db.createRaceTrait({
+        id: "race-trait-fleet-of-foot-elf_wood_elf",
+        name: "Fleet of Foot",
+        description: "Your base walking speed increases to 35 feet.",
+      }),
+      mask_of_the_wild_elf_wood_elf: await db.createRaceTrait({
+        id: "race-trait-mask-of-the-wild-elf_wood_elf",
+        name: "Mask of the Wild",
+        description: "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
+      }),
+      superior_darkvision_elf_dark_elf_drow: await db.createRaceTrait({
+        id: "race-trait-superior-darkvision-elf_dark_elf_drow",
+        name: "Superior Darkvision",
+        description: "Your darkvision has a radius of 120 feet.",
+      }),
+      sunlight_sensitivity_elf_dark_elf_drow: await db.createRaceTrait({
+        id: "race-trait-sunlight-sensitivity-elf_dark_elf_drow",
+        name: "Sunlight Sensitivity",
+        description: "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.",
+      }),
+      drow_magic_elf_dark_elf_drow: await db.createRaceTrait({
+        id: "race-trait-drow-magic-elf_dark_elf_drow",
+        name: "Drow Magic",
+        description: "You know the dancing lights cantrip. When you reach 3rd level, you can cast the faerie fire spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      drow_weapon_training_elf_dark_elf_drow: await db.createRaceTrait({
+        id: "race-trait-drow-weapon-training-elf_dark_elf_drow",
+        name: "Drow Weapon Training",
+        description: "You have proficiency with rapiers, shortswords, and hand crossbows.",
+      }),
+      sea_elf_training_elf_sea_elf: await db.createRaceTrait({
+        id: "race-trait-sea-elf-training-elf_sea_elf",
+        name: "Sea Elf Training",
+        description: "You have proficiency with the spear, trident, light crossbow, and net.",
+      }),
+      child_of_the_sea_elf_sea_elf: await db.createRaceTrait({
+        id: "race-trait-child-of-the-sea-elf_sea_elf",
+        name: "Child of the Sea",
+        description: "You have a swimming speed of 30 feet, and you can breathe air and water.",
+      }),
+      friend_of_the_sea_elf_sea_elf: await db.createRaceTrait({
+        id: "race-trait-friend-of-the-sea-elf_sea_elf",
+        name: "Friend of the Sea",
+        description: "Using gestures and sounds, you can communicate simple ideas with any beast that has an innate swimming speed.",
+      }),
+      fey_step_elf_eladrin: await db.createRaceTrait({
+        id: "race-trait-fey-step-elf_eladrin",
+        name: "Fey Step",
+        description: "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. Once you use this trait, you can't do so again until you finish a short or long rest. When you reach 3rd level, your Fey Step gains an additional effect based on your season. The effect lasts until the end of your next turn.",
+      }),
+      trance_elf_eladrin: await db.createRaceTrait({
+        id: "race-trait-trance-elf_eladrin",
+        name: "Trance",
+        description: "You don't need to sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in a trancelike meditation, during which you remain conscious.",
+      }),
+      blessing_of_the_raven_queen_elf_shadar_kai: await db.createRaceTrait({
+        id: "race-trait-blessing-of-the-raven-queen-elf_shadar_kai",
+        name: "Blessing of the Raven Queen",
+        description: "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. Once you use this trait, you can't do so again until you finish a long rest. Starting at 3rd level, you also gain resistance to all damage when you teleport using this trait. The resistance lasts until the start of your next turn. During that time, you appear ghostly and translucent.",
+      }),
+      necrotic_resistance_elf_shadar_kai: await db.createRaceTrait({
+        id: "race-trait-necrotic-resistance-elf_shadar_kai",
+        name: "Necrotic Resistance",
+        description: "You have resistance to necrotic damage.",
+      }),
+      trance_elf_shadar_kai: await db.createRaceTrait({
+        id: "race-trait-trance-elf_shadar_kai",
+        name: "Trance",
+        description: "You don't need to sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in a trancelike meditation, during which you remain conscious.",
+      }),
+      fairy_magic_fairy: await db.createRaceTrait({
+        id: "race-trait-fairy-magic-fairy",
+        name: "Fairy Magic",
+        description: "You know the druidcraft cantrip. Starting at 3rd level, you can cast the faerie fire spell with this trait. Starting at 5th level, you can also cast the enlarge/reduce spell with this trait. Once you cast faerie fire or enlarge/reduce with this trait, you can't cast that spell with it again until you finish a long rest. You can also cast either of those spells using any spell slots you have of the appropriate level. Charisma is your spellcasting ability for these spells.",
+      }),
+      flight_fairy: await db.createRaceTrait({
+        id: "race-trait-flight-fairy",
+        name: "Flight",
+        description: "You have a flying speed equal to your walking speed. You can hover.",
+      }),
+      fey_passage_fairy: await db.createRaceTrait({
+        id: "race-trait-fey-passage-fairy",
+        name: "Fey Passage",
+        description: "You can squeeze through a space as narrow as 1 inch wide without squeezing.",
+      }),
+      firbolg_magic_firbolg: await db.createRaceTrait({
+        id: "race-trait-firbolg-magic-firbolg",
+        name: "Firbolg Magic",
+        description: "You can cast detect magic and disguise self with this trait, using Wisdom as your spellcasting ability. Once you cast either spell with this trait, you can't cast that spell with it again until you finish a short or long rest. You can also cast these spells using any spell slots you have of the appropriate level.",
+      }),
+      hidden_step_firbolg: await db.createRaceTrait({
+        id: "race-trait-hidden-step-firbolg",
+        name: "Hidden Step",
+        description: "As a bonus action, you can magically turn invisible until the start of your next turn or until you attack, make a damage roll, or force someone to make a saving throw. Once you use this trait, you can't do so again until you finish a short or long rest.",
+      }),
+      powerful_build_firbolg: await db.createRaceTrait({
+        id: "race-trait-powerful-build-firbolg",
+        name: "Powerful Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      }),
+      speech_of_beast_and_leaf_firbolg: await db.createRaceTrait({
+        id: "race-trait-speech-of-beast-and-leaf-firbolg",
+        name: "Speech of Beast and Leaf",
+        description: "You have the ability to communicate in a limited manner with beasts and plants. They can understand the meaning of your words, though you have no special ability to understand them in return. You have advantage on all Charisma checks you make to influence them.",
+      }),
+      elemental_resistance_genasi: await db.createRaceTrait({
+        id: "race-trait-elemental-resistance-genasi",
+        name: "Elemental Resistance",
+        description: "You have resistance to one damage type based on your elemental heritage.",
+      }),
+      elemental_magic_genasi: await db.createRaceTrait({
+        id: "race-trait-elemental-magic-genasi",
+        name: "Elemental Magic",
+        description: "You know one cantrip based on your elemental heritage. At 3rd level, you can cast a 1st-level spell based on your elemental heritage. At 5th level, you can cast a 2nd-level spell based on your elemental heritage. Once you cast a spell with this trait, you can't cast that spell with it again until you finish a long rest. You can also cast these spells using any spell slots you have of the appropriate level. Constitution is your spellcasting ability for these spells.",
+      }),
+      air_resistance_genasi_air_genasi: await db.createRaceTrait({
+        id: "race-trait-air-resistance-genasi_air_genasi",
+        name: "Air Resistance",
+        description: "You have resistance to lightning damage.",
+      }),
+      air_magic_genasi_air_genasi: await db.createRaceTrait({
+        id: "race-trait-air-magic-genasi_air_genasi",
+        name: "Air Magic",
+        description: "You know the shocking grasp cantrip. At 3rd level, you can cast feather fall with this trait. At 5th level, you can cast levitate with this trait. Once you cast feather fall or levitate with this trait, you can't cast that spell with it again until you finish a long rest.",
+      }),
+      unending_breath_genasi_air_genasi: await db.createRaceTrait({
+        id: "race-trait-unending-breath-genasi_air_genasi",
+        name: "Unending Breath",
+        description: "You can hold your breath indefinitely while you're not incapacitated.",
+      }),
+      mingle_with_the_wind_genasi_air_genasi: await db.createRaceTrait({
+        id: "race-trait-mingle-with-the-wind-genasi_air_genasi",
+        name: "Mingle with the Wind",
+        description: "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. Once you use this trait, you can't do so again until you finish a short or long rest.",
+      }),
+      earth_resistance_genasi_earth_genasi: await db.createRaceTrait({
+        id: "race-trait-earth-resistance-genasi_earth_genasi",
+        name: "Earth Resistance",
+        description: "You have resistance to acid damage.",
+      }),
+      earth_magic_genasi_earth_genasi: await db.createRaceTrait({
+        id: "race-trait-earth-magic-genasi_earth_genasi",
+        name: "Earth Magic",
+        description: "You know the blade ward cantrip. At 3rd level, you can cast earth tremor with this trait. At 5th level, you can cast passwall with this trait. Once you cast earth tremor or passwall with this trait, you can't cast that spell with it again until you finish a long rest.",
+      }),
+      earth_walk_genasi_earth_genasi: await db.createRaceTrait({
+        id: "race-trait-earth-walk-genasi_earth_genasi",
+        name: "Earth Walk",
+        description: "You can move across difficult terrain made of earth or stone without spending extra movement.",
+      }),
+      fire_resistance_genasi_fire_genasi: await db.createRaceTrait({
+        id: "race-trait-fire-resistance-genasi_fire_genasi",
+        name: "Fire Resistance",
+        description: "You have resistance to fire damage.",
+      }),
+      fire_magic_genasi_fire_genasi: await db.createRaceTrait({
+        id: "race-trait-fire-magic-genasi_fire_genasi",
+        name: "Fire Magic",
+        description: "You know the produce flame cantrip. At 3rd level, you can cast burning hands with this trait. At 5th level, you can cast flame blade with this trait. Once you cast burning hands or flame blade with this trait, you can't cast that spell with it again until you finish a long rest.",
+      }),
+      reach_to_the_blaze_genasi_fire_genasi: await db.createRaceTrait({
+        id: "race-trait-reach-to-the-blaze-genasi_fire_genasi",
+        name: "Reach to the Blaze",
+        description: "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. Once you use this trait, you can't do so again until you finish a short or long rest.",
+      }),
+      water_resistance_genasi_water_genasi: await db.createRaceTrait({
+        id: "race-trait-water-resistance-genasi_water_genasi",
+        name: "Water Resistance",
+        description: "You have resistance to acid damage.",
+      }),
+      water_magic_genasi_water_genasi: await db.createRaceTrait({
+        id: "race-trait-water-magic-genasi_water_genasi",
+        name: "Water Magic",
+        description: "You know the shape water cantrip. At 3rd level, you can cast create or destroy water with this trait. At 5th level, you can cast wall of water with this trait. Once you cast create or destroy water or wall of water with this trait, you can't cast that spell with it again until you finish a long rest.",
+      }),
+      amphibious_genasi_water_genasi: await db.createRaceTrait({
+        id: "race-trait-amphibious-genasi_water_genasi",
+        name: "Amphibious",
+        description: "You can breathe air and water.",
+      }),
+      swim_genasi_water_genasi: await db.createRaceTrait({
+        id: "race-trait-swim-genasi_water_genasi",
+        name: "Swim",
+        description: "You have a swimming speed of 30 feet.",
+      }),
+      darkvision_gnome: await db.createRaceTrait({
+        id: "race-trait-darkvision-gnome",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      gnome_cunning_gnome: await db.createRaceTrait({
+        id: "race-trait-gnome-cunning-gnome",
+        name: "Gnome Cunning",
+        description: "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.",
+      }),
+      natural_illusionist_gnome_forest_gnome: await db.createRaceTrait({
+        id: "race-trait-natural-illusionist-gnome_forest_gnome",
+        name: "Natural Illusionist",
+        description: "You know the minor illusion cantrip. Intelligence is your spellcasting ability for it.",
+      }),
+      speak_with_small_beasts_gnome_forest_gnome: await db.createRaceTrait({
+        id: "race-trait-speak-with-small-beasts-gnome_forest_gnome",
+        name: "Speak with Small Beasts",
+        description: "Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts.",
+      }),
+      artificers_lore_gnome_rock_gnome: await db.createRaceTrait({
+        id: "race-trait-artificers-lore-gnome_rock_gnome",
+        name: "Artificer's Lore",
+        description: "Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.",
+      }),
+      tinker_gnome_rock_gnome: await db.createRaceTrait({
+        id: "race-trait-tinker-gnome_rock_gnome",
+        name: "Tinker",
+        description: "You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp).",
+      }),
+      firearms_mastery_giff: await db.createRaceTrait({
+        id: "race-trait-firearms-mastery-giff",
+        name: "Firearms Mastery",
+        description: "You have proficiency with firearms and ignore the loading property of firearms. You can use a bonus action to reload a firearm you are holding.",
+      }),
+      hippo_build_giff: await db.createRaceTrait({
+        id: "race-trait-hippo-build-giff",
+        name: "Hippo Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      }),
+      natural_armor_giff: await db.createRaceTrait({
+        id: "race-trait-natural-armor-giff",
+        name: "Natural Armor",
+        description: "Your thick hide provides you with a +1 bonus to AC when you aren't wearing armor.",
+      }),
+      darkvision_goblin: await db.createRaceTrait({
+        id: "race-trait-darkvision-goblin",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      fury_of_the_small_goblin: await db.createRaceTrait({
+        id: "race-trait-fury-of-the-small-goblin",
+        name: "Fury of the Small",
+        description: "When you damage a creature with an attack or a spell and the creature's size is larger than yours, you can cause the attack or spell to deal extra damage to the creature. The extra damage equals your level. Once you use this trait, you can't use it again until you finish a short or long rest.",
+      }),
+      nimble_escape_goblin: await db.createRaceTrait({
+        id: "race-trait-nimble-escape-goblin",
+        name: "Nimble Escape",
+        description: "You can take the Disengage or Hide action as a bonus action on each of your turns.",
+      }),
+      natural_athlete_goliath: await db.createRaceTrait({
+        id: "race-trait-natural-athlete-goliath",
+        name: "Natural Athlete",
+        description: "You have proficiency in the Athletics skill.",
+      }),
+      stones_endurance_goliath: await db.createRaceTrait({
+        id: "race-trait-stones-endurance-goliath",
+        name: "Stone's Endurance",
+        description: "You can focus yourself to occasionally shrug off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can't use it again until you finish a short or long rest.",
+      }),
+      powerful_build_goliath: await db.createRaceTrait({
+        id: "race-trait-powerful-build-goliath",
+        name: "Powerful Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      }),
+      mountain_born_goliath: await db.createRaceTrait({
+        id: "race-trait-mountain-born-goliath",
+        name: "Mountain Born",
+        description: "You're acclimated to high altitude, including elevations above 20,000 feet. You're also naturally adapted to cold climates.",
+      }),
+      dexterous_feet_hadozee: await db.createRaceTrait({
+        id: "race-trait-dexterous-feet-hadozee",
+        name: "Dexterous Feet",
+        description: "As a bonus action, you can use your feet to manipulate an object, open or close a door or container, or pick up or set down a Tiny object.",
+      }),
+      glide_hadozee: await db.createRaceTrait({
+        id: "race-trait-glide-hadozee",
+        name: "Glide",
+        description: "When you fall at least 10 feet, you can use your reaction to extend your skin membranes to glide horizontally a number of feet equal to your walking speed, and you take no damage from the fall. You choose the direction of the glide.",
+      }),
+      hadozee_dodge_hadozee: await db.createRaceTrait({
+        id: "race-trait-hadozee-dodge-hadozee",
+        name: "Hadozee Dodge",
+        description: "When you take damage, you can use your reaction to roll a d6 and add your proficiency bonus; reduce the damage by that total (minimum 0). You can use this trait a number of times equal to your proficiency bonus, and regain all uses after a long rest.",
+      }),
+      darkvision_half_elf: await db.createRaceTrait({
+        id: "race-trait-darkvision-half_elf",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      fey_ancestry_half_elf: await db.createRaceTrait({
+        id: "race-trait-fey-ancestry-half_elf",
+        name: "Fey Ancestry",
+        description: "You have advantage on saving throws against being charmed, and magic can't put you to sleep.",
+      }),
+      skill_versatility_half_elf: await db.createRaceTrait({
+        id: "race-trait-skill-versatility-half_elf",
+        name: "Skill Versatility",
+        description: "You gain proficiency in two skills of your choice.",
+      }),
+      aquatic_half_elf_aquatic_half_elf: await db.createRaceTrait({
+        id: "race-trait-aquatic-half_elf_aquatic_half_elf",
+        name: "Aquatic",
+        description: "You can breathe air and water, and you have a swimming speed of 30 feet.",
+      }),
+      drow_magic_half_elf_drow_half_elf: await db.createRaceTrait({
+        id: "race-trait-drow-magic-half_elf_drow_half_elf",
+        name: "Drow Magic",
+        description: "You know the dancing lights cantrip. When you reach 3rd level, you can cast the faerie fire spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      elf_weapon_training_half_elf_high_half_elf: await db.createRaceTrait({
+        id: "race-trait-elf-weapon-training-half_elf_high_half_elf",
+        name: "Elf Weapon Training",
+        description: "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
+      }),
+      cantrip_half_elf_high_half_elf: await db.createRaceTrait({
+        id: "race-trait-cantrip-half_elf_high_half_elf",
+        name: "Cantrip",
+        description: "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.",
+      }),
+      elf_weapon_training_half_elf_wood_half_elf: await db.createRaceTrait({
+        id: "race-trait-elf-weapon-training-half_elf_wood_half_elf",
+        name: "Elf Weapon Training",
+        description: "You have proficiency with the longsword, shortsword, shortbow, and longbow.",
+      }),
+      fleet_of_foot_half_elf_wood_half_elf: await db.createRaceTrait({
+        id: "race-trait-fleet-of-foot-half_elf_wood_half_elf",
+        name: "Fleet of Foot",
+        description: "Your base walking speed increases to 35 feet.",
+      }),
+      mask_of_the_wild_half_elf_wood_half_elf: await db.createRaceTrait({
+        id: "race-trait-mask-of-the-wild-half_elf_wood_half_elf",
+        name: "Mask of the Wild",
+        description: "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
+      }),
+      darkvision_half_orc: await db.createRaceTrait({
+        id: "race-trait-darkvision-half_orc",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      relentless_endurance_half_orc: await db.createRaceTrait({
+        id: "race-trait-relentless-endurance-half_orc",
+        name: "Relentless Endurance",
+        description: "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest.",
+      }),
+      savage_attacks_half_orc: await db.createRaceTrait({
+        id: "race-trait-savage-attacks-half_orc",
+        name: "Savage Attacks",
+        description: "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.",
+      }),
+      lucky_halfling: await db.createRaceTrait({
+        id: "race-trait-lucky-halfling",
+        name: "Lucky",
+        description: "When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.",
+      }),
+      brave_halfling: await db.createRaceTrait({
+        id: "race-trait-brave-halfling",
+        name: "Brave",
+        description: "You have advantage on saving throws against being frightened.",
+      }),
+      halfling_nimbleness_halfling: await db.createRaceTrait({
+        id: "race-trait-halfling-nimbleness-halfling",
+        name: "Halfling Nimbleness",
+        description: "You can move through the space of any creature that is of a size larger than yours.",
+      }),
+      naturally_stealthy_halfling_lightfoot_halfling: await db.createRaceTrait({
+        id: "race-trait-naturally-stealthy-halfling_lightfoot_halfling",
+        name: "Naturally Stealthy",
+        description: "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.",
+      }),
+      stout_resilience_halfling_stout_halfling: await db.createRaceTrait({
+        id: "race-trait-stout-resilience-halfling_stout_halfling",
+        name: "Stout Resilience",
+        description: "You have advantage on saving throws against poison, and you have resistance against poison damage.",
+      }),
+      silent_speech_halfling_ghostwise_halfling: await db.createRaceTrait({
+        id: "race-trait-silent-speech-halfling_ghostwise_halfling",
+        name: "Silent Speech",
+        description: "You can speak telepathically to any creature within 30 feet of you. The creature understands you only if the two of you share a language. You can speak telepathically in this way to one creature at a time.",
+      }),
+      hare_trigger_harengon: await db.createRaceTrait({
+        id: "race-trait-hare-trigger-harengon",
+        name: "Hare-Trigger",
+        description: "You can add your proficiency bonus to your initiative rolls.",
+      }),
+      leporine_senses_harengon: await db.createRaceTrait({
+        id: "race-trait-leporine-senses-harengon",
+        name: "Leporine Senses",
+        description: "You have proficiency in the Perception skill.",
+      }),
+      lucky_footwork_harengon: await db.createRaceTrait({
+        id: "race-trait-lucky-footwork-harengon",
+        name: "Lucky Footwork",
+        description: "When you fail a Dexterity saving throw, you can use your reaction to reroll the die, and you must use the new roll.",
+      }),
+      rabbit_hop_harengon: await db.createRaceTrait({
+        id: "race-trait-rabbit-hop-harengon",
+        name: "Rabbit Hop",
+        description: "As a bonus action, you can jump a number of feet equal to 5 × your proficiency bonus, without provoking opportunity attacks. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      }),
+      darkvision_hexblood: await db.createRaceTrait({
+        id: "race-trait-darkvision-hexblood",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      hex_magic_hexblood: await db.createRaceTrait({
+        id: "race-trait-hex-magic-hexblood",
+        name: "Hex Magic",
+        description: "You know the minor illusion cantrip. When you reach 3rd level, you can cast the hex spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can also cast the disguise self spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      eerie_token_hexblood: await db.createRaceTrait({
+        id: "race-trait-eerie-token-hexblood",
+        name: "Eerie Token",
+        description: "As an action, you can harmlessly remove a lock of your hair, a bit of your nail, or one of your teeth. This token is imbued with magic until you finish a long rest. While the token is imbued in this way, you can use an action to send a telepathic message to the creature holding or carrying the token, as long as you are on the same plane of existence. The message can contain up to twenty-five words.",
+      }),
+      darkvision_hobgoblin: await db.createRaceTrait({
+        id: "race-trait-darkvision-hobgoblin",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      martial_training_hobgoblin: await db.createRaceTrait({
+        id: "race-trait-martial-training-hobgoblin",
+        name: "Martial Training",
+        description: "You are proficient with two martial weapons of your choice and with light armor.",
+      }),
+      saving_face_hobgoblin: await db.createRaceTrait({
+        id: "race-trait-saving-face-hobgoblin",
+        name: "Saving Face",
+        description: "If you miss with an attack roll or fail an ability check, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can't use it again until you finish a short or long rest.",
+      }),
+      extra_language_human: await db.createRaceTrait({
+        id: "race-trait-extra-language-human",
+        name: "Extra Language",
+        description: "You can speak, read, and write one extra language of your choice.",
+      }),
+      feat_human_variant_human: await db.createRaceTrait({
+        id: "race-trait-feat-human_variant_human",
+        name: "Feat",
+        description: "You gain one feat of your choice.",
+      }),
+      skill_human_variant_human: await db.createRaceTrait({
+        id: "race-trait-skill-human_variant_human",
+        name: "Skill",
+        description: "You gain proficiency in one skill of your choice.",
+      }),
+      hunters_intuition_human_mark_of_finding_human: await db.createRaceTrait({
+        id: "race-trait-hunters-intuition-human_mark_of_finding_human",
+        name: "Hunter's Intuition",
+        description: "When you make a Wisdom (Perception) or Wisdom (Survival) check, you can roll a d4 and add the number rolled to the ability check.",
+      }),
+      finders_magic_human_mark_of_finding_human: await db.createRaceTrait({
+        id: "race-trait-finders-magic-human_mark_of_finding_human",
+        name: "Finder's Magic",
+        description: "You can cast the hunter's mark spell with this trait. Starting at 3rd level, you can also cast the locate object spell with it. Starting at 5th level, you can also cast the locate creature spell with it. Once you cast a spell with this trait, you can't do so again until you finish a long rest. Wisdom is your spellcasting ability for these spells.",
+      }),
+      wild_intuition_human_mark_of_handling_human: await db.createRaceTrait({
+        id: "race-trait-wild-intuition-human_mark_of_handling_human",
+        name: "Wild Intuition",
+        description: "When you make a Wisdom (Animal Handling) or Intelligence (Nature) check, you can roll a d4 and add the number rolled to the ability check.",
+      }),
+      primal_connection_human_mark_of_handling_human: await db.createRaceTrait({
+        id: "race-trait-primal-connection-human_mark_of_handling_human",
+        name: "Primal Connection",
+        description: "You can cast the speak with animals spell with this trait. Starting at 3rd level, you can also cast the animal friendship spell with it. Starting at 5th level, you can also cast the beast sense spell with it. Once you cast a spell with this trait, you can't do so again until you finish a long rest. Wisdom is your spellcasting ability for these spells.",
+      }),
+      artisans_intuition_human_mark_of_making_human: await db.createRaceTrait({
+        id: "race-trait-artisans-intuition-human_mark_of_making_human",
+        name: "Artisan's Intuition",
+        description: "When you make an Intelligence (Arcana) or Intelligence (History) check, you can roll a d4 and add the number rolled to the ability check.",
+      }),
+      makers_magic_human_mark_of_making_human: await db.createRaceTrait({
+        id: "race-trait-makers-magic-human_mark_of_making_human",
+        name: "Maker's Magic",
+        description: "You can cast the mending cantrip with this trait. Starting at 3rd level, you can also cast the magic weapon spell with it. Starting at 5th level, you can also cast the fabricate spell with it. Once you cast a spell with this trait, you can't do so again until you finish a long rest. Intelligence is your spellcasting ability for these spells.",
+      }),
+      intuitive_motion_human_mark_of_passage_human: await db.createRaceTrait({
+        id: "race-trait-intuitive-motion-human_mark_of_passage_human",
+        name: "Intuitive Motion",
+        description: "When you make a Dexterity (Acrobatics) or Strength (Athletics) check, you can roll a d4 and add the number rolled to the ability check.",
+      }),
+      passage_magic_human_mark_of_passage_human: await db.createRaceTrait({
+        id: "race-trait-passage-magic-human_mark_of_passage_human",
+        name: "Passage Magic",
+        description: "You can cast the longstrider spell with this trait. Starting at 3rd level, you can also cast the misty step spell with it. Starting at 5th level, you can also cast the passwall spell with it. Once you cast a spell with this trait, you can't do so again until you finish a long rest. Intelligence is your spellcasting ability for these spells.",
+      }),
+      vigilant_guardian_human_mark_of_sentinel_human: await db.createRaceTrait({
+        id: "race-trait-vigilant-guardian-human_mark_of_sentinel_human",
+        name: "Vigilant Guardian",
+        description: "When you make a Wisdom (Insight) or Wisdom (Perception) check, you can roll a d4 and add the number rolled to the ability check.",
+      }),
+      sentinels_magic_human_mark_of_sentinel_human: await db.createRaceTrait({
+        id: "race-trait-sentinels-magic-human_mark_of_sentinel_human",
+        name: "Sentinel's Magic",
+        description: "You can cast the shield spell with this trait. Starting at 3rd level, you can also cast the warding bond spell with it. Starting at 5th level, you can also cast the death ward spell with it. Once you cast a spell with this trait, you can't do so again until you finish a long rest. Wisdom is your spellcasting ability for these spells.",
+      }),
+      dual_mind_kalashtar: await db.createRaceTrait({
+        id: "race-trait-dual-mind-kalashtar",
+        name: "Dual Mind",
+        description: "You have advantage on all Wisdom saving throws.",
+      }),
+      mental_discipline_kalashtar: await db.createRaceTrait({
+        id: "race-trait-mental-discipline-kalashtar",
+        name: "Mental Discipline",
+        description: "You have resistance to psychic damage.",
+      }),
+      mind_link_kalashtar: await db.createRaceTrait({
+        id: "race-trait-mind-link-kalashtar",
+        name: "Mind Link",
+        description: "You can speak telepathically to any creature you can see within 30 feet of you. The creature understands you only if the two of you share a language. You can speak telepathically in this way to one creature at a time.",
+      }),
+      severed_from_dreams_kalashtar: await db.createRaceTrait({
+        id: "race-trait-severed-from-dreams-kalashtar",
+        name: "Severed from Dreams",
+        description: "You don't sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in a trancelike meditation, during which you retain consciousness.",
+      }),
+      fearless_kender: await db.createRaceTrait({
+        id: "race-trait-fearless-kender",
+        name: "Fearless",
+        description: "You are immune to the frightened condition.",
+      }),
+      kender_curiosity_kender: await db.createRaceTrait({
+        id: "race-trait-kender-curiosity-kender",
+        name: "Kender Curiosity",
+        description: "You have advantage on all Intelligence (Investigation) checks.",
+      }),
+      taunt_kender: await db.createRaceTrait({
+        id: "race-trait-taunt-kender",
+        name: "Taunt",
+        description: "As a bonus action, you can unleash a string of provoking words at a creature within 30 feet of you that can hear you. The target must succeed on a Wisdom saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or be taunted by you until the start of your next turn. A taunted target has disadvantage on attack rolls against targets other than you.",
+      }),
+      expert_forgery_kenku: await db.createRaceTrait({
+        id: "race-trait-expert-forgery-kenku",
+        name: "Expert Forgery",
+        description: "You can duplicate other creatures' handwriting and craftwork. You have advantage on all checks made to produce forgeries or duplicates of existing objects.",
+      }),
+      kenku_training_kenku: await db.createRaceTrait({
+        id: "race-trait-kenku-training-kenku",
+        name: "Kenku Training",
+        description: "You are proficient in your choice of two of the following skills: Acrobatics, Deception, Stealth, and Sleight of Hand.",
+      }),
+      mimicry_kenku: await db.createRaceTrait({
+        id: "race-trait-mimicry-kenku",
+        name: "Mimicry",
+        description: "You can mimic sounds you have heard, including voices. A creature that hears the sounds you make can tell they are imitations with a successful Wisdom (Insight) check opposed by your Charisma (Deception) check.",
+      }),
+      darkvision_kobold: await db.createRaceTrait({
+        id: "race-trait-darkvision-kobold",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      grovel_cower_and_beg_kobold: await db.createRaceTrait({
+        id: "race-trait-grovel-cower-and-beg-kobold",
+        name: "Grovel, Cower, and Beg",
+        description: "As an action on your turn, you can cower pathetically to distract nearby foes. Until the end of your next turn, your allies gain advantage on attack rolls against creatures within 10 feet of you that can see you. Once you use this trait, you can't use it again until you finish a short or long rest.",
+      }),
+      pack_tactics_kobold: await db.createRaceTrait({
+        id: "race-trait-pack-tactics-kobold",
+        name: "Pack Tactics",
+        description: "You have advantage on an attack roll against a creature if at least one of your allies is within 5 feet of the creature and the ally isn't incapacitated.",
+      }),
+      darkvision_leonin: await db.createRaceTrait({
+        id: "race-trait-darkvision-leonin",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      claws_leonin: await db.createRaceTrait({
+        id: "race-trait-claws-leonin",
+        name: "Claws",
+        description: "Your claws are natural weapons, which you can use to make unarmed strikes. If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      hunters_instincts_leonin: await db.createRaceTrait({
+        id: "race-trait-hunters-instincts-leonin",
+        name: "Hunter's Instincts",
+        description: "You have proficiency in one of the following skills of your choice: Athletics, Intimidation, Perception, or Survival.",
+      }),
+      daunting_roar_leonin: await db.createRaceTrait({
+        id: "race-trait-daunting-roar-leonin",
+        name: "Daunting Roar",
+        description: "As a bonus action, you can let out a menacing roar. Creatures of your choice within 10 feet of you that can hear you must succeed on a Wisdom saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or be frightened of you until the end of your next turn. Once you use this trait, you can't use it again until you finish a short or long rest.",
+      }),
+      bite_lizardfolk: await db.createRaceTrait({
+        id: "race-trait-bite-lizardfolk",
+        name: "Bite",
+        description: "Your fanged maw is a natural weapon, which you can use to make unarmed strikes. If you hit with it, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      cunning_artisan_lizardfolk: await db.createRaceTrait({
+        id: "race-trait-cunning-artisan-lizardfolk",
+        name: "Cunning Artisan",
+        description: "As part of a short rest, you can harvest bone and hide from a slain beast, construct, dragon, monstrosity, or plant creature of size Small or larger to create one of the following items: a shield, a club, a javelin, or 1d4 darts or blowgun needles. To use this trait, you need a blade, such as a dagger, or appropriate artisan's tools, such as leatherworker's tools.",
+      }),
+      hold_breath_lizardfolk: await db.createRaceTrait({
+        id: "race-trait-hold-breath-lizardfolk",
+        name: "Hold Breath",
+        description: "You can hold your breath for up to 15 minutes at a time.",
+      }),
+      natural_armor_lizardfolk: await db.createRaceTrait({
+        id: "race-trait-natural-armor-lizardfolk",
+        name: "Natural Armor",
+        description: "You have tough, scaly skin. When you aren't wearing armor, your AC is 13 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor.",
+      }),
+      hungry_jaws_lizardfolk: await db.createRaceTrait({
+        id: "race-trait-hungry-jaws-lizardfolk",
+        name: "Hungry Jaws",
+        description: "In battle, you can throw yourself into a vicious feeding frenzy. As a bonus action, you can make a special attack with your bite. If the attack hits, it deals its normal damage, and you gain temporary hit points (minimum of 1) equal to your Constitution modifier, and you can't use this trait again until you finish a short or long rest.",
+      }),
+      natural_armor_loxodon: await db.createRaceTrait({
+        id: "race-trait-natural-armor-loxodon",
+        name: "Natural Armor",
+        description: "You have thick, leathery skin. When you aren't wearing armor, your AC is 12 + your Constitution modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor.",
+      }),
+      powerful_build_loxodon: await db.createRaceTrait({
+        id: "race-trait-powerful-build-loxodon",
+        name: "Powerful Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      }),
+      trunk_loxodon: await db.createRaceTrait({
+        id: "race-trait-trunk-loxodon",
+        name: "Trunk",
+        description: "You can grasp things with your trunk, and you can use it as a snorkel. It has a reach of 5 feet, and it can lift a number of pounds equal to five times your Strength score. You can use it to do the following simple tasks: lift, drop, hold, push, or pull an object or a creature; open or close a door or a container; grapple someone; or make an unarmed strike. Your DM might allow other simple tasks to be added to that list of options. It can't wield weapons or shields or do anything that requires manual precision, such as using tools or magic items or performing the somatic components of a spell.",
+      }),
+      keen_smell_loxodon: await db.createRaceTrait({
+        id: "race-trait-keen-smell-loxodon",
+        name: "Keen Smell",
+        description: "Thanks to your sensitive trunk, you have advantage on Wisdom (Perception) checks that involve smell.",
+      }),
+      horns_minotaur: await db.createRaceTrait({
+        id: "race-trait-horns-minotaur",
+        name: "Horns",
+        description: "Your horns are natural melee weapons, which you can use to make unarmed strikes. If you hit with them, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      goring_rush_minotaur: await db.createRaceTrait({
+        id: "race-trait-goring-rush-minotaur",
+        name: "Goring Rush",
+        description: "When you take the Dash action on your turn, you can make one melee attack with your horns as a bonus action.",
+      }),
+      hammering_horns_minotaur: await db.createRaceTrait({
+        id: "race-trait-hammering-horns-minotaur",
+        name: "Hammering Horns",
+        description: "When you use the Attack action during your turn to make a melee attack, you can attempt to shove a creature with your horns as a bonus action. You cannot use this shove attempt to knock a creature prone.",
+      }),
+      labyrinthine_recall_minotaur: await db.createRaceTrait({
+        id: "race-trait-labyrinthine-recall-minotaur",
+        name: "Labyrinthine Recall",
+        description: "You can perfectly recall any path you have traveled.",
+      }),
+      darkvision_orc: await db.createRaceTrait({
+        id: "race-trait-darkvision-orc",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      aggressive_orc: await db.createRaceTrait({
+        id: "race-trait-aggressive-orc",
+        name: "Aggressive",
+        description: "As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started.",
+      }),
+      powerful_build_orc: await db.createRaceTrait({
+        id: "race-trait-powerful-build-orc",
+        name: "Powerful Build",
+        description: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+      }),
+      darkvision_owlin: await db.createRaceTrait({
+        id: "race-trait-darkvision-owlin",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      flight_owlin: await db.createRaceTrait({
+        id: "race-trait-flight-owlin",
+        name: "Flight",
+        description: "You have a flying speed equal to your walking speed. You can't use this flying speed if you're wearing medium or heavy armor.",
+      }),
+      keen_senses_owlin: await db.createRaceTrait({
+        id: "race-trait-keen-senses-owlin",
+        name: "Keen Senses",
+        description: "You have proficiency in the Perception skill.",
+      }),
+      silent_feathers_owlin: await db.createRaceTrait({
+        id: "race-trait-silent-feathers-owlin",
+        name: "Silent Feathers",
+        description: "You have proficiency in the Stealth skill.",
+      }),
+      amorphous_plasmoid: await db.createRaceTrait({
+        id: "race-trait-amorphous-plasmoid",
+        name: "Amorphous",
+        description: "You can squeeze through a space as narrow as 1 inch wide without squeezing.",
+      }),
+      darkvision_plasmoid: await db.createRaceTrait({
+        id: "race-trait-darkvision-plasmoid",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      hold_breath_plasmoid: await db.createRaceTrait({
+        id: "race-trait-hold-breath-plasmoid",
+        name: "Hold Breath",
+        description: "You can hold your breath for 1 hour.",
+      }),
+      natural_reach_plasmoid: await db.createRaceTrait({
+        id: "race-trait-natural-reach-plasmoid",
+        name: "Natural Reach",
+        description: "When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.",
+      }),
+      shape_self_plasmoid: await db.createRaceTrait({
+        id: "race-trait-shape-self-plasmoid",
+        name: "Shape Self",
+        description: "As a bonus action, you can reshape your body to give yourself a head, one or two arms, one or two legs, and makeshift hands and feet, or you can revert to a limbless blob. While you have a humanlike shape, you can wear clothing and armor made for a Humanoid of your size. As a bonus action, you can extrude a pseudopod that is up to 6 inches wide and 10 feet long, or reabsorb it into your body. You can use this pseudopod to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can't attack with the pseudopod or use it to carry more than 10 pounds.",
+      }),
+      ancestral_legacy_reborn: await db.createRaceTrait({
+        id: "race-trait-ancestral-legacy-reborn",
+        name: "Ancestral Legacy",
+        description: "You gain the benefits of your choice of one of the following options: (a) Darkvision with a range of 60 feet, (b) Proficiency in two skills of your choice, or (c) Proficiency with one tool of your choice.",
+      }),
+      deathless_nature_reborn: await db.createRaceTrait({
+        id: "race-trait-deathless-nature-reborn",
+        name: "Deathless Nature",
+        description: "You don't need to eat, drink, or breathe. You don't need to sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in an inactive, motionless state, during which you remain semiconscious.",
+      }),
+      knowledge_from_a_past_life_reborn: await db.createRaceTrait({
+        id: "race-trait-knowledge-from-a-past-life-reborn",
+        name: "Knowledge from a Past Life",
+        description: "When you make an ability check that uses a skill, you can roll a d6 and add the number rolled to the check. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+      }),
+      souls_gift_reborn: await db.createRaceTrait({
+        id: "race-trait-souls-gift-reborn",
+        name: "Soul's Gift",
+        description: "You have resistance to necrotic damage and radiant damage.",
+      }),
+      fey_satyr: await db.createRaceTrait({
+        id: "race-trait-fey-satyr",
+        name: "Fey",
+        description: "Your creature type is fey, rather than humanoid.",
+      }),
+      ram_satyr: await db.createRaceTrait({
+        id: "race-trait-ram-satyr",
+        name: "Ram",
+        description: "You can use your head and horns to make unarmed strikes. If you hit with them, you deal bludgeoning damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      magic_resistance_satyr: await db.createRaceTrait({
+        id: "race-trait-magic-resistance-satyr",
+        name: "Magic Resistance",
+        description: "You have advantage on saving throws against spells and other magical effects.",
+      }),
+      mirthful_leaps_satyr: await db.createRaceTrait({
+        id: "race-trait-mirthful-leaps-satyr",
+        name: "Mirthful Leaps",
+        description: "Whenever you make a long or high jump, you can roll a d8 and add the number rolled to the number of feet you cover, even when making a standing jump. This extra distance costs movement as normal.",
+      }),
+      reveler_satyr: await db.createRaceTrait({
+        id: "race-trait-reveler-satyr",
+        name: "Reveler",
+        description: "You have proficiency in the Performance and Persuasion skills, and you have proficiency with one musical instrument of your choice.",
+      }),
+      darkvision_shifter: await db.createRaceTrait({
+        id: "race-trait-darkvision-shifter",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      shifting_shifter: await db.createRaceTrait({
+        id: "race-trait-shifting-shifter",
+        name: "Shifting",
+        description: "As a bonus action, you can assume a more bestial appearance. This transformation lasts for 1 minute, until you die, or until you revert to your normal appearance as a bonus action. When you shift, you gain temporary hit points equal to your level + your Constitution modifier (minimum of 1). You also gain additional benefits that depend on your shifter type, as detailed below. Once you shift, you can't do so again until you finish a short or long rest.",
+      }),
+      shifting_feature_shifter_beasthide_shifter: await db.createRaceTrait({
+        id: "race-trait-shifting-feature-shifter_beasthide_shifter",
+        name: "Shifting Feature",
+        description: "While shifting, you gain 1d6 temporary hit points at the start of each of your turns. You also gain a +1 bonus to AC while shifting.",
+      }),
+      shifting_feature_shifter_longtooth_shifter: await db.createRaceTrait({
+        id: "race-trait-shifting-feature-shifter_longtooth_shifter",
+        name: "Shifting Feature",
+        description: "While shifting, you can use your fangs to make an unarmed strike as a bonus action. If you hit, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      shifting_feature_shifter_swiftstride_shifter: await db.createRaceTrait({
+        id: "race-trait-shifting-feature-shifter_swiftstride_shifter",
+        name: "Shifting Feature",
+        description: "While shifting, your walking speed increases by 10 feet. You also gain a +1 bonus to AC while shifting.",
+      }),
+      shifting_feature_shifter_wildhunt_shifter: await db.createRaceTrait({
+        id: "race-trait-shifting-feature-shifter_wildhunt_shifter",
+        name: "Shifting Feature",
+        description: "While shifting, you have advantage on Wisdom checks, and no creature within 30 feet of you can make an attack roll with advantage against you, unless you're incapacitated.",
+      }),
+      animal_enhancement_simic_hybrid: await db.createRaceTrait({
+        id: "race-trait-animal-enhancement-simic_hybrid",
+        name: "Animal Enhancement",
+        description: "You gain one of the following enhancements of your choice: (a) Manta Glide: You have a flying speed equal to your walking speed, but you must end your turn on solid ground or fall. (b) Nimble Climber: You have a climbing speed equal to your walking speed. (c) Underwater Adaptation: You can breathe air and water, and you have a swimming speed equal to your walking speed.",
+      }),
+      darkvision_simic_hybrid: await db.createRaceTrait({
+        id: "race-trait-darkvision-simic_hybrid",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      darkvision_tabaxi: await db.createRaceTrait({
+        id: "race-trait-darkvision-tabaxi",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      feline_agility_tabaxi: await db.createRaceTrait({
+        id: "race-trait-feline-agility-tabaxi",
+        name: "Feline Agility",
+        description: "Your reflexes and agility allow you to move with a burst of speed. When you move on your turn in combat, you can double your speed until the end of the turn. Once you use this trait, you can't use it again until you move 0 feet on one of your turns.",
+      }),
+      cats_claws_tabaxi: await db.createRaceTrait({
+        id: "race-trait-cats-claws-tabaxi",
+        name: "Cat's Claws",
+        description: "Because of your claws, you have a climbing speed of 20 feet. In addition, your claws are natural weapons, which you can use to make unarmed strikes. If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      cats_talent_tabaxi: await db.createRaceTrait({
+        id: "race-trait-cats-talent-tabaxi",
+        name: "Cat's Talent",
+        description: "You have proficiency in the Perception and Stealth skills.",
+      }),
+      chameleon_carapace_thri_kreen: await db.createRaceTrait({
+        id: "race-trait-chameleon-carapace-thri_kreen",
+        name: "Chameleon Carapace",
+        description: "As a bonus action, you can change the color of your carapace to match the color and texture of your surroundings, giving you advantage on Dexterity (Stealth) checks made to hide.",
+      }),
+      darkvision_thri_kreen: await db.createRaceTrait({
+        id: "race-trait-darkvision-thri_kreen",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      extra_arms_thri_kreen: await db.createRaceTrait({
+        id: "race-trait-extra-arms-thri_kreen",
+        name: "Extra Arms",
+        description: "You have two extra arms below your main pair of arms. The extra arms can manipulate an object, open or close a door or container, pick up or set down a Tiny object, or wield a weapon that has the light property.",
+      }),
+      sleepless_thri_kreen: await db.createRaceTrait({
+        id: "race-trait-sleepless-thri_kreen",
+        name: "Sleepless",
+        description: "You don't need to sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in a trancelike meditation, during which you remain semiconscious.",
+      }),
+      thri_kreen_weapon_training_thri_kreen: await db.createRaceTrait({
+        id: "race-trait-thri-kreen-weapon-training-thri_kreen",
+        name: "Thri-kreen Weapon Training",
+        description: "You are proficient with the gythka and the chatkcha.",
+      }),
+      darkvision_tiefling: await db.createRaceTrait({
+        id: "race-trait-darkvision-tiefling",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      hellish_resistance_tiefling: await db.createRaceTrait({
+        id: "race-trait-hellish-resistance-tiefling",
+        name: "Hellish Resistance",
+        description: "You have resistance to fire damage.",
+      }),
+      infernal_legacy_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_asmodeus_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_asmodeus_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_baalzebul_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_baalzebul_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the suggestion spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the stinking cloud spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_dispater_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_dispater_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the command spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the detect magic spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_fierna_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_fierna_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the charm person spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the suggestion spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_glasya_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_glasya_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the minor illusion spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the disguise self spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_levistus_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_levistus_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the ray of frost spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the armor of Agathys spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_mammon_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_mammon_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the Tenser's floating disk spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the arcane lock spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_mephistopheles_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_mephistopheles_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the burning hands spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the flame blade spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      infernal_legacy_tiefling_zariel_tiefling: await db.createRaceTrait({
+        id: "race-trait-infernal-legacy-tiefling_zariel_tiefling",
+        name: "Infernal Legacy",
+        description: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the searing smite spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the branding smite spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      claws_tortle: await db.createRaceTrait({
+        id: "race-trait-claws-tortle",
+        name: "Claws",
+        description: "Your claws are natural weapons, which you can use to make unarmed strikes. If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.",
+      }),
+      hold_breath_tortle: await db.createRaceTrait({
+        id: "race-trait-hold-breath-tortle",
+        name: "Hold Breath",
+        description: "You can hold your breath for up to 1 hour.",
+      }),
+      natural_armor_tortle: await db.createRaceTrait({
+        id: "race-trait-natural-armor-tortle",
+        name: "Natural Armor",
+        description: "Due to your shell, you have a +2 bonus to AC while you aren't wearing armor.",
+      }),
+      shell_defense_tortle: await db.createRaceTrait({
+        id: "race-trait-shell-defense-tortle",
+        name: "Shell Defense",
+        description: "You can withdraw into your shell as an action. Until you emerge, you gain a +4 bonus to AC, and you have advantage on Strength and Constitution saving throws. While in your shell, you are prone, your speed is 0 and can't increase, you have disadvantage on Dexterity saving throws, you can't take reactions, and the only action you can take is a bonus action to emerge from your shell.",
+      }),
+      survival_instinct_tortle: await db.createRaceTrait({
+        id: "race-trait-survival-instinct-tortle",
+        name: "Survival Instinct",
+        description: "You gain proficiency in the Survival skill. Your shell gives you advantage on all checks made to stabilize a dying creature and on all checks made to provide first aid.",
+      }),
+      amphibious_triton: await db.createRaceTrait({
+        id: "race-trait-amphibious-triton",
+        name: "Amphibious",
+        description: "You can breathe air and water.",
+      }),
+      control_air_and_water_triton: await db.createRaceTrait({
+        id: "race-trait-control-air-and-water-triton",
+        name: "Control Air and Water",
+        description: "You can cast fog cloud with this trait. Starting at 3rd level, you can cast gust of wind with it, and starting at 5th level, you can also cast wall of water with it. Once you cast a spell with this trait, you can't do so again until you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      emissary_of_the_sea_triton: await db.createRaceTrait({
+        id: "race-trait-emissary-of-the-sea-triton",
+        name: "Emissary of the Sea",
+        description: "Aquatic beasts have an extraordinary affinity with your people. You can communicate simple ideas to any beast that can breathe water. They can understand the meaning of your words, though you have no special ability to understand them in return.",
+      }),
+      guardians_of_the_depths_triton: await db.createRaceTrait({
+        id: "race-trait-guardians-of-the-depths-triton",
+        name: "Guardians of the Depths",
+        description: "Adapted to even the most extreme ocean depths, you have resistance to cold damage, and you ignore any of the drawbacks caused by a deep, underwater environment.",
+      }),
+      swimming_speed_triton: await db.createRaceTrait({
+        id: "race-trait-swimming-speed-triton",
+        name: "Swimming Speed",
+        description: "You have a swimming speed of 30 feet.",
+      }),
+      darkvision_vedalken: await db.createRaceTrait({
+        id: "race-trait-darkvision-vedalken",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      vedalken_dispassion_vedalken: await db.createRaceTrait({
+        id: "race-trait-vedalken-dispassion-vedalken",
+        name: "Vedalken Dispassion",
+        description: "You have advantage on all Intelligence, Wisdom, and Charisma saving throws.",
+      }),
+      partially_amphibious_vedalken: await db.createRaceTrait({
+        id: "race-trait-partially-amphibious-vedalken",
+        name: "Partially Amphibious",
+        description: "You can breathe air and water, but you need to be submerged at least once every 4 hours to avoid suffocating.",
+      }),
+      tireless_precision_vedalken: await db.createRaceTrait({
+        id: "race-trait-tireless-precision-vedalken",
+        name: "Tireless Precision",
+        description: "You are proficient with one of the following skills of your choice: Arcana, History, Investigation, Medicine, Performance, or Sleight of Hand. You are also proficient with one tool of your choice. When you make an ability check with the chosen skill or tool, you can roll a d4 and add the number rolled to the check.",
+      }),
+      constructed_resilience_warforged: await db.createRaceTrait({
+        id: "race-trait-constructed-resilience-warforged",
+        name: "Constructed Resilience",
+        description: "You were created to have remarkable fortitude, represented by the following benefits: You have advantage on saving throws against being poisoned, and you have resistance to poison damage. You don't need to eat, drink, or breathe. You are immune to disease. You don't need to sleep, and magic can't put you to sleep.",
+      }),
+      sentrys_rest_warforged: await db.createRaceTrait({
+        id: "race-trait-sentrys-rest-warforged",
+        name: "Sentry's Rest",
+        description: "When you take a long rest, you must spend at least 6 hours in an inactive, motionless state, rather than sleeping. In this state, you appear inert, but it doesn't render you unconscious, and you can see and hear as normal.",
+      }),
+      integrated_protection_warforged: await db.createRaceTrait({
+        id: "race-trait-integrated-protection-warforged",
+        name: "Integrated Protection",
+        description: "Your body has built-in defensive layers, which can be enhanced with armor: You gain a +1 bonus to Armor Class. You can don only armor with which you have proficiency. To don armor other than a shield, you must incorporate it into your body over the course of 1 hour, during which you must remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way. While you live, the armor incorporated into your body can't be removed against your will.",
+      }),
+      specialized_design_warforged: await db.createRaceTrait({
+        id: "race-trait-specialized-design-warforged",
+        name: "Specialized Design",
+        description: "You gain one skill proficiency of your choice, one tool proficiency of your choice, and fluency in one language of your choice.",
+      }),
+      darkvision_yuan_ti: await db.createRaceTrait({
+        id: "race-trait-darkvision-yuan_ti",
+        name: "Darkvision",
+        description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+      }),
+      magic_resistance_yuan_ti: await db.createRaceTrait({
+        id: "race-trait-magic-resistance-yuan_ti",
+        name: "Magic Resistance",
+        description: "You have advantage on saving throws against spells and other magical effects.",
+      }),
+      poison_immunity_yuan_ti: await db.createRaceTrait({
+        id: "race-trait-poison-immunity-yuan_ti",
+        name: "Poison Immunity",
+        description: "You are immune to poison damage and the poisoned condition.",
+      }),
+      serpentine_magic_yuan_ti: await db.createRaceTrait({
+        id: "race-trait-serpentine-magic-yuan_ti",
+        name: "Serpentine Magic",
+        description: "You know the poison spray cantrip. When you reach 3rd level, you can cast the suggestion spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the animal friendship spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      innate_spellcasting_yuan_ti_pureblood_yuan_ti: await db.createRaceTrait({
+        id: "race-trait-innate-spellcasting-yuan_ti_pureblood_yuan_ti",
+        name: "Innate Spellcasting",
+        description: "You know the poison spray cantrip. When you reach 3rd level, you can cast the suggestion spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the animal friendship spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.",
+      }),
+      chromatic_ancestry_dragonborn: await db.createRaceTrait({
+        id: "race-trait-chromatic-ancestry-dragonborn",
+        name: "Chromatic Ancestry",
+        description: "You have draconic ancestry of your chosen color, which determines your resistance and breathe weapon type.\n\tBlack: Acid (5 by 30ft line)\n\tBlue: Lightning (5 by 30ft line)\n\tGreen: Poison (15ft cone)\n\tRed: Fire (15ft cone)\n\tWhite: Cold (15ft cone)",
+      }),
+      metallic_ancestry_dragonborn: await db.createRaceTrait({
+        id: "race-trait-metallic-ancestry-dragonborn",
+        name: "Metallic Ancestry",
+        description: "You have draconic ancestry of your chosen metal, which determines your resistance and breathe weapon type.\n\tBrass: Fire (5 by 30ft line)\n\tBronze: Lightning (5 by 30ft line)\n\tCopper: Acid (5 by 30ft line)\n\tGold: Fire (15ft cone)\n\tSilver: Cold (15ft cone)",
+      }),
+      gem_ancestry_dragonborn: await db.createRaceTrait({
+        id: "race-trait-gem-ancestry-dragonborn",
+        name: "Gem Ancestry",
+        description: "You have draconic ancestry of your chosen gem, which determines your resistance and breathe weapon type.\n\tAmethyst: Force (15ft cone)\n\tCrystal: Radiant (5 by 30ft line)\n\tEmerald: Psychic (15ft cone)\n\tSapphire: Thunder (5 by 30ft line)\n\tTopaz: Necrotic (5 by 30ft line)",
+      })
     };
     // Race Names
-    const raceNames: Record<string, Prisma.RaceNameGetPayload<{}>> = {
-        aarakocra: await db.createRaceName({
-            id: "race-names-aarakocra",
-            male: ["Kree", "Kreel", "Kreeth", "Kreetha", "Kreetho", "Kreethu", "Rath", "Ratha", "Ratho", "Rathu"],
-            female: ["Kreea", "Kreela", "Kreetha", "Kreethia", "Kreetho", "Kreethia", "Ratha", "Rathia", "Ratho", "Rathia"],
-            unisex: ["Sky", "Wind", "Feather", "Talons", "Beak", "Wing", "Cloud", "Breeze", "Storm", "Gale"],
-            surname: ["Skycaller", "Windrider", "Featherfoot", "Talonstrike", "Beakblade", "Wingflap", "Cloudsworn", "Breezefury", "Stormwatcher", "Galesinger"]
-        }),
-        aasimar: await db.createRaceName({
-            id: "race-names-aasimar",
-            male: ["Seraphiel", "Thalion", "Aurelius", "Celestius", "Divinus", "Luminus", "Radiant", "Solarius", "Elysian", "Zephyrus"],
-            female: ["Liora", "Mara", "Celestia", "Aurelia", "Divina", "Lumina", "Radiance", "Solara", "Elysia", "Zephyra"],
-            unisex: ["Light", "Dawn", "Glory", "Hope", "Faith", "Grace", "Valor", "Truth", "Honor", "Justice"],
-            surname: ["Lightbringer", "Dawnstar", "Gloryseeker", "Hopebearer", "Faithkeeper", "Gracelord", "Valorshield", "Truthsayer", "Honorguard", "Justiceblade", "Brightwing", "Goldheart", "Starfall", "Lightbringer", "Heavenward", "Divinegrace"]
-        })
+    const raceNames = {
+    aarakocra: await db.createRaceName({
+        id: "race-names-aarakocra",
+        male: ["Kree", "Kreel", "Kreeth", "Kreetha", "Kreetho", "Kreethu"],
+        female: ["Kreea", "Kreela", "Kreetha", "Kreethi", "Kreetho", "Kreethu"],
+        unisex: [],
+        surname: ["Windcaller", "Skysoarer", "Clouddancer", "Stormrider", "Windwhisper", "Skywatcher"]
+    }),
+    aasimar: await db.createRaceName({
+        id: "race-names-aasimar",
+        male: ["Seraphiel", "Thalion", "Aurelius", "Celestius", "Divinus", "Luminus"],
+        female: ["Liora", "Mara", "Celestia", "Aurelia", "Divina", "Lumina"],
+        unisex: [],
+        surname: ["Brightwing", "Goldheart", "Starfall", "Lightbringer", "Heavenward", "Divinegrace"]
+    }),
+    autognome: await db.createRaceName({
+        id: "race-names-autognome",
+        male: ["Cog", "Gear", "Spring", "Piston", "Rivet", "Bolt"],
+        female: ["Cog", "Gear", "Spring", "Piston", "Rivet", "Bolt"],
+        unisex: [],
+        surname: ["Ironworks", "Steelcraft", "Clockwork", "Mechanus", "Gearwright", "Springmaker"]
+    }),
+    bugbear: await db.createRaceName({
+        id: "race-names-bugbear",
+        male: ["Gor", "Thokk", "Dren", "Harg", "Krusk", "Vrak"],
+        female: ["Shara", "Emen", "Baggi", "Vola", "Ovak", "Zara"],
+        unisex: [],
+        surname: ["Bloodclaw", "Bonechewer", "Skullcrusher", "Ironhide", "Grimjaw", "Darkfang"]
+    }),
+    centaur: await db.createRaceName({
+        id: "race-names-centaur",
+        male: ["Chiron", "Pholus", "Nessus", "Eurytion", "Hylaeus", "Rhoecus"],
+        female: ["Hippe", "Melanippe", "Ocyrhoe", "Theano", "Euippe", "Hippodamia"],
+        unisex: [],
+        surname: ["Swiftstride", "Windrunner", "Meadowgallop", "Thunderhoof", "Stormchaser", "Wildheart"]
+    }),
+    changeling: await db.createRaceName({
+        id: "race-names-changeling",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Shapeshifter", "Faceless", "Mimic", "Doppelganger", "Illusion", "Mirage"]
+    }),
+    dhampir: await db.createRaceName({
+        id: "race-names-dhampir",
+        male: ["Vladimir", "Damien", "Lucian", "Cassius", "Darius", "Marcus"],
+        female: ["Lilith", "Raven", "Luna", "Cassandra", "Diana", "Mira"],
+        unisex: [],
+        surname: ["Nightshade", "Bloodmoon", "Shadowbane", "Darkheart", "Crimson", "Nocturne"]
+    }),
+    dragonborn: await db.createRaceName({
+        id: "race-names-dragonborn",
+        male: ["Arjhan", "Balasar", "Bharash", "Donaar", "Ghesh", "Heskan"],
+        female: ["Akra", "Biri", "Daar", "Farideh", "Harann", "Havilar"],
+        unisex: [],
+        surname: ["Flameheart", "Stormwind", "Frostfang", "Thunderclaw", "Shadowscale", "Goldwing"]
+    }),
+    dwarf: await db.createRaceName({
+        id: "race-names-dwarf",
+        male: ["Thrain", "Beldrum", "Dorn", "Farin", "Orik", "Thorin"],
+        female: ["Hilda", "Elinor", "Bree", "Dagna", "Helja", "Thora"],
+        unisex: [],
+        surname: ["Ironbeard", "Stonehammer", "Goldforge", "Mountainheart", "Steelaxe", "Rockfist"]
+    }),
+    elf: await db.createRaceName({
+        id: "race-names-elf",
+        male: ["Thamior", "Kaelen", "Aelar", "Valandil", "Immeral", "Arannis"],
+        female: ["Laeriel", "Sylvaria", "Naivara", "Elenwen", "Faelina", "Thalindra"],
+        unisex: [],
+        surname: ["Moonwhisper", "Stardancer", "Windweaver", "Leafshade", "Riversong", "Forestwalker"]
+    }),
+    fairy: await db.createRaceName({
+        id: "race-names-fairy",
+        male: ["Puck", "Oberon", "Titania"],
+        female: ["Titania", "Puck", "Oberon"],
+        unisex: [],
+        surname: ["Sparklewing", "Dustdancer", "Glowmoth", "Twinkletoes", "Shimmer", "Gleam"]
+    }),
+    firbolg: await db.createRaceName({
+        id: "race-names-firbolg",
+        male: ["Bael", "Druid", "Fael", "Gael", "Hael", "Kael"],
+        female: ["Ael", "Bael", "Cael", "Dael", "Eael", "Fael"],
+        unisex: [],
+        surname: ["Treehugger", "Forestkeeper", "Natureguard", "Wildwood", "Greenheart", "Earthshaker"]
+    }),
+    genasi: await db.createRaceName({
+        id: "race-names-genasi",
+        male: ["Aiden", "Blaze", "Cinder", "Dust", "Ember", "Flame"],
+        female: ["Aria", "Breeze", "Crystal", "Dew", "Echo", "Frost"],
+        unisex: [],
+        surname: ["Elemental", "Primordial", "Essence", "Spirit", "Force", "Power"]
+    }),
+    gnome: await db.createRaceName({
+        id: "race-names-gnome",
+        male: ["Fizban", "Tink", "Alston", "Boddynock", "Zook", "Fizzlepuff"],
+        female: ["Nissa", "Bimpnottin", "Caramip", "Ellywick", "Tana", "Thistle"],
+        unisex: [],
+        surname: ["Tinkertop", "Gadgetmaker", "Whimsy", "Trickster", "Gizmo", "Puzzle"]
+    }),
+    giff: await db.createRaceName({
+        id: "race-names-giff",
+        male: ["Gunther", "Hans", "Klaus", "Otto", "Rolf", "Wolfgang"],
+        female: ["Greta", "Helga", "Ingrid", "Katarina", "Petra", "Ursula"],
+        unisex: [],
+        surname: ["Ironfist", "Steeljaw", "Gunpowder", "Cannonball", "Blunderbuss", "Musket"]
+    }),
+    goblin: await db.createRaceName({
+        id: "race-names-goblin",
+        male: ["Grik", "Snag", "Vrak", "Dreg", "Muck", "Snik"],
+        female: ["Ziz", "Yip", "Nib", "Gik", "Pox", "Vix"],
+        unisex: [],
+        surname: ["Sneak", "Stab", "Grab", "Snatch", "Pilfer", "Thief"]
+    }),
+    goliath: await db.createRaceName({
+        id: "race-names-goliath",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Stonefist", "Mountainpeak", "Thunderclap", "Stormcaller", "Earthshaker", "Rockbreaker"]
+    }),
+    hadozee: await db.createRaceName({
+        id: "race-names-hadozee",
+        male: ["Bansh", "Darsh", "Grath", "Groh", "Polth", "Marn"],
+        female: ["Bahasha", "Bannithi", "Dashi", "Kalla", "Risha", "Yasha"],
+        unisex: [],
+        surname: ["Nightdream", "Swiftson", "Wave-dancer", "Dawnchaser", "Cloudjumper", "Swordstorm"]
+    }),
+    half_elf: await db.createRaceName({
+        id: "race-names-half-elf",
+        male: ["Caelum", "Lioran", "Thalion", "Eldrin", "Arlen", "Dorian"],
+        female: ["Liora", "Nyxara", "Elara", "Selene", "Aria", "Luna"],
+        unisex: [],
+        surname: ["Moonwhisper", "Stardancer", "Windweaver", "Leafshade", "Riversong", "Forestwalker"]
+    }),
+    half_orc: await db.createRaceName({
+        id: "race-names-half-orc",
+        male: ["Gor", "Thokk", "Dren", "Harg", "Krusk", "Vrak"],
+        female: ["Shara", "Emen", "Baggi", "Vola", "Ovak", "Zara"],
+        unisex: [],
+        surname: ["Bloodclaw", "Bonechewer", "Skullcrusher", "Ironhide", "Grimjaw", "Darkfang"]
+    }),
+    halfling: await db.createRaceName({
+        id: "race-names-halfling",
+        male: ["Milo", "Pippin", "Samwise", "Frodo", "Bilbo", "Tobias"],
+        female: ["Rosie", "Marigold", "Pansy", "Daisy", "Primrose", "Piri"],
+        unisex: [],
+        surname: ["Greenbottle", "Underhill", "Goodbarrel", "Hobbiton", "Bagshot", "Baggins"]
+    }),
+    harengon: await db.createRaceName({
+        id: "race-names-harengon",
+        male: ["Bunny", "Hoppy", "Jumper", "Skipper", "Bounder", "Leaper"],
+        female: ["Bunny", "Hoppy", "Jumper", "Skipper", "Bounder", "Leaper"],
+        unisex: [],
+        surname: ["Longears", "Quickfoot", "Swiftjump", "Bouncy", "Fleetfoot", "Springstep"]
+    }),
+    hexblood: await db.createRaceName({
+        id: "race-names-hexblood",
+        male: ["Crow", "Raven", "Shadow", "Grim", "Dark", "Night"],
+        female: ["Crow", "Raven", "Shadow", "Grim", "Dark", "Night"],
+        unisex: [],
+        surname: ["Hexweaver", "Cursebearer", "Witchborn", "Hagspawn", "Darkmagic", "Spellbound"]
+    }),
+    hobgoblin: await db.createRaceName({
+        id: "race-names-hobgoblin",
+        male: ["Gor", "Thokk", "Dren", "Harg", "Krusk", "Vrak"],
+        female: ["Shara", "Emen", "Baggi", "Vola", "Ovak", "Zara"],
+        unisex: [],
+        surname: ["Ironfist", "Steeljaw", "Gunpowder", "Cannonball", "Blunderbuss", "Musket"]
+    }),
+    human: await db.createRaceName({
+        id: "race-names-human",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia"]
+    }),
+    kalashtar: await db.createRaceName({
+        id: "race-names-kalashtar",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Dreamweaver", "Mindwalker", "Soulbinder", "Spiritguide", "Psion", "Telepath"]
+    }),
+    kender: await db.createRaceName({
+        id: "race-names-kender",
+        male: ["Milo", "Pippin", "Samwise", "Frodo", "Bilbo", "Tobias"],
+        female: ["Rosie", "Marigold", "Pansy", "Daisy", "Primrose", "Piri"],
+        unisex: [],
+        surname: ["Greenbottle", "Underhill", "Goodbarrel", "Hobbiton", "Bagshot", "Baggins"]
+    }),
+    kenku: await db.createRaceName({
+        id: "race-names-kenku",
+        male: ["Caw", "Squawk", "Chirp", "Tweet", "Coo", "Cackle"],
+        female: ["Caw", "Squawk", "Chirp", "Tweet", "Coo", "Cackle"],
+        unisex: [],
+        surname: ["Featherfall", "Wingbeat", "Skycaller", "Windwhisper", "Cloudsoarer", "Stormdancer"]
+    }),
+    kobold: await db.createRaceName({
+        id: "race-names-kobold",
+        male: ["Meepo", "Snik", "Vrak", "Drek", "Muck", "Grik"],
+        female: ["Ziz", "Yip", "Nib", "Gik", "Pox", "Vix"],
+        unisex: [],
+        surname: ["Tinyclaw", "Smallfang", "Littletooth", "Miniscale", "Petite", "Diminutive"]
+    }),
+    leonin: await db.createRaceName({
+        id: "race-names-leonin",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Goldmane", "Lionheart", "Pridestalker", "Mane", "Roar", "Claw"]
+    }),
+    lizardfolk: await db.createRaceName({
+        id: "race-names-lizardfolk",
+        male: ["Sissith", "Vessk", "Throden", "Hissar", "Ziss", "Kess"],
+        female: ["Sash", "Vissara", "Thiss", "Hissara", "Zissith", "Kessara"],
+        unisex: [],
+        surname: ["Scalefoot", "Tailswish", "Clawmark", "Fang", "Scale", "Lizard"]
+    }),
+    loxodon: await db.createRaceName({
+        id: "race-names-loxodon",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Tuskbreaker", "Trunkstrong", "Ivory", "Tusk", "Trunk", "Elephant"]
+    }),
+    minotaur: await db.createRaceName({
+        id: "race-names-minotaur",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Hornbreaker", "Bullrush", "Charger", "Horn", "Bull", "Maze"]
+    }),
+    orc: await db.createRaceName({
+        id: "race-names-orc",
+        male: ["Gor", "Thokk", "Dren", "Harg", "Krusk", "Vrak"],
+        female: ["Shara", "Emen", "Baggi", "Vola", "Ovak", "Zara"],
+        unisex: [],
+        surname: ["Bloodclaw", "Bonechewer", "Skullcrusher", "Ironhide", "Grimjaw", "Darkfang"]
+    }),
+    owlin: await db.createRaceName({
+        id: "race-names-owlin",
+        male: ["Hoot", "Screech"],
+        female: ["Hoot", "Screech"],
+        unisex: [],
+        surname: ["Nightwing", "Owlcall", "Hoot", "Screech", "Wingbeat", "Featherfall"]
+    }),
+    plasmoid: await db.createRaceName({
+        id: "race-names-plasmoid",
+        male: ["Blob", "Goo", "Slime", "Gel", "Ooze", "Mucus"],
+        female: ["Blob", "Goo", "Slime", "Gel", "Ooze", "Mucus"],
+        unisex: [],
+        surname: ["Slimy", "Gooey", "Blobby", "Gelatinous", "Mucous", "Viscous"]
+    }),
+    reborn: await db.createRaceName({
+        id: "race-names-reborn",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Deathless", "Undying", "Eternal", "Immortal", "Ageless", "Timeless"]
+    }),
+    satyr: await db.createRaceName({
+        id: "race-names-satyr",
+        male: ["Puck", "Oberon", "Titania"],
+        female: ["Titania", "Puck", "Oberon"],
+        unisex: [],
+        surname: ["Horned", "Goatfoot", "Pan", "Faun", "Sylvan", "Woodland"]
+    }),
+    shifter: await db.createRaceName({
+        id: "race-names-shifter",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Wildheart", "Beastform", "Shapeshifter", "Feral", "Primal", "Savage"]
+    }),
+    simic_hybrid: await db.createRaceName({
+        id: "race-names-simic-hybrid",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Hybrid", "Mutant", "Experiment", "Modified", "Enhanced", "Evolved"]
+    }),
+    tabaxi: await db.createRaceName({
+        id: "race-names-tabaxi",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Whiskers", "Purr", "Meow", "Claw", "Fang", "Tail"]
+    }),
+    thri_kreen: await db.createRaceName({
+        id: "race-names-thri-kreen",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Manyarms", "Chitin", "Exoskeleton", "Mandible", "Antenna", "Compound"]
+    }),
+    tiefling: await db.createRaceName({
+        id: "race-names-tiefling",
+        male: ["Akmenos", "Barakas", "Damakos", "Iados", "Therai", "Vladimir"],
+        female: ["Akta", "Bryseis", "Damaia", "Kallista", "Lerissa", "Lilith"],
+        unisex: [],
+        surname: ["Hellspawn", "Devilborn", "Infernal", "Demon", "Fiend", "Devil"]
+    }),
+    tortle: await db.createRaceName({
+        id: "race-names-tortle",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Shellback", "Turtle", "Tortoise", "Carapace", "Shell", "Slow"]
+    }),
+    triton: await db.createRaceName({
+        id: "race-names-triton",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Seafoam", "Wavecaller", "Tide", "Ocean", "Sea", "Water"]
+    }),
+    vedalken: await db.createRaceName({
+        id: "race-names-vedalken",
+        male: ["Aiden", "Caleb", "Ethan", "Gavin", "Ian", "Liam"],
+        female: ["Aria", "Cora", "Eva", "Grace", "Iris", "Luna"],
+        unisex: [],
+        surname: ["Mind", "Thought", "Logic", "Reason", "Wisdom", "Knowledge"]
+    }),
+    warforged: await db.createRaceName({
+        id: "race-names-warforged",
+        male: ["Cog", "Gear", "Spring", "Piston", "Rivet", "Bolt"],
+        female: ["Cog", "Gear", "Spring", "Piston", "Rivet", "Bolt"],
+        unisex: [],
+        surname: ["Ironworks", "Steelcraft", "Clockwork", "Mechanus", "Gearwright", "Springmaker"]
+    }),
+    yuan_ti: await db.createRaceName({
+        id: "race-names-yuan-ti",
+        male: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        female: ["Aukan", "Eglath", "Gae-Al", "Gauthak", "Ilikan", "Keothi"],
+        unisex: [],
+        surname: ["Snakescale", "Serpent", "Viper", "Cobra", "Python", "Constrictor"]
+    }),
     };
-    // Races
-    const race: Record<string, Prisma.RaceGetPayload<{}>> = {
-        aarakocra: await db.createRace({
-            id: "race-aarakocra",
-            name: "Aarakocra",
-            slug: "aarakocra",
-            description: "Birdfolk from the Elemental Plane of Air, Aarakocra are often travelers, expats, refugees, or adventurers. Resembling humanoids in their stature and bipedal movements, they also gain the benefits of a flying speed, slashing talons, and an understanding of the Aarakocra as well as the Auran tongue and writ.",
-            speed: "25 feet walking, 50 feet flying",
-            age: "Aarakocra reach maturity by age 3. Compared to humans, aarakocra don't usually live longer than 30 years.",
-            alignment: "Most aarakocra are good and rarely choose sides when it comes to law and chaos. Leaders are sometimes lawful good.",
-            heightRange: "5'0\" to 6'4\"",
-            weightRange: "90 to 130 lbs",
-            alabastriaLore: "In Bulsania's mountain peaks and Kuriguer's coastal cliffs, Aarakocra serve as messengers and scouts, their aerial perspective providing crucial intelligence about the harsh landscapes below. These birdfolk often work with the Huntbound Order, using their flight to track dangerous creatures across difficult terrain.",
-            playstyle: "Excellent mobility and ranged combat specialists. Perfect for players who want aerial superiority and unique movement options.",
-            defaultCreatureSizeId: "creature-size-medium",
-            languages: {
-                connect: [
-                    { id: language.common.id },
-                    { id: language.aarakocra.id },
-                    { id: language.auran.id }
-                ]
-            },
-            traits: {
-                connect: [
-                    { id: raceTrait.flight.id },
-                    { id: raceTrait.talons.id }
-                ]
-            },
-            abilityScoreIncreases: {
-                connect: [
-                    { id: raceAbilityScore.dex_two.id },
-                    { id: raceAbilityScore.wis_one.id }
-                ]
-            },
-            namesId: raceNames.aarakocra.id
-        }),
-        aasimar: await db.createRace({
-            id: "race-aasimar",
-            name: "Aasimar",
-            slug: "aasimar",
-            description: "Aasimar are descended from humans and often celestials, reflecting the light and pure good of the divine realm. This goodness is often signified by a celestial mark on their bodies and their undeniable beauty.",
-            speed: "30 feet",
-            age: "Aasimar mature at the same rate as humans but can live up to 160 years.",
-            alignment: "Aasimar are inclined toward good alignments. Not all aasimar are of good alignment, but very few are evil.",
-            heightRange: "5'4\" to 7'0\"",
-            weightRange: "110 to 190 lbs",
-            alabastriaLore: "Across Skratonia's cities and temples, Aasimar serve as beacons of hope and divine guidance. These celestial-touched individuals often work with clerics and paladins, their healing abilities and divine resistance making them natural leaders in the fight against darkness.",
-            playstyle: "Divine support and healing specialists. Great for players who want to be the party's moral compass and primary healer.",
-            defaultCreatureSizeId: "creature-size-medium",
-            languages: {
-                connect: [
-                    { id: language.common.id },
-                    { id: language.celestial.id }
-                ]
-            },
-            traits: {
-                connect: [
-                    { id: raceTrait.darkvision.id },
-                    { id: raceTrait.celestial_resistance.id },
-                    { id: raceTrait.healing_hands.id }
-                ]
-            },
-            abilityScoreIncreases: {
-                connect: [
-                    { id: raceAbilityScore.cha_two.id }
-                ]
-            },
-            namesId: raceNames.aasimar.id
-        })
+        // Races
+    const race = {
+      aarakocra: await db.createRace({
+        id: "race-aarakocra",
+        name: "Aarakocra",
+        slug: "aarakocra",
+        description:
+          "Birdfolk from the Elemental Plane of Air, Aarakocra are often travelers, expats, refugees, or adventurers. Resembling humanoids in their stature and bipedal movements, they also gain the benefits of a flying speed, slashing talons, and an understanding of the Aarakocra as well as the Auran tongue and writ.",
+        speed: "25 feet walking, 50 feet flying",
+        age: "Aarakocra reach maturity by age 3. Compared to humans, aarakocra don't usually live longer than 30 years.",
+        alignment:
+          "Most aarakocra are good and rarely choose sides when it comes to law and chaos. Leaders are sometimes lawful good.",
+        heightRange: "5'0\" to 6'4\"",
+        weightRange: "90 to 130 lbs",
+        alabastriaLore:
+          "In Bulsania's mountain peaks and Kuriguer's coastal cliffs, Aarakocra serve as messengers and scouts, their aerial perspective providing crucial intelligence about the harsh landscapes below. These birdfolk often work with the Huntbound Order, using their flight to track dangerous creatures across difficult terrain.",
+        playstyle:
+          "Excellent mobility and ranged combat specialists. Perfect for players who want aerial superiority and unique movement options.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.aarakocra.id },
+            { id: language.auran.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.flight_aarakocra.id },
+            { id: raceTrait.talons_aarakocra.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.aarakocra.id,
+      }),
+      aasimar: await db.createRace({
+        id: "race-aasimar",
+        name: "Aasimar",
+        slug: "aasimar",
+        description:
+          "Aasimar are descended from humans and often celestials, reflecting the light and pure good of the divine realm. This goodness is often signified by a celestial mark on their bodies and their undeniable beauty.",
+        speed: "30 feet",
+        age: "Aasimar mature at the same rate as humans but can live up to 160 years.",
+        alignment:
+          "Aasimar are inclined toward good alignments. Not all aasimar are of good alignment, but very few are evil.",
+        heightRange: "5'4\" to 7'0\"",
+        weightRange: "110 to 190 lbs",
+        alabastriaLore:
+          "Across Skratonia's cities and temples, Aasimar serve as beacons of hope and divine guidance. These celestial-touched individuals often work with clerics and paladins, their healing abilities and divine resistance making them natural leaders in the fight against darkness.",
+        playstyle:
+          "Divine support and healing specialists. Great for players who want to be the party's moral compass and primary healer.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.celestial.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_aasimar.id },
+            { id: raceTrait.celestial_resistance_aasimar.id },
+            { id: raceTrait.healing_hands_aasimar.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.cha_two.id }],
+        },
+        namesId: raceNames.aasimar.id,
+      }),
+      autognome: await db.createRace({
+        id: "race-autognome",
+        name: "Autognome",
+        slug: "autognome",
+        description:
+          "Autognomes are small constructs built by gnomes to serve as assistants and companions. They are imbued with a spark of life and sentience, making them more than mere machines.",
+        speed: "30 feet",
+        age: "Autognomes don't age, but they can be destroyed. They can live indefinitely if properly maintained.",
+        alignment:
+          "Most autognomes are lawful, following the instructions of their creators or their own internal programming.",
+        heightRange: "2'8\" to 3'4\"",
+        weightRange: "45 to 49 lbs",
+        alabastriaLore:
+          "In Alatman's volcanic forges and Maltman's mountain workshops, Autognomes serve as tireless assistants to their gnomish creators. These mechanical beings represent the pinnacle of gnomish engineering, combining magical and technological innovation in Alabastria's most advanced settlements.",
+        playstyle:
+          "Durable utility specialists with unique construct abilities. Perfect for players who want to be immune to many common threats and have unique roleplay opportunities.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.gnomish.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.constructed_resilience_autognome.id },
+            { id: raceTrait.mechanical_nature_autognome.id },
+            { id: raceTrait.sentrys_rest_autognome.id },
+            { id: raceTrait.true_life_autognome.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.int_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.autognome.id,
+      }),
+      bugbear: await db.createRace({
+        id: "race-bugbear",
+        name: "Bugbear",
+        slug: "bugbear",
+        description:
+          "Bugbears are large, hairy goblinoids with a talent for stealth and surprise attacks. Despite their intimidating appearance, they can be surprisingly cunning and strategic.",
+        speed: "30 feet",
+        age: "Bugbears reach adulthood at age 16 and live up to 80 years.",
+        alignment:
+          "Bugbears are chaotic evil in the wild, but some can be trained to be lawful evil.",
+        heightRange: "6'0\" to 7'4\"",
+        weightRange: "200 to 272 lbs",
+        alabastriaLore:
+          "In Katman's swamplands and the darker corners of Alabastria, Bugbears serve as scouts and infiltrators for various factions. Their natural stealth and surprise attack abilities make them valuable assets in the Huntbound Order's more covert operations.",
+        playstyle:
+          "Stealthy melee combatants with surprise tactics. Great for players who want to be sneaky fighters with extended reach.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.goblin.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_bugbear.id },
+            { id: raceTrait.long_limbed_bugbear.id },
+            { id: raceTrait.powerful_build_bugbear.id },
+            { id: raceTrait.sneaky_bugbear.id },
+            { id: raceTrait.surprise_attack_bugbear.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.dex_one.id },
+          ],
+        },
+        namesId: raceNames.bugbear.id,
+      }),
+      centaur: await db.createRace({
+        id: "race-centaur",
+        name: "Centaur",
+        slug: "centaur",
+        description:
+          "Centaurs are humanoid creatures with the upper body of a human and the lower body of a horse. They are known for their speed, strength, and connection to nature.",
+        speed: "40 feet",
+        age: "Centaurs mature and age at the same rate as humans, living about 100 years.",
+        alignment:
+          "Centaurs are typically chaotic good, valuing freedom and nature.",
+        heightRange: "6'2\" to 7'10\"",
+        weightRange: "200 to 272 lbs",
+        alabastriaLore:
+          "On Skratonia's vast plains and in Kuriguer's magical forests, Centaurs serve as messengers, scouts, and guardians of nature. Their speed and connection to the land make them invaluable allies in the Huntbound Order's efforts to protect Alabastria's wilderness.",
+        playstyle:
+          "Mobile melee combatants with nature connection. Perfect for players who want speed, strength, and natural abilities.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.sylvan.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.charge_centaur.id },
+            { id: raceTrait.hooves_centaur.id },
+            { id: raceTrait.equine_build_centaur.id },
+            { id: raceTrait.survivor_centaur.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.centaur.id,
+      }),
+      changeling: await db.createRace({
+        id: "race-changeling",
+        name: "Changeling",
+        slug: "changeling",
+        description:
+          "Changelings are shapeshifters who can alter their appearance at will. They are often found in urban environments where their abilities allow them to blend in and gather information.",
+        speed: "30 feet",
+        age: "Changelings mature at the same rate as humans but can live up to 200 years.",
+        alignment:
+          "Changelings are typically chaotic, as they value personal freedom and adaptability.",
+        heightRange: "5'4\" to 7'0\"",
+        weightRange: "110 to 190 lbs",
+        alabastriaLore:
+          "In Skratonia's diverse cities and Kuriguer's cosmopolitan ports, Changelings serve as spies, diplomats, and information brokers. Their shapeshifting abilities make them invaluable assets to the Huntbound Order's intelligence operations.",
+        playstyle:
+          "Versatile social specialists with infiltration abilities. Perfect for players who want to be masters of disguise and social manipulation.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_two.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.shapechanger_changeling.id },
+            { id: raceTrait.changeling_instincts_changeling.id },
+            { id: raceTrait.divergent_persona_changeling.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_two.id },
+            { id: raceAbilityScore.dex_one.id },
+          ],
+        },
+        namesId: raceNames.changeling.id,
+      }),
+      dhampir: await db.createRace({
+        id: "race-dhampir",
+        name: "Dhampir",
+        slug: "dhampir",
+        description:
+          "Dhampirs are the offspring of vampires and mortals, inheriting some of their undead parent's abilities while maintaining their humanity. They walk between the worlds of the living and the dead.",
+        speed: "35 feet",
+        age: "Dhampirs mature at the same rate as humans but can live for centuries.",
+        alignment:
+          "Dhampirs can be of any alignment, though many struggle with their dark heritage.",
+        heightRange: "5'4\" to 7'0\"",
+        weightRange: "110 to 190 lbs",
+        alabastriaLore:
+          "In Alabastria's shadowed corners and among the undead-haunted regions, Dhampirs walk a dangerous path between life and death. Some serve the Huntbound Order as specialists against undead threats, while others struggle with their dark heritage in the world's more accepting communities.",
+        playstyle:
+          "Mobile combatants with unique feeding mechanics. Great for players who want to play morally complex characters with undead abilities.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_dhampir.id },
+            { id: raceTrait.spider_climb_dhampir.id },
+            { id: raceTrait.vampiric_bite_dhampir.id },
+            { id: raceTrait.deathless_nature_dhampir.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_two.id },
+            { id: raceAbilityScore.dex_one.id },
+          ],
+        },
+        namesId: raceNames.dhampir.id,
+      }),
+      dragonborn: await db.createRace({
+        id: "race-dragonborn",
+        name: "Dragonborn",
+        slug: "dragonborn",
+        description:
+          "Dragonborn are humanoid dragons, created by dragons or born from dragon eggs. They are proud, honorable, and often seek to prove their worth through great deeds.",
+        speed: "30 feet",
+        age: "Dragonborn grow quickly, reaching adulthood by age 15 and living to be around 80 years old.",
+        alignment:
+          "Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil.",
+        heightRange: "5'6\" to 7'2\"",
+        weightRange: "175 to 247 lbs",
+        alabastriaLore:
+          "In Bulsania's militarized society and across Alabastria's dragon-worshipping regions, Dragonborn serve as elite warriors and leaders. Their draconic heritage and martial prowess make them natural commanders in the Huntbound Order's most dangerous missions.",
+        playstyle:
+          "Martial combatants with elemental abilities. Perfect for players who want to be proud warriors with draconic powers.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.draconic.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.draconic_ancestry_dragonborn.id },
+            { id: raceTrait.breath_weapon_dragonborn.id },
+            { id: raceTrait.damage_resistance_dragonborn.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.cha_one.id },
+          ],
+        },
+        namesId: raceNames.dragonborn.id,
+      }),
+      dwarf: await db.createRace({
+        id: "race-dwarf",
+        name: "Dwarf",
+        slug: "dwarf",
+        description:
+          "Dwarves are a stoic but stern race, ensconced in cities carved from the hearts of mountains and fiercely determined to repel the hardships of the outside world.",
+        speed: "25 feet",
+        age: "Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.",
+        alignment:
+          "Most dwarves are lawful, believing firmly in the benefits of a well-ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.",
+        heightRange: "3'8\" to 4'0\"",
+        weightRange: "115 to 163 lbs",
+        alabastriaLore:
+          "In Maltman's mountain strongholds and Alatman's volcanic forges, Dwarves serve as master craftsmen and miners. Their expertise in metalwork and stone construction makes them invaluable allies in the Huntbound Order's efforts to fortify settlements against monstrous threats.",
+        playstyle:
+          "Durable craftsmen and warriors with resistance to common threats. Perfect for players who want to be tough, practical characters with crafting abilities.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.dwarvish.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_dwarf.id },
+            { id: raceTrait.dwarven_resilience_dwarf.id },
+            { id: raceTrait.stonecunning_dwarf.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.con_two.id }],
+        },
+        namesId: raceNames.dwarf.id,
+      }),
+      elf: await db.createRace({
+        id: "race-elf",
+        name: "Elf",
+        slug: "elf",
+        description:
+          "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it. They live in places of ethereal beauty, in the midst of ancient forests or in silvery spires glittering with faerie light.",
+        speed: "30 feet",
+        age: "Elves mature at the same rate as humans physically, but are considered adults around 100 years old. They can live to be 750 years old.",
+        alignment:
+          "Elves love freedom, variety, and self-expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own.",
+        heightRange: "4'6\" to 6'4\"",
+        weightRange: "90 to 130 lbs",
+        alabastriaLore:
+          "In Kuriguer's magical forests and Skratonia's ancient groves, Elves serve as guardians of nature and keepers of ancient wisdom. Their long lives and magical heritage make them natural leaders in the Huntbound Order's efforts to protect Alabastria's natural beauty and magical secrets.",
+        playstyle:
+          "Graceful and perceptive characters with magical resistance. Perfect for players who want to be agile, wise, and resistant to common magical effects.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.elvish.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_elf.id },
+            { id: raceTrait.keen_senses_elf.id },
+            { id: raceTrait.fey_ancestry_elf.id },
+            { id: raceTrait.trance_elf.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.dex_two.id }],
+        },
+        namesId: raceNames.elf.id,
+      }),
+      fairy: await db.createRace({
+        id: "race-fairy",
+        name: "Fairy",
+        slug: "fairy",
+        description:
+          "Fairies are small, magical humanoids with a deep connection to the Feywild. They are known for their mischievous nature and powerful magic.",
+        speed: "30 feet",
+        age: "Fairies mature at the same rate as humans but can live for centuries.",
+        alignment:
+          "Fairies are typically chaotic, as they value personal freedom and creativity.",
+        heightRange: "2'6\" to 3'2\"",
+        weightRange: "30 to 34 lbs",
+        alabastriaLore:
+          "In Kuriguer's magical forests and fey-touched areas, Fairies serve as messengers and guardians of the natural world. Their small size and magical abilities make them excellent scouts and spies in the Huntbound Order's operations.",
+        playstyle:
+          "Tiny magical scouts with flight abilities. Perfect for players who want to be small, magical characters with unique movement options.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.sylvan.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.fairy_magic_fairy.id },
+            { id: raceTrait.flight_fairy.id },
+            { id: raceTrait.fey_passage_fairy.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_two.id },
+            { id: raceAbilityScore.dex_one.id },
+          ],
+        },
+        namesId: raceNames.fairy.id,
+      }),
+      firbolg: await db.createRace({
+        id: "race-firbolg",
+        name: "Firbolg",
+        slug: "firbolg",
+        description:
+          "Firbolgs are gentle giants who live in the deepest forests and serve as guardians of nature. They are known for their wisdom, strength, and connection to the natural world.",
+        speed: "30 feet",
+        age: "Firbolgs reach adulthood around 30 and can live up to 500 years.",
+        alignment:
+          "Firbolgs are typically neutral good, valuing nature and protecting the innocent.",
+        heightRange: "7'0\" to 8'8\"",
+        weightRange: "250 to 322 lbs",
+        alabastriaLore:
+          "In Kuriguer's deepest forests and Skratonia's ancient groves, Firbolgs serve as guardians of nature and protectors of the innocent. Their gentle strength and natural magic make them powerful allies in the Huntbound Order's efforts to protect Alabastria's wilderness.",
+        playstyle:
+          "Gentle giants with nature magic and stealth abilities. Perfect for players who want to be strong, wise characters with unique magical abilities.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.giant.id },
+            { id: language.elvish.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.firbolg_magic_firbolg.id },
+            { id: raceTrait.hidden_step_firbolg.id },
+            { id: raceTrait.powerful_build_firbolg.id },
+            { id: raceTrait.speech_of_beast_and_leaf_firbolg.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_two.id },
+            { id: raceAbilityScore.str_one.id },
+          ],
+        },
+        namesId: raceNames.firbolg.id,
+      }),
+      genasi: await db.createRace({
+        id: "race-genasi",
+        name: "Genasi",
+        slug: "genasi",
+        description:
+          "Genasi are humanoids with a deep connection to elemental forces. They are born when mortals and elementals interbreed, resulting in beings with elemental powers.",
+        speed: "30 feet",
+        age: "Genasi mature at the same rate as humans but can live up to 120 years.",
+        alignment:
+          "Genasi can be of any alignment, though they often reflect the nature of their elemental heritage.",
+        heightRange: "5'4\" to 7'0\"",
+        weightRange: "110 to 190 lbs",
+        alabastriaLore:
+          "In Kuriguer's elemental hotspots and Alatman's volcanic regions, Genasi serve as elemental specialists and magical researchers. Their elemental heritage and magical abilities make them valuable assets in the Huntbound Order's efforts to understand and control Alabastria's magical phenomena.",
+        playstyle:
+          "Elemental magic users with unique resistances. Perfect for players who want to be magical characters with elemental themes.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.primordial.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.elemental_resistance_genasi.id },
+            { id: raceTrait.elemental_magic_genasi.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.con_two.id }],
+        },
+        namesId: raceNames.genasi.id,
+      }),
+      gnome: await db.createRace({
+        id: "race-gnome",
+        name: "Gnome",
+        slug: "gnome",
+        description:
+          "Small, curious folk with a natural affinity for magic and invention. Gnomes are known for their intelligence, curiosity, and love of knowledge.",
+        speed: "25 feet",
+        age: "Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.",
+        alignment:
+          "Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors. Those who tend toward chaos are minstrels, tricksters, wanderers, or fanciful jewelers.",
+        heightRange: "3'0\" to 3'6\"",
+        weightRange: "35 to 45 lbs",
+        alabastriaLore:
+          "Gnomes in Alabastria are found primarily in the magical academies of Kuriguer, where their natural curiosity and magical aptitude make them excellent researchers and inventors. They often work alongside Artificers to create magical devices and study the strange phenomena of the world.",
+        playstyle:
+          "Intelligent spellcasters and inventors who excel at problem-solving and magical research. Perfect for players who enjoy creative solutions and magical experimentation.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.gnomish.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_gnome.id },
+            { id: raceTrait.gnome_cunning_gnome.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.int_two.id }],
+        },
+        namesId: raceNames.gnome.id,
+      }),
+      giff: await db.createRace({
+        id: "race-giff",
+        name: "Giff",
+        slug: "giff",
+        description:
+          "Hippopotamus-like humanoids known for their strength, honor, and love of firearms and explosives. Giff are disciplined warriors with a strong sense of duty.",
+        speed: "30 feet",
+        age: "Giff mature at the same rate as humans and live about as long.",
+        alignment:
+          "Giff are typically lawful, tending toward good. They value honor, discipline, and order.",
+        heightRange: "6'0\" to 7'0\"",
+        weightRange: "280 to 340 lbs",
+        alabastriaLore:
+          "Giff in Alabastria are found primarily in the militarized regions of Bulsania, where their disciplined nature and combat prowess make them excellent soldiers and guards. They often serve in the Huntbound Order as elite warriors.",
+        playstyle:
+          "Strong warriors who excel at ranged combat with firearms and heavy weapons. Perfect for players who want to be disciplined soldiers with advanced weaponry.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.giff.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.firearms_mastery_giff.id },
+            { id: raceTrait.hippo_build_giff.id },
+            { id: raceTrait.natural_armor_giff.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.giff.id,
+      }),
+      goblin: await db.createRace({
+        id: "race-goblin",
+        name: "Goblin",
+        slug: "goblin",
+        description:
+          "Small, cunning humanoids known for their stealth, speed, and opportunistic nature. Goblins are survivors who excel at hit-and-run tactics.",
+        speed: "30 feet",
+        age: "Goblins reach adulthood at age 8 and live up to 60 years.",
+        alignment:
+          "Goblins are typically neutral evil, as they care only for their own needs. A few goblins might rise above their origins, however, proving to be heroes worthy of legend.",
+        heightRange: "3'0\" to 3'6\"",
+        weightRange: "35 to 45 lbs",
+        alabastriaLore:
+          "Goblins in Alabastria are found in the swamps and wilderness of Kamalatman, where they form small tribes and communities. They are often viewed with suspicion by other races, but some have proven themselves as valuable allies and members of the Huntbound Order.",
+        playstyle:
+          "Fast and stealthy characters who excel at hit-and-run tactics and survival. Perfect for players who want to be quick and cunning.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.goblin.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_goblin.id },
+            { id: raceTrait.fury_of_the_small_goblin.id },
+            { id: raceTrait.nimble_escape_goblin.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.goblin.id,
+      }),
+      goliath: await db.createRace({
+        id: "race-goliath",
+        name: "Goliath",
+        slug: "goliath",
+        description:
+          "Tall, muscular humanoids with gray skin and a natural resistance to cold. Goliaths are competitive and value strength and endurance.",
+        speed: "30 feet",
+        age: "Goliaths have lifespans comparable to humans. They enter adulthood in their late teens and usually live less than a century.",
+        alignment:
+          "Goliaths tend toward neutral alignments. They value individual freedom and self-reliance.",
+        heightRange: "7'0\" to 8'0\"",
+        weightRange: "280 to 340 lbs",
+        alabastriaLore:
+          "Goliaths in Alabastria are found primarily in the mountain regions of Bulsania and Kamalatman, where their strength and endurance make them excellent climbers and warriors. They often serve as guides and protectors in the harsh mountain terrain.",
+        playstyle:
+          "Strong and tough characters who excel at physical challenges and combat. Perfect for players who want to be powerful warriors with natural resilience.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.giant.id }, { id: language.common_sign_language.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.natural_athlete_goliath.id },
+            { id: raceTrait.stones_endurance_goliath.id },
+            { id: raceTrait.powerful_build_goliath.id },
+            { id: raceTrait.mountain_born_goliath.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.goliath.id,
+      }),
+      hadozee: await db.createRace({
+        id: "race-hadozee",
+        name: "Hadozee",
+        slug: "hadozee",
+        description:
+          "Simian humanoids with patagial skin flaps between their arms and legs, Hadozee are natural climbers, sailors, and gliders. They are often called “deck apes,” moving with agility through ships’ rigging or across rugged terrain. Their prehensile feet grant extra dexterity, and in the air they can glide to safety from falls. In Skratonia, they are known for navigating between open plains and sky-scoured plateaus, often serving as scouts, sailors, or wanderers between towns.",
+        speed: "30 feet walking; climbing speed equal to walking speed",
+        age: "Hadozee mature at about the same rate as humans (late teens) and often live somewhat longer, up to around 90 years.",
+        alignment:
+          "Tending toward neutrality, often mercenary or wanderlust-driven. Exceptions lean more chaotic than lawful and more often good than evil.",
+        heightRange: "5′0″ to 6′4″",
+        weightRange: "150 to 200 lbs",
+        alabastriaLore:
+          "In the plains and sky-scrub plateaus of Skratonia, Hadozee make their homes near cliff-edged oases and rigged lookout towers, gliding from heights to scout the terrain below. Their prehensile feet let them navigate planks, ropes, and the rigging of ships or nomadic caravans with ease. Many join the wind-flecked trading fleets of Skratonia, serving aboard sail-ships or sky-vessels, guiding them along trade routes between major towns carved across open plains.",
+        playstyle:
+          "Mobile scouts and utility characters. Good for players who like vertical movement (glide), creative positioning, and surviving falls. Excellent with classes that benefit from mobility, dexterity, or reactions.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.hadozee.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.dexterous_feet_hadozee.id },
+            { id: raceTrait.glide_hadozee.id },
+            { id: raceTrait.hadozee_dodge_hadozee.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.hadozee.id,
+      }),
+      half_elf: await db.createRace({
+        id: "race-half-elf",
+        name: "Half-Elf",
+        slug: "half-elf",
+        description:
+          "The offspring of humans and elves, combining the best traits of both races. Half-elves are versatile and charismatic, often serving as diplomats and mediators.",
+        speed: "30 feet",
+        age: "Half-elves mature at the same rate humans do and reach adulthood around age 20. They live much longer than humans, often exceeding 180 years.",
+        alignment:
+          "Half-elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Half-Elves in Alabastria are found throughout all continents, often serving as diplomats and mediators between different races. Their mixed heritage makes them valuable in the complex political landscape of the world.",
+        playstyle:
+          "Versatile characters who excel at social interaction and can adapt to many different situations. Perfect for players who want flexibility and charisma.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.elvish.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_half_elf.id },
+            { id: raceTrait.fey_ancestry_half_elf.id },
+            { id: raceTrait.skill_versatility_half_elf.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.half_elf.id,
+      }),
+      half_orc: await db.createRace({
+        id: "race-half-orc",
+        name: "Half-Orc",
+        slug: "half-orc",
+        description:
+          "The offspring of humans and orcs, combining human versatility with orcish strength and endurance. Half-orcs are often found on the fringes of society.",
+        speed: "30 feet",
+        age: "Half-orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.",
+        alignment:
+          "Half-orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward good. Half-orcs raised among orcs and willing to live out their lives among them are usually evil.",
+        heightRange: "5'6\" to 6'6\"",
+        weightRange: "150 to 220 lbs",
+        alabastriaLore:
+          "Half-Orcs in Alabastria are found primarily in the frontier regions of Kamalatman and the borderlands of Skratonia, where their strength and endurance make them valuable as guards and warriors. They often face discrimination but have proven themselves as capable members of the Huntbound Order.",
+        playstyle:
+          "Strong and tough characters who excel at combat and survival. Perfect for players who want to be powerful warriors with natural resilience.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.orcish.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_half_orc.id },
+            { id: raceTrait.relentless_endurance_half_orc.id },
+            { id: raceTrait.savage_attacks_half_orc.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.half_orc.id,
+      }),
+      halfling: await db.createRace({
+        id: "race-halfling",
+        name: "Halfling",
+        slug: "halfling",
+        description:
+          "Small, cheerful folk known for their luck, courage, and love of comfort. Halflings are optimistic and resourceful, making the best of any situation.",
+        speed: "25 feet",
+        age: "Halflings reach adulthood at age 20 and live up to 150 years.",
+        alignment:
+          "Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.",
+        heightRange: "2'7\" to 3'3\"",
+        weightRange: "30 to 40 lbs",
+        alabastriaLore:
+          "Halflings in Alabastria are found primarily in the fertile plains of Skratonia, where their agricultural skills and community values make them excellent farmers and merchants. They often serve as the backbone of the region's economy and are known for their hospitality.",
+        playstyle:
+          "Lucky and brave characters who excel at avoiding danger and supporting their communities. Perfect for players who want to be optimistic and resourceful.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.halfling.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.lucky_halfling.id },
+            { id: raceTrait.brave_halfling.id },
+            { id: raceTrait.halfling_nimbleness_halfling.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.dex_two.id }],
+        },
+        namesId: raceNames.halfling.id,
+      }),
+      harengon: await db.createRace({
+        id: "race-harengon",
+        name: "Harengon",
+        slug: "harengon",
+        description:
+          "Rabbit-like humanoids known for their agility, luck, and connection to the Feywild. Harengon are quick, nimble, and often have a mischievous streak.",
+        speed: "30 feet",
+        age: "Harengon mature at the same rate as humans and live about as long.",
+        alignment:
+          "Harengon are typically chaotic, tending toward good. They value freedom and personal expression.",
+        heightRange: "3'0\" to 5'0\"",
+        weightRange: "35 to 85 lbs",
+        alabastriaLore:
+          "Harengon in Alabastria are found primarily in the magical forests of Kuriguer, where their fey heritage and agility make them excellent scouts and messengers. They often serve as couriers for the Huntbound Order and guides through dangerous terrain.",
+        playstyle:
+          "Agile and lucky characters who excel at movement and avoiding danger. Perfect for players who want to be quick and nimble.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.sylvan.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.hare_trigger_harengon.id },
+            { id: raceTrait.leporine_senses_harengon.id },
+            { id: raceTrait.lucky_footwork_harengon.id },
+            { id: raceTrait.rabbit_hop_harengon.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.harengon.id,
+      }),
+      hexblood: await db.createRace({
+        id: "race-hexblood",
+        name: "Hexblood",
+        slug: "hexblood",
+        description:
+          "Humanoids touched by hag magic, bearing the mark of a hag's influence. Hexbloods are often outcasts but possess unique magical abilities.",
+        speed: "30 feet",
+        age: "Hexbloods mature at the same rate as humans but can live up to 200 years due to their hag heritage.",
+        alignment:
+          "Hexbloods can be of any alignment, but many lean toward chaotic due to their outsider status.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Hexbloods in Alabastria are found in the darker regions of Kuriguer's forests and the swamps of Kamalatman, where their hag-touched nature makes them both feared and sought after for their unique magical abilities. They often serve as scouts and information gatherers for the Huntbound Order.",
+        playstyle:
+          "Magical characters with unique abilities and outsider status. Perfect for players who want to be mysterious and magical.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_hexblood.id },
+            { id: raceTrait.hex_magic_hexblood.id },
+            { id: raceTrait.eerie_token_hexblood.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.any_one.id }],
+        },
+        namesId: raceNames.hexblood.id,
+      }),
+      hobgoblin: await db.createRace({
+        id: "race-hobgoblin",
+        name: "Hobgoblin",
+        slug: "hobgoblin",
+        description:
+          "Larger, more disciplined cousins of goblins known for their military prowess and strict codes of honor. Hobgoblins are organized warriors who value discipline and order.",
+        speed: "30 feet",
+        age: "Hobgoblins mature at the same rate as humans and live about as long.",
+        alignment:
+          "Hobgoblins are typically lawful evil, as they care only for their own needs and are willing to use any means to achieve their goals.",
+        heightRange: "5'6\" to 6'6\"",
+        weightRange: "150 to 220 lbs",
+        alabastriaLore:
+          "Hobgoblins in Alabastria are found in the militarized regions of Bulsania and the organized settlements of Kamalatman, where their disciplined nature and military training make them excellent soldiers and guards. Some have proven themselves as valuable members of the Huntbound Order.",
+        playstyle:
+          "Disciplined warriors who excel at organized combat and teamwork. Perfect for players who want to be military-focused characters.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.goblin.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_hobgoblin.id },
+            { id: raceTrait.martial_training_hobgoblin.id },
+            { id: raceTrait.saving_face_hobgoblin.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_two.id },
+            { id: raceAbilityScore.int_one.id },
+          ],
+        },
+        namesId: raceNames.hobgoblin.id,
+      }),
+      human: await db.createRace({
+        id: "race-human",
+        name: "Human",
+        slug: "human",
+        description:
+          "The most adaptable and ambitious of the common races, humans are known for their versatility and drive to achieve greatness. They are found in every corner of the world.",
+        speed: "30 feet",
+        age: "Humans reach adulthood in their late teens and live less than a century.",
+        alignment:
+          "Humans tend toward no particular alignment. The best and the worst are found among them.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Humans in Alabastria are found throughout all continents, serving as the backbone of most civilizations. Their adaptability and ambition have made them leaders in politics, trade, and the Huntbound Order. They are known for their ability to work with other races and their drive to achieve greatness.",
+        playstyle:
+          "Versatile characters who can excel at any role. Perfect for players who want maximum flexibility and adaptability.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [{ id: raceTrait.extra_language_human.id }],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.any_one.id }],
+        },
+        namesId: raceNames.human.id,
+      }),
+      kalashtar: await db.createRace({
+        id: "race-kalashtar",
+        name: "Kalashtar",
+        slug: "kalashtar",
+        description:
+          "Humanoids with a unique connection to the dream plane, sharing their consciousness with quori spirits. Kalashtar are wise, empathetic, and possess psionic abilities.",
+        speed: "30 feet",
+        age: "Kalashtar mature at the same rate as humans and live about as long.",
+        alignment:
+          "Kalashtar are typically lawful good, as they are guided by the wisdom of their quori spirits.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Kalashtar in Alabastria are found primarily in the magical regions of Kuriguer, where their psionic abilities and connection to the dream plane make them excellent scholars and spiritual guides. They often serve as advisors to the Huntbound Order and other organizations.",
+        playstyle:
+          "Psionic characters with telepathic abilities and spiritual wisdom. Perfect for players who want to be wise and empathetic with unique mental powers.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.quori.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.dual_mind_kalashtar.id },
+            { id: raceTrait.mental_discipline_kalashtar.id },
+            { id: raceTrait.mind_link_kalashtar.id },
+            { id: raceTrait.severed_from_dreams_kalashtar.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.kalashtar.id,
+      }),
+      kender: await db.createRace({
+        id: "race-kender",
+        name: "Kender",
+        slug: "kender",
+        description:
+          "Small, curious humanoids known for their fearlessness, curiosity, and tendency to 'borrow' things. Kender are brave, optimistic, and often find themselves in trouble.",
+        speed: "25 feet",
+        age: "Kender mature at the same rate as halflings, reaching adulthood around 20 and living up to 150 years.",
+        alignment:
+          "Kender are typically chaotic good, as they value freedom and helping others.",
+        heightRange: "3'0\" to 3'6\"",
+        weightRange: "35 to 45 lbs",
+        alabastriaLore:
+          "Kender in Alabastria are found throughout all continents, often serving as scouts and adventurers. Their fearlessness and curiosity make them excellent for dangerous missions, though their tendency to 'borrow' things can cause problems.",
+        playstyle:
+          "Fearless and curious characters who excel at exploration and social interaction. Perfect for players who want to be brave and optimistic.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.kenderspeak.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.fearless_kender.id },
+            { id: raceTrait.kender_curiosity_kender.id },
+            { id: raceTrait.taunt_kender.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.cha_one.id },
+          ],
+        },
+        namesId: raceNames.kender.id,
+      }),
+      kenku: await db.createRace({
+        id: "race-kenku",
+        name: "Kenku",
+        slug: "kenku",
+        description:
+          "Raven-like humanoids cursed to mimic sounds and voices rather than speak original thoughts. Kenku are clever, stealthy, and excellent at imitation.",
+        speed: "30 feet",
+        age: "Kenku reach adulthood at 12 and live around 60 years.",
+        alignment:
+          "Kenku are typically chaotic neutral, as they are driven by their own desires and instincts.",
+        heightRange: "5'0\" to 5'6\"",
+        weightRange: "90 to 120 lbs",
+        alabastriaLore:
+          "Kenku in Alabastria are found in the cities and wilderness of all continents, often serving as spies, messengers, and information gatherers. Their mimicry abilities make them valuable for the Huntbound Order's intelligence operations.",
+        playstyle:
+          "Stealthy and clever characters who excel at imitation and information gathering. Perfect for players who want to be sneaky and resourceful.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.auran.id }, { id: language.common_sign_language.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.expert_forgery_kenku.id },
+            { id: raceTrait.kenku_training_kenku.id },
+            { id: raceTrait.mimicry_kenku.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.kenku.id,
+      }),
+      kobold: await db.createRace({
+        id: "race-kobold",
+        name: "Kobold",
+        slug: "kobold",
+        description:
+          "Small, reptilian humanoids known for their cowardice, cunning, and pack tactics. Kobolds are weak individually but dangerous in groups.",
+        speed: "30 feet",
+        age: "Kobolds mature quickly, reaching adulthood by age 6, and can live up to 120 years.",
+        alignment:
+          "Kobolds are typically lawful evil, as they care only for their own needs and are willing to use any means to achieve their goals.",
+        heightRange: "2'0\" to 2'6\"",
+        weightRange: "25 to 35 lbs",
+        alabastriaLore:
+          "Kobolds in Alabastria are found in the underground regions of Kamalatman and the mountain caves of Bulsania, where they form small communities and serve as scouts and miners. Some have proven themselves as valuable members of the Huntbound Order.",
+        playstyle:
+          "Small and cunning characters who excel at teamwork and survival. Perfect for players who want to be clever and resourceful.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.draconic.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_kobold.id },
+            { id: raceTrait.grovel_cower_and_beg_kobold.id },
+            { id: raceTrait.pack_tactics_kobold.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.dex_two.id }],
+        },
+        namesId: raceNames.kobold.id,
+      }),
+      leonin: await db.createRace({
+        id: "race-leonin",
+        name: "Leonin",
+        slug: "leonin",
+        description:
+          "Lion-like humanoids known for their strength, courage, and regal bearing. Leonin are proud warriors who value honor and strength.",
+        speed: "35 feet",
+        age: "Leonin mature at the same rate as humans and live about as long.",
+        alignment:
+          "Leonin are typically lawful good, as they value honor, justice, and protecting the weak.",
+        heightRange: "5'6\" to 6'6\"",
+        weightRange: "150 to 220 lbs",
+        alabastriaLore:
+          "Leonin in Alabastria are found primarily in the plains of Skratonia and the mountain regions of Bulsania, where their strength and courage make them excellent warriors and leaders. They often serve as commanders in the Huntbound Order and other military organizations.",
+        playstyle:
+          "Strong and courageous characters who excel at combat and leadership. Perfect for players who want to be powerful warriors with regal bearing.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.leonin.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_leonin.id },
+            { id: raceTrait.claws_leonin.id },
+            { id: raceTrait.hunters_instincts_leonin.id },
+            { id: raceTrait.daunting_roar_leonin.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.leonin.id,
+      }),
+      lizardfolk: await db.createRace({
+        id: "race-lizardfolk",
+        name: "Lizardfolk",
+        slug: "lizardfolk",
+        description:
+          "Reptilian humanoids known for their natural armor, swimming abilities, and practical nature. Lizardfolk are survivalists who value efficiency and strength.",
+        speed: "30 feet",
+        age: "Lizardfolk reach adulthood around 14 and live up to 60 years.",
+        alignment:
+          "Lizardfolk are typically neutral, as they care only for their own survival and the survival of their tribe.",
+        heightRange: "5'6\" to 6'6\"",
+        weightRange: "150 to 220 lbs",
+        alabastriaLore:
+          "Lizardfolk in Alabastria are found primarily in the swamps and wetlands of Kamalatman, where their natural abilities make them excellent hunters and survivalists. They often serve as guides and scouts for the Huntbound Order in difficult terrain.",
+        playstyle:
+          "Survivalist characters who excel at combat and wilderness survival. Perfect for players who want to be practical and efficient.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.draconic.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.bite_lizardfolk.id },
+            { id: raceTrait.cunning_artisan_lizardfolk.id },
+            { id: raceTrait.hold_breath_lizardfolk.id },
+            { id: raceTrait.natural_armor_lizardfolk.id },
+            { id: raceTrait.hungry_jaws_lizardfolk.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.lizardfolk.id,
+      }),
+      loxodon: await db.createRace({
+        id: "race-loxodon",
+        name: "Loxodon",
+        slug: "loxodon",
+        description:
+          "Elephant-like humanoids known for their strength, wisdom, and natural armor. Loxodon are patient, wise, and have excellent memories.",
+        speed: "30 feet",
+        age: "Loxodon mature at the same rate as humans and live about as long.",
+        alignment:
+          "Loxodon are typically lawful good, as they value order, justice, and protecting others.",
+        heightRange: "6'0\" to 7'0\"",
+        weightRange: "280 to 340 lbs",
+        alabastriaLore:
+          "Loxodon in Alabastria are found primarily in the plains of Skratonia and the mountain regions of Bulsania, where their strength and wisdom make them excellent leaders and protectors. They often serve as advisors and commanders in the Huntbound Order.",
+        playstyle:
+          "Strong and wise characters who excel at leadership and protection. Perfect for players who want to be patient and powerful.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.loxodon.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.natural_armor_loxodon.id },
+            { id: raceTrait.powerful_build_loxodon.id },
+            { id: raceTrait.trunk_loxodon.id },
+            { id: raceTrait.keen_smell_loxodon.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.loxodon.id,
+      }),
+      minotaur: await db.createRace({
+        id: "race-minotaur",
+        name: "Minotaur",
+        slug: "minotaur",
+        description:
+          "Bull-like humanoids known for their strength, horns, and connection to labyrinths. Minotaurs are powerful warriors with a natural sense of direction.",
+        speed: "30 feet",
+        age: "Minotaurs mature at the same rate as humans and live about as long.",
+        alignment:
+          "Minotaurs are typically chaotic neutral, as they value freedom and personal strength.",
+        heightRange: "6'0\" to 7'0\"",
+        weightRange: "200 to 280 lbs",
+        alabastriaLore:
+          "Minotaurs in Alabastria are found primarily in the mountain regions of Bulsania and the underground areas of Kamalatman, where their strength and sense of direction make them excellent guides and warriors. They often serve as protectors and scouts for the Huntbound Order.",
+        playstyle:
+          "Strong and powerful characters who excel at combat and navigation. Perfect for players who want to be powerful warriors with unique abilities.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.minotaur.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.horns_minotaur.id },
+            { id: raceTrait.goring_rush_minotaur.id },
+            { id: raceTrait.hammering_horns_minotaur.id },
+            { id: raceTrait.labyrinthine_recall_minotaur.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.minotaur.id,
+      }),
+      orc: await db.createRace({
+        id: "race-orc",
+        name: "Orc",
+        slug: "orc",
+        description:
+          "Strong, aggressive humanoids known for their physical prowess and tribal culture. Orcs are fierce warriors who value strength and honor.",
+        speed: "30 feet",
+        age: "Orcs mature a little faster than humans, reaching adulthood around age 14, and rarely live longer than 75 years.",
+        alignment:
+          "Orcs are typically chaotic evil, as they care only for their own needs and are willing to use any means to achieve their goals.",
+        heightRange: "5'6\" to 6'6\"",
+        weightRange: "150 to 220 lbs",
+        alabastriaLore:
+          "Orcs in Alabastria are found primarily in the frontier regions of Kamalatman and the borderlands of Skratonia, where their strength and aggression make them valuable as warriors and guards. Some have proven themselves as capable members of the Huntbound Order.",
+        playstyle:
+          "Strong and aggressive characters who excel at combat and physical challenges. Perfect for players who want to be powerful warriors.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.orcish.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_orc.id },
+            { id: raceTrait.aggressive_orc.id },
+            { id: raceTrait.powerful_build_orc.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.con_one.id },
+          ],
+        },
+        namesId: raceNames.orc.id,
+      }),
+      owlin: await db.createRace({
+        id: "race-owlin",
+        name: "Owlin",
+        slug: "owlin",
+        description:
+          "Owl-like humanoids known for their flight, stealth, and keen senses. Owlin are wise, stealthy, and have excellent night vision.",
+        speed: "30 feet",
+        age: "Owlin mature at the same rate as humans and live about as long.",
+        alignment:
+          "Owlin are typically neutral good, as they value wisdom and helping others.",
+        heightRange: "3'0\" to 5'0\"",
+        weightRange: "35 to 85 lbs",
+        alabastriaLore:
+          "Owlin in Alabastria are found primarily in the forests of Kuriguer and the mountain regions of Bulsania, where their flight and stealth abilities make them excellent scouts and messengers. They often serve as aerial reconnaissance for the Huntbound Order.",
+        playstyle:
+          "Flying and stealthy characters who excel at reconnaissance and night operations. Perfect for players who want to be wise and mobile.",
+        defaultCreatureSizeId: creature_size.small.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.owlin.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_owlin.id },
+            { id: raceTrait.flight_owlin.id },
+            { id: raceTrait.keen_senses_owlin.id },
+            { id: raceTrait.silent_feathers_owlin.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.owlin.id,
+      }),
+      plasmoid: await db.createRace({
+        id: "race-plasmoid",
+        name: "Plasmoid",
+        slug: "plasmoid",
+        description:
+          "Amorphous humanoids made of living ooze, capable of changing their shape and squeezing through tight spaces. Plasmoids are adaptable and resilient.",
+        speed: "30 feet",
+        age: "Plasmoids mature at the same rate as humans and live about as long.",
+        alignment:
+          "Plasmoids can be of any alignment, as they are highly adaptable to their environment.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Plasmoids in Alabastria are found in the swamps and underground regions of Kamalatman, where their amorphous nature makes them excellent infiltrators and scouts. They often serve as spies and information gatherers for the Huntbound Order.",
+        playstyle:
+          "Adaptable and resilient characters who excel at infiltration and survival. Perfect for players who want to be flexible and unique.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.amorphous_plasmoid.id },
+            { id: raceTrait.darkvision_plasmoid.id },
+            { id: raceTrait.hold_breath_plasmoid.id },
+            { id: raceTrait.natural_reach_plasmoid.id },
+            { id: raceTrait.shape_self_plasmoid.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.plasmoid.id,
+      }),
+      reborn: await db.createRace({
+        id: "race-reborn",
+        name: "Reborn",
+        slug: "reborn",
+        description:
+          "Humanoids who have died and returned to life, bearing the marks of their death and possessing unique abilities. Reborn are often outcasts but have unique perspectives on life and death.",
+        speed: "30 feet",
+        age: "Reborn don't age naturally and can live indefinitely, though their original race's lifespan may still apply.",
+        alignment:
+          "Reborn can be of any alignment, as their death and rebirth often changes their perspective on life.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Reborn in Alabastria are found throughout all continents, often serving as advisors and guides due to their unique perspective on life and death. They often work with the Huntbound Order as spiritual advisors and those who understand the nature of mortality.",
+        playstyle:
+          "Unique characters with death-defying abilities and unique perspectives. Perfect for players who want to be mysterious and otherworldly.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.ancestral_legacy_reborn.id },
+            { id: raceTrait.deathless_nature_reborn.id },
+            { id: raceTrait.knowledge_from_a_past_life_reborn.id },
+            { id: raceTrait.souls_gift_reborn.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [{ id: raceAbilityScore.any_one.id }],
+        },
+        namesId: raceNames.reborn.id,
+      }),
+      satyr: await db.createRace({
+        id: "race-satyr",
+        name: "Satyr",
+        slug: "satyr",
+        description:
+          "Fey humanoids with goat-like features known for their revelry, music, and connection to nature. Satyrs are joyful, musical, and have a strong connection to the Feywild.",
+        speed: "35 feet",
+        age: "Satyrs mature at the same rate as humans but can live up to 200 years.",
+        alignment:
+          "Satyrs are typically chaotic good, as they value freedom and joy.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Satyrs in Alabastria are found primarily in the magical forests of Kuriguer, where their fey nature and musical abilities make them excellent entertainers and guides. They often serve as bards and entertainers for the Huntbound Order.",
+        playstyle:
+          "Joyful and musical characters who excel at entertainment and social interaction. Perfect for players who want to be charismatic and fun-loving.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.sylvan.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.fey_satyr.id },
+            { id: raceTrait.ram_satyr.id },
+            { id: raceTrait.magic_resistance_satyr.id },
+            { id: raceTrait.mirthful_leaps_satyr.id },
+            { id: raceTrait.reveler_satyr.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.cha_one.id },
+          ],
+        },
+        namesId: raceNames.satyr.id,
+      }),
+      shifter: await db.createRace({
+        id: "race-shifter",
+        name: "Shifter",
+        slug: "shifter",
+        description:
+          "Humanoids with the ability to partially transform into their animal totems. Shifters are connected to nature and have enhanced senses and abilities.",
+        speed: "30 feet",
+        age: "Shifters mature at the same rate as humans and live about as long.",
+        alignment:
+          "Shifters are typically neutral, as they are driven by their animal instincts and personal desires.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Shifters in Alabastria are found throughout all continents, often serving as scouts and rangers due to their animal-like abilities. They often work with the Huntbound Order as trackers and wilderness guides.",
+        playstyle:
+          "Nature-connected characters with animal-like abilities and enhanced senses. Perfect for players who want to be wild and instinctive.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_shifter.id },
+            { id: raceTrait.shifting_shifter.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.shifter.id,
+      }),
+      simic_hybrid: await db.createRace({
+        id: "race-simic-hybrid",
+        name: "Simic Hybrid",
+        slug: "simic-hybrid",
+        description:
+          "Humanoids who have been enhanced with animal traits through magical experimentation. Simic Hybrids are unique individuals with both human and animal characteristics.",
+        speed: "30 feet",
+        age: "Simic Hybrids mature at the same rate as humans and live about as long.",
+        alignment:
+          "Simic Hybrids can be of any alignment, as their enhancements don't determine their moral outlook.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Simic Hybrids in Alabastria are found primarily in the magical academies of Kuriguer, where their unique enhancements make them valuable for research and experimentation. They often serve as test subjects and researchers for the Huntbound Order.",
+        playstyle:
+          "Enhanced characters with unique animal traits and abilities. Perfect for players who want to be unique and experimental.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.animal_enhancement_simic_hybrid.id },
+            { id: raceTrait.darkvision_simic_hybrid.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.simic_hybrid.id,
+      }),
+      tabaxi: await db.createRace({
+        id: "race-tabaxi",
+        name: "Tabaxi",
+        slug: "tabaxi",
+        description:
+          "Cat-like humanoids known for their agility, curiosity, and love of shiny objects. Tabaxi are graceful, stealthy, and have excellent reflexes.",
+        speed: "30 feet",
+        age: "Tabaxi mature at the same rate as humans and have lifespans equivalent to humans.",
+        alignment:
+          "Tabaxi are typically chaotic good, as they value freedom and helping others.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Tabaxi in Alabastria are found throughout all continents, often serving as scouts and messengers due to their agility and curiosity. They often work with the Huntbound Order as trackers and information gatherers.",
+        playstyle:
+          "Agile and curious characters who excel at stealth and exploration. Perfect for players who want to be graceful and inquisitive.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.tabaxi.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_tabaxi.id },
+            { id: raceTrait.feline_agility_tabaxi.id },
+            { id: raceTrait.cats_claws_tabaxi.id },
+            { id: raceTrait.cats_talent_tabaxi.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.cha_one.id },
+          ],
+        },
+        namesId: raceNames.tabaxi.id,
+      }),
+      thri_kreen: await db.createRace({
+        id: "race-thri-kreen",
+        name: "Thri-kreen",
+        slug: "thri-kreen",
+        description:
+          "Insectoid humanoids with four arms and a chitinous exoskeleton. Thri-kreen are fast, agile, and have unique physical abilities.",
+        speed: "30 feet",
+        age: "Thri-kreen mature at the same rate as humans and live about as long.",
+        alignment:
+          "Thri-kreen are typically lawful neutral, as they value order and efficiency.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Thri-kreen in Alabastria are found primarily in the desert regions of Kamalatman and the mountain regions of Bulsania, where their unique abilities make them excellent scouts and warriors. They often serve as elite operatives for the Huntbound Order.",
+        playstyle:
+          "Unique insectoid characters with multiple arms and special abilities. Perfect for players who want to be alien and efficient.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.thri_kreen.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.chameleon_carapace_thri_kreen.id },
+            { id: raceTrait.darkvision_thri_kreen.id },
+            { id: raceTrait.extra_arms_thri_kreen.id },
+            { id: raceTrait.sleepless_thri_kreen.id },
+            { id: raceTrait.thri_kreen_weapon_training_thri_kreen.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.thri_kreen.id,
+      }),
+      tiefling: await db.createRace({
+        id: "race-tiefling",
+        name: "Tiefling",
+        slug: "tiefling",
+        description:
+          "Humanoids with infernal heritage, bearing the mark of their fiendish ancestors. Tieflings are often outcasts but possess unique magical abilities.",
+        speed: "30 feet",
+        age: "Tieflings mature at the same rate as humans but live a few years longer, up to 120 years.",
+        alignment:
+          "Tieflings are typically chaotic neutral, as they are driven by their own desires and instincts.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities. They often work with the Huntbound Order as magical specialists and those who understand the nature of fiends.",
+        playstyle:
+          "Magical characters with infernal heritage and unique abilities. Perfect for players who want to be mysterious and magical.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.infernal.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_tiefling.id },
+            { id: raceTrait.hellish_resistance_tiefling.id },
+            { id: raceTrait.infernal_legacy_tiefling.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_two.id },
+            { id: raceAbilityScore.int_one.id },
+          ],
+        },
+        namesId: raceNames.tiefling.id,
+      }),
+      tortle: await db.createRace({
+        id: "race-tortle",
+        name: "Tortle",
+        slug: "tortle",
+        description:
+          "Turtle-like humanoids known for their natural armor and connection to water. Tortles are wise, patient, and have excellent defensive abilities.",
+        speed: "30 feet",
+        age: "Tortles reach adulthood by age 15 and live to be around 50 years old.",
+        alignment:
+          "Tortles are typically lawful good, as they value order, justice, and protecting others.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "200 to 280 lbs",
+        alabastriaLore:
+          "Tortles in Alabastria are found primarily in the coastal regions of Kuriguer and the waterways of Kamalatman, where their natural abilities make them excellent swimmers and protectors. They often serve as guardians and healers for the Huntbound Order.",
+        playstyle:
+          "Defensive and wise characters who excel at protection and healing. Perfect for players who want to be patient and protective.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.aquan.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.claws_tortle.id },
+            { id: raceTrait.hold_breath_tortle.id },
+            { id: raceTrait.natural_armor_tortle.id },
+            { id: raceTrait.shell_defense_tortle.id },
+            { id: raceTrait.survival_instinct_tortle.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.tortle.id,
+      }),
+      triton: await db.createRace({
+        id: "race-triton",
+        name: "Triton",
+        slug: "triton",
+        description:
+          "Aquatic humanoids with a strong connection to the sea and water magic. Tritons are noble, proud, and have excellent swimming abilities.",
+        speed: "30 feet",
+        age: "Tritons reach maturity around 15 and can live up to 200 years.",
+        alignment:
+          "Tritons are typically lawful good, as they value order, justice, and protecting others.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Tritons in Alabastria are found primarily in the coastal regions of Kuriguer and the waterways of Kamalatman, where their aquatic abilities make them excellent sailors and water guardians. They often serve as maritime specialists for the Huntbound Order.",
+        playstyle:
+          "Aquatic characters with water magic and swimming abilities. Perfect for players who want to be noble and water-focused.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.primordial.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.amphibious_triton.id },
+            { id: raceTrait.control_air_and_water_triton.id },
+            { id: raceTrait.emissary_of_the_sea_triton.id },
+            { id: raceTrait.guardians_of_the_depths_triton.id },
+            { id: raceTrait.swimming_speed_triton.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_one.id },
+            { id: raceAbilityScore.con_one.id },
+            { id: raceAbilityScore.cha_one.id },
+          ],
+        },
+        namesId: raceNames.triton.id,
+      }),
+      vedalken: await db.createRace({
+        id: "race-vedalken",
+        name: "Vedalken",
+        slug: "vedalken",
+        description:
+          "Blue-skinned humanoids known for their intelligence, precision, and connection to knowledge. Vedalken are analytical, methodical, and have excellent problem-solving abilities.",
+        speed: "30 feet",
+        age: "Vedalken mature at the same rate as humans and live about as long.",
+        alignment:
+          "Vedalken are typically lawful neutral, as they value order, logic, and efficiency.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Vedalken in Alabastria are found primarily in the magical academies of Kuriguer and the research facilities of Kamalatman, where their analytical abilities make them excellent scholars and researchers. They often serve as advisors and researchers for the Huntbound Order.",
+        playstyle:
+          "Intelligent and analytical characters who excel at problem-solving and research. Perfect for players who want to be methodical and precise.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [{ id: language.common.id }, { id: language.vedalken.id }],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_vedalken.id },
+            { id: raceTrait.vedalken_dispassion_vedalken.id },
+            { id: raceTrait.partially_amphibious_vedalken.id },
+            { id: raceTrait.tireless_precision_vedalken.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.int_two.id },
+            { id: raceAbilityScore.wis_one.id },
+          ],
+        },
+        namesId: raceNames.vedalken.id,
+      }),
+      warforged: await db.createRace({
+        id: "race-warforged",
+        name: "Warforged",
+        slug: "warforged",
+        description:
+          "Constructed humanoids created for war but now seeking their own purpose. Warforged are durable, adaptable, and have unique mechanical abilities.",
+        speed: "30 feet",
+        age: "Warforged don't age and can live indefinitely if properly maintained.",
+        alignment:
+          "Warforged can be of any alignment, as they are driven by their own choices and experiences.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Warforged in Alabastria are found throughout all continents, often serving as guards and warriors due to their constructed nature and durability. They often work with the Huntbound Order as elite operatives and those who understand the nature of constructs.",
+        playstyle:
+          "Constructed characters with unique mechanical abilities and durability. Perfect for players who want to be artificial and adaptable.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.any_one.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.constructed_resilience_warforged.id },
+            { id: raceTrait.sentrys_rest_warforged.id },
+            { id: raceTrait.integrated_protection_warforged.id },
+            { id: raceTrait.specialized_design_warforged.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_two.id },
+            { id: raceAbilityScore.any_one.id },
+          ],
+        },
+        namesId: raceNames.warforged.id,
+      }),
+      yuan_ti: await db.createRace({
+        id: "race-yuan-ti",
+        name: "Yuan-ti",
+        slug: "yuan-ti",
+        description:
+          "Snake-like humanoids with serpentine features and magical abilities. Yuan-ti are often outcasts but possess unique magical powers and resistance to magic.",
+        speed: "30 feet",
+        age: "Yuan-ti mature at the same rate as humans and live up to 120 years.",
+        alignment:
+          "Yuan-ti are typically chaotic evil, as they care only for their own needs and are willing to use any means to achieve their goals.",
+        heightRange: "5'0\" to 6'0\"",
+        weightRange: "110 to 180 lbs",
+        alabastriaLore:
+          "Yuan-ti in Alabastria are found primarily in the swamps and underground regions of Kamalatman, where their serpentine nature makes them excellent infiltrators and spellcasters. They often serve as spies and magical specialists for the Huntbound Order.",
+        playstyle:
+          "Magical characters with serpentine heritage and unique abilities. Perfect for players who want to be mysterious and magical.",
+        defaultCreatureSizeId: creature_size.medium.id,
+        languages: {
+          connect: [
+            { id: language.common.id },
+            { id: language.abyssal.id },
+            { id: language.draconic.id },
+          ],
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.darkvision_yuan_ti.id },
+            { id: raceTrait.magic_resistance_yuan_ti.id },
+            { id: raceTrait.poison_immunity_yuan_ti.id },
+            { id: raceTrait.serpentine_magic_yuan_ti.id },
+          ],
+        },
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_two.id },
+            { id: raceAbilityScore.int_one.id },
+          ],
+        },
+        namesId: raceNames.yuan_ti.id,
+      }),
     };
-    // Subraces
-    const subrace: Record<string, Prisma.SubraceGetPayload<{}>> = {
-        // Aasimar
-        aasimar_protector: await db.createSubrace({
-            id: "subrace-aasimar-protector",
-            name: "Protector Aasimar",
-            slug: "protector-aasimar",
-            description: "Protector aasimar are charged by the powers of good to guard the weak, to seek out evil, and to stand vigilant against the darkness.",
-            alabastriaContext: "Protector Aasimar in Skratonia's temples serve as divine guardians, their radiant wings inspiring hope in the faithful. They often work alongside Tharos Raggenthraw's Huntbound Order, bringing celestial light to the darkest corners of Alabastria.",
-            playstyle: "Defensive support with healing and radiant damage. Perfect for players who want to protect allies while dealing divine damage.",
-            abilityScoreIncreases: {
-                connect: [
-                    { id: raceAbilityScore.wis_one.id }
-                ]
-            },
-            traits: {
-                connect: [
-                    { id: raceTrait.radiant_soul.id }
-                ]
-            },
-            raceId: race.aasimar.id
-        }),
-        aasimar_scourge: await db.createSubrace({
-            id: "subrace-aasimar-scourge",
-            name: "Scourge Aasimar",
-            slug: "scourge-aasimar",
-            description: "Scourge aasimar are imbued with a divine energy that blazes intensely within them. It feeds a powerful desire to destroy evil—a desire that is, at its best, unflinching and, at its worst, all-consuming.",
-            alabastriaContext: "Scourge Aasimar in Alabastria's frontier regions channel their burning divine fury against the forces of evil. Their intense light and self-sacrificing nature make them formidable allies in the Huntbound Order's most dangerous missions.",
-            playstyle: "Offensive support with area damage and self-sacrifice. Great for players who want to deal damage while supporting allies.",
-            abilityScoreIncreases: {
-                connect: [
-                    { id: raceAbilityScore.con_one.id }
-                ]
-            },
-            traits: {
-                connect: [
-                    { id: raceTrait.radiant_consumption.id }
-                ]
-            },
-            raceId: race.aasimar.id
-        }),
-        aasimar_fallen: await db.createSubrace({
-            id: "subrace-aasimar-fallen",
-            name: "Fallen Aasimar",
-            slug: "fallen-aasimar",
-            description: "An aasimar who was touched by dark powers, or who chose to dabble in them, is an aasimar whose original celestial nature has been warped by evil.",
-            alabastriaContext: "Fallen Aasimar in Alabastria's shadowed corners struggle with their corrupted divine nature. Some seek redemption through the Huntbound Order, while others embrace their dark power to fight evil with evil.",
-            playstyle: "Dark support with necrotic damage and intimidation. Ideal for players who want to play morally complex characters with dark powers.",
-            abilityScoreIncreases: {
-                connect: [ 
-                    { id: raceAbilityScore.str_one.id }
-                ]
-            },
-            traits: {
-                connect: [
-                    { id: raceTrait.necrotic_shroud.id }
-                ]
-            },
-            raceId: race.aasimar.id
-        })
-    }
-    //await migrateLegacyData()
+        // Subraces
+    const subrace = {
+      aasimar_protector_aasimar: await db.createSubrace({
+        id: "subrace-aasimar-protector-aasimar",
+        name: "Protector Aasimar",
+        slug: "protector-aasimar",
+        description: "Protector aasimar are charged by the powers of good to guard the weak, to seek out evil, and to stand vigilant against the darkness.",
+        alabastriaContext: "Protector Aasimar in Skratonia's temples serve as divine guardians, their radiant wings inspiring hope in the faithful. They often work alongside Tharos Raggenthraw's Huntbound Order, bringing celestial light to the darkest corners of Alabastria.",
+        playstyle: "Defensive support with healing and radiant damage. Perfect for players who want to protect allies while dealing divine damage.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.radiant_soul_aasimar_protector_aasimar.id },
+          ]
+        },
+        raceId: race.aasimar.id
+      }),
+      aasimar_scourge_aasimar: await db.createSubrace({
+        id: "subrace-aasimar-scourge-aasimar",
+        name: "Scourge Aasimar",
+        slug: "scourge-aasimar",
+        description: "Scourge aasimar are imbued with a divine energy that blazes intensely within them. It feeds a powerful desire to destroy evil—a desire that is, at its best, unflinching and, at its worst, all-consuming.",
+        alabastriaContext: "Scourge Aasimar in Alabastria's frontier regions channel their burning divine fury against the forces of evil. Their intense light and self-sacrificing nature make them formidable allies in the Huntbound Order's most dangerous missions.",
+        playstyle: "Offensive support with area damage and self-sacrifice. Great for players who want to deal damage while supporting allies.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.radiant_consumption_aasimar_scourge_aasimar.id },
+          ]
+        },
+        raceId: race.aasimar.id
+      }),
+      aasimar_fallen_aasimar: await db.createSubrace({
+        id: "subrace-aasimar-fallen-aasimar",
+        name: "Fallen Aasimar",
+        slug: "fallen-aasimar",
+        description: "An aasimar who was touched by dark powers, or who chose to dabble in them, is an aasimar whose original celestial nature has been warped by evil.",
+        alabastriaContext: "Fallen Aasimar in Alabastria's shadowed corners struggle with their corrupted divine nature. Some seek redemption through the Huntbound Order, while others embrace their dark power to fight evil with evil.",
+        playstyle: "Dark support with necrotic damage and intimidation. Ideal for players who want to play morally complex characters with dark powers.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.necrotic_shroud_aasimar_fallen_aasimar.id },
+          ]
+        },
+        raceId: race.aasimar.id
+      }),
+      dragonborn_chromatic_dragonborn: await db.createSubrace({
+        id: "subrace-dragonborn-chromatic-dragonborn",
+        name: "Chromatic Dragonborn",
+        slug: "chromatic-dragonborn",
+        description: "Chromatic dragonborn are descended from evil dragons and often inherit their ancestors' destructive tendencies.",
+        alabastriaContext: "Chromatic Dragonborn in Bulsania's military often serve as shock troops, their destructive breath weapons making them feared on the battlefield. Some seek redemption through the Huntbound Order, channeling their destructive power against true evil.",
+        playstyle: "Offensive warriors with destructive elemental powers. Great for players who want to deal elemental damage and intimidate enemies.",
+        raceId: race.dragonborn.id,
+        traits: {
+          connect: [
+            { id: raceTrait.chromatic_ancestry_dragonborn.id },
+          ]
+        }
+      }),
+      dragonborn_metallic_dragonborn: await db.createSubrace({
+        id: "subrace-dragonborn-metallic-dragonborn",
+        name: "Metallic Dragonborn",
+        slug: "metallic-dragonborn",
+        description: "Metallic dragonborn are descended from good dragons and often inherit their ancestors' protective nature.",
+        alabastriaContext: "Metallic Dragonborn in Alabastria's temples and noble houses serve as protectors and leaders. Their noble heritage and protective abilities make them natural leaders in the Huntbound Order's quest to protect the innocent.",
+        playstyle: "Defensive warriors with protective elemental powers. Perfect for players who want to be noble protectors with draconic abilities.",
+        raceId: race.dragonborn.id,
+        traits: {
+          connect: [
+            { id: raceTrait.metallic_ancestry_dragonborn.id },
+          ]
+        }
+      }),
+      dragonborn_gem_dragonborn: await db.createSubrace({
+        id: "subrace-dragonborn-gem-dragonborn",
+        name: "Gem Dragonborn",
+        slug: "gem-dragonborn",
+        description: "Gem dragonborn are descended from psionic dragons and often inherit their ancestors' mental abilities.",
+        alabastriaContext: "Gem Dragonborn in Kuriguer's magical academies and Skratonia's scholarly institutions study the mysteries of the mind. Their psionic heritage and intellectual abilities make them valuable researchers and strategists in the Huntbound Order.",
+        playstyle: "Intellectual warriors with psionic abilities. Ideal for players who want to combine martial prowess with mental powers.",
+        raceId: race.dragonborn.id,
+        traits: {
+          connect: [
+            { id: raceTrait.gem_ancestry_dragonborn.id },
+          ]
+        }
+      }),
+      dwarf_hill_dwarf: await db.createSubrace({
+        id: "subrace-dwarf-hill-dwarf",
+        name: "Hill Dwarf",
+        slug: "hill-dwarf",
+        description: "Hill dwarves are more social and less reclusive than mountain dwarves, often found in human settlements.",
+        alabastriaContext: "Hill Dwarves in Skratonia's cities and Kuriguer's coastal towns serve as merchants and craftsmen. Their social nature and extra durability make them excellent community leaders and healers in the Huntbound Order.",
+        playstyle: "Durable support characters with extra hit points. Great for players who want to be tough healers or community leaders.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.dwarven_toughness_dwarf_hill_dwarf.id },
+          ]
+        },
+        raceId: race.dwarf.id
+      }),
+      dwarf_mountain_dwarf: await db.createSubrace({
+        id: "subrace-dwarf-mountain-dwarf",
+        name: "Mountain Dwarf",
+        slug: "mountain-dwarf",
+        description: "Mountain dwarves are more traditional and reclusive, often found in their mountain strongholds.",
+        alabastriaContext: "Mountain Dwarves in Maltman's strongholds and Bulsania's peaks serve as elite warriors and miners. Their martial training and strength make them formidable fighters in the Huntbound Order's most dangerous missions.",
+        playstyle: "Heavily armored warriors with martial training. Perfect for players who want to be heavily armored fighters with crafting abilities.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_two.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.dwarven_armor_training_dwarf_mountain_dwarf.id },
+          ]
+        },
+        heightRangeOverride: "4'0\" to 4'8\"",
+        weightRangeOverride: "130 to 178 lbs",
+        raceId: race.dwarf.id
+      }),
+      dwarf_duergar: await db.createSubrace({
+        id: "subrace-dwarf-duergar",
+        name: "Duergar",
+        slug: "duergar",
+        description: "Duergar are dark dwarves who live in the Underdark and have developed psionic abilities.",
+        alabastriaContext: "Duergar in Maltman's deepest mines and Alatman's underground workshops serve as specialized craftsmen and spies. Their psionic abilities and Underdark knowledge make them valuable assets in the Huntbound Order's covert operations.",
+        playstyle: "Psionic craftsmen with stealth abilities. Great for players who want to be magical craftsmen with unique abilities.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.duergar_magic_dwarf_duergar.id },
+            { id: raceTrait.duergar_resilience_dwarf_duergar.id },
+            { id: raceTrait.sunlight_sensitivity_dwarf_duergar.id },
+          ]
+        },
+        raceId: race.dwarf.id
+      }),
+      elf_high_elf: await db.createSubrace({
+        id: "subrace-elf-high-elf",
+        name: "High Elf",
+        slug: "high-elf",
+        description: "High elves are the most traditional and magical of the elven subraces, often found in magical academies and ancient libraries.",
+        alabastriaContext: "High Elves in Kuriguer's magical academies and Skratonia's scholarly institutions serve as wizards and researchers. Their intellectual nature and magical abilities make them valuable strategists and spellcasters in the Huntbound Order.",
+        playstyle: "Intellectual spellcasters with martial training. Great for players who want to be magical warriors with extra languages.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.int_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.elf_weapon_training_elf_high_elf.id },
+            { id: raceTrait.cantrip_elf_high_elf.id },
+            { id: raceTrait.extra_language_elf_high_elf.id },
+          ]
+        },
+        raceId: race.elf.id
+      }),
+      elf_wood_elf: await db.createSubrace({
+        id: "subrace-elf-wood-elf",
+        name: "Wood Elf",
+        slug: "wood-elf",
+        description: "Wood elves are swift and stealthy, with a deep bond to the forests and natural world.",
+        alabastriaContext: "Wood Elves in Kuriguer's magical forests and Skratonia's ancient groves serve as rangers and druids. Their natural stealth and speed make them excellent scouts and trackers in the Huntbound Order's wilderness operations.",
+        playstyle: "Swift and stealthy nature guardians. Perfect for players who want to be fast, sneaky characters with nature abilities.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.elf_weapon_training_elf_wood_elf.id },
+            { id: raceTrait.fleet_of_foot_elf_wood_elf.id },
+            { id: raceTrait.mask_of_the_wild_elf_wood_elf.id },
+          ]
+        },
+        weightRangeOverride: "100 to 140 lbs",
+        raceId: race.elf.id
+      }),
+      elf_dark_elf_drow: await db.createSubrace({
+        id: "subrace-elf-dark-elf-drow",
+        name: "Dark Elf (Drow)",
+        slug: "dark-elf-drow",
+        description: "Dark elves, or drow, are elves who live in the Underdark and have adapted to its harsh environment.",
+        alabastriaContext: "Drow in Maltman's deepest caverns and Alatman's underground regions serve as scouts and spies. Their Underdark knowledge and magical abilities make them valuable assets in the Huntbound Order's covert operations.",
+        playstyle: "Magical scouts with Underdark abilities. Great for players who want to be stealthy spellcasters with unique challenges.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.superior_darkvision_elf_dark_elf_drow.id },
+            { id: raceTrait.sunlight_sensitivity_elf_dark_elf_drow.id },
+            { id: raceTrait.drow_magic_elf_dark_elf_drow.id },
+            { id: raceTrait.drow_weapon_training_elf_dark_elf_drow.id },
+          ]
+        },
+        heightRangeOverride: "4'5\" to 5'7\"",
+        weightRangeOverride: "75 to 105 lbs",
+        raceId: race.elf.id
+      }),
+      elf_sea_elf: await db.createSubrace({
+        id: "subrace-elf-sea-elf",
+        name: "Sea Elf",
+        slug: "sea-elf",
+        description: "Sea elves are elves who have adapted to life underwater and have a deep connection to the ocean.",
+        alabastriaContext: "Sea Elves in Kuriguer's coastal waters and along Alabastria's shores serve as maritime scouts and protectors. Their aquatic abilities and ocean knowledge make them valuable allies in the Huntbound Order's coastal operations.",
+        playstyle: "Aquatic scouts with ocean abilities. Perfect for players who want to be water-based characters with unique movement options.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.sea_elf_training_elf_sea_elf.id },
+            { id: raceTrait.child_of_the_sea_elf_sea_elf.id },
+            { id: raceTrait.friend_of_the_sea_elf_sea_elf.id },
+          ]
+        },
+        raceId: race.elf.id
+      }),
+      elf_eladrin: await db.createSubrace({
+        id: "subrace-elf-eladrin",
+        name: "Eladrin",
+        slug: "eladrin",
+        description: "Eladrin are elves who live in the Feywild and have a deep connection to the seasons and natural cycles.",
+        alabastriaContext: "Eladrin in Kuriguer's magical forests and fey-touched areas serve as guardians of the natural world. Their seasonal magic and fey connection make them powerful allies in the Huntbound Order's efforts to protect Alabastria's magical balance.",
+        playstyle: "Seasonal magic users with teleportation. Great for players who want to be magical characters with unique seasonal abilities.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.int_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.fey_step_elf_eladrin.id },
+            { id: raceTrait.trance_elf_eladrin.id },
+          ]
+        },
+        raceId: race.elf.id
+      }),
+      elf_shadar_kai: await db.createSubrace({
+        id: "subrace-elf-shadar-kai",
+        name: "Shadar-kai",
+        slug: "shadar-kai",
+        description: "Shadar-kai are elves who live in the Shadowfell and have a deep connection to death and shadow magic.",
+        alabastriaContext: "Shadar-kai in Kuriguer's shadow-touched woods and Alabastria's darker regions serve as specialists against undead threats. Their shadow magic and death resistance make them valuable assets in the Huntbound Order's most dangerous missions.",
+        playstyle: "Shadow magic users with death resistance. Perfect for players who want to be dark magical characters with unique abilities.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.blessing_of_the_raven_queen_elf_shadar_kai.id },
+            { id: raceTrait.necrotic_resistance_elf_shadar_kai.id },
+            { id: raceTrait.trance_elf_shadar_kai.id },
+          ]
+        },
+        raceId: race.elf.id
+      }),
+      genasi_air_genasi: await db.createSubrace({
+        id: "subrace-genasi-air-genasi",
+        name: "Air Genasi",
+        slug: "air-genasi",
+        description: "Air genasi are connected to the element of air and wind, often found in high places and open spaces.",
+        alabastriaContext: "Air Genasi in Kuriguer's coastal regions and Bulsania's mountain peaks serve as scouts and messengers. Their wind magic and aerial abilities make them excellent for reconnaissance and communication in the Huntbound Order.",
+        playstyle: "Wind magic users with teleportation abilities. Great for players who want to be mobile magical characters with air themes.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.air_resistance_genasi_air_genasi.id },
+            { id: raceTrait.air_magic_genasi_air_genasi.id },
+            { id: raceTrait.unending_breath_genasi_air_genasi.id },
+            { id: raceTrait.mingle_with_the_wind_genasi_air_genasi.id },
+          ]
+        },
+        raceId: race.genasi.id
+      }),
+      genasi_earth_genasi: await db.createSubrace({
+        id: "subrace-genasi-earth-genasi",
+        name: "Earth Genasi",
+        slug: "earth-genasi",
+        description: "Earth genasi are connected to the element of earth and stone, often found in mountains and underground areas.",
+        alabastriaContext: "Earth Genasi in Maltman's mountain strongholds and Alatman's volcanic regions serve as miners and craftsmen. Their earth magic and stone abilities make them valuable for construction and excavation in the Huntbound Order.",
+        playstyle: "Earth magic users with terrain abilities. Perfect for players who want to be sturdy magical characters with earth themes.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.earth_resistance_genasi_earth_genasi.id },
+            { id: raceTrait.earth_magic_genasi_earth_genasi.id },
+            { id: raceTrait.earth_walk_genasi_earth_genasi.id },
+          ]
+        },
+        raceId: race.genasi.id
+      }),
+      genasi_fire_genasi: await db.createSubrace({
+        id: "subrace-genasi-fire-genasi",
+        name: "Fire Genasi",
+        slug: "fire-genasi",
+        description: "Fire genasi are connected to the element of fire and heat, often found in volcanic areas and hot climates.",
+        alabastriaContext: "Fire Genasi in Alatman's volcanic forges and Kuriguer's magical hotspots serve as smiths and magical researchers. Their fire magic and heat resistance make them excellent for crafting and magical experimentation in the Huntbound Order.",
+        playstyle: "Fire magic users with teleportation abilities. Great for players who want to be destructive magical characters with fire themes.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.int_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.fire_resistance_genasi_fire_genasi.id },
+            { id: raceTrait.fire_magic_genasi_fire_genasi.id },
+            { id: raceTrait.reach_to_the_blaze_genasi_fire_genasi.id },
+          ]
+        },
+        raceId: race.genasi.id
+      }),
+      genasi_water_genasi: await db.createSubrace({
+        id: "subrace-genasi-water-genasi",
+        name: "Water Genasi",
+        slug: "water-genasi",
+        description: "Water genasi are connected to the element of water and ice, often found near bodies of water and in cold climates.",
+        alabastriaContext: "Water Genasi in Kuriguer's coastal waters and along Alabastria's shores serve as maritime specialists and water guardians. Their water magic and aquatic abilities make them excellent for coastal operations and water-based missions in the Huntbound Order.",
+        playstyle: "Water magic users with aquatic abilities. Perfect for players who want to be water-based magical characters with unique movement options.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.water_resistance_genasi_water_genasi.id },
+            { id: raceTrait.water_magic_genasi_water_genasi.id },
+            { id: raceTrait.amphibious_genasi_water_genasi.id },
+            { id: raceTrait.swim_genasi_water_genasi.id },
+          ]
+        },
+        raceId: race.genasi.id
+      }),
+      gnome_forest_gnome: await db.createSubrace({
+        id: "subrace-gnome-forest-gnome",
+        name: "Forest Gnome",
+        slug: "forest-gnome",
+        description: "Forest gnomes are reclusive and shy, living in hidden communities deep in the woods.",
+        alabastriaContext: "Forest Gnomes in Alabastria are found in the magical forests of Kuriguer, where they serve as guardians of nature and guides for those who venture into the dangerous woods.",
+        playstyle: "Stealthy and nature-focused gnomes who excel at illusion magic and communication with animals.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.natural_illusionist_gnome_forest_gnome.id },
+            { id: raceTrait.speak_with_small_beasts_gnome_forest_gnome.id },
+          ]
+        },
+        raceId: race.gnome.id
+      }),
+      gnome_rock_gnome: await db.createSubrace({
+        id: "subrace-gnome-rock-gnome",
+        name: "Rock Gnome",
+        slug: "rock-gnome",
+        description: "Rock gnomes are the most common gnomes, known for their engineering skills and love of tinkering.",
+        alabastriaContext: "Rock Gnomes in Alabastria are found in the workshops and forges of Kamalatman, where their engineering skills are highly valued. They often work alongside Dwarves and Artificers to create mechanical devices and magical items.",
+        playstyle: "Engineering-focused gnomes who excel at creating devices and understanding technology.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.artificers_lore_gnome_rock_gnome.id },
+            { id: raceTrait.tinker_gnome_rock_gnome.id },
+          ]
+        },
+        raceId: race.gnome.id
+      }),
+      half_elf_aquatic_half_elf: await db.createSubrace({
+        id: "subrace-half-elf-aquatic-half-elf",
+        name: "Aquatic Half-Elf",
+        slug: "aquatic-half-elf",
+        description: "Half-elves with aquatic heritage who can breathe underwater and swim with ease.",
+        alabastriaContext: "Aquatic Half-Elves in Alabastria are found along the coasts of Kuriguer and in the waterways of Kamalatman, where their aquatic abilities make them excellent for maritime operations.",
+        playstyle: "Water-based characters who excel at aquatic adventures and coastal missions.",
+        traits: {
+          connect: [
+            { id: raceTrait.aquatic_half_elf_aquatic_half_elf.id },
+          ]
+        },
+        raceId: race.half_elf.id
+      }),
+      half_elf_drow_half_elf: await db.createSubrace({
+        id: "subrace-half-elf-drow-half-elf",
+        name: "Drow Half-Elf",
+        slug: "drow-half-elf",
+        description: "Half-elves with drow heritage who have some of the dark elves' abilities.",
+        alabastriaContext: "Drow Half-Elves in Alabastria are rare but found in the darker regions of Kuriguer's forests, where they often serve as scouts and guides in dangerous areas.",
+        playstyle: "Dark magic users with unique spellcasting abilities and darkvision.",
+        traits: {
+          connect: [
+            { id: raceTrait.drow_magic_half_elf_drow_half_elf.id },
+          ]
+        },
+        raceId: race.half_elf.id
+      }),
+      half_elf_high_half_elf: await db.createSubrace({
+        id: "subrace-half-elf-high-half-elf",
+        name: "High Half-Elf",
+        slug: "high-half-elf",
+        description: "Half-elves with high elf heritage who have some magical abilities.",
+        alabastriaContext: "High Half-Elves in Alabastria are found in the magical academies of Kuriguer and the cities of Skratonia, where their magical heritage makes them excellent scholars and diplomats.",
+        playstyle: "Magical characters with weapon proficiency and cantrip abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.elf_weapon_training_half_elf_high_half_elf.id },
+            { id: raceTrait.cantrip_half_elf_high_half_elf.id },
+          ]
+        },
+        raceId: race.half_elf.id
+      }),
+      half_elf_wood_half_elf: await db.createSubrace({
+        id: "subrace-half-elf-wood-half-elf",
+        name: "Wood Half-Elf",
+        slug: "wood-half-elf",
+        description: "Half-elves with wood elf heritage who have enhanced speed and stealth abilities.",
+        alabastriaContext: "Wood Half-Elves in Alabastria are found in the forests of Kuriguer and the wilderness of Kamalatman, where their natural abilities make them excellent rangers and scouts.",
+        playstyle: "Fast and stealthy characters who excel at wilderness survival and ranged combat.",
+        traits: {
+          connect: [
+            { id: raceTrait.elf_weapon_training_half_elf_wood_half_elf.id },
+            { id: raceTrait.fleet_of_foot_half_elf_wood_half_elf.id },
+            { id: raceTrait.mask_of_the_wild_half_elf_wood_half_elf.id },
+          ]
+        },
+        raceId: race.half_elf.id
+      }),
+      halfling_lightfoot_halfling: await db.createSubrace({
+        id: "subrace-halfling-lightfoot-halfling",
+        name: "Lightfoot Halfling",
+        slug: "lightfoot-halfling",
+        description: "Lightfoot halflings are stealthy and social, able to hide behind larger creatures.",
+        alabastriaContext: "Lightfoot Halflings in Alabastria are found in the cities of Skratonia, where their social skills and stealth make them excellent merchants and diplomats.",
+        playstyle: "Social and stealthy halflings who excel at hiding and social interaction.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.cha_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.naturally_stealthy_halfling_lightfoot_halfling.id },
+          ]
+        },
+        raceId: race.halfling.id
+      }),
+      halfling_stout_halfling: await db.createSubrace({
+        id: "subrace-halfling-stout-halfling",
+        name: "Stout Halfling",
+        slug: "stout-halfling",
+        description: "Stout halflings are hardier and more resistant to poison than other halflings.",
+        alabastriaContext: "Stout Halflings in Alabastria are found in the agricultural regions of Skratonia, where their hardiness makes them excellent farmers and workers in harsh conditions.",
+        playstyle: "Hardy and resilient halflings who excel at surviving in difficult conditions.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.stout_resilience_halfling_stout_halfling.id },
+          ]
+        },
+        raceId: race.halfling.id
+      }),
+      halfling_ghostwise_halfling: await db.createSubrace({
+        id: "subrace-halfling-ghostwise-halfling",
+        name: "Ghostwise Halfling",
+        slug: "ghostwise-halfling",
+        description: "Ghostwise halflings are reclusive and have telepathic abilities.",
+        alabastriaContext: "Ghostwise Halflings in Alabastria are found in the remote regions of Kuriguer's forests, where their telepathic abilities make them excellent scouts and guides.",
+        playstyle: "Telepathic halflings who excel at silent communication and wilderness survival.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.silent_speech_halfling_ghostwise_halfling.id },
+          ]
+        },
+        raceId: race.halfling.id
+      }),
+      human_variant_human: await db.createSubrace({
+        id: "subrace-human-variant-human",
+        name: "Variant Human",
+        slug: "variant-human",
+        description: "Humans with a particular talent or focus, represented by a feat.",
+        alabastriaContext: "Variant Humans in Alabastria are found throughout all continents, often as specialists and experts in their chosen fields. Their focused abilities make them valuable in the Huntbound Order and other organizations.",
+        playstyle: "Specialized humans with unique abilities and focused expertise.",
+        traits: {
+          connect: [
+            { id: raceTrait.feat_human_variant_human.id },
+            { id: raceTrait.skill_human_variant_human.id },
+          ]
+        },
+        raceId: race.human.id
+      }),
+      human_mark_of_finding_human: await db.createSubrace({
+        id: "subrace-human-mark-of-finding-human",
+        name: "Mark of Finding Human",
+        slug: "mark-of-finding-human",
+        description: "Humans with the Mark of Finding, a dragonmark that grants tracking and divination abilities.",
+        alabastriaContext: "Mark of Finding Humans in Alabastria are found primarily in the Huntbound Order, where their tracking abilities make them invaluable for finding monsters and lost people.",
+        playstyle: "Tracking specialists with divination magic and enhanced perception.",
+        traits: {
+          connect: [
+            { id: raceTrait.hunters_intuition_human_mark_of_finding_human.id },
+            { id: raceTrait.finders_magic_human_mark_of_finding_human.id },
+          ]
+        },
+        raceId: race.human.id
+      }),
+      human_mark_of_handling_human: await db.createSubrace({
+        id: "subrace-human-mark-of-handling-human",
+        name: "Mark of Handling Human",
+        slug: "mark-of-handling-human",
+        description: "Humans with the Mark of Handling, a dragonmark that grants animal handling and beast mastery abilities.",
+        alabastriaContext: "Mark of Handling Humans in Alabastria are found in the wilderness regions of Kuriguer and Kamalatman, where their animal handling abilities make them excellent rangers and beast masters.",
+        playstyle: "Animal specialists with nature magic and beast communication abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.wild_intuition_human_mark_of_handling_human.id },
+            { id: raceTrait.primal_connection_human_mark_of_handling_human.id },
+          ]
+        },
+        raceId: race.human.id
+      }),
+      human_mark_of_making_human: await db.createSubrace({
+        id: "subrace-human-mark-of-making-human",
+        name: "Mark of Making Human",
+        slug: "mark-of-making-human",
+        description: "Humans with the Mark of Making, a dragonmark that grants crafting and creation abilities.",
+        alabastriaContext: "Mark of Making Humans in Alabastria are found in the workshops and forges of Kamalatman, where their crafting abilities make them excellent artificers and smiths.",
+        playstyle: "Crafting specialists with creation magic and enhanced intelligence.",
+        traits: {
+          connect: [
+            { id: raceTrait.artisans_intuition_human_mark_of_making_human.id },
+            { id: raceTrait.makers_magic_human_mark_of_making_human.id },
+          ]
+        },
+        raceId: race.human.id
+      }),
+      human_mark_of_passage_human: await db.createSubrace({
+        id: "subrace-human-mark-of-passage-human",
+        name: "Mark of Passage Human",
+        slug: "mark-of-passage-human",
+        description: "Humans with the Mark of Passage, a dragonmark that grants movement and transportation abilities.",
+        alabastriaContext: "Mark of Passage Humans in Alabastria are found throughout all continents as couriers and messengers, where their movement abilities make them excellent for transportation and communication.",
+        playstyle: "Movement specialists with teleportation magic and enhanced mobility.",
+        traits: {
+          connect: [
+            { id: raceTrait.intuitive_motion_human_mark_of_passage_human.id },
+            { id: raceTrait.passage_magic_human_mark_of_passage_human.id },
+          ]
+        },
+        raceId: race.human.id
+      }),
+      human_mark_of_sentinel_human: await db.createSubrace({
+        id: "subrace-human-mark-of-sentinel-human",
+        name: "Mark of Sentinel Human",
+        slug: "mark-of-sentinel-human",
+        description: "Humans with the Mark of Sentinel, a dragonmark that grants protection and defense abilities.",
+        alabastriaContext: "Mark of Sentinel Humans in Alabastria are found in the Huntbound Order and other protective organizations, where their defensive abilities make them excellent guards and protectors.",
+        playstyle: "Protection specialists with defensive magic and enhanced awareness.",
+        traits: {
+          connect: [
+            { id: raceTrait.vigilant_guardian_human_mark_of_sentinel_human.id },
+            { id: raceTrait.sentinels_magic_human_mark_of_sentinel_human.id },
+          ]
+        },
+        raceId: race.human.id
+      }),
+      shifter_beasthide_shifter: await db.createSubrace({
+        id: "subrace-shifter-beasthide-shifter",
+        name: "Beasthide Shifter",
+        slug: "beasthide-shifter",
+        description: "Beasthide shifters are tough and resilient, with enhanced durability and strength.",
+        alabastriaContext: "Beasthide Shifters in Alabastria are found in the harsh regions of Bulsania and Kamalatman, where their toughness makes them excellent survivalists and warriors.",
+        playstyle: "Tough and resilient shifters who excel at survival and combat.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.con_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.shifting_feature_shifter_beasthide_shifter.id },
+          ]
+        },
+        raceId: race.shifter.id
+      }),
+      shifter_longtooth_shifter: await db.createSubrace({
+        id: "subrace-shifter-longtooth-shifter",
+        name: "Longtooth Shifter",
+        slug: "longtooth-shifter",
+        description: "Longtooth shifters are fierce and aggressive, with enhanced combat abilities.",
+        alabastriaContext: "Longtooth Shifters in Alabastria are found in the frontier regions of Kamalatman and Skratonia, where their ferocity makes them excellent warriors and guards.",
+        playstyle: "Fierce and aggressive shifters who excel at combat and intimidation.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.str_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.shifting_feature_shifter_longtooth_shifter.id },
+          ]
+        },
+        raceId: race.shifter.id
+      }),
+      shifter_swiftstride_shifter: await db.createSubrace({
+        id: "subrace-shifter-swiftstride-shifter",
+        name: "Swiftstride Shifter",
+        slug: "swiftstride-shifter",
+        description: "Swiftstride shifters are fast and agile, with enhanced mobility and reflexes.",
+        alabastriaContext: "Swiftstride Shifters in Alabastria are found throughout all continents, often serving as messengers and scouts due to their speed and agility.",
+        playstyle: "Fast and agile shifters who excel at mobility and stealth.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.dex_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.shifting_feature_shifter_swiftstride_shifter.id },
+          ]
+        },
+        raceId: race.shifter.id
+      }),
+      shifter_wildhunt_shifter: await db.createSubrace({
+        id: "subrace-shifter-wildhunt-shifter",
+        name: "Wildhunt Shifter",
+        slug: "wildhunt-shifter",
+        description: "Wildhunt shifters are wise and perceptive, with enhanced senses and tracking abilities.",
+        alabastriaContext: "Wildhunt Shifters in Alabastria are found in the wilderness regions of Kuriguer and Kamalatman, where their enhanced senses make them excellent trackers and guides.",
+        playstyle: "Wise and perceptive shifters who excel at tracking and wilderness survival.",
+        abilityScoreIncreases: {
+          connect: [
+            { id: raceAbilityScore.wis_one.id },
+          ]
+        },
+        traits: {
+          connect: [
+            { id: raceTrait.shifting_feature_shifter_wildhunt_shifter.id },
+          ]
+        },
+        raceId: race.shifter.id
+      }),
+      tiefling_asmodeus_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-asmodeus-tiefling",
+        name: "Asmodeus Tiefling",
+        slug: "asmodeus-tiefling",
+        description: "Tieflings with the bloodline of Asmodeus, the Lord of the Nine Hells.",
+        alabastriaContext: "Asmodeus Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_asmodeus_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_baalzebul_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-baalzebul-tiefling",
+        name: "Baalzebul Tiefling",
+        slug: "baalzebul-tiefling",
+        description: "Tieflings with the bloodline of Baalzebul, the Lord of Flies.",
+        alabastriaContext: "Baalzebul Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_baalzebul_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_dispater_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-dispater-tiefling",
+        name: "Dispater Tiefling",
+        slug: "dispater-tiefling",
+        description: "Tieflings with the bloodline of Dispater, the Iron Duke.",
+        alabastriaContext: "Dispater Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_dispater_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_fierna_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-fierna-tiefling",
+        name: "Fierna Tiefling",
+        slug: "fierna-tiefling",
+        description: "Tieflings with the bloodline of Fierna, the Lady of the Fourth.",
+        alabastriaContext: "Fierna Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_fierna_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_glasya_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-glasya-tiefling",
+        name: "Glasya Tiefling",
+        slug: "glasya-tiefling",
+        description: "Tieflings with the bloodline of Glasya, the Daughter of Asmodeus.",
+        alabastriaContext: "Glasya Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_glasya_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_levistus_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-levistus-tiefling",
+        name: "Levistus Tiefling",
+        slug: "levistus-tiefling",
+        description: "Tieflings with the bloodline of Levistus, the Lord of the Fifth.",
+        alabastriaContext: "Levistus Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_levistus_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_mammon_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-mammon-tiefling",
+        name: "Mammon Tiefling",
+        slug: "mammon-tiefling",
+        description: "Tieflings with the bloodline of Mammon, the Lord of the Third.",
+        alabastriaContext: "Mammon Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_mammon_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_mephistopheles_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-mephistopheles-tiefling",
+        name: "Mephistopheles Tiefling",
+        slug: "mephistopheles-tiefling",
+        description: "Tieflings with the bloodline of Mephistopheles, the Lord of the Eighth.",
+        alabastriaContext: "Mephistopheles Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_mephistopheles_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      tiefling_zariel_tiefling: await db.createSubrace({
+        id: "subrace-tiefling-zariel-tiefling",
+        name: "Zariel Tiefling",
+        slug: "zariel-tiefling",
+        description: "Tieflings with the bloodline of Zariel, the Fallen Angel.",
+        alabastriaContext: "Zariel Tieflings in Alabastria are found throughout all continents, often serving as advisors and spellcasters due to their infernal heritage and magical abilities.",
+        playstyle: "Magical tieflings with infernal heritage and unique abilities.",
+        traits: {
+          connect: [
+            { id: raceTrait.infernal_legacy_tiefling_zariel_tiefling.id },
+          ]
+        },
+        raceId: race.tiefling.id
+      }),
+      yuan_ti_pureblood_yuan_ti: await db.createSubrace({
+        id: "subrace-yuan-ti-pureblood-yuan-ti",
+        name: "Pureblood Yuan-ti",
+        slug: "pureblood-yuan-ti",
+        description: "Yuan-ti with the most human-like appearance, often able to pass as human.",
+        alabastriaContext: "Pureblood Yuan-ti in Alabastria are found throughout all continents, often serving as spies and infiltrators due to their human-like appearance and magical abilities.",
+        playstyle: "Human-like yuan-ti with magical abilities and infiltration skills.",
+        traits: {
+          connect: [
+            { id: raceTrait.innate_spellcasting_yuan_ti_pureblood_yuan_ti.id },
+          ]
+        },
+        raceId: race.yuan_ti.id
+      }),
+    };
 
     console.log("   ✓ Migrated legacy data\n");
 

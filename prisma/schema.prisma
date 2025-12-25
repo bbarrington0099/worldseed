@@ -503,7 +503,7 @@ model RaceName {
   surname String[]
 
   raceId String?
-  race   Race?
+  race   Race? 
 
   subraceId String?
   subrace   Subrace?

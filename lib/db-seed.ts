@@ -181,7 +181,6 @@ export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput): P
     return db.createSubrace(data, true);
 }
 
-
 // ============================================================================
 // CLASSES
 // ============================================================================
