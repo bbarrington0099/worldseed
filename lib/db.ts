@@ -7,6 +7,7 @@ import { prisma } from "./prisma";
 import { ContinentLanguagePrevalence, ContinentCreatureRelation, Prisma } from "@prismagen/client";
 import { CACHE_TAGS } from "./constants";
 import { slugify } from "./utils";
+import { RaceAbilityScore } from '../generated/prisma/index';
 
 // Re-export cache tags for convenience
 export { CACHE_TAGS };
@@ -173,7 +174,7 @@ export async function createContinentCreatureType(data: Prisma.ContinentCreature
     });
 }
 
-export async function createLegendaryCreature(data: Prisma.LegendaryCreatureCreateInput, seeded: boolean = false): Promise<Prisma.LegendaryCreatureGetPayload<{}>> {
+export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.LegendaryCreatureGetPayload<{}>> {
     return await prisma.legendaryCreature.upsert({
         where: { id: data.id },
         update: data,
@@ -184,6 +185,46 @@ export async function createLegendaryCreature(data: Prisma.LegendaryCreatureCrea
 // ============================================================================
 // RACES
 // ============================================================================
+
+export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput, seeded: boolean = false): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
+    return await prisma.raceAbilityScore.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createRaceTrait(data: Prisma.RaceTraitCreateInput, seeded: boolean = false): Promise<Prisma.RaceTraitGetPayload<{}>> {
+    return await prisma.raceTrait.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.RaceNameGetPayload<{}>> {
+    return await prisma.raceName.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createRace(data: Prisma.RaceUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.RaceGetPayload<{}>> {
+    return await prisma.race.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.SubraceGetPayload<{}>> {
+    return await prisma.subrace.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
 
 export async function getRaces() {
     return prisma.race.findMany({

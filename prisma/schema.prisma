@@ -437,7 +437,6 @@ model Race {
   name           String  @unique
   slug           String  @unique
   description    String  @db.Text
-  size           String?
   speed          String?
   age            String? @db.Text
   alignment      String? @db.Text
@@ -446,15 +445,21 @@ model Race {
   alabastriaLore String? @db.Text
   playstyle      String? @db.Text
 
+  defaultCreatureSizeId String @default("creature-size-medium")
+  defaultCreatureSize   CreatureSize @relation(fields: [defaultCreatureSizeId], references: [id])
+
+  namesId String? @unique
+  names   RaceName? @relation(fields: [namesId], references: [id], onDelete: Cascade)
+
   abilityScoreIncreases RaceAbilityScore[]
   languages             Language[]
   traits                RaceTrait[]
+
   subraces              Subrace[]
   recommendedClasses    RaceClassRecommendation[]
   continentLocations    RaceContinent[]
   deityRecommendations  DeityRecommendation[]     @relation("RaceDeityRecs")
   characters            Character[]
-  names                 RaceName[]
 }
 
 enum RaceAbilityScores {
@@ -470,12 +475,13 @@ enum RaceAbilityScores {
 model RaceAbilityScore {
   id       String            @id @default(uuid())
   ability  RaceAbilityScores
+  seeded   Boolean           @default(false)
   modifier Int
 
-  raceId String
-  race   Race   @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  races Race[]
+  subraces Subrace[]
 
-  @@unique([raceId, ability])
+  @@unique([ability, modifier])
 }
 
 model RaceTrait {
@@ -484,17 +490,23 @@ model RaceTrait {
   name        String
   description String? @db.Text
 
-  raceId String
-  race   Race   @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  races Race[]
+  subraces Subrace[]
 }
 
 model RaceName {
   id     String  @id @default(uuid())
-  name   String
-  gender String?
+  seeded Boolean @default(false)
+  male String[]
+  female String[]
+  unisex String[]
+  surname String[]
 
-  raceId String
-  race   Race   @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  raceId String?
+  race   Race?
+
+  subraceId String?
+  subrace   Subrace?
 }
 
 model RaceContinent {
@@ -527,40 +539,30 @@ model Subrace {
   name              String
   slug              String
   description       String  @db.Text
-  heightRange       String?
-  weightRange       String?
   alabastriaContext String? @db.Text
   playstyle         String? @db.Text
   seeded            Boolean @default(false)
+  
+  speedOverride             String?
+  ageOverride               String?
+  alignmentOverride         String?
+  heightRangeOverride       String?
+  weightRangeOverride       String?
+
+  namesOverrideAppend Boolean @default(false)
+  namesIdOverride     String? @unique
+  namesOverride       RaceName? @relation(fields: [namesIdOverride], references: [id], onDelete: Cascade)
 
   raceId                String
   race                  Race                  @relation(fields: [raceId], references: [id], onDelete: Cascade)
-  abilityScoreIncreases SubraceAbilityScore[]
-  traits                SubraceTrait[]
+
+  abilityScoreIncreases RaceAbilityScore[]
+  traits                RaceTrait[]
+
   deityRecommendations  DeityRecommendation[] @relation("SubraceDeityRecs")
   characters            Character[]
 
   @@unique([raceId, slug])
-}
-
-model SubraceAbilityScore {
-  id       String @id @default(uuid())
-  ability  String
-  modifier Int
-
-  subraceId String
-  subrace   Subrace @relation(fields: [subraceId], references: [id], onDelete: Cascade)
-
-  @@unique([subraceId, ability])
-}
-
-model SubraceTrait {
-  id          String  @id @default(uuid())
-  name        String
-  description String? @db.Text
-
-  subraceId String
-  subrace   Subrace @relation(fields: [subraceId], references: [id], onDelete: Cascade)
 }
 
 model Class {
@@ -1610,15 +1612,23 @@ model CreatureSize {
   description   String? @db.Text
 
   creatureTypes      CreatureType[]      @relation("CreatureTypeCommonSizes")
+  races Race[]
   characters         Character[]
   legendaryCreatures LegendaryCreature[]
+}
+
+enum LegendaryCreatureThreatLevel {
+  CITY
+  REGIONAL
+  CONTINENTAL
+  GLOBAL
 }
 
 model LegendaryCreature {
   id              String  @id @default(uuid())
   name            String
   description     String  @db.Text
-  threatLevel     String?
+  threatLevel     LegendaryCreatureThreatLevel
   questPotential  String? @db.Text
   isPast          Boolean @default(false)
   defeatedBy      String?
@@ -1633,6 +1643,6 @@ model LegendaryCreature {
   creatureTypeId String
   creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id], onDelete: Cascade)
 
-  continentId String?
-  continent   Continent? @relation(fields: [continentId], references: [id])
+  continentId String
+  continent   Continent @relation(fields: [continentId], references: [id])
 }

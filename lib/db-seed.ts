@@ -3,7 +3,7 @@
  * Used to create seeded/seeded data with consistent patterns
  */
 
-import { prisma } from "./prisma";
+import { prisma } from './prisma';
 import { Prisma, ContinentLanguagePrevalence, ContinentCreatureRelation } from "@prismagen/client";
 import * as db from "./db";
 import { slugify } from "./utils";
@@ -88,7 +88,7 @@ export async function createContinentCreatureType(data: Prisma.ContinentCreature
     return await db.createContinentCreatureType(data, true);
 }
 
-export async function createLegendaryCreature(data: Prisma.LegendaryCreatureCreateInput): Promise<Prisma.LegendaryCreatureGetPayload<{}>> {
+export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUncheckedCreateInput): Promise<Prisma.LegendaryCreatureGetPayload<{}>> {
     return await db.createLegendaryCreature(data, true);
 }
 
@@ -161,47 +161,26 @@ export async function createRuler(data: {
 // RACES
 // ============================================================================
 
-export async function createRace(data: {
-    name: string;
-    description: string;
-    size?: string;
-    speed?: string;
-    age?: string;
-    alignment?: string;
-    heightRange?: string;
-    weightRange?: string;
-    alabastriaLore?: string;
-    playstyle?: string;
-}) {
-    const slug = slugify(data.name);
-    return prisma.race.upsert({
-        where: { slug },
-        update: data,
-        create: { ...data, slug, seeded: true },
-    });
+export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
+    return db.createRaceAbilityScore(data, true);
 }
 
-export async function createSubrace(data: {
-    raceId: string;
-    name: string;
-    description: string;
-    heightRange?: string;
-    weightRange?: string;
-    alabastriaContext?: string;
-    playstyle?: string;
-}) {
-    const slug = slugify(data.name);
-    return prisma.subrace.upsert({
-        where: {
-            raceId_slug: {
-                raceId: data.raceId,
-                slug,
-            },
-        },
-        update: data,
-        create: { ...data, slug, seeded: true },
-    });
+export async function createRaceTrait(data: Prisma.RaceTraitCreateInput): Promise<Prisma.RaceTraitGetPayload<{}>> {
+    return db.createRaceTrait(data, true);
 }
+
+export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput): Promise<Prisma.RaceNameGetPayload<{}>> {
+    return db.createRaceName(data, true);
+}
+
+export async function createRace(data: Prisma.RaceUncheckedCreateInput): Promise<Prisma.RaceGetPayload<{}>> {
+    return db.createRace(data, true);
+}
+
+export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput): Promise<Prisma.SubraceGetPayload<{}>> {
+    return db.createSubrace(data, true);
+}
+
 
 // ============================================================================
 // CLASSES

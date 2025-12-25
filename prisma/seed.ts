@@ -12,7 +12,7 @@
  */
 
 import { prisma } from "../lib/prisma";
-import { Prisma, TownType, TradeRouteType, TradeRouteFrequency, ContinentLanguagePrevalence, GovernmentType, WarConflictStatus, Month, ContinentCreatureRelation } from "../generated/prisma/client";
+import { Prisma, TownType, TradeRouteType, TradeRouteFrequency, ContinentLanguagePrevalence, GovernmentType, WarConflictStatus, Month, ContinentCreatureRelation, LegendaryCreatureThreatLevel, RaceAbilityScores } from "../generated/prisma/client";
 import * as db from "../lib/db-seed";
 import bcrypt from "bcrypt";
 
@@ -1916,7 +1916,505 @@ async function main() {
         process.exit(1);
     }
     // Legendary Creatures
-
+    try {
+        // Past
+        await db.createLegendaryCreature({
+            id: "legendary-creature-malagaroth-swamp-dragon",
+            name: "Malagaroth the Swamp Dragon",
+            description: "A massive black dragon that terrorized the swamplands for centuries, breathing clouds of toxic gas that turned the very air into poison. Its lair was a vast network of flooded caves beneath the swamps, where it hoarded the treasures of countless victims.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            isPast: true,
+            defeatedBy: "Gorak Swampstrider",
+            defeatedByTitle: "Supreme Ruler of Kamalatman",
+            defeatStory: "During the Swamp Wars, when Gorak was in his 40s (793AB), he single-handedly defeated the dreaded Swamp Dragon Malagaroth, whose death throes created the vast swamplands that now bear his name. This victory earned him the respect of all three Kamalatman kingdoms, and he was chosen to marry Princess Elara of Katman, uniting the royal bloodlines.",
+            legacy: "The dragon's death created the vast swamplands that now define the region, and its bones are said to still lie beneath the murky waters, occasionally causing the ground to tremble.",
+            creatureSizeId: creature_size.huge.id,
+            creatureTypeId: creature_type.dragon.id,
+            continentId: continent.katman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-wyvern-queen-sylvara",
+            name: "Wyvern Queen Sylvara",
+            description: "A massive white wyvern with ice-blue scales that could freeze the very air with her breath. She led a vast migration of wyverns that threatened to overrun the northern continents, her intelligence and magical abilities making her nearly invincible.",
+            threatLevel: LegendaryCreatureThreatLevel.GLOBAL,
+            isPast: true,
+            defeatedBy: "Thane Icewind",
+            defeatedByTitle: "Legendary Frost Giant Slayer",
+            defeatStory: "During the Great Wyvern Migration including the year 730AB, when the Wyvern Queen led her vast army north, Thane Icewind was a legendary warrior from the northern tribes. In the final battle against the Wyvern Queen, Thane was struck by her devastating frost breath, which should have killed him instantly. However, through sheer willpower and divine intervention from Tempus, he survived but was permanently transformed - his skin turned to the pale blue-gray of ice, his eyes became piercing ice-blue, and his very essence became bound to the frozen elements. This transformation made him the perfect leader for the harsh frozen lands, and he established the first Icebound Confederacy.",
+            legacy: "The Wyvern Wars ended with her defeat, establishing the current alliance system between continents and making Thane a legendary figure across all of Alabastria.",
+            creatureSizeId: creature_size.gargantuan.id,
+            creatureTypeId: creature_type.dragon.id,
+            continentId: continent.bulsania.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-crimson-cult-leader-azrakul",
+            name: "Azrakul the Crimson Cult Leader",
+            description: "A charismatic tiefling warlock who led a massive cult that sought to open portals to the lower planes. His followers numbered in the thousands, and he had mastered dark magic that allowed him to command legions of fiends.",
+            threatLevel: LegendaryCreatureThreatLevel.CONTINENTAL,
+            isPast: true,
+            defeatedBy: "Sir Aldric the Redeemer",
+            defeatedByTitle: "Paladin of the Golden Order",
+            defeatStory: "During the Great Wyvern Migration including the year 506AB, Sir Aldric the Redeemer was a legendary paladin who used his diplomatic skills and divine magic to infiltrate the cult, learning their plans and turning many of their members against their leader. Through careful negotiation and the promise of redemption, he convinced the cult's inner circle to betray their master, leading to the cult leader's capture and the cult's dissolution. This victory helped secure the alliance that would later allow the Treaty of Golden Fields to be brokered, and his methods of redemption through diplomacy became legendary, inspiring future leaders like Marcus Goldfield.",
+            legacy: "The cult's stronghold was destroyed, and many former cultists were rehabilitated and reintegrated into society, proving that even the most lost souls can find redemption.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.humanoid.id,
+            continentId: continent.bulsania.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-iron-golem-king",
+            name: "The Iron Golem King",
+            description: "A massive construct created by ancient dwarven artificers, standing over 20 feet tall and made entirely of enchanted iron. It had gained sentience and declared itself king of the volcanic region, enslaving the local population to mine materials for its ever-growing army of constructs.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            isPast: true,
+            defeatedBy: "Svenrue Steelmore",
+            defeatedByTitle: "Master of the Volcanic Forges",
+            defeatStory: "Around 214AB, Svenrue Steelmore discovered the ancient control runes that had been used to create the Iron Golem King. Through careful study and magical expertise, she was able to reprogram the construct, turning it from a tyrant into a guardian that now protects the volcanic region from external threats.",
+            legacy: "The Iron Golem King now serves as a guardian of the volcanic region, and its knowledge of ancient construct-making techniques has been preserved and taught to new generations of artificers.",
+            creatureSizeId: creature_size.huge.id,
+            creatureTypeId: creature_type.construct.id,
+            continentId: continent.alatman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-shadow-stalker",
+            name: "The Shadow Stalker",
+            description: "A creature that existed partially in the shadow plane, able to phase through solid matter and drain the life force from its victims. It had been created by a failed magical experiment and had been terrorizing the magical academies for decades.",
+            threatLevel: LegendaryCreatureThreatLevel.CITY,
+            isPast: true,
+            defeatedBy: "Elara Moonwhisper",
+            defeatedByTitle: "High Archmage of the Conclave",
+            defeatStory: "Elara spent years researching the creature's nature and finally in 659AB discovered that it was bound to a specific shadow anchor. Through a complex ritual involving light magic and planar binding, she was able to banish the creature back to the shadow plane and seal the anchor, preventing its return.",
+            legacy: "The magical academies now have better protections against planar creatures, and Elara's research into shadow magic has advanced the field significantly.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.aberration.id,
+            continentId: continent.kuriguer.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-ancient-wyvern",
+            name: "The Ancient Wyvern",
+            description: "A massive, ancient wyvern that had terrorized the central plains for decades, preying on caravans and settlements. This wyvern was larger and more intelligent than its kin, with scales as hard as steel and breath that could melt stone. It had learned to avoid large military forces and instead targeted isolated communities, making it nearly impossible to track and defeat.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            isPast: true,
+            defeatedBy: "Tharos Raggenthraw",
+            defeatedByTitle: "Guild Founder and Master of the Huntbound Order",
+            defeatStory: "In 755AB, before founding the Huntbound Order, Tharos was a veteran of the Skratonian Alliance's military forces. After witnessing villages abandoned to monsters while soldiers fought foreign wars, he took matters into his own hands. He tracked the Ancient Wyvern for months, learning its patterns and weaknesses. In a legendary duel that lasted three days, Tharos used his divine connection to Tempus and his mastery of battle tactics to finally defeat the beast. This victory inspired him to found the Huntbound Order, dedicated to protecting the innocent from monsters that the regular military couldn't handle.",
+            legacy: "The defeat of the Ancient Wyvern proved that dedicated monster hunters could succeed where armies failed. This victory directly led to the founding of the Huntbound Order, which has since become the premier organization for monster hunting across all of Alabastria.",
+            creatureSizeId: creature_size.gargantuan.id,
+            creatureTypeId: creature_type.dragon.id,
+            continentId: continent.skratonia.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-plague-lord",
+            name: "The Plague Lord",
+            description: "A powerful lich who had mastered death magic and was spreading a magical plague across the continent in 312AB. The plague turned its victims into mindless undead, and the lich was using their souls to fuel his dark rituals.",
+            threatLevel: LegendaryCreatureThreatLevel.CONTINENTAL,
+            isPast: true,
+            defeatedBy: "The Radiant Paladin",
+            defeatedByTitle: "Champion of the Light",
+            defeatStory: "The Radiant Paladin, whose true name has been lost to history, led a crusade against the Plague Lord, gathering paladins and clerics from across the continent. Through divine magic and sheer determination, they were able to destroy the lich's phylactery and banish his spirit to the lower planes, ending the plague.",
+            legacy: "The Radiant Paladin's sacrifice saved countless lives, and their name is still spoken with reverence by those who follow the light. The continent of Katman, while still cursed, is no longer plagued by the undead curse.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.undead.id,
+            continentId: continent.katman.id
+        });
+        // Present
+        await db.createLegendaryCreature({
+            id: "legendary-creature-shadowmaw-pack",
+            name: "The Shadowmaw Pack",
+            description: "A pack of massive, intelligent wolves that have been corrupted by shadow magic. They hunt in the deeper forests, their howls causing fear and madness in those who hear them. Their leader, Shadowmaw, is said to be as large as a horse and can phase through shadows.",
+            threatLevel: LegendaryCreatureThreatLevel.CITY,
+            questPotential: "Hunt down the pack and either destroy them or find a way to break their curse and restore them to their natural state.",
+            creatureSizeId: creature_size.large.id,
+            creatureTypeId: creature_type.beast.id,
+            continentId: continent.kuriguer.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-crimson-reaper",
+            name: "The Crimson Reaper",
+            description: "A powerful demon that has established a cult in the cursed lands, using its infernal powers to corrupt the local population. It appears as a massive figure wreathed in flames, wielding a scythe that can cut through both flesh and soul.",
+            threatLevel: LegendaryCreatureThreatLevel.CONTINENTAL,
+            questPotential: "Infiltrate the cult, gather information about the demon's weaknesses, and either banish it back to the lower planes or destroy it permanently.",
+            creatureSizeId: creature_size.huge.id,
+            creatureTypeId: creature_type.fiend.id,
+            continentId: continent.alatman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-iron-titan",
+            name: "The Iron Titan",
+            description: "A massive construct that has gone rogue, rampaging through the mining villages and destroying everything in its path. It was originally created to help with mining operations but has developed a malevolent consciousness and now seeks to destroy all organic life.",
+            threatLevel: LegendaryCreatureThreatLevel.CITY,
+            questPotential: "Find a way to either shut down the construct or reprogram it to serve its original purpose. The construct's control systems are hidden deep within the mountain.",
+            creatureSizeId: creature_size.large.id,
+            creatureTypeId: creature_type.construct.id,
+            continentId: continent.maltman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-swamp-witch",
+            name: "The Swamp Witch",
+            description: "A powerful druid who has been corrupted by the dark magic of the swamps. She commands legions of plant creatures and oozes, using them to terrorize the local population and expand her domain. She lives in a massive tree that has been twisted into a fortress.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            questPotential: "Either defeat the Swamp Witch and free the corrupted creatures under her control, or find a way to redeem her and restore the natural balance of the swamps.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.humanoid.id,
+            continentId: continent.katman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-frost-wraith",
+            name: "The Frost Wraith",
+            description: "The spirit of a powerful shaman who died in the frozen wastes, now bound to the ice and seeking revenge against the living. It can control the weather, creating blizzards that last for days, and its touch can freeze a person solid instantly.",
+            threatLevel: LegendaryCreatureThreatLevel.CONTINENTAL,
+            questPotential: "Discover the Frost Wraith's true name and the circumstances of its death, then perform the proper burial rites to lay its spirit to rest.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.undead.id,
+            continentId: continent.bulsania.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-elemental-storm",
+            name: "The Elemental Storm",
+            description: "A massive storm of pure elemental energy that has been raging around the volcano for months. It contains fire, earth, and air elementals all mixed together, creating a chaotic maelstrom that threatens to spread across the entire region.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            questPotential: "Find a way to either calm the elemental storm or channel its energy into something constructive, such as powering the forges or creating new magical items.",
+            creatureSizeId: creature_size.gargantuan.id,
+            creatureTypeId: creature_type.elemental.id,
+            continentId: continent.alatman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-bandit-king",
+            name: "The Bandit King",
+            description: "A charismatic leader who has united several bandit groups into a massive criminal organization. He controls the major trade routes and demands tribute from all caravans, using his network of spies and informants to stay one step ahead of the law.",
+            threatLevel: LegendaryCreatureThreatLevel.CONTINENTAL,
+            questPotential: "Infiltrate the bandit organization, gather evidence of their crimes, and either capture the Bandit King or convince him to turn over a new leaf and use his skills for legitimate purposes.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.humanoid.id,
+            continentId: continent.skratonia.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-fey-lord",
+            name: "The Fey Lord",
+            description: "A powerful fey creature that has claimed a large portion of the forest as its domain, trapping travelers in an endless maze of enchanted trees. It feeds on the confusion and fear of its victims, growing stronger with each person it ensnares.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            questPotential: "Navigate the enchanted maze, find the Fey Lord's true name, and either defeat it in combat or outwit it in a game of riddles and puzzles.",
+            creatureSizeId: creature_size.large.id,
+            creatureTypeId: creature_type.fey.id,
+            continentId: continent.kuriguer.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-crystal-dragon",
+            name: "The Crystal Dragon",
+            description: "A young but powerful dragon made entirely of living crystal that has taken up residence in the deepest mines. It hoards precious gems and metals, and its breath weapon can turn living creatures into crystal statues.",
+            threatLevel: LegendaryCreatureThreatLevel.CITY,
+            questPotential: "Either negotiate with the dragon to share the mines' resources, or find a way to defeat it without destroying the valuable crystal it has created.",
+            creatureSizeId: creature_size.huge.id,
+            creatureTypeId: creature_type.dragon.id,
+            continentId: continent.maltman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-cult-of-the-void",
+            name: "The Cult of the Void",
+            description: "A secretive cult that worships the concept of nothingness and seeks to unravel the very fabric of reality. They have been performing dark rituals that are causing reality to become unstable in certain areas, creating dangerous zones where the laws of physics no longer apply.",
+            threatLevel: LegendaryCreatureThreatLevel.CONTINENTAL,
+            questPotential: "Investigate the cult's activities, stop their reality-warping rituals, and either capture or eliminate the cult leaders before they can cause irreparable damage to the world.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.humanoid.id,
+            continentId: continent.kuriguer.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-swarm-queen",
+            name: "The Swarm Queen",
+            description: "A massive, insect-like creature that has been breeding an army of smaller monsters in the deepest swamps. It can control its offspring telepathically and uses them to expand its territory, consuming everything in its path.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            questPotential: "Find and destroy the Swarm Queen before it can breed enough offspring to overrun the entire swamp region. The queen is heavily protected by its swarm, so a direct assault may not be the best approach.",
+            creatureSizeId: creature_size.huge.id,
+            creatureTypeId: creature_type.monstrosity.id,
+            continentId: continent.katman.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-time-wraith",
+            name: "The Time Wraith",
+            description: "A creature that exists partially outside of time, able to move through different moments in history. It has been causing temporal anomalies throughout the magical academies, making it difficult to perform spells that require precise timing.",
+            threatLevel: LegendaryCreatureThreatLevel.CITY,
+            questPotential: "Track down the Time Wraith through different time periods, understand its nature, and either banish it to a timeless void or find a way to anchor it to a specific moment in time.",
+            creatureSizeId: creature_size.medium.id,
+            creatureTypeId: creature_type.aberration.id,
+            continentId: continent.kuriguer.id
+        });
+        await db.createLegendaryCreature({
+            id: "legendary-creature-mountain-giant-chieftain",
+            name: "The Mountain Giant Chieftain",
+            description: "A massive giant who has united several giant clans under his leadership. He seeks to reclaim the mountain regions from the smaller tribes and monsters that have encroached upon their ancestral lands.",
+            threatLevel: LegendaryCreatureThreatLevel.REGIONAL,
+            questPotential: "Negotiate with the chieftain to find a peaceful resolution to the territorial disputes, or prepare for a large-scale battle against his united giant forces.",
+            creatureSizeId: creature_size.gargantuan.id,
+            creatureTypeId: creature_type.giant.id,
+            continentId: continent.bulsania.id
+        });
+    } catch (error) {
+        console.error("Error creating legendary creatures:", error);
+        process.exit(1);
+    }
+    // Race Ability Scores
+    const raceAbilityScore: Record<string, Prisma.RaceAbilityScoreGetPayload<{}>> = {
+        dex_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-dex-one",
+            ability: RaceAbilityScores.DEXTERITY,
+            modifier: 1
+        }),
+        dex_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-dex-two",
+            ability: RaceAbilityScores.DEXTERITY,
+            modifier: 2
+        }),
+        cha_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-cha-one",
+            ability: RaceAbilityScores.CHARISMA,
+            modifier: 1
+        }),
+        cha_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-cha-two",
+            ability: RaceAbilityScores.CHARISMA,
+            modifier: 2
+        }),
+        wis_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-wis-one",
+            ability: RaceAbilityScores.WISDOM,
+            modifier: 1
+        }),
+        wis_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-wis-two",
+            ability: RaceAbilityScores.WISDOM,
+            modifier: 2
+        }),
+        int_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-int-one",
+            ability: RaceAbilityScores.INTELLIGENCE,
+            modifier: 1
+        }),
+        int_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-int-two",
+            ability: RaceAbilityScores.INTELLIGENCE,
+            modifier: 2
+        }),
+        con_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-con-one",
+            ability: RaceAbilityScores.CONSTITUTION,
+            modifier: 1
+        }),
+        con_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-con-two",
+            ability: RaceAbilityScores.CONSTITUTION,
+            modifier: 2
+        }),
+        str_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-str-one",
+            ability: RaceAbilityScores.STRENGTH,
+            modifier: 1
+        }),
+        str_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-str-two",
+            ability: RaceAbilityScores.STRENGTH,
+            modifier: 2
+        }),
+        any_one: await db.createRaceAbilityScore({
+            id: "race-ability-score-any-one",
+            ability: RaceAbilityScores.ANY_OTHER,
+            modifier: 1
+        }),
+        any_two: await db.createRaceAbilityScore({
+            id: "race-ability-score-any-two",
+            ability: RaceAbilityScores.ANY_OTHER,
+            modifier: 2
+        })
+    };
+    // Race Traits
+    const raceTrait: Record<string, Prisma.RaceTraitGetPayload<{}>> = {
+        flight: await db.createRaceTrait({
+            id: "race-trait-flight",
+            name: "Flight",
+            description: "You have a flying speed of 50 feet. To use this speed, you can't be wearing medium or heavy armor.",
+        }),
+        talons: await db.createRaceTrait({
+            id: "race-trait-talons",
+            name: "Talons",
+            description: "You are proficient with your unarmed strikes, which deal 1d4 slashing damage on a hit.",
+        }),
+        darkvision: await db.createRaceTrait({
+            id: "race-trait-darkvision",
+            name: "Darkvision",
+            description: "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+        }),
+        celestial_resistance: await db.createRaceTrait({
+            id: "race-trait-celestial-resistance",
+            name: "Celestial Resistance",
+            description: "You have resistance to necrotic damage and radiant damage.",
+        }),
+        healing_hands: await db.createRaceTrait({
+            id: "race-trait-healing-hands",
+            name: "Healing Hands",
+            description: "As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.",
+        }),
+        radiant_soul: await db.createRaceTrait({
+            id: "race-trait-radiant-soul",
+            name: "Radiant Soul",
+            description: "As an action, you can unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
+        }),
+        radiant_consumption: await db.createRaceTrait({
+            id: "race-trait-radiant-consumption",
+            name: "Radiant Consumption",
+            description: "As an action, you can unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
+        }),
+        necrotic_shroud: await db.createRaceTrait({
+            id: "race-trait-necrotic-shroud",
+            name: "Necrotic Shroud",
+            description: "As an action, you can unleash the divine energy within yourself, causing your eyes to turn black and two skeletal, ghostly, flightless wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.",
+        })
+    };
+    // Race Names
+    const raceNames: Record<string, Prisma.RaceNameGetPayload<{}>> = {
+        aarakocra: await db.createRaceName({
+            id: "race-names-aarakocra",
+            male: ["Kree", "Kreel", "Kreeth", "Kreetha", "Kreetho", "Kreethu", "Rath", "Ratha", "Ratho", "Rathu"],
+            female: ["Kreea", "Kreela", "Kreetha", "Kreethia", "Kreetho", "Kreethia", "Ratha", "Rathia", "Ratho", "Rathia"],
+            unisex: ["Sky", "Wind", "Feather", "Talons", "Beak", "Wing", "Cloud", "Breeze", "Storm", "Gale"],
+            surname: ["Skycaller", "Windrider", "Featherfoot", "Talonstrike", "Beakblade", "Wingflap", "Cloudsworn", "Breezefury", "Stormwatcher", "Galesinger"]
+        }),
+        aasimar: await db.createRaceName({
+            id: "race-names-aasimar",
+            male: ["Seraphiel", "Thalion", "Aurelius", "Celestius", "Divinus", "Luminus", "Radiant", "Solarius", "Elysian", "Zephyrus"],
+            female: ["Liora", "Mara", "Celestia", "Aurelia", "Divina", "Lumina", "Radiance", "Solara", "Elysia", "Zephyra"],
+            unisex: ["Light", "Dawn", "Glory", "Hope", "Faith", "Grace", "Valor", "Truth", "Honor", "Justice"],
+            surname: ["Lightbringer", "Dawnstar", "Gloryseeker", "Hopebearer", "Faithkeeper", "Gracelord", "Valorshield", "Truthsayer", "Honorguard", "Justiceblade", "Brightwing", "Goldheart", "Starfall", "Lightbringer", "Heavenward", "Divinegrace"]
+        })
+    };
+    // Races
+    const race: Record<string, Prisma.RaceGetPayload<{}>> = {
+        aarakocra: await db.createRace({
+            id: "race-aarakocra",
+            name: "Aarakocra",
+            slug: "aarakocra",
+            description: "Birdfolk from the Elemental Plane of Air, Aarakocra are often travelers, expats, refugees, or adventurers. Resembling humanoids in their stature and bipedal movements, they also gain the benefits of a flying speed, slashing talons, and an understanding of the Aarakocra as well as the Auran tongue and writ.",
+            speed: "25 feet walking, 50 feet flying",
+            age: "Aarakocra reach maturity by age 3. Compared to humans, aarakocra don't usually live longer than 30 years.",
+            alignment: "Most aarakocra are good and rarely choose sides when it comes to law and chaos. Leaders are sometimes lawful good.",
+            heightRange: "5'0\" to 6'4\"",
+            weightRange: "90 to 130 lbs",
+            alabastriaLore: "In Bulsania's mountain peaks and Kuriguer's coastal cliffs, Aarakocra serve as messengers and scouts, their aerial perspective providing crucial intelligence about the harsh landscapes below. These birdfolk often work with the Huntbound Order, using their flight to track dangerous creatures across difficult terrain.",
+            playstyle: "Excellent mobility and ranged combat specialists. Perfect for players who want aerial superiority and unique movement options.",
+            defaultCreatureSizeId: "creature-size-medium",
+            languages: {
+                connect: [
+                    { id: language.common.id },
+                    { id: language.aarakocra.id },
+                    { id: language.auran.id }
+                ]
+            },
+            traits: {
+                connect: [
+                    { id: raceTrait.flight.id },
+                    { id: raceTrait.talons.id }
+                ]
+            },
+            abilityScoreIncreases: {
+                connect: [
+                    { id: raceAbilityScore.dex_two.id },
+                    { id: raceAbilityScore.wis_one.id }
+                ]
+            },
+            namesId: raceNames.aarakocra.id
+        }),
+        aasimar: await db.createRace({
+            id: "race-aasimar",
+            name: "Aasimar",
+            slug: "aasimar",
+            description: "Aasimar are descended from humans and often celestials, reflecting the light and pure good of the divine realm. This goodness is often signified by a celestial mark on their bodies and their undeniable beauty.",
+            speed: "30 feet",
+            age: "Aasimar mature at the same rate as humans but can live up to 160 years.",
+            alignment: "Aasimar are inclined toward good alignments. Not all aasimar are of good alignment, but very few are evil.",
+            heightRange: "5'4\" to 7'0\"",
+            weightRange: "110 to 190 lbs",
+            alabastriaLore: "Across Skratonia's cities and temples, Aasimar serve as beacons of hope and divine guidance. These celestial-touched individuals often work with clerics and paladins, their healing abilities and divine resistance making them natural leaders in the fight against darkness.",
+            playstyle: "Divine support and healing specialists. Great for players who want to be the party's moral compass and primary healer.",
+            defaultCreatureSizeId: "creature-size-medium",
+            languages: {
+                connect: [
+                    { id: language.common.id },
+                    { id: language.celestial.id }
+                ]
+            },
+            traits: {
+                connect: [
+                    { id: raceTrait.darkvision.id },
+                    { id: raceTrait.celestial_resistance.id },
+                    { id: raceTrait.healing_hands.id }
+                ]
+            },
+            abilityScoreIncreases: {
+                connect: [
+                    { id: raceAbilityScore.cha_two.id }
+                ]
+            },
+            namesId: raceNames.aasimar.id
+        })
+    };
+    // Subraces
+    const subrace: Record<string, Prisma.SubraceGetPayload<{}>> = {
+        // Aasimar
+        aasimar_protector: await db.createSubrace({
+            id: "subrace-aasimar-protector",
+            name: "Protector Aasimar",
+            slug: "protector-aasimar",
+            description: "Protector aasimar are charged by the powers of good to guard the weak, to seek out evil, and to stand vigilant against the darkness.",
+            alabastriaContext: "Protector Aasimar in Skratonia's temples serve as divine guardians, their radiant wings inspiring hope in the faithful. They often work alongside Tharos Raggenthraw's Huntbound Order, bringing celestial light to the darkest corners of Alabastria.",
+            playstyle: "Defensive support with healing and radiant damage. Perfect for players who want to protect allies while dealing divine damage.",
+            abilityScoreIncreases: {
+                connect: [
+                    { id: raceAbilityScore.wis_one.id }
+                ]
+            },
+            traits: {
+                connect: [
+                    { id: raceTrait.radiant_soul.id }
+                ]
+            },
+            raceId: race.aasimar.id
+        }),
+        aasimar_scourge: await db.createSubrace({
+            id: "subrace-aasimar-scourge",
+            name: "Scourge Aasimar",
+            slug: "scourge-aasimar",
+            description: "Scourge aasimar are imbued with a divine energy that blazes intensely within them. It feeds a powerful desire to destroy evil—a desire that is, at its best, unflinching and, at its worst, all-consuming.",
+            alabastriaContext: "Scourge Aasimar in Alabastria's frontier regions channel their burning divine fury against the forces of evil. Their intense light and self-sacrificing nature make them formidable allies in the Huntbound Order's most dangerous missions.",
+            playstyle: "Offensive support with area damage and self-sacrifice. Great for players who want to deal damage while supporting allies.",
+            abilityScoreIncreases: {
+                connect: [
+                    { id: raceAbilityScore.con_one.id }
+                ]
+            },
+            traits: {
+                connect: [
+                    { id: raceTrait.radiant_consumption.id }
+                ]
+            },
+            raceId: race.aasimar.id
+        }),
+        aasimar_fallen: await db.createSubrace({
+            id: "subrace-aasimar-fallen",
+            name: "Fallen Aasimar",
+            slug: "fallen-aasimar",
+            description: "An aasimar who was touched by dark powers, or who chose to dabble in them, is an aasimar whose original celestial nature has been warped by evil.",
+            alabastriaContext: "Fallen Aasimar in Alabastria's shadowed corners struggle with their corrupted divine nature. Some seek redemption through the Huntbound Order, while others embrace their dark power to fight evil with evil.",
+            playstyle: "Dark support with necrotic damage and intimidation. Ideal for players who want to play morally complex characters with dark powers.",
+            abilityScoreIncreases: {
+                connect: [ 
+                    { id: raceAbilityScore.str_one.id }
+                ]
+            },
+            traits: {
+                connect: [
+                    { id: raceTrait.necrotic_shroud.id }
+                ]
+            },
+            raceId: race.aasimar.id
+        })
+    }
     //await migrateLegacyData()
 
     console.log("   ✓ Migrated legacy data\n");
