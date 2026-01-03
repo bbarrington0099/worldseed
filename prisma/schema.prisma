@@ -445,24 +445,24 @@ model Race {
   alabastriaLore String? @db.Text
   playstyle      String? @db.Text
 
-  defaultCreatureSizeId String @default("creature-size-medium")
+  defaultCreatureSizeId String       @default("creature-size-medium")
   defaultCreatureSize   CreatureSize @relation(fields: [defaultCreatureSizeId], references: [id])
 
-  namesId String? @unique
+  namesId String?   @unique
   names   RaceName? @relation(fields: [namesId], references: [id], onDelete: Cascade)
 
   abilityScoreIncreases RaceAbilityScore[]
   languages             Language[]
   traits                RaceTrait[]
 
-  subraces              Subrace[]
-  recommendedClasses    RaceClassRecommendation[]
-  continentLocations    RaceContinent[]
-  deityRecommendations  DeityRecommendation[]     @relation("RaceDeityRecs")
-  characters            Character[]
+  subraces             Subrace[]
+  recommendedClasses   RaceClassRecommendation[]
+  continentLocations   RaceContinent[]
+  deityRecommendations DeityRecommendation[]     @relation("RaceDeityRecs")
+  characters           Character[]
 }
 
-enum RaceAbilityScores {
+enum AbilityScores {
   STRENGTH
   DEXTERITY
   CONSTITUTION
@@ -473,12 +473,12 @@ enum RaceAbilityScores {
 }
 
 model RaceAbilityScore {
-  id       String            @id @default(uuid())
-  ability  RaceAbilityScores
-  seeded   Boolean           @default(false)
+  id       String        @id @default(uuid())
+  ability  AbilityScores
+  seeded   Boolean       @default(false)
   modifier Int
 
-  races Race[]
+  races    Race[]
   subraces Subrace[]
 
   @@unique([ability, modifier])
@@ -490,20 +490,20 @@ model RaceTrait {
   name        String
   description String? @db.Text
 
-  races Race[]
+  races    Race[]
   subraces Subrace[]
 }
 
 model RaceName {
-  id     String  @id @default(uuid())
-  seeded Boolean @default(false)
-  male String[]
-  female String[]
-  unisex String[]
+  id      String   @id @default(uuid())
+  seeded  Boolean  @default(false)
+  male    String[]
+  female  String[]
+  unisex  String[]
   surname String[]
 
   raceId String?
-  race   Race? 
+  race   Race?
 
   subraceId String?
   subrace   Subrace?
@@ -542,27 +542,112 @@ model Subrace {
   alabastriaContext String? @db.Text
   playstyle         String? @db.Text
   seeded            Boolean @default(false)
-  
-  speedOverride             String?
-  ageOverride               String?
-  alignmentOverride         String?
-  heightRangeOverride       String?
-  weightRangeOverride       String?
 
-  namesOverrideAppend Boolean @default(false)
-  namesIdOverride     String? @unique
+  speedOverride       String?
+  ageOverride         String?
+  alignmentOverride   String?
+  heightRangeOverride String?
+  weightRangeOverride String?
+
+  namesOverrideAppend Boolean   @default(false)
+  namesIdOverride     String?   @unique
   namesOverride       RaceName? @relation(fields: [namesIdOverride], references: [id], onDelete: Cascade)
 
-  raceId                String
-  race                  Race                  @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  raceId String
+  race   Race   @relation(fields: [raceId], references: [id], onDelete: Cascade)
 
   abilityScoreIncreases RaceAbilityScore[]
   traits                RaceTrait[]
 
-  deityRecommendations  DeityRecommendation[] @relation("SubraceDeityRecs")
-  characters            Character[]
+  deityRecommendations DeityRecommendation[] @relation("SubraceDeityRecs")
+  characters           Character[]
 
   @@unique([raceId, slug])
+}
+
+model ClassRole {
+  id    String @id @default(uuid())
+  name  String @unique
+  seeded Boolean @default(false)
+  purpose String?
+  keyTraits String[]
+
+  classes Class[]
+}
+
+enum ArmorProficiency {
+	LIGHT_ARMOR
+	MEDIUM_ARMOR
+	HEAVY_ARMOR
+	SHIELDS
+	SHIELDS_NON_METAL_ONLY
+}
+
+enum WeaponProficiency {
+	SIMPLE_WEAPONS
+	FIREARMS
+	LIGHT_CROSSBOWS
+	HEAVY_CROSSBOWS
+	MARTIAL_WEAPONS
+	HAND_CROSSBOWS
+	LONGSWORDS
+	RAPIERS
+	SHORTSWORDS
+	CLUBS
+	DAGGERS
+	DARTS
+	JAVELINS
+	MACES
+	QUARTERSTAFFS
+	SCIMITARS
+	SICKLES
+	SLINGS
+	SPEARS
+}
+
+enum ToolProficiency {
+  ARTISANS_CHOOSE_ONE
+  ARTISANS_ALCHEMISTS_SUPPLIES
+  ARTISANS_BREWERS_SUPPLIES
+  ARTISANS_CALLIGRAPHERS_SUPPLIES
+  ARTISANS_CARPENTERS_TOOLS
+  ARTISANS_CARTOGRAPHERS_TOOLS
+  ARTISANS_COBBLERS_TOOLS
+  ARTISANS_COOKS_UTENSILS
+  ARTISANS_GLASSBLOWERS_TOOLS
+  ARTISANS_JEWELERS_TOOLS
+  ARTISANS_LEATHERWORKERS_TOOLS
+  ARTISANS_MASONS_TOOLS
+  ARTISANS_PAINTERS_SUPPLIES
+  ARTISANS_POTTERS_TOOLS
+  ARTISANS_SMITHS_TOOLS
+  ARTISANS_TINKERS_TOOLS
+  ARTISANS_WEAVERS_TOOLS
+  ARTISANS_WOODCARVERS_TOOLS
+  GAMING_SET_CHOOSE_ONE
+  GAMING_SET_DICE_SET
+  GAMING_SET_DRAGONCHESS_SET
+  GAMING_SET_PLAYING_CARD_SET
+  GAMING_SET_THREE_DRAGON_ANTE_SET
+  MUSICAL_INSTRUMENT_CHOOSE_ONE
+  MUSICAL_INSTRUMENT_CHOOSE_THREE
+  MUSICAL_INSTRUMENT_BAGPIPES
+  MUSICAL_INSTRUMENT_DRUM
+  MUSICAL_INSTRUMENT_DULCIMER
+  MUSICAL_INSTRUMENT_FLUTE
+  MUSICAL_INSTRUMENT_LUTE
+  MUSICAL_INSTRUMENT_LYRE
+  MUSICAL_INSTRUMENT_HORN
+  MUSICAL_INSTRUMENT_PAN_FLUTE
+  MUSICAL_INSTRUMENT_SHAWM
+  MUSICAL_INSTRUMENT_VIOL
+  ARTISANS_CHOOSE_ONE_OR_MUSICAL_INSTRUMENT_CHOOSE_ONE
+  DISGUISE_KIT
+  FORGERY_KIT
+  HERBALISM_KIT
+  NAVIGATORS_TOOLS
+  POISONERS_KIT
+  THIEVES_TOOLS
 }
 
 model Class {
@@ -570,18 +655,19 @@ model Class {
   name              String  @unique
   slug              String  @unique
   description       String  @db.Text
-  role              String?
-  primaryAbility    String?
+  roles             ClassRole[]
+  primaryAbility    AbilityScores[]
   hitDie            String?
-  armorProficiency  String?
-  weaponProficiency String?
-  toolProficiency   String?
+  armorProficiency  ArmorProficiency[]
+  weaponProficiency WeaponProficiency[]
+  toolProficiency   ToolProficiency[]
   alabastriaLore    String? @db.Text
   playstyle         String? @db.Text
   seeded            Boolean @default(false)
 
-  savingThrows         ClassSavingThrow[]
+  savingThrows         AbilityScores[]
   keyFeatures          ClassFeature[]
+
   subclasses           Subclass[]
   recommendedRaces     RaceClassRecommendation[]
   playstyleCategories  PlaystyleClassRecommendation[]
@@ -589,24 +675,15 @@ model Class {
   characters           Character[]
 }
 
-model ClassSavingThrow {
-  id      String @id @default(uuid())
-  ability String
-
-  classId String
-  class   Class  @relation(fields: [classId], references: [id], onDelete: Cascade)
-
-  @@unique([classId, ability])
-}
-
 model ClassFeature {
   id          String  @id @default(uuid())
   name        String
+  seeded      Boolean @default(false)
   level       Int?
   description String? @db.Text
 
-  classId String
-  class   Class  @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classes Class[]
+  subclasses Subclass[]
 }
 
 model Subclass {
@@ -620,21 +697,12 @@ model Subclass {
 
   classId              String
   class                Class                 @relation(fields: [classId], references: [id], onDelete: Cascade)
-  keyFeatures          SubclassFeature[]
+  keyFeatures          ClassFeature[]
+
   deityRecommendations DeityRecommendation[] @relation("SubclassDeityRecs")
   characters           Character[]
 
   @@unique([classId, slug])
-}
-
-model SubclassFeature {
-  id          String  @id @default(uuid())
-  name        String
-  level       Int?
-  description String? @db.Text
-
-  subclassId String
-  subclass   Subclass @relation(fields: [subclassId], references: [id], onDelete: Cascade)
 }
 
 model RaceClassRecommendation {
@@ -679,11 +747,11 @@ model Deity {
   pantheonId String
   pantheon   Pantheon @relation(fields: [pantheonId], references: [id])
 
-  domains   DeityDomain[]
-  followers DeityFollower[]
+  domains   String[]
+  followers String[]
   holyDays  DeityHolyDay[]
-  symbols   DeitySymbol[]
-  colors    DeityColor[]
+  symbols   String[]
+  colors    String[]
   history   DeityHistory[]
 
   alliesFrom DeityRelationship[] @relation("DeityFrom")
@@ -693,46 +761,13 @@ model Deity {
   characters      Character[]
 }
 
-model DeityDomain {
-  id     String @id @default(uuid())
-  domain String
-
-  deityId String
-  deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
-
-  @@unique([deityId, domain])
-}
-
-model DeityFollower {
-  id           String  @id @default(uuid())
-  followerType String
-  description  String? @db.Text
-
-  deityId String
-  deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
-}
-
 model DeityHolyDay {
   id          String  @id @default(uuid())
   name        String
   description String? @db.Text
-
-  deityId String
-  deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
-}
-
-model DeitySymbol {
-  id          String  @id @default(uuid())
-  symbol      String
-  description String? @db.Text
-
-  deityId String
-  deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
-}
-
-model DeityColor {
-  id    String @id @default(uuid())
-  color String
+  month       Month @default(JANUARY)
+  day         Int @default(1)
+  seeded      Boolean @default(false)
 
   deityId String
   deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
@@ -742,6 +777,7 @@ model DeityHistory {
   id          String  @id @default(uuid())
   era         String?
   description String? @db.Text
+  seeded      Boolean @default(false)
 
   deityId String
   deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
@@ -756,6 +792,7 @@ model DeityRelationship {
   id        String                    @id @default(uuid())
   type      DeityRelationshipCategory
   reasoning String?                   @db.Text
+  seeded    Boolean                   @default(false)
 
   deityId        String
   deity          Deity  @relation("DeityFrom", fields: [deityId], references: [id], onDelete: Cascade)
@@ -968,17 +1005,11 @@ model Character {
   appearance          String? @db.Text
   personality         String? @db.Text
   gearLoadout         String? @db.Text
-
-  // Ability Scores
-  strength     Int?
-  dexterity    Int?
-  constitution Int?
-  intelligence Int?
-  wisdom       Int?
-  charisma     Int?
-  hitPoints    Int?
-  armorClass   Int?
-  speed        Int?
+  keyAttributes     String? @db.Text
+  ideals            String? @db.Text
+  bonds             String? @db.Text
+  flaws             String? @db.Text
+  backstory         String? @db.Text
 
   // Languages
   languages Language[]
@@ -986,8 +1017,8 @@ model Character {
   // Relations to Core Data
   userId         String?
   user           User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  raceId         String?
-  race           Race?     @relation(fields: [raceId], references: [id])
+  raceId         String
+  race           Race    @relation(fields: [raceId], references: [id])
   subraceId      String?
   subrace        Subrace?  @relation(fields: [subraceId], references: [id])
   classId        String?
@@ -1612,7 +1643,7 @@ model CreatureSize {
   description   String? @db.Text
 
   creatureTypes      CreatureType[]      @relation("CreatureTypeCommonSizes")
-  races Race[]
+  races              Race[]
   characters         Character[]
   legendaryCreatures LegendaryCreature[]
 }
@@ -1625,17 +1656,17 @@ enum LegendaryCreatureThreatLevel {
 }
 
 model LegendaryCreature {
-  id              String  @id @default(uuid())
+  id              String                       @id @default(uuid())
   name            String
-  description     String  @db.Text
+  description     String                       @db.Text
   threatLevel     LegendaryCreatureThreatLevel
-  questPotential  String? @db.Text
-  isPast          Boolean @default(false)
+  questPotential  String?                      @db.Text
+  isPast          Boolean                      @default(false)
   defeatedBy      String?
   defeatedByTitle String?
-  defeatStory     String? @db.Text
-  legacy          String? @db.Text
-  seeded          Boolean @default(false)
+  defeatStory     String?                      @db.Text
+  legacy          String?                      @db.Text
+  seeded          Boolean                      @default(false)
 
   creatureSizeId String
   creatureSize   CreatureSize @relation(fields: [creatureSizeId], references: [id], onDelete: Cascade)

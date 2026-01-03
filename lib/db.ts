@@ -273,6 +273,38 @@ export async function getRaceBySlug(slug: string) {
 // CLASSES
 // ============================================================================
 
+export async function createClassRole(data: Prisma.ClassRoleCreateInput, seeded: boolean = false): Promise<Prisma.ClassRoleGetPayload<{}>> {
+    return await prisma.classRole.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createClassFeature(data: Prisma.ClassFeatureCreateInput, seeded: boolean = false): Promise<Prisma.ClassFeatureGetPayload<{}>> {
+    return await prisma.classFeature.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createClass(data: Prisma.ClassCreateInput, seeded: boolean = false): Promise<Prisma.ClassGetPayload<{}>> {
+    return await prisma.class.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.SubclassGetPayload<{}>> {
+    return await prisma.subclass.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
 export async function getClasses() {
     return prisma.class.findMany({
         orderBy: { name: "asc" },
@@ -310,6 +342,60 @@ export async function getClassBySlug(slug: string) {
 // ============================================================================
 // PANTHEON & DEITIES
 // ============================================================================
+
+export async function createPantheon(data: Prisma.PantheonCreateInput, seeded: boolean = false): Promise<Prisma.PantheonGetPayload<{}>> {
+    return await prisma.pantheon.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createDeityHolyDay(data: Prisma.DeityHolyDayUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.DeityHolyDayGetPayload<{}>> {
+    return await prisma.deityHolyDay.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createDeityHistory(data: Prisma.DeityHistoryUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.DeityHistoryGetPayload<{}>> {
+    return await prisma.deityHistory.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createDeity(data: Prisma.DeityUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.DeityGetPayload<{}>> {
+    return await prisma.deity.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createDeityRelationship(data: Prisma.DeityRelationshipUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.DeityRelationshipGetPayload<{}>> {
+    const deityExists = await prisma.deity.findUnique({
+        where: { id: data.deityId },
+    });
+
+    const relatedExists = await prisma.deity.findUnique({
+        where: { id: data.relatedDeityId },
+    });
+
+    if (!deityExists || !relatedExists) {
+        throw new Error(
+            `Missing deity FK: ${data.deityId} -> ${data.relatedDeityId}`
+        );
+    }
+
+    return await prisma.deityRelationship.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
 
 export async function getPantheons() {
     return prisma.pantheon.findMany({

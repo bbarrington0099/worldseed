@@ -92,71 +92,6 @@ export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUnch
     return await db.createLegendaryCreature(data, true);
 }
 
-
-export async function createTrip(data: {
-    fromTownId: string;
-    toTownId: string;
-    distanceMi?: number;
-    travelDays?: number;
-    travelHours?: number;
-    travelMinutes?: number;
-}) {
-    return prisma.trip.upsert({
-        where: {
-            fromTownId_toTownId: {
-                fromTownId: data.fromTownId,
-                toTownId: data.toTownId,
-            },
-        },
-        update: data,
-        create: data,
-    });
-}
-
-export async function createRuler(data: {
-    continentId: string;
-    name: string;
-    raceId?: string;
-    title?: string;
-    personality?: string;
-    rulingStyle?: string;
-    background?: string;
-    appearance?: string;
-    imagePath?: string;
-    deityId?: string;
-    deityReasoning?: string;
-}) {
-    // Create the character first (no userId for NPCs)
-    const character = await prisma.character.create({
-        data: {
-            name: data.name,
-            personality: data.personality,
-            appearance: data.appearance,
-            backgroundSummary: data.background,
-            imagePath: data.imagePath,
-            raceId: data.raceId,
-            deityId: data.deityId,
-            deityReasoning: data.deityReasoning,
-        },
-    });
-
-    // Link character to continent as ruler
-    return prisma.characterContinentRuler.upsert({
-        where: { continentId: data.continentId },
-        update: {
-            characterId: character.id,
-            title: data.title,
-            rulingStyle: data.rulingStyle,
-        },
-        create: {
-            characterId: character.id,
-            continentId: data.continentId,
-            title: data.title,
-            rulingStyle: data.rulingStyle,
-        },
-    });
-}
-
 // ============================================================================
 // RACES
 // ============================================================================
@@ -185,99 +120,44 @@ export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput): P
 // CLASSES
 // ============================================================================
 
-export async function createClass(data: {
-    name: string;
-    description: string;
-    role?: string;
-    primaryAbility?: string;
-    hitDie?: string;
-    armorProficiency?: string;
-    weaponProficiency?: string;
-    toolProficiency?: string;
-    alabastriaLore?: string;
-    playstyle?: string;
-}) {
-    const slug = slugify(data.name);
-    return prisma.class.upsert({
-        where: { slug },
-        update: data,
-        create: { ...data, slug, seeded: true },
-    });
+export async function createClassRole(data: Prisma.ClassRoleCreateInput): Promise<Prisma.ClassRoleGetPayload<{}>> {
+    return db.createClassRole(data, true);
 }
 
-export async function createSubclass(data: {
-    classId: string;
-    name: string;
-    description: string;
-    alabastriaContext?: string;
-    playstyle?: string;
-}) {
-    const slug = slugify(data.name);
-    return prisma.subclass.upsert({
-        where: {
-            classId_slug: {
-                classId: data.classId,
-                slug,
-            },
-        },
-        update: data,
-        create: { ...data, slug, seeded: true },
-    });
+export async function createClassFeature(data: Prisma.ClassFeatureCreateInput): Promise<Prisma.ClassFeatureGetPayload<{}>> {
+    return db.createClassFeature(data, true);
+}
+
+export async function createClass(data: Prisma.ClassCreateInput) : Promise<Prisma.ClassGetPayload<{}>> {
+    return db.createClass(data, true);
+}
+
+export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput) : Promise<Prisma.SubclassGetPayload<{}>> {
+    return db.createSubclass(data, true);
 }
 
 // ============================================================================
 // PANTHEON & DEITIES
 // ============================================================================
 
-export async function createPantheon(data: {
-    name: string;
-    description: string;
-    symbol?: string;
-}) {
-    const slug = slugify(data.name);
-    return prisma.pantheon.upsert({
-        where: { slug },
-        update: data,
-        create: { ...data, slug, seeded: true },
-    });
+export async function createPantheon(data: Prisma.PantheonCreateInput): Promise<Prisma.PantheonGetPayload<{}>> {
+    return db.createPantheon(data, true);
 }
 
-export async function createDeity(data: {
-    pantheonId: string;
-    name: string;
-    title?: string;
-    alignment?: string;
-    symbol?: string;
-    description?: string;
-    alabastriaContext?: string;
-    temples?: string;
-}) {
-    const slug = slugify(data.name);
-    const description = data.description || `${data.name} is a deity of the realm.`;
-    return prisma.deity.upsert({
-        where: { slug },
-        update: { ...data, description },
-        create: { ...data, description, slug, seeded: true },
-    });
+export async function createDeityHolyDay(data: Prisma.DeityHolyDayUncheckedCreateInput): Promise<Prisma.DeityHolyDayGetPayload<{}>> {
+    return db.createDeityHolyDay(data, true);
 }
 
-export async function createDeityRelationship(data: {
-    deityId: string;
-    relatedDeityId: string;
-    type: DeityRelationshipCategory;
-    reasoning?: string;
-}) {
-    return prisma.deityRelationship.upsert({
-        where: {
-            deityId_relatedDeityId_type: {
-                deityId: data.deityId,
-                relatedDeityId: data.relatedDeityId,
-                type: data.type,
-            },
-        },
-        update: data,
-        create: data,
-    });
+export async function createDeityHistory(data: Prisma.DeityHistoryUncheckedCreateInput): Promise<Prisma.DeityHistoryGetPayload<{}>> {
+    return db.createDeityHistory(data, true);
+}
+
+export async function createDeity(data: Prisma.DeityUncheckedCreateInput): Promise<Prisma.DeityGetPayload<{}>> {
+    return db.createDeity(data, true);
+}
+
+export async function createDeityRelationship(data: Prisma.DeityRelationshipUncheckedCreateInput): Promise<Prisma.DeityRelationshipGetPayload<{}>> {
+    return db.createDeityRelationship(data, true);
 }
 
 // ============================================================================
