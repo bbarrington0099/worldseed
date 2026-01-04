@@ -453,6 +453,18 @@ export async function getDeityBySlug(slug: string) {
 }
 
 // ============================================================================
+// CHARACTERS
+// ============================================================================
+
+export async function createCharacter(data: Prisma.CharacterUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.CharacterGetPayload<{}>> {
+    return await prisma.character.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+// ============================================================================
 // GUILDS
 // ============================================================================
 

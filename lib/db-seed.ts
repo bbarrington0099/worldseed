@@ -161,6 +161,14 @@ export async function createDeityRelationship(data: Prisma.DeityRelationshipUnch
 }
 
 // ============================================================================
+// CHARACTERS
+// ============================================================================
+
+export async function createCharacter(data: Prisma.CharacterUncheckedCreateInput): Promise<Prisma.CharacterGetPayload<{}>> {
+    return db.createCharacter(data, true);
+}
+
+// ============================================================================
 // GUILDS
 // ============================================================================
 
@@ -402,100 +410,3 @@ export async function createUser(data: {
         },
     });
 }
-
-// ============================================================================
-// CLEANUP
-// ============================================================================
-
-export async function deleteAllOfficialData() {
-    // Delete in reverse dependency order
-    const tables = [
-        prisma.questFallenMember,
-        prisma.questMemberReport,
-        prisma.questLoot,
-        prisma.questAward,
-        prisma.questEnemy,
-        prisma.questParticipant,
-        prisma.questReport,
-        prisma.guildMemberAchievement,
-        prisma.guildMemberTag,
-        prisma.factionGuildMemberMembership,
-        prisma.factionNPCMembership,
-        prisma.factionRelationship,
-        prisma.factionBase,
-        prisma.factionContinentPresence,
-        prisma.faction,
-        prisma.factionRelationshipType,
-        prisma.factionRole,
-        prisma.characterRelationship,
-        prisma.characterFactionRelationship,
-        prisma.characterTownJob,
-        prisma.characterContinentRuler,
-        prisma.character,
-        prisma.professionTownRestriction,
-        prisma.professionContinentRestriction,
-        prisma.nPCProfession,
-        prisma.nPCRelationshipType,
-        prisma.guildMember,
-        prisma.guildStaff,
-        prisma.guildMembership,
-        prisma.guildDM,
-        prisma.guild,
-        prisma.deityRecommendation,
-        prisma.deityRelationship,
-        prisma.deityHistory,
-        prisma.deityColor,
-        prisma.deitySymbol,
-        prisma.deityHolyDay,
-        prisma.deityFollower,
-        prisma.deityDomain,
-        prisma.deity,
-        prisma.pantheon,
-        prisma.legendaryCreature,
-        prisma.creatureType,
-        prisma.complexityClass,
-        prisma.complexityLevel,
-        prisma.roleBestClass,
-        prisma.roleKeyAbility,
-        prisma.roleDescription,
-        prisma.abilityScoreImportance,
-        prisma.abilityScoreClass,
-        prisma.abilityScorePriority,
-        prisma.playstyleClassRecommendation,
-        prisma.playstyleCategory,
-        prisma.historicalEvent,
-        prisma.historicalPeriod,
-        prisma.raceClassRecommendation,
-        prisma.subclassFeature,
-        prisma.subclass,
-        prisma.classFeature,
-        prisma.classSavingThrow,
-        prisma.class,
-        prisma.subraceTrait,
-        prisma.subraceAbilityScore,
-        prisma.subrace,
-        prisma.raceName,
-        prisma.raceContinent,
-        prisma.raceTrait,
-        prisma.raceAbilityScore,
-        prisma.race,
-        prisma.treaty,
-        prisma.warConflict,
-        prisma.voyage,
-        prisma.town,
-        prisma.continent,
-        prisma.kingdom,
-        prisma.world,
-    ];
-
-    for (const table of tables) {
-        try {
-            await (table as unknown as { deleteMany: (args: { where: { seeded: boolean } }) => Promise<unknown> }).deleteMany({
-                where: { seeded: true },
-            });
-        } catch {
-            // Some tables might not have seeded field, skip them
-        }
-    }
-}
-

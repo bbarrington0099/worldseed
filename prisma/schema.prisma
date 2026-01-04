@@ -190,6 +190,7 @@ model Continent {
   professionRestrictions ProfessionContinentRestriction[]
   factionPresence        FactionContinentPresence[]
   ruler                  CharacterContinentRuler?
+  charactersFrom        Character[]
 }
 
 enum ContinentLanguagePrevalence {
@@ -268,6 +269,8 @@ model Town {
   tripsFrom              Road[]                      @relation("FromTown")
   tripsTo                Road[]                      @relation("ToTown")
   tradeRoutes            TradeRoute[]
+  charactersFrom        Character[]                  @relation("homeTown")
+  charactersLivingIn    Character[]                  @relation("LivesInTown")
 
   @@unique([continentId, slug])
 }
@@ -1028,6 +1031,12 @@ model Character {
   deityId        String?
   deity          Deity?    @relation(fields: [deityId], references: [id])
   deityReasoning String?   @db.Text
+  fromContinentId String?
+  fromContinent   Continent? @relation(fields: [fromContinentId], references: [id])
+  fromTownId      String?
+  fromTown        Town?      @relation("homeTown", fields: [fromTownId], references: [id])
+  livesInTownId   String?
+  livesInTown     Town?      @relation("LivesInTown", fields: [livesInTownId], references: [id])
 
   creatureSizeId String       @default("creature-size-medium")
   creatureSize   CreatureSize @relation(fields: [creatureSizeId], references: [id])
