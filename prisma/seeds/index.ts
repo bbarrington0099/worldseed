@@ -8,6 +8,7 @@ export * from './tradeRoute';
 export * from './language';
 export * from './warConflict';
 export * from './treaty';
+export * from './historicalPeriod';
 export * from './creatureSize';
 export * from './creatureType';
 export * from './legendaryCreature';

@@ -24,6 +24,14 @@ export async function createWorld(data: Prisma.WorldCreateInput, seeded: boolean
     });
 }
 
+export async function createWorldConnection(data: Prisma.WorldConnectionUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.WorldConnectionGetPayload<{}>> {
+    return await prisma.worldConnection.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
 export async function createKingdom(data: Prisma.KingdomCreateInput, seeded: boolean = false): Promise<Prisma.KingdomGetPayload<{}>> {
     return await prisma.kingdom.upsert({
         where: { id: data.id },
@@ -135,6 +143,14 @@ export async function createWarConflict(data: Prisma.WarConflictCreateInput, see
 
 export async function createTreaty(data: Prisma.TreatyCreateInput, seeded: boolean = false): Promise<Prisma.TreatyGetPayload<{}>> {
     return await prisma.treaty.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createHistoricalPeriod(data: Prisma.HistoricalPeriodUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.HistoricalPeriodGetPayload<{}>> {
+    return await prisma.historicalPeriod.upsert({
         where: { id: data.id },
         update: data,
         create: { ...data, seeded },

@@ -12,7 +12,6 @@
  */
 
 import { prisma } from "../lib/prisma";
-import { Prisma } from "../generated/prisma/client";
 import * as db from "../lib/db-seed";
 import * as seed from "./seeds"
 import bcrypt from "bcrypt";
@@ -222,6 +221,7 @@ async function main() {
     await seed.setContinentLanguages({ continents, languages });
     const warConflicts: seed.WarConflicts = await seed.seedWarConflicts({ continents });
     const treaties: seed.Treaties = await seed.seedTreaties({ continents });
+    const historicalPeriods: seed.HistoricalPeriods = await seed.createHistoricalPeriods({ worlds });
     // Creatures
     const creatureSizes: seed.CreatureSizes = await seed.seedCreatureSizes();
     const creatureTypes: seed.CreatureTypes = await seed.seedCreatureTypes({ creatureSizes });
@@ -242,7 +242,7 @@ async function main() {
     const pantheons: seed.Pantheons = await seed.seedPantheons();
     const deities: seed.Deities = await seed.seedDeities({ pantheons });
     const deityHolyDays: seed.DeityHolyDays = await seed.seedDeityHolyDays({ deities });
-    const deityHistories: seed.DeityHistories = await seed.seedDeityHistories({ deities });
+    const deityHistories: seed.DeityHistories = await seed.seedDeityHistories({ deities, historicalPeriods });
     const deityRelationships: seed.DeityRelationships = await seed.seedDeityRelationships({ deities });
     // Recommendations
     const racesContinents: seed.RacesContinents = await seed.setRacesContinents({ races, continents });

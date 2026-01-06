@@ -129,8 +129,65 @@ model World {
   currentMonth    Month
   currentDay      Int
 
+  historicalPeriods  HistoricalPeriod[]
+  historyEvents       HistoricalEvent[]
   continents Continent[]
   kingdoms   Kingdom[]
+  worldConnections WorldConnection[] @relation("primaryWorld")
+  connectedWorlds WorldConnection[]         @relation("connectedWorld")
+}
+
+model WorldConnection {
+  id          String  @id @default(uuid())
+  connection   String?  @db.Text
+  seeded      Boolean @default(false)
+
+  worldId String
+  world   World  @relation( "primaryWorld", fields: [worldId], references: [id])
+
+  raceId  String?
+  race   Race?  @relation(fields: [raceId], references: [id], onDelete: Cascade)
+
+  subraceId   String?
+  subrace     Subrace?   @relation(fields: [subraceId], references: [id], onDelete: Cascade)
+
+  classId  String?
+  class   Class?  @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  subclassId   String?
+  subclass     Subclass?   @relation(fields: [subclassId], references: [id], onDelete: Cascade)
+
+  deityId   String?
+  deity     Deity?   @relation(fields: [deityId], references: [id], onDelete: Cascade)
+
+  guildId   String?
+  guild     Guild?   @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  characterId   String?
+  character     Character?   @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  legendaryCreatureId   String?
+  legendaryCreature     LegendaryCreature?   @relation(fields: [legendaryCreatureId], references: [id], onDelete: Cascade)
+
+  factionId   String?
+  faction     Faction?   @relation(fields: [factionId], references: [id], onDelete: Cascade)
+
+  creatureTypeId   String?
+  creatureType     CreatureType?   @relation(fields: [creatureTypeId], references: [id], onDelete: Cascade)
+
+  connectedWorldId String?
+  connectedWorld   World? @relation("connectedWorld", fields: [connectedWorldId], references: [id])
+
+  @@unique([worldId, raceId])
+  @@unique([worldId, subraceId])
+  @@unique([worldId, classId])
+  @@unique([worldId, subclassId])
+  @@unique([worldId, deityId])
+  @@unique([worldId, guildId])
+  @@unique([worldId, characterId])
+  @@unique([worldId, legendaryCreatureId])
+  @@unique([worldId, factionId])
+  @@unique([worldId, creatureTypeId])
 }
 
 model Continent {
@@ -139,7 +196,6 @@ model Continent {
   name              String  @unique
   slug              String  @unique
   description       String  @db.Text
-  plane             Plane   @default(MATERIAL)
   widthMi           Int?
   heightMi          Int?
   surfaceAreaSqMi   BigInt?
@@ -172,6 +228,7 @@ model Continent {
 
   towns              Town[]
   regions            Region[]
+  stateInPeriods   ContinentHistory[]
   primaryLanguages   Language[] @relation("PrimaryLanguages")
   secondaryLanguages Language[] @relation("SecondaryLanguages")
   rareLanguages      Language[] @relation("RareLanguages")
@@ -208,7 +265,6 @@ model Kingdom {
   name            String  @unique
   slug            String  @unique
   description     String? @db.Text
-  plane           Plane   @default(MATERIAL)
   surfaceAreaSqMi BigInt?
   primaryColor    String?
   secondaryColor  String?
@@ -252,7 +308,6 @@ model Town {
   name        String
   slug        String   @unique
   description String   @db.Text
-  plane       Plane    @default(MATERIAL)
   location    String?
   population  Int?
   type        TownType @default(VILLAGE)
@@ -283,11 +338,11 @@ model Region {
   seeded      Boolean   @default(false)
   name        String    @unique
   description String?   @db.Text
-  plane       Plane     @default(MATERIAL)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   continentId String
   continent   Continent @relation(fields: [continentId], references: [id])
+  creatureTypes RegionCreatureType[]
   towns       Town[]    @relation("RegionTowns")
 }
 
@@ -414,8 +469,29 @@ model HistoricalPeriod {
   description  String  @db.Text
   significance String? @db.Text
   sortOrder    Int     @default(0)
+  
+  worldId      String
+  world        World  @relation(fields: [worldId], references: [id])
 
+  deitysDuringPeriod DeityHistory[]
+  continentsDuringPeriod ContinentHistory[]
   events HistoricalEvent[]
+
+  @@unique([worldId, sortOrder])
+}
+
+model ContinentHistory {
+  id          String  @id @default(uuid())
+  seeded      Boolean @default(false)
+  description String? @db.Text
+
+  continentId String
+  continent   Continent @relation(fields: [continentId], references: [id], onDelete: Cascade)
+
+  periodId    String
+  period      HistoricalPeriod @relation(fields: [periodId], references: [id], onDelete: Cascade)
+
+  @@unique([continentId, periodId])
 }
 
 model HistoricalEvent {
@@ -427,6 +503,8 @@ model HistoricalEvent {
   impact      String? @db.Text
   sortOrder   Int     @default(0)
 
+  worldId   String?
+  world     World?           @relation(fields: [worldId], references: [id])
   periodId    String?
   period      HistoricalPeriod? @relation(fields: [periodId], references: [id])
   continentId String?
@@ -448,7 +526,7 @@ model Race {
   alignment      String? @db.Text
   heightRange    String?
   weightRange    String?
-  alabastriaLore String? @db.Text
+  worldConnection WorldConnection[]
   playstyle      String? @db.Text
 
   defaultCreatureSizeId String       @default("creature-size-medium")
@@ -571,7 +649,6 @@ model Subrace {
   name              String
   slug              String
   description       String  @db.Text
-  alabastriaContext String? @db.Text
   playstyle         String? @db.Text
   seeded            Boolean @default(false)
 
@@ -591,6 +668,7 @@ model Subrace {
   abilityScoreIncreases RaceAbilityScore[]
   traits                RaceTrait[]
 
+  worldConnections WorldConnection[]
   continentLocations   SubraceContinent[]
   subclassRecommendations   SubraceSubclassRecommendation[]
   deityRecommendations DeityRecommendation[] @relation("SubraceDeityRecs")
@@ -695,13 +773,12 @@ model Class {
   armorProficiency  ArmorProficiency[]
   weaponProficiency WeaponProficiency[]
   toolProficiency   ToolProficiency[]
-  alabastriaLore    String? @db.Text
   playstyle         String? @db.Text
   seeded            Boolean @default(false)
 
   savingThrows         AbilityScores[]
   keyFeatures          ClassFeature[]
-
+  worldConnections     WorldConnection[]
   subclasses           Subclass[]
   playstyleCategories  PlaystyleClassRecommendation[]
   deityRecommendations DeityRecommendation[]          @relation("ClassDeityRecs")
@@ -724,14 +801,13 @@ model Subclass {
   name              String
   slug              String
   description       String  @db.Text
-  alabastriaContext String? @db.Text
   playstyle         String? @db.Text
   seeded            Boolean @default(false)
 
   classId              String
   class                Class                 @relation(fields: [classId], references: [id], onDelete: Cascade)
   keyFeatures          ClassFeature[]
-
+  worldConnections     WorldConnection[]
   raceRecommendations   RaceSubclassRecommendation[]
   subraceRecommendations SubraceSubclassRecommendation[]
   contientLocations     SubclassContinent[]
@@ -790,13 +866,12 @@ model Deity {
   alignment         String?
   symbol            String?
   description       String  @db.Text
-  alabastriaContext String? @db.Text
   temples           String? @db.Text
   seeded            Boolean @default(false)
 
   pantheonId String
   pantheon   Pantheon @relation(fields: [pantheonId], references: [id])
-
+  worldConnections WorldConnection[]
   domains   String[]
   followers String[]
   holyDays  DeityHolyDay[]
@@ -825,7 +900,8 @@ model DeityHolyDay {
 
 model DeityHistory {
   id          String  @id @default(uuid())
-  era         String?
+  eraId         String
+  era         HistoricalPeriod @relation(fields: [eraId], references: [id], onDelete: Cascade)
   description String? @db.Text
   seeded      Boolean @default(false)
 
@@ -905,6 +981,7 @@ model Guild {
   foundedCycle Int?
   seeded       Boolean @default(false)
 
+  worldConnections WorldConnection[]
   continents  Continent[]
   guildHalls  GuildHall[]
   roles       GuildRole[]
@@ -1085,6 +1162,7 @@ model Character {
   livesInTownId   String?
   livesInTown     Town?      @relation("LivesInTown", fields: [livesInTownId], references: [id])
 
+  worldConnections WorldConnection[]
   creatureSizeId String       @default("creature-size-medium")
   creatureSize   CreatureSize @relation(fields: [creatureSizeId], references: [id])
   creatureTypeId String       @default("creature-type-humanoid")
@@ -1387,6 +1465,7 @@ model Faction {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  worldConnections WorldConnection[]
   continentPresence      FactionContinentPresence[]
   bases                  FactionBase[]
   npcMembers             FactionNPCMembership[]
@@ -1672,6 +1751,19 @@ model ContinentCreatureType {
   @@unique([continentId, creatureTypeId])
 }
 
+model RegionCreatureType {
+  id        String  @id @default(uuid())
+  seeded    Boolean @default(false)
+  reasoning String? @db.Text
+
+  regionId      String
+  region        Region       @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  creatureTypeId String
+  creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id], onDelete: Cascade)
+
+  @@unique([regionId, creatureTypeId])
+}
+
 model CreatureType {
   id          String  @id @default(uuid())
   name        String  @unique
@@ -1683,8 +1775,9 @@ model CreatureType {
   seeded      Boolean @default(false)
 
   commonSizes CreatureSize[] @relation("CreatureTypeCommonSizes")
-
+  worldConnections WorldConnection[]
   continents         ContinentCreatureType[]
+  regions            RegionCreatureType[]
   characters         Character[]
   legendaryCreatures LegendaryCreature[]
 }
@@ -1732,4 +1825,6 @@ model LegendaryCreature {
 
   continentId String
   continent   Continent @relation(fields: [continentId], references: [id])
+
+  worldConnections WorldConnection[]
 }

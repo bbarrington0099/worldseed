@@ -4,15 +4,13 @@
  */
 
 import { prisma } from './prisma';
-import { Prisma, ContinentLanguagePrevalence, ContinentCreatureRelation } from "@prismagen/client";
+import { Prisma, ContinentLanguagePrevalence } from "@prismagen/client";
 import * as db from "./db";
-import { slugify } from "./utils";
+import { slugify } from './utils';
 import type {
     GuildRank,
     MemberStatus,
     UserRole,
-    DeityRelationshipCategory,
-    FactionInfluenceLevel,
     ProfessionRestrictionType,
 } from "@prismagen/client";
 
@@ -22,6 +20,10 @@ import type {
 
 export async function createWorld(data: Prisma.WorldCreateInput): Promise<Prisma.WorldGetPayload<{}>> {
     return await db.createWorld(data, true);
+}
+
+export async function createWorldConnection(data: Prisma.WorldConnectionUncheckedCreateInput): Promise<Prisma.WorldConnectionGetPayload<{}>> {
+    return await db.createWorldConnection(data, true);
 }
 
 export async function createKingdom(data: Prisma.KingdomCreateInput): Promise<Prisma.KingdomGetPayload<{}>> {
@@ -72,6 +74,10 @@ export async function createTreaty(data: Prisma.TreatyCreateInput): Promise<Pris
     return await db.createTreaty(data, true);
 }
 
+export async function createHistoricalPeriod(data: Prisma.HistoricalPeriodUncheckedCreateInput): Promise<Prisma.HistoricalPeriodGetPayload<{}>> {
+    return await db.createHistoricalPeriod(data, true);
+}
+
 // ============================================================================
 // BESTIARY
 // ============================================================================
@@ -81,7 +87,13 @@ export async function createCreatureSize(data: Prisma.CreatureSizeCreateInput): 
 }
 
 export async function createCreatureType(data: Prisma.CreatureTypeCreateInput): Promise<Prisma.CreatureTypeGetPayload<{}>> {
-    return await db.createCreatureType(data, true);
+    const creatureType = await db.createCreatureType(data, true);
+    createWorldConnection({
+        id: `creature-type-alabastria-connection-${creatureType.id}`,
+        worldId: 'alabastria',
+        creatureTypeId: creatureType.id,
+    });
+    return creatureType;
 }
 
 export async function createContinentCreatureType(data: Prisma.ContinentCreatureTypeUncheckedCreateInput): Promise<Prisma.ContinentCreatureTypeGetPayload<{}>> {
@@ -89,7 +101,13 @@ export async function createContinentCreatureType(data: Prisma.ContinentCreature
 }
 
 export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUncheckedCreateInput): Promise<Prisma.LegendaryCreatureGetPayload<{}>> {
-    return await db.createLegendaryCreature(data, true);
+    const legendaryCreature = await db.createLegendaryCreature(data, true);
+    createWorldConnection({
+        id: `legendary-creature-alabastria-connection-${legendaryCreature.id}`,
+        worldId: 'alabastria',
+        legendaryCreatureId: legendaryCreature.id,
+    });
+    return legendaryCreature;
 }
 
 // ============================================================================
@@ -108,12 +126,28 @@ export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput):
     return db.createRaceName(data, true);
 }
 
-export async function createRace(data: Prisma.RaceUncheckedCreateInput): Promise<Prisma.RaceGetPayload<{}>> {
-    return db.createRace(data, true);
+export async function createRace(data: Prisma.RaceUncheckedCreateInput & { alabastriaLore: string}): Promise<Prisma.RaceGetPayload<{}>> {
+    const { alabastriaLore, ...raceData } = data;
+    const race = await db.createRace(raceData, true);
+    createWorldConnection({
+        id: `race-alabastria-connection-${race.id}`,
+        worldId: 'alabastria',
+        raceId: race.id,
+        connection: data.alabastriaLore,
+    });
+    return race;
 }
 
-export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput): Promise<Prisma.SubraceGetPayload<{}>> {
-    return db.createSubrace(data, true);
+export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput & { alabastriaContext: string}): Promise<Prisma.SubraceGetPayload<{}>> {
+    const { alabastriaContext, ...subraceData } = data;
+    const subrace = await db.createSubrace(subraceData, true);
+    createWorldConnection({
+        id: `subrace-alabastria-connection-${subrace.id}`,
+        worldId: 'alabastria',
+        subraceId: subrace.id,
+        connection: data.alabastriaContext,
+    });
+    return subrace;
 }
 
 // ============================================================================
@@ -128,12 +162,28 @@ export async function createClassFeature(data: Prisma.ClassFeatureCreateInput): 
     return db.createClassFeature(data, true);
 }
 
-export async function createClass(data: Prisma.ClassCreateInput) : Promise<Prisma.ClassGetPayload<{}>> {
-    return db.createClass(data, true);
+export async function createClass(data: Prisma.ClassCreateInput & { alabastriaLore: string}) : Promise<Prisma.ClassGetPayload<{}>> {
+    const { alabastriaLore, ...classData } = data;
+    const clazz = await db.createClass(classData, true);
+    createWorldConnection({
+        id: `class-alabastria-connection-${clazz.id}`,
+        worldId: 'alabastria',
+        classId: clazz.id,
+        connection: data.alabastriaLore,
+    });
+    return clazz;
 }
 
-export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput) : Promise<Prisma.SubclassGetPayload<{}>> {
-    return db.createSubclass(data, true);
+export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput & { alabastriaContext: string}) : Promise<Prisma.SubclassGetPayload<{}>> {
+    const { alabastriaContext, ...subclassData } = data;
+    const subclass = await db.createSubclass(subclassData, true);
+    createWorldConnection({
+        id: `subclass-alabastria-connection-${subclass.id}`,
+        worldId: 'alabastria',
+        subclassId: subclass.id,
+        connection: data.alabastriaContext,
+    });
+    return subclass;
 }
 
 // ============================================================================
@@ -152,8 +202,16 @@ export async function createDeityHistory(data: Prisma.DeityHistoryUncheckedCreat
     return db.createDeityHistory(data, true);
 }
 
-export async function createDeity(data: Prisma.DeityUncheckedCreateInput): Promise<Prisma.DeityGetPayload<{}>> {
-    return db.createDeity(data, true);
+export async function createDeity(data: Prisma.DeityUncheckedCreateInput & { alabastriaContext: string}): Promise<Prisma.DeityGetPayload<{}>> {
+    const { alabastriaContext, ...deityData } = data;
+    const deity = await db.createDeity(deityData, true);
+    createWorldConnection({
+        id: `deity-alabastria-connection-${deity.id}`,
+        worldId: 'alabastria',
+        deityId: deity.id,
+        connection: data.alabastriaContext,
+    });
+    return deity;
 }
 
 export async function createDeityRelationship(data: Prisma.DeityRelationshipUncheckedCreateInput): Promise<Prisma.DeityRelationshipGetPayload<{}>> {
@@ -189,7 +247,13 @@ export async function createSubclassContinent(data: Prisma.SubclassContinentUnch
 // ============================================================================
 
 export async function createCharacter(data: Prisma.CharacterUncheckedCreateInput): Promise<Prisma.CharacterGetPayload<{}>> {
-    return db.createCharacter(data, true);
+    const character = await db.createCharacter(data, true);
+    createWorldConnection({
+        id: `character-alabastria-connection-${character.id}`,
+        worldId: 'alabastria',
+        characterId: character.id,
+    });
+    return character;
 }
 
 // ============================================================================
@@ -340,39 +404,6 @@ export async function createNPCRelationshipType(data: {
         where: { name: data.name },
         update: data,
         create: { ...data, seeded: true },
-    });
-}
-
-// ============================================================================
-// HISTORY
-// ============================================================================
-
-export async function createHistoricalPeriod(data: {
-    name: string;
-    startCycle: number;
-    endCycle?: number;
-    description: string;
-    significance?: string;
-    sortOrder?: number;
-}) {
-    return prisma.historicalPeriod.upsert({
-        where: { name: data.name },
-        update: data,
-        create: { ...data, seeded: true },
-    });
-}
-
-export async function createHistoricalEvent(data: {
-    periodId?: string;
-    name: string;
-    cycle: number;
-    description: string;
-    impact?: string;
-    sortOrder?: number;
-    continentId?: string;
-}) {
-    return prisma.historicalEvent.create({
-        data: { ...data, seeded: true },
     });
 }
 
