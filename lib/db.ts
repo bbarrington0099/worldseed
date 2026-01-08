@@ -4,19 +4,79 @@
  */
 
 import { prisma } from "./prisma";
-import { ContinentLanguagePrevalence, ContinentCreatureRelation, Prisma } from "@prismagen/client";
+import { ContinentLanguagePrevalence, UserRole, Prisma } from "@prismagen/client";
 import { CACHE_TAGS } from "./constants";
 import { slugify } from "./utils";
-import { RaceAbilityScore } from '../generated/prisma/index';
+import bcrypt from "bcrypt";
 
 // Re-export cache tags for convenience
 export { CACHE_TAGS };
 
 // ============================================================================
+// USER MANAGEMENT
+// ============================================================================
+
+export async function createUser(data: Prisma.UserCreateInput & { plainPassword: string }): Promise<void> {
+    const existingUser = await prisma.user.findUnique({
+        where: { email: data.email },
+    });
+    if (existingUser) {
+        throw new Error(`User with email ${data.email} already exists.`);
+    }
+    const { plainPassword, ...rawData } = data;
+    if (!rawData.email || !plainPassword) {
+        throw new Error("Email and plainPassword are required to create a user.");
+    }
+    rawData.passwordHash = await bcrypt.hash(plainPassword, 10);
+    prisma.user.create({
+        data: rawData,
+    });
+}
+
+// ============================================================================
 // WORLD & GEOGRAPHY
 // ============================================================================
 
-export async function createWorld(data: Prisma.WorldCreateInput, seeded: boolean = false): Promise<Prisma.WorldGetPayload<{}>> {
+export async function createSeason(data: Prisma.SeasonCreateInput, seeded: boolean = false): Promise<Prisma.SeasonGetPayload<{}>> {
+    return await prisma.season.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createMonth(data: Prisma.MonthUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.MonthGetPayload<{}>> {
+    return await prisma.month.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createDate(data: Prisma.DateUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.DateGetPayload<{}>> {
+    let month = undefined;
+    if (data.monthId) {
+        month = await prisma.month.findUnique({
+            where: { id: data.monthId },
+        });
+        if (!month) {
+            throw new Error(`Missing month FK: ${data.monthId}`);
+        }
+        if (data.day && (data.day < 0 || data.day > month.daysInMonth)) {
+            data.day = undefined;
+        }
+    }
+    if (!data.id) {
+        data.id = `date-${data.cycle ?? "unknown"}-${month?.name ?? "unknown"}-${data.day ?? "unknown"}`;
+    }
+    return await prisma.date.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createWorld(data: Prisma.WorldUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.WorldGetPayload<{}>> {
     return await prisma.world.upsert({
         where: { id: data.id },
         update: data,
@@ -32,7 +92,7 @@ export async function createWorldConnection(data: Prisma.WorldConnectionUnchecke
     });
 }
 
-export async function createKingdom(data: Prisma.KingdomCreateInput, seeded: boolean = false): Promise<Prisma.KingdomGetPayload<{}>> {
+export async function createKingdom(data: Prisma.KingdomUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.KingdomGetPayload<{}>> {
     return await prisma.kingdom.upsert({
         where: { id: data.id },
         update: data,
@@ -202,21 +262,21 @@ export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUnch
 // RACES
 // ============================================================================
 
-export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput, seeded: boolean = false): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
+/* export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput, seeded: boolean = false): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
     return await prisma.raceAbilityScore.upsert({
         where: { id: data.id },
         update: data,
         create: { ...data, seeded },
     });
-}
+} */
 
-export async function createRaceTrait(data: Prisma.RaceTraitCreateInput, seeded: boolean = false): Promise<Prisma.RaceTraitGetPayload<{}>> {
+/* export async function createRaceTrait(data: Prisma.RaceTraitCreateInput, seeded: boolean = false): Promise<Prisma.RaceTraitGetPayload<{}>> {
     return await prisma.raceTrait.upsert({
         where: { id: data.id },
         update: data,
         create: { ...data, seeded },
     });
-}
+} */
 
 export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.RaceNameGetPayload<{}>> {
     return await prisma.raceName.upsert({
@@ -261,8 +321,8 @@ export async function getRaceBySlug(slug: string) {
             traits: true,
             subraces: {
                 include: {
-                    abilityScoreIncreases: true,
-                    traits: true,
+                    /* abilityScoreIncreases: true, */
+                    /* traits: true, */
                 },
             },
             recommendedClasses: {
@@ -297,13 +357,13 @@ export async function createClassRole(data: Prisma.ClassRoleCreateInput, seeded:
     });
 }
 
-export async function createClassFeature(data: Prisma.ClassFeatureCreateInput, seeded: boolean = false): Promise<Prisma.ClassFeatureGetPayload<{}>> {
+/* export async function createClassFeature(data: Prisma.ClassFeatureCreateInput, seeded: boolean = false): Promise<Prisma.ClassFeatureGetPayload<{}>> {
     return await prisma.classFeature.upsert({
         where: { id: data.id },
         update: data,
         create: { ...data, seeded },
     });
-}
+} */
 
 export async function createClass(data: Prisma.ClassCreateInput, seeded: boolean = false): Promise<Prisma.ClassGetPayload<{}>> {
     return await prisma.class.upsert({
@@ -335,10 +395,10 @@ export async function getClassBySlug(slug: string) {
         where: { slug },
         include: {
             savingThrows: true,
-            keyFeatures: true,
+            //keyFeatures: true,
             subclasses: {
                 include: {
-                    keyFeatures: true,
+                    //keyFeatures: true,
                 },
             },
             recommendedRaces: {

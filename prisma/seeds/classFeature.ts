@@ -1,4 +1,4 @@
-import { Prisma } from "@prismagen/client";
+/* import { Prisma } from "@prismagen/client";
 import * as db from "@lib/db-seed";
 
 type ClassFeaturePayload = Prisma.ClassFeatureGetPayload<{}>;
@@ -2941,4 +2941,4 @@ export async function seedClassFeatures(): Promise<ClassFeatures> {
             description: "Power Surge description."
         })
     }
-}
+} */

@@ -82,7 +82,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         cyric: await db.createDeity({
             id: "cyric",
             name: "Cyric",
-            slug: "cyric",
+            //slug: "cyric",
             title: "Prince of Lies",
             alignment: "Chaotic Evil",
             symbol: "fas fa-sun-plant-wilt",
@@ -98,7 +98,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         tempus: await db.createDeity({
             id: "tempus",
             name: "Tempus",
-            slug: "tempus",
+            //slug: "tempus",
             title: "Lord of Battles",
             alignment: "Neutral",
             symbol: "fas fa-pen-fancy",
@@ -114,7 +114,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         mystra: await db.createDeity({
             id: "mystra",
             name: "Mystra",
-            slug: "mystra",
+            //slug: "mystra",
             title: "Goddess of Magic",
             alignment: "Neutral Good",
             symbol: "fas fa-magic",
@@ -130,7 +130,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         lathander: await db.createDeity({
             id: "lathander",
             name: "Lathander",
-            slug: "lathander",
+            //slug: "lathander",
             title: "Morninglord",
             alignment: "Lawful Good",
             symbol: "fas fa-sun",
@@ -146,7 +146,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         selune: await db.createDeity({
             id: "selune",
             name: "Selûne",
-            slug: "selune",
+            //slug: "selune",
             title: "Our Lady of Silver",
             alignment: "Chaotic Good",
             symbol: "fas fa-moon",
@@ -162,7 +162,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         shar: await db.createDeity({
             id: "shar",
             name: "Shar",
-            slug: "shar",
+            //slug: "shar",
             title: "Mistress of the Night",
             alignment: "Neutral Evil",
             symbol: "fas fa-eye-slash",
@@ -178,7 +178,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         oghma: await db.createDeity({
             id: "oghma",
             name: "Oghma",
-            slug: "oghma",
+            //slug: "oghma",
             title: "The Binder of What Is Known",
             alignment: "Neutral",
             symbol: "fas fa-book-open",
@@ -194,7 +194,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         deneir: await db.createDeity({
             id: "deneir",
             name: "Deneir",
-            slug: "deneir",
+            //slug: "deneir",
             title: "The First Scribe",
             alignment: "Neutral Good",
             symbol: "fas fa-feather-pointed",
@@ -210,7 +210,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         mask: await db.createDeity({
             id: "mask",
             name: "Mask",
-            slug: "mask",
+            //slug: "mask",
             title: "The Lord of Shadows",
             alignment: "Chaotic Neutral",
             symbol: "fas fa-masks-theater",
@@ -226,7 +226,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         helm: await db.createDeity({
             id: "helm",
             name: "Helm",
-            slug: "helm",
+            //slug: "helm",
             title: "The Vigilant One",
             alignment: "Lawful Neutral",
             symbol: "fas fa-shield-halved",
@@ -242,7 +242,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         tyr: await db.createDeity({
             id: "tyr",
             name: "Tyr",
-            slug: "tyr",
+            //slug: "tyr",
             title: "The Even-Handed",
             alignment: "Lawful Good",
             symbol: "fas fa-scale-balanced",
@@ -258,7 +258,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         chauntea: await db.createDeity({
             id: "chauntea",
             name: "Chauntea",
-            slug: "chauntea",
+            //slug: "chauntea",
             title: "The Great Mother",
             alignment: "Neutral Good",
             symbol: "fas fa-seedling",
@@ -274,7 +274,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         ilmater: await db.createDeity({
             id: "ilmater",
             name: "Ilmater",
-            slug: "ilmater",
+            //slug: "ilmater",
             title: "The Crying God",
             alignment: "Lawful Good",
             symbol: "fas fa-hand-holding-heart",
@@ -290,7 +290,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         talona: await db.createDeity({
             id: "talona",
             name: "Talona",
-            slug: "talona",
+            //slug: "talona",
             title: "Lady of Poison",
             alignment: "Chaotic Evil",
             symbol: "fas fa-skull-crossbones",
@@ -306,7 +306,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         tymora: await db.createDeity({
             id: "tymora",
             name: "Tymora",
-            slug: "tymora",
+            //slug: "tymora",
             title: "Lady Luck",
             alignment: "Chaotic Good",
             symbol: "fas fa-dice",
@@ -322,7 +322,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         beshaba: await db.createDeity({
             id: "beshaba",
             name: "Beshaba",
-            slug: "beshaba",
+            //slug: "beshaba",
             title: "Lady Doom",
             alignment: "Chaotic Evil",
             symbol: "fas fa-skull",
@@ -338,7 +338,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         kelemvor: await db.createDeity({
             id: "kelemvor",
             name: "Kelemvor",
-            slug: "kelemvor",
+            //slug: "kelemvor",
             title: "Lord of the Dead",
             alignment: "Lawful Neutral",
             symbol: "fas fa-balance-scale",
@@ -354,7 +354,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         bane: await db.createDeity({
             id: "bane",
             name: "Bane",
-            slug: "bane",
+            //slug: "bane",
             title: "The Black Hand",
             alignment: "Lawful Evil",
             symbol: "fas fa-fist-raised",
@@ -370,7 +370,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         myrkul: await db.createDeity({
             id: "myrkul",
             name: "Myrkul",
-            slug: "myrkul",
+            //slug: "myrkul",
             title: "Lord of Bones",
             alignment: "Neutral Evil",
             symbol: "fas fa-skull-crossbones",
@@ -386,7 +386,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         jergal: await db.createDeity({
             id: "jergal",
             name: "Jergal",
-            slug: "jergal",
+            //slug: "jergal",
             title: "Scribe of the Dead",
             alignment: "True Neutral",
             symbol: "fas fa-book-skull",
@@ -402,7 +402,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         moradin: await db.createDeity({
             id: "moradin",
             name: "Moradin",
-            slug: "moradin",
+            //slug: "moradin",
             title: "Soul Forger",
             alignment: "Lawful Good",
             symbol: "fas fa-hammer",
@@ -418,7 +418,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         berronar_truesilver: await db.createDeity({
             id: "berronar-truesilver",
             name: "Berronar Truesilver",
-            slug: "berronar-truesilver",
+            //slug: "berronar-truesilver",
             title: "The Shield Mother",
             alignment: "Lawful Good",
             symbol: "fas fa-shield-alt",
@@ -434,7 +434,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         clangeddin_silverbeard: await db.createDeity({
             id: "clangeddin-silverbeard",
             name: "Clangeddin Silverbeard",
-            slug: "clangeddin-silverbeard",
+            //slug: "clangeddin-silverbeard",
             title: "The Battle Lord",
             alignment: "Lawful Good",
             symbol: "fas fa-tents",
@@ -450,7 +450,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         dugmaren_brightmantle: await db.createDeity({
             id: "dugmaren-brightmantle",
             name: "Dugmaren Brightmantle",
-            slug: "dugmaren-brightmantle",
+            //slug: "dugmaren-brightmantle",
             title: "The Gleam in the Eye",
             alignment: "Chaotic Good",
             symbol: "fas fa-lightbulb",
@@ -466,7 +466,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         vergadain: await db.createDeity({
             id: "vergadain",
             name: "Vergadain",
-            slug: "vergadain",
+            //slug: "vergadain",
             title: "The Merchant King",
             alignment: "Neutral",
             symbol: "fas fa-coins",
@@ -482,7 +482,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         corellon_larethian: await db.createDeity({
             id: "corellon-larethian",
             name: "Corellon Larethian",
-            slug: "corellon-larethian",
+            //slug: "corellon-larethian",
             title: "Creator of the Elves",
             alignment: "Chaotic Good",
             symbol: "fas fa-palette",
@@ -498,7 +498,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         sehanine_moonbow: await db.createDeity({
             id: "sehanine-moonbow",
             name: "Sehanine Moonbow",
-            slug: "sehanine-moonbow",
+            //slug: "sehanine-moonbow",
             title: "Goddess of Dreams",
             alignment: "Chaotic Good",
             symbol: "fas fa-moon",
@@ -514,7 +514,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         hanali_celanil: await db.createDeity({
             id: "hanali-celanil",
             name: "Hanali Celanil",
-            slug: "hanali-celanil",
+            //slug: "hanali-celanil",
             title: "Goddess of Love",
             alignment: "Chaotic Good",
             symbol: "fas fa-heart",
@@ -530,7 +530,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         labelas_enoreth: await db.createDeity({
             id: "labelas-enoreth",
             name: "Labelas Enoreth",
-            slug: "labelas-enoreth",
+            //slug: "labelas-enoreth",
             title: "God of Time",
             alignment: "Neutral Good",
             symbol: "fas fa-clock",
@@ -546,7 +546,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         solonor_thelandira: await db.createDeity({
             id: "solonor-thelandira",
             name: "Solonor Thelandira",
-            slug: "solonor-thelandira",
+            //slug: "solonor-thelandira",
             title: "God of Archery",
             alignment: "Chaotic Good",
             symbol: "fas fa-arrows-up-to-line",
@@ -562,7 +562,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         lolth: await db.createDeity({
             id: "lolth",
             name: "Lolth",
-            slug: "lolth",
+            //slug: "lolth",
             title: "Spider Queen",
             alignment: "Chaotic Evil",
             symbol: "fas fa-spider",
@@ -578,7 +578,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         vhaeraun: await db.createDeity({
             id: "vhaeraun",
             name: "Vhaeraun",
-            slug: "vhaeraun",
+            //slug: "vhaeraun",
             title: "God of Shadow",
             alignment: "Chaotic Evil",
             symbol: "fas fa-mask",
@@ -594,7 +594,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         eilistraee: await db.createDeity({
             id: "eilistraee",
             name: "Eilistraee",
-            slug: "eilistraee",
+            //slug: "eilistraee",
             title: "Goddess of Song",
             alignment: "Chaotic Good",
             symbol: "fas fa-music",
@@ -610,7 +610,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         gruumsh_one_eye: await db.createDeity({
             id: "gruumsh-one-eye",
             name: "Gruumsh One-Eye",
-            slug: "gruumsh-one-eye",
+            //slug: "gruumsh-one-eye",
             title: "The One-Eyed God",
             alignment: "Chaotic Evil",
             symbol: "fas fa-eye-slash",
@@ -626,7 +626,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         luthic: await db.createDeity({
             id: "luthic",
             name: "Luthic",
-            slug: "luthic",
+            //slug: "luthic",
             title: "The Cave Mother",
             alignment: "Lawful Evil",
             symbol: "fas fa-mountain",
@@ -642,7 +642,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         ilneval: await db.createDeity({
             id: "ilneval",
             name: "Ilneval",
-            slug: "ilneval",
+            //slug: "ilneval",
             title: "The War Chief",
             alignment: "Lawful Evil",
             symbol: "fas fa-chess",
@@ -658,7 +658,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         bahgtru: await db.createDeity({
             id: "bahgtru",
             name: "Bahgtru",
-            slug: "bahgtru",
+            //slug: "bahgtru",
             title: "The Brute",
             alignment: "Chaotic Evil",
             symbol: "fas fa-fist-raised",
@@ -674,7 +674,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         shargaas: await db.createDeity({
             id: "shargaas",
             name: "Shargaas",
-            slug: "shargaas",
+            //slug: "shargaas",
             title: "The Night Stalker",
             alignment: "Chaotic Evil",
             symbol: "fas fa-mask",
@@ -690,7 +690,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         bahamut: await db.createDeity({
             id: "bahamut",
             name: "Bahamut",
-            slug: "bahamut",
+            //slug: "bahamut",
             title: "The Platinum Dragon",
             alignment: "Lawful Good",
             symbol: "fas fa-shield-alt",
@@ -706,7 +706,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         tiamat: await db.createDeity({
             id: "tiamat",
             name: "Tiamat",
-            slug: "tiamat",
+            //slug: "tiamat",
             title: "The Chromatic Dragon",
             alignment: "Chaotic Evil",
             symbol: "fas fa-crown",
@@ -722,7 +722,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         akadi: await db.createDeity({
             id: "akadi",
             name: "Akadi",
-            slug: "akadi",
+            //slug: "akadi",
             title: "The Queen of Air",
             alignment: "Chaotic Neutral",
             symbol: "fas fa-wind",
@@ -738,7 +738,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         grumbar: await db.createDeity({
             id: "grumbar",
             name: "Grumbar",
-            slug: "grumbar",
+            //slug: "grumbar",
             title: "The Earth Lord",
             alignment: "Lawful Neutral",
             symbol: "fas fa-mountain",
@@ -754,7 +754,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         kossuth: await db.createDeity({
             id: "kossuth",
             name: "Kossuth",
-            slug: "kossuth",
+            //slug: "kossuth",
             title: "The Fire Lord",
             alignment: "Chaotic Neutral",
             symbol: "fas fa-fire",
@@ -770,7 +770,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         istishia: await db.createDeity({
             id: "istishia",
             name: "Istishia",
-            slug: "istishia",
+            //slug: "istishia",
             title: "The Water Lord",
             alignment: "True Neutral",
             symbol: "fas fa-water",
@@ -786,7 +786,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         the_raven_queen: await db.createDeity({
             id: "the-raven-queen",
             name: "The Raven Queen",
-            slug: "the-raven-queen",
+            //slug: "the-raven-queen",
             title: "Goddess of Fate and Death",
             alignment: "Lawful Neutral",
             symbol: "fas fa-crow",
@@ -802,7 +802,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         asmodeus: await db.createDeity({
             id: "asmodeus",
             name: "Asmodeus",
-            slug: "asmodeus",
+            //slug: "asmodeus",
             title: "Lord of the Nine Hells",
             alignment: "Lawful Evil",
             symbol: "fas fa-crown",
@@ -818,7 +818,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         yondalla: await db.createDeity({
             id: "yondalla",
             name: "Yondalla",
-            slug: "yondalla",
+            //slug: "yondalla",
             title: "The Protector and Provider",
             alignment: "Lawful Good",
             symbol: "fas fa-shield-alt",
@@ -834,7 +834,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         arvoreen: await db.createDeity({
             id: "arvoreen",
             name: "Arvoreen",
-            slug: "arvoreen",
+            //slug: "arvoreen",
             title: "The Defender",
             alignment: "Lawful Good",
             symbol: "fas fa-shield",
@@ -850,7 +850,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         cyrrollalee: await db.createDeity({
             id: "cyrrollalee",
             name: "Cyrrollalee",
-            slug: "cyrrollalee",
+            //slug: "cyrrollalee",
             title: "The Hearthkeeper",
             alignment: "Neutral Good",
             symbol: "fas fa-heart",
@@ -866,7 +866,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         urogalan: await db.createDeity({
             id: "urogalan",
             name: "Urogalan",
-            slug: "urogalan",
+            //slug: "urogalan",
             title: "The Earth Lord",
             alignment: "Lawful Neutral",
             symbol: "fas fa-mountain",
@@ -882,7 +882,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         garl_glittergold: await db.createDeity({
             id: "garl-glittergold",
             name: "Garl Glittergold",
-            slug: "garl-glittergold",
+            //slug: "garl-glittergold",
             title: "The Joker",
             alignment: "Neutral Good",
             symbol: "fas fa-smile",
@@ -898,7 +898,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         baervan_wildwanderer: await db.createDeity({
             id: "baervan-wildwanderer",
             name: "Baervan Wildwanderer",
-            slug: "baervan-wildwanderer",
+            //slug: "baervan-wildwanderer",
             title: "The Forest Walker",
             alignment: "Chaotic Good",
             symbol: "fas fa-tree",
@@ -914,7 +914,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         baravar_cloakshadow: await db.createDeity({
             id: "baravar-cloakshadow",
             name: "Baravar Cloakshadow",
-            slug: "baravar-cloakshadow",
+            //slug: "baravar-cloakshadow",
             title: "The Shadow Walker",
             alignment: "Chaotic Neutral",
             symbol: "fas fa-mask",
@@ -930,7 +930,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         segojan_earthcaller: await db.createDeity({
             id: "segojan-earthcaller",
             name: "Segojan Earthcaller",
-            slug: "segojan-earthcaller",
+            //slug: "segojan-earthcaller",
             title: "The Earth Speaker",
             alignment: "Neutral Good",
             symbol: "fas fa-mountain",
@@ -946,7 +946,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         maglubiyet: await db.createDeity({
             id: "maglubiyet",
             name: "Maglubiyet",
-            slug: "maglubiyet",
+            //slug: "maglubiyet",
             title: "The Mighty One",
             alignment: "Lawful Evil",
             symbol: "fas fa-crown",
@@ -962,7 +962,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         khurgorbaeyag: await db.createDeity({
             id: "khurgorbaeyag",
             name: "Khurgorbaeyag",
-            slug: "khurgorbaeyag",
+            //slug: "khurgorbaeyag",
             title: "The Slave Driver",
             alignment: "Lawful Evil",
             symbol: "fas fa-chain",
@@ -978,7 +978,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         bargrivyek: await db.createDeity({
             id: "bargrivyek",
             name: "Bargrivyek",
-            slug: "bargrivyek",
+            //slug: "bargrivyek",
             title: "The Peacekeeper",
             alignment: "Lawful Neutral",
             symbol: "fas fa-handshake",
@@ -994,7 +994,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         nomog_geaya: await db.createDeity({
             id: "nomog-geaya",
             name: "Nomog-Geaya",
-            slug: "nomog-geaya",
+            //slug: "nomog-geaya",
             title: "The Authority",
             alignment: "Lawful Evil",
             symbol: "fas fa-gavel",
@@ -1010,7 +1010,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         kurtulmak: await db.createDeity({
             id: "kurtulmak",
             name: "Kurtulmak",
-            slug: "kurtulmak",
+            //slug: "kurtulmak",
             title: "The Kobold God",
             alignment: "Lawful Evil",
             symbol: "fas fa-hammer",
@@ -1026,7 +1026,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         gith: await db.createDeity({
             id: "gith",
             name: "Gith",
-            slug: "gith",
+            //slug: "gith",
             title: "The Liberator",
             alignment: "Chaotic Good",
             symbol: "fas fa-fist-raised",
@@ -1042,7 +1042,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         vlaakith: await db.createDeity({
             id: "vlaakith",
             name: "Vlaakith",
-            slug: "vlaakith",
+            //slug: "vlaakith",
             title: "The Lich-Queen",
             alignment: "Lawful Evil",
             symbol: "fas fa-skull",
@@ -1058,7 +1058,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         sseth: await db.createDeity({
             id: "sseth",
             name: "Sseth",
-            slug: "sseth",
+            //slug: "sseth",
             title: "The Serpent Lord",
             alignment: "Chaotic Evil",
             symbol: "fas fa-eye",
@@ -1074,7 +1074,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         merrshaulk: await db.createDeity({
             id: "merrshaulk",
             name: "Merrshaulk",
-            slug: "merrshaulk",
+            //slug: "merrshaulk",
             title: "The Slumbering Serpent",
             alignment: "Chaotic Evil",
             symbol: "fas fa-bed",
@@ -1090,7 +1090,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         umberlee: await db.createDeity({
             id: "umberlee",
             name: "Umberlee",
-            slug: "umberlee",
+            //slug: "umberlee",
             title: "The Bitch Queen",
             alignment: "Chaotic Evil",
             symbol: "fas fa-wave-square",
@@ -1106,7 +1106,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         valkur: await db.createDeity({
             id: "valkur",
             name: "Valkur",
-            slug: "valkur",
+            //slug: "valkur",
             title: "The Sailor's Friend",
             alignment: "Chaotic Good",
             symbol: "fas fa-anchor",
@@ -1122,7 +1122,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         deep_sashelas: await db.createDeity({
             id: "deep-sashelas",
             name: "Deep Sashelas",
-            slug: "deep-sashelas",
+            //slug: "deep-sashelas",
             title: "The Sea Elf God",
             alignment: "Chaotic Good",
             symbol: "fas fa-fish",
@@ -1138,7 +1138,7 @@ export async function seedDeities(params: SeedDeitiesParams): Promise<Deities> {
         sekolah: await db.createDeity({
             id: "sekolah",
             name: "Sekolah",
-            slug: "sekolah",
+            //slug: "sekolah",
             title: "The Shark God",
             alignment: "Chaotic Evil",
             symbol: "fas fa-khanda",

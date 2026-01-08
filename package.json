@@ -1,5 +1,5 @@
 {
-    "name": "realmanvil",
+    "name": "worldseed",
     "version": "0.1.0",
     "private": true,
     "type": "module",
@@ -25,8 +25,8 @@
         "docker:dev:up": "docker compose -f docker-compose.dev.yml up -d",
         "docker:dev:up:logs": "docker compose -f docker-compose.dev.yml up",
         "docker:dev:logs": "docker compose -f docker-compose.dev.yml logs -f",
-        "docker:dev:exec:app": "docker exec -it alabastria-dev-app",
-        "docker:dev:exec:db": "docker exec -it alabastria-dev-postgres",
+        "docker:dev:exec:app": "docker exec -it worldseed-dev-app",
+        "docker:dev:exec:db": "docker exec -it worldseed-dev-postgres",
         "docker:dev:down": "docker compose -f docker-compose.dev.yml down",
         "docker:dev:clear": "docker compose -f docker-compose.dev.yml down -v",
         "docker:dev:rebuild": "npm run docker:dev:down && npm run docker:dev:build",

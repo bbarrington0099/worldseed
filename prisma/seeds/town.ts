@@ -22,7 +22,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
     return {
         silverleaf_harbor: await db.createTown({
             id: "silverleaf-harbor-kuriguer-alabastria",
-            slug: "silverleaf-harbor-kuriguer-alabastria",
+            //slug: "silverleaf-harbor-kuriguer-alabastria",
             name: "Silverleaf Harbor",
             type: TownType.CAPITAL,
         location: "To the south-west of the continent, Silverleaf Harbor is a small city built into the cliffs of Mount Rian, where natural architecture blends seamlessly with arcane engineering.",
@@ -31,7 +31,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         swamp_crown: await db.createTown({
             id: "swamp-crown-katman-kamalatman-alabastria",
-            slug: "swamp-crown-katman-kamalatman-alabastria",
+            //slug: "swamp-crown-katman-kamalatman-alabastria",
             name: "Swamp Crown",
             type: TownType.CAPITAL,
             continent: { connect: { id: continents.katman.id } },
@@ -40,7 +40,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         volcanic_throne: await db.createTown({
             id: "volcanic-throne-alatman-kamalatman-alabastria",
-            slug: "volcanic-throne-alatman-kamalatman-alabastria",
+            //slug: "volcanic-throne-alatman-kamalatman-alabastria",
             name: "Volcanic Throne",
             type: TownType.CAPITAL,
             continent: { connect: { id: continents.alatman.id } },
@@ -49,7 +49,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         deepforge_citadel: await db.createTown({
             id: "deepforge-citadel-maltman-kamalatman-alabastria",
-            slug: "deepforge-citadel-maltman-kamalatman-alabastria",
+            //slug: "deepforge-citadel-maltman-kamalatman-alabastria",
             name: "Deepforge Citadel",
             type: TownType.CAPITAL,
             continent: { connect: { id: continents.maltman.id } },
@@ -58,7 +58,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         golden_fields: await db.createTown({
             id: "golden-fields-skratonia-alabastria",
-            slug: "golden-fields-skratonia-alabastria",
+            //slug: "golden-fields-skratonia-alabastria",
             name: "Golden Fields",
             type: TownType.CAPITAL,
             location: "Golden Fields is located to the southern edge of the central plains of the continent, at the crossroads of all major trade routes.",
@@ -67,7 +67,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         frosthold: await db.createTown({
             id: "frosthold-bulsania-alabastria",
-            slug: "frosthold-bulsania-alabastria",
+            //slug: "frosthold-bulsania-alabastria",
             name: "Frosthold",
             type: TownType.CAPITAL,
             location: "In the west most part of the continent, Frosthold sits lodged against the outer side of the Noxious Mountain range, restricting access to and from the glacial side of the contient",
@@ -76,7 +76,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         suetonon: await db.createTown({
             id: "suetonon-skratonia-alabastria",
-            slug: "suetonon-skratonia-alabastria",
+            //slug: "suetonon-skratonia-alabastria",
             name: "Suetonon",
             type: TownType.CITY,
             continent: { connect: { id: continents.skratonia.id } },
@@ -85,7 +85,7 @@ export async function seedTowns(params: SeedTownsParams): Promise<Towns> {
         }),
         tuinton: await db.createTown({
             id: "tuinton-skratonia-alabastria",
-            slug: "tuinton-skratonia-alabastria",
+            //slug: "tuinton-skratonia-alabastria",
             name: "Tuinton",
             type: TownType.HAMLET,
             location: "Tuinton is on the western edge of the Ashen City, just north of the mountain range that borders the road from Suetonon to the south.",

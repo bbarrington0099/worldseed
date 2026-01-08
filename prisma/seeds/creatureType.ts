@@ -29,7 +29,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         aberration: await db.createCreatureType({
             id: "creature-type-aberration",
             name: "Aberration",
-            slug: "creature-type-aberration",
+            //slug: "creature-type-aberration",
             description: "Creatures that defy natural law and understanding, often born from magical experimentation or planar corruption.",
             habits: "Aberrations are unpredictable and alien in their thinking. They often lurk in dark, isolated places and prefer to ambush their prey. Many are drawn to areas of magical instability or planar rifts.",
             tactics: "Aberrations typically use their bizarre anatomies and psionic abilities to confuse and terrify opponents. They often attack from unexpected angles and use mind-affecting abilities to turn allies against each other. Many can phase through solid matter or exist partially in other planes.",
@@ -44,7 +44,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         beast: await db.createCreatureType({
             id: "creature-type-beast",
             name: "Beast",
-            slug: "creature-type-beast",
+            //slug: "creature-type-beast",
             description: "Wild creatures both natural and magical, ranging from ordinary animals to fantastical beasts that roam the wilderness.",
             habits: "Beasts follow natural instincts and territorial patterns. They establish hunting grounds, mark territory with scent or claw marks, and often hunt at specific times of day. Many are protective of their young and will fight more ferociously when cornered.",
             tactics: "Beasts rely on natural weapons like claws, teeth, and horns. They use pack tactics when in groups, with some members flanking while others attack head-on. Many use their superior senses to track and ambush prey, often attacking from cover or above.",
@@ -62,7 +62,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         celestial: await db.createCreatureType({
             id: "creature-type-celestial",
             name: "Celestial",
-            slug: "creature-type-celestial",
+            //slug: "creature-type-celestial",
             description: "Beings of pure light and divine energy, often sent to protect the innocent or carry out divine will.",
             habits: "Celestials are drawn to areas of great virtue, holy sites, and places where evil threatens the innocent. They often appear during times of great need and prefer to work through mortal champions rather than directly intervening.",
             tactics: "Celestials fight with divine magic and radiant energy. They use their healing abilities to support allies and their smiting powers to destroy evil. Many can fly and use their mobility to outmaneuver ground-based opponents.",
@@ -77,7 +77,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         construct: await db.createCreatureType({
             id: "creature-type-construct",
             name: "Construct",
-            slug: "creature-type-construct",
+            //slug: "creature-type-construct",
             description: "Artificial beings created through magic or technology, ranging from simple golems to complex mechanical creatures.",
             habits: "Constructs are typically found guarding specific locations or performing assigned tasks. They follow their programming rigidly and rarely deviate from their intended purpose. Many are powered by magical cores that require periodic maintenance.",
             tactics: "Constructs fight with relentless determination, using their superior strength and durability to overwhelm opponents. They often use simple but effective combat patterns and can continue fighting even when severely damaged. Many have built-in weapons or magical abilities.",
@@ -93,7 +93,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         dragon: await db.createCreatureType({
             id: "creature-type-dragon",
             name: "Dragon",
-            slug: "creature-type-dragon",
+            //slug: "creature-type-dragon",
             description: "Ancient, powerful reptilian creatures of immense intelligence and magical ability, often hoarding treasure and knowledge.",
             habits: "Dragons are territorial and establish lairs in remote, defensible locations. They hoard treasure and magical items, often using them to enhance their power. Many dragons are highly intelligent and can be negotiated with, though they are proud and easily offended.",
             tactics: "Dragons use their breath weapons to devastating effect, often opening combat with a breath attack. They combine aerial mobility with powerful melee attacks, using their size and strength to dominate the battlefield. Many can cast spells and use their hoard's magic items.",
@@ -108,7 +108,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         elemental: await db.createCreatureType({
             id: "creature-type-elemental",
             name: "Elemental",
-            slug: "creature-type-elemental",
+            //slug: "creature-type-elemental",
             description: "Beings of pure elemental energy - fire, water, earth, and air - often summoned or bound to specific locations.",
             habits: "Elementals are drawn to areas that match their elemental nature. Fire elementals seek heat and flame, water elementals are found near bodies of water, earth elementals prefer rocky terrain, and air elementals favor high places and open skies.",
             tactics: "Elementals use their elemental powers to devastating effect, often creating environmental hazards. They can merge with their element to become harder to hit and can create elemental effects that persist after they're gone. Many can summon smaller elementals to aid them.",
@@ -123,7 +123,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         fey: await db.createCreatureType({
             id: "creature-type-fey",
             name: "Fey",
-            slug: "creature-type-fey",
+            //slug: "creature-type-fey",
             description: "Magical creatures of the natural world, often capricious and dangerous, dwelling in enchanted forests and glades.",
             habits: "Fey creatures are drawn to areas of natural beauty and magical energy. They often establish courts in enchanted groves and are most active during twilight hours. Many are bound by ancient pacts and cannot break their word once given.",
             tactics: "Fey use charm and illusion magic to confuse and mislead opponents. They often fight in groups, using their superior mobility and magical abilities to outmaneuver enemies. Many can phase between the material plane and the Feywild.",
@@ -138,7 +138,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         fiend: await db.createCreatureType({
             id: "creature-type-fiend",
             name: "Fiend",
-            slug: "creature-type-fiend",
+            //slug: "creature-type-fiend",
             description: "Creatures from the lower planes, often demonic or devilish in nature, seeking to corrupt and destroy.",
             habits: "Fiends are drawn to areas of corruption, suffering, and evil. They often establish cults and corrupt mortals to do their bidding. Many are bound by contracts and cannot break their word, though they will exploit every loophole.",
             tactics: "Fiends use fear, corruption, and overwhelming force to defeat opponents. They often fight in groups, with weaker fiends supporting stronger ones. Many can summon other fiends and use their infernal powers to create lasting effects.",
@@ -153,7 +153,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         giant: await db.createCreatureType({
             id: "creature-type-giant",
             name: "Giant",
-            slug: "creature-type-giant",
+            //slug: "creature-type-giant",
             description: "Massive humanoid creatures of great strength and often primitive intelligence, dwelling in remote mountainous regions.",
             habits: "Giants are territorial and establish strongholds in remote areas. They often form tribes and follow a strict hierarchy. Many are drawn to areas rich in resources and will defend their territory fiercely.",
             tactics: "Giants use their massive size and strength to overwhelm opponents. They often fight with large weapons and can throw boulders or other heavy objects. Many use their reach advantage to keep enemies at bay while dealing devastating damage.",
@@ -167,7 +167,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         humanoid: await db.createCreatureType({
             id: "creature-type-humanoid",
             name: "Humanoid",
-            slug: "creature-type-humanoid",
+            //slug: "creature-type-humanoid",
             description: "Intelligent humanoid creatures that pose threats through organization, cunning, and numbers - including bandits, cults, rebels, and hostile tribes.",
             habits: "Humanoid enemies often operate in organized groups with clear hierarchies. They establish bases of operations, gather intelligence, and plan coordinated attacks. Many are motivated by greed, power, or ideological beliefs.",
             tactics: "Humanoids use strategy, teamwork, and superior numbers to overcome opponents. They often employ hit-and-run tactics, ambushes, and psychological warfare. Many use magic items, poisons, and other tools to gain advantages.",
@@ -181,7 +181,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         monstrosity: await db.createCreatureType({
             id: "creature-type-monstrosity",
             name: "Monstrosity",
-            slug: "creature-type-monstrosity",
+            //slug: "creature-type-monstrosity",
             description: "Creatures that defy natural classification, often the result of magical experimentation or planar corruption.",
             habits: "Monstrosities are often solitary creatures that lurk in remote or dangerous areas. They are drawn to places of magical instability and often exhibit behaviors that combine traits from multiple creature types.",
             tactics: "Monstrosities use their unique abilities and bizarre anatomies to surprise and overwhelm opponents. They often have multiple attack methods and can adapt their tactics based on their opponent's weaknesses. Many are highly aggressive and fight to the death.",
@@ -196,7 +196,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         ooze: await db.createCreatureType({
             id: "creature-type-ooze",
             name: "Ooze",
-            slug: "creature-type-ooze",
+            //slug: "creature-type-ooze",
             description: "Amorphous, slithering creatures that move through the environment, often acidic or toxic in nature.",
             habits: "Oozes are drawn to dark, damp environments and often lurk in dungeons, caves, and underground areas. They are attracted to organic matter and will consume almost anything they can engulf. Many are slow-moving but persistent hunters.",
             tactics: "Oozes use their amorphous nature to squeeze through small spaces and surprise opponents. They often attack by engulfing their prey and dissolving them with acid. Many can split into smaller oozes when damaged, making them harder to eliminate completely.",
@@ -212,7 +212,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         plant: await db.createCreatureType({
             id: "creature-type-plant",
             name: "Plant",
-            slug: "creature-type-plant",
+            //slug: "creature-type-plant",
             description: "Vegetation that has gained consciousness and mobility, often carnivorous or magical in nature.",
             habits: "Plant creatures are rooted to specific locations and are most active during daylight hours. They often establish groves or forests where they can control the environment. Many are territorial and will defend their domain fiercely.",
             tactics: "Plant creatures use their natural weapons like thorns, vines, and roots to attack opponents. They often use their environment to their advantage, creating difficult terrain and using their reach to keep enemies at bay. Many can regenerate and are difficult to kill permanently.",
@@ -227,7 +227,7 @@ export async function seedCreatureTypes(params: SeedCreatureTypesParams): Promis
         undead: await db.createCreatureType({
             id: "creature-type-undead",
             name: "Undead",
-            slug: "creature-type-undead",
+            //slug: "creature-type-undead",
             description: "Creatures that have returned from death, often through necromancy or dark magic, seeking to spread their curse.",
             habits: "Undead creatures are drawn to areas of death, decay, and negative energy. They often lurk in graveyards, crypts, and battlefields. Many are bound to specific locations or objects and cannot travel far from their source.",
             tactics: "Undead use fear, paralysis, and life-draining abilities to weaken opponents. They often fight in groups and can raise fallen enemies as undead allies. Many are immune to most mental effects and cannot be charmed or frightened.",

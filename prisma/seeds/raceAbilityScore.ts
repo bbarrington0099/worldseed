@@ -1,4 +1,4 @@
-import { Prisma, AbilityScores } from "@prismagen/client";
+/* import { Prisma, AbilityScores } from "@prismagen/client";
 import * as db from "@lib/db-seed";
 
 type RaceAbilityScorePayload = Prisma.RaceAbilityScoreGetPayload<{}>;
@@ -92,4 +92,4 @@ export async function seedRaceAbilityScores(): Promise<RaceAbilityScores> {
             modifier: 2
         })
     }
-}
+} */

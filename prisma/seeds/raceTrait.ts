@@ -1,4 +1,4 @@
-import { Prisma } from "@prismagen/client";
+/* import { Prisma } from "@prismagen/client";
 import * as db from "@lib/db-seed";
 
 type RaceTraitPayload = Prisma.RaceTraitGetPayload<{}>;
@@ -1586,4 +1586,4 @@ export async function seedRaceTraits(): Promise<RaceTraits> {
             description: "You have draconic ancestry of your chosen gem, which determines your resistance and breathe weapon type.\n\tAmethyst: Force (15ft cone)\n\tCrystal: Radiant (5 by 30ft line)\n\tEmerald: Psychic (15ft cone)\n\tSapphire: Thunder (5 by 30ft line)\n\tTopaz: Necrotic (5 by 30ft line)",
         })
     }
-}
+} */

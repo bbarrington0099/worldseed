@@ -9,16 +9,26 @@ import * as db from "./db";
 import { slugify } from './utils';
 import type {
     GuildRank,
-    MemberStatus,
-    UserRole,
-    ProfessionRestrictionType,
+    MemberStatus
 } from "@prismagen/client";
 
 // ============================================================================
 // WORLD & GEOGRAPHY
 // ============================================================================
 
-export async function createWorld(data: Prisma.WorldCreateInput): Promise<Prisma.WorldGetPayload<{}>> {
+export async function createSeason(data: Prisma.SeasonCreateInput): Promise<Prisma.SeasonGetPayload<{}>> {
+    return await db.createSeason(data, true);
+}
+
+export async function createMonth(data: Prisma.MonthUncheckedCreateInput): Promise<Prisma.MonthGetPayload<{}>> {
+    return await db.createMonth(data, true);
+}
+
+export async function createDate(data: Prisma.DateUncheckedCreateInput): Promise<Prisma.DateGetPayload<{}>> {
+    return await db.createDate(data, true);
+}
+
+export async function createWorld(data: Prisma.WorldUncheckedCreateInput): Promise<Prisma.WorldGetPayload<{}>> {
     return await db.createWorld(data, true);
 }
 
@@ -26,7 +36,7 @@ export async function createWorldConnection(data: Prisma.WorldConnectionUnchecke
     return await db.createWorldConnection(data, true);
 }
 
-export async function createKingdom(data: Prisma.KingdomCreateInput): Promise<Prisma.KingdomGetPayload<{}>> {
+export async function createKingdom(data: Prisma.KingdomUncheckedCreateInput): Promise<Prisma.KingdomGetPayload<{}>> {
     return await db.createKingdom(data, true);
 }
 
@@ -114,19 +124,19 @@ export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUnch
 // RACES
 // ============================================================================
 
-export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
+/* export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
     return db.createRaceAbilityScore(data, true);
-}
+} */
 
-export async function createRaceTrait(data: Prisma.RaceTraitCreateInput): Promise<Prisma.RaceTraitGetPayload<{}>> {
+/* export async function createRaceTrait(data: Prisma.RaceTraitCreateInput): Promise<Prisma.RaceTraitGetPayload<{}>> {
     return db.createRaceTrait(data, true);
-}
+} */
 
 export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput): Promise<Prisma.RaceNameGetPayload<{}>> {
     return db.createRaceName(data, true);
 }
 
-export async function createRace(data: Prisma.RaceUncheckedCreateInput & { alabastriaLore: string}): Promise<Prisma.RaceGetPayload<{}>> {
+export async function createRace(data: Prisma.RaceUncheckedCreateInput & { alabastriaLore: string }): Promise<Prisma.RaceGetPayload<{}>> {
     const { alabastriaLore, ...raceData } = data;
     const race = await db.createRace(raceData, true);
     createWorldConnection({
@@ -138,8 +148,8 @@ export async function createRace(data: Prisma.RaceUncheckedCreateInput & { alaba
     return race;
 }
 
-export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput & { alabastriaContext: string}): Promise<Prisma.SubraceGetPayload<{}>> {
-    const { alabastriaContext, ...subraceData } = data;
+export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput & { alabastriaContext: string, traits?: any, abilityScoreIncreases?: any }): Promise<Prisma.SubraceGetPayload<{}>> {
+    const { alabastriaContext, traits, abilityScoreIncreases, ...subraceData } = data;
     const subrace = await db.createSubrace(subraceData, true);
     createWorldConnection({
         id: `subrace-alabastria-connection-${subrace.id}`,
@@ -158,9 +168,9 @@ export async function createClassRole(data: Prisma.ClassRoleCreateInput): Promis
     return db.createClassRole(data, true);
 }
 
-export async function createClassFeature(data: Prisma.ClassFeatureCreateInput): Promise<Prisma.ClassFeatureGetPayload<{}>> {
+/* export async function createClassFeature(data: Prisma.ClassFeatureCreateInput): Promise<Prisma.ClassFeatureGetPayload<{}>> {
     return db.createClassFeature(data, true);
-}
+} */
 
 export async function createClass(data: Prisma.ClassCreateInput & { alabastriaLore: string}) : Promise<Prisma.ClassGetPayload<{}>> {
     const { alabastriaLore, ...classData } = data;
@@ -448,20 +458,6 @@ export async function createComplexityLevel(data: {
 // USERS
 // ============================================================================
 
-export async function createUser(data: {
-    email: string;
-    name?: string;
-    passwordHash: string;
-    role?: UserRole;
-    mustChangePassword?: boolean;
-}) {
-    return prisma.user.upsert({
-        where: { email: data.email },
-        update: data,
-        create: {
-            ...data,
-            role: data.role ?? "GUILD_MEMBER",
-            mustChangePassword: data.mustChangePassword ?? true,
-        },
-    });
+export async function createUser(data: Prisma.UserCreateInput & { plainPassword: string }): Promise<void> {
+    await db.createUser(data);
 }

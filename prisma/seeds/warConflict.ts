@@ -30,8 +30,8 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-wyvern-wars-alabastria",
             name: "Wyvern Wars",
             description: "A great migration of wyverns leaving Kantra to explore the newly inhabited lands, laying siege against all continents and their developing civilizations, causing widespread devastation and forcing unlikely alliances to repel the threat.",
-            startCycle: 300,
-            endCycle: 600,
+            startDate: "300",
+            endDate: "600",
             status: WarConflictStatus.RESOLVED,
             outcome: "Victory for the allied continents, and while it was at a great cost; led to most of the continents taking on their role from the war as a specialization in their economies and cultures.",
             continentsInvolved: {
@@ -49,8 +49,8 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-first-continental-war-alabastria",
             name: "First Continental War",
             description: "Major naval conflict with Bulsania over control of northern maritime trade routes, establishing Skratonia as the central trade hub.",
-            startCycle: 100,
-            endCycle: 130,
+            startDate: "100",
+            endDate: "130",
             status: WarConflictStatus.RESOLVED,
             outcome: "Skratonia's victory established it as the dominant maritime power in the northern seas, controlling key trade routes and ports.",
             continentsInvolved: {
@@ -64,7 +64,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-coastal-forest-disputes-alabastria",
             name: "Coastal Forest Disputes",
             description: "Ongoing tensions with Skratonia over logging rights in the northern coastal forests. Skratonian settlers occasionally arrive by sea to encroach on elven territory.",
-            startCycle: 768,
+            startDate: "768",
             status: WarConflictStatus.LOW_INTENSITY,
             continentsInvolved: {
                 connect: [
@@ -77,8 +77,8 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-swamp-wars-alabastria",
             name: "Swamp Wars",
             description: "Major conflicts over control of the swamp regions, establishing Katman as the primary agricultural center of Kamalatman.",
-            startCycle: 500,
-            endCycle: 600,
+            startDate: "500",
+            endDate: "600",
             status: WarConflictStatus.RESOLVED,
             outcome: "Katman's victory solidified its role as the agricultural hub of Kamalatman, controlling vital swamp resources and trade routes.",
             continentsInvolved: {
@@ -93,7 +93,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-swamp-border-skirmishes-alabastria",
             name: "Swamp Border Skirmishes",
             description: "Frequent skirmishes along the swamp borders between Katman and Alatman, with disputes over fishing rights with naval support from both sides.",
-            startCycle: 785,
+            startDate: "785",
             status: WarConflictStatus.COLD_WAR,
             continentsInvolved: {
                 connect: [
@@ -106,7 +106,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-southern-frontier-war-alabastria",
             name: "Southern Frontier War",
             description: "Ongoing conflicts with Skratonia over trade tariffs and resource taxation, particularly affecting the southern maritime trade routes.",
-            startCycle: 770,
+            startDate: "770",
             status: WarConflictStatus.LOW_INTENSITY,
             continentsInvolved: {
                 connect: [
@@ -121,8 +121,8 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-alatman-resource-wars-alabastria",
             name: "Alatman Resource Wars",
             description: "Major conflict over control of the volcanic resources, leading to the current taxation system.",
-            startCycle: 600,
-            endCycle: 700,
+            startDate: "600",
+            endDate: "700",
             status: WarConflictStatus.RESOLVED,
             outcome: "In the end the continent of Alatman gave in to the demands of Katman and Maltman, agreeing to a taxation system that benefited all parties involved.",
             continentsInvolved: {
@@ -137,7 +137,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-resource-tax-rebellion-alabastria",
             name: "Resource Tax Rebellion",
             description: "Ongoing uprisings against the Kamalatman monarchy's heavy taxation on resource extraction. Local miners and settlers demand fairer treatment.",
-            startCycle: 795,
+            startDate: "795",
             status: WarConflictStatus.COLD_WAR,
             continentsInvolved: {
                 connect: [
@@ -151,8 +151,8 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-great-mining-war-alabastria",
             name: "Great Mining War",
             description: "Major conflicts over control of the richest mining regions, establishing Maltman as the primary mining center of Kamalatman.",
-            startCycle: 200,
-            endCycle: 300,
+            startDate: "200",
+            endDate: "300",
             status: WarConflictStatus.RESOLVED,
             outcome: "Maltman's victory solidified its role as the mining hub of Kamalatman, controlling vital mineral resources and trade routes.",
             continentsInvolved: {
@@ -167,7 +167,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-underground-expansion-conflict-alabastria",
             name: "Underground Expansion Conflict",
             description: "Tensions with Kuriguer over underground magical resources and ancient ruins discovered in deep mines.",
-            startCycle: 780,
+            startDate: "780",
             status: WarConflictStatus.COLD_WAR,
             continentsInvolved: {
                 connect: [
@@ -180,7 +180,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-coastal-mountain-dispute-alabastria",
             name: "Coastal Mountain Dispute",
             description: "Frequent disputes caused by Maltman attempting to lay claim to mountain resources in areas of Bulsania that the tribes do not often travel to due to the dangers of being on that side of the continent.",
-            startCycle: 642,
+            startDate: "642",
             status: WarConflictStatus.LOW_INTENSITY,
             continentsInvolved: {
                 connect: [
@@ -193,7 +193,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-caravan-wars-alabastria",
             name: "Caravan Wars",
             description: "Ongoing conflict between Frosthold and raider tribes like the Icemaw who regularly attack food caravans. Mercenary companies such as the Frostmarch Company are frequently hired to hunt down and eliminate raider camps.",
-            startCycle: 515,
+            startDate: "515",
             status: WarConflictStatus.HIGH_INTENSITY,
             continentsInvolved: {
                 connect: [
@@ -205,7 +205,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-kantra-watch-alabastria",
             name: "Kantra Watch",
             description: "Constant maritime vigilance against threats from the mysterious Kantra region across the northern seas, requiring significant naval resources.",
-            startCycle: 600,
+            startDate: "600",
             status: WarConflictStatus.COLD_WAR,
             continentsInvolved: {
                 connect: [
@@ -218,7 +218,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             id: "war-conflict-forbidden-land-dispute-alabastria",
             name: "Forbidden Land Dispute",
             description: "Ongoing tensions over who has the right to explore or claim Kantra, with multiple nations claiming territorial rights.",
-            startCycle: 750,
+            startDate: "750",
             status: WarConflictStatus.COLD_WAR,
             continentsInvolved: {
                 connect: [

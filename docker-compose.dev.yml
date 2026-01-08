@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: alabastria-dev-app
+    container_name: worldseed-dev-app
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -20,7 +20,7 @@ services:
       - db
 
   db:
-    container_name: alabastria-dev-postgres
+    container_name: worldseed-dev-postgres
     image: postgres:18.1
     restart: always
     env_file:

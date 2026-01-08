@@ -22,7 +22,7 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
     return {
         kuriguer: await db.createContinent({
             id: "kuriguer-alabastria", 
-            slug: "kuriguer-alabastria",
+            //slug: "kuriguer-alabastria",
             world: { connect: { id: worlds.alabastria.id } }, 
             name: "Kuriguer", 
             description: "Here is the land of magic, far from a fairytale sense. With the establishment of two fine towns along the coast and smaller settlements leading South, the rest of this land is shrouded beyond a forest not typically kind to strangers.", 
@@ -34,14 +34,14 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
             flagSymbol: "Mystical Tree", 
             flagDescription: "A silver tree with purple leaves representing the magical forests and elven coastal settlements, symbolizing the balance between nature and arcane knowledge.",
             languageReasoning: "The magical nature of Kuriguer has attracted diverse races. Elvish dominates the forests, Sylvan echoes in fey-touched areas, while Primordial resonates with elemental magic. The coastal towns use Common for trade, and magical research brings scholars speaking Draconic and even rarer planar languages.",
-            governmentType: GovernmentType.MAGICAL_CONCLAVE,
+            governmentType: GovernmentType.CONCLAVE,
             politicalStructure: "Kuriguer is governed by a Conclave of Archmages, each representing different schools of magic and the various settlements. While decisions attempted to be made collectively, there is a seat of High Archmage for settling disputes and addressing the public. The conclave operates with a focus on preserving the magical integrity of the continent while fostering cooperation among its diverse inhabitants.",
             foreignRelations: "Kuriguer maintains a network of alliances with other magical realms and mystical creatures. Diplomatic efforts are often intertwined with arcane rituals and exchanges of magical knowledge, ensuring that the continent remains a pivotal center for magical research and cooperation.",
             majorPoliticalIssue: "The diverse magical factions within Kuriguer often clash over the direction of magical research and the use of arcane resources. Disputes arise between traditionalist mages who wish to preserve ancient practices and progressive scholars advocating for new magical innovations, leading to political tension within the Conclave."
         }),
         katman: await db.createContinent({
             id: "katman-kamalatman-alabastria",
-            slug: "katman-kamalatman-alabastria",
+            //slug: "katman-kamalatman-alabastria",
             world: { connect: { id: worlds.alabastria.id } },
             kingdom: { connect: { id: kingdoms.kamalatman.id } },
             name: "Katman",
@@ -61,7 +61,7 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
         }),
         alatman: await db.createContinent({
             id: "alatman-kamalatman-alabastria",
-            slug: "alatman-kamalatman-alabastria",
+            //slug: "alatman-kamalatman-alabastria",
             world: { connect: { id: worlds.alabastria.id } },
             kingdom: { connect: { id: kingdoms.kamalatman.id } },
             name: "Alatman",
@@ -81,7 +81,7 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
         }),
         maltman: await db.createContinent({
             id: "maltman-kamalatman-alabastria",
-            slug: "maltman-kamalatman-alabastria",
+            //slug: "maltman-kamalatman-alabastria",
             world: { connect: { id: worlds.alabastria.id } },
             kingdom: { connect: { id: kingdoms.kamalatman.id } },
             name: "Maltman",
@@ -101,7 +101,7 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
         }),
         skratonia: await db.createContinent({
             id: "skratonia-alabastria",
-            slug: "skratonia-alabastria",
+            //slug: "skratonia-alabastria",
             world: { connect: { id: worlds.alabastria.id } },
             name: "Skratonia",
             description: "While other worlds would likely consider this a desert wasteland, in Alabastria, Skratonia is the most populated land due to its' many open planes, and moderate temperate compared to much of the commoner welcome options or the swampy marshlands of the triontinental Kingdom of Kamalatman, allowing the growth of decent crops, leading to a very diverse mix of people of small settlements connected through major towns.",
@@ -120,7 +120,7 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
         }),
         bulsania: await db.createContinent({
             id: "bulsania-alabastria",
-            slug: "bulsania-alabastria",
+            //slug: "bulsania-alabastria",
             world: { connect: { id: worlds.alabastria.id } },
             name: "Bulsania",
             description: "The resident continent of ice and tough inhabitants holds few settlements on its' West coast before reaching a group of mountain ranges including the cloud towering Noxious Mountain, leading into a frozen land left to giants and titans. The wastes are prowled by mercenary companies like the Frostmarch Company, who make their living as hired blades and monster hunters in this unforgiving landscape where survival itself is a form of warfare.",
@@ -139,7 +139,7 @@ export async function seedContinents(params: SeedContinentsParams): Promise<Cont
         }),
         kantra: await db.createContinent({
             id: "kantra-alabastria",
-            slug: "kantra-alabastria",
+            //slug: "kantra-alabastria",
             world: { connect: { id: worlds.alabastria.id } },
             name: "Kantra",
             description: "A counter to Bulsania, this land of fiery cracking earth and ash filled sky is home to creatures not known by the lands around it as no attempted explorations have returned, leading to quite the rumors of this hellish region. (No map as the land is uncharted)",
