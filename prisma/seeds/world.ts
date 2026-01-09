@@ -13,9 +13,12 @@ export interface Worlds {
 } */
 export async function seedWorlds(/* params: WorldsParams */): Promise<Worlds> {
     //const { dates } = params;
+    if (!process.env.WORLD_SEED_ID) {
+        throw new Error("Missing WORLD_SEED_ID in environment variables.");
+    }
     return {
         worldSeed: await db.createWorld({
-            id: "world-seed",
+            id: process.env.WORLD_SEED_ID,
             //slug: "world-seed",
             name: "World Seed",
             description: "The World Seed, a collection of core information available to all worlds born from it.",

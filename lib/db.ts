@@ -16,21 +16,49 @@ export { CACHE_TAGS };
 // USER MANAGEMENT
 // ============================================================================
 
-export async function createUser(data: Prisma.UserCreateInput & { plainPassword: string }): Promise<void> {
-    const existingUser = await prisma.user.findUnique({
-        where: { email: data.email },
-    });
-    if (existingUser) {
-        throw new Error(`User with email ${data.email} already exists.`);
-    }
-    const { plainPassword, ...rawData } = data;
-    if (!rawData.email || !plainPassword) {
+export async function createUser(
+    data: Prisma.UserCreateInput & { plainPassword: string }
+): Promise<void> {
+    const { plainPassword, ...userData } = data;
+
+    if (!userData.email || !plainPassword) {
         throw new Error("Email and plainPassword are required to create a user.");
     }
-    rawData.passwordHash = await bcrypt.hash(plainPassword, 10);
-    prisma.user.create({
-        data: rawData,
-    });
+
+    const worldId = process.env.WORLD_SEED_ID;
+    if (!worldId) {
+        throw new Error("Missing WORLD_SEED_ID in environment variables.");
+    }
+
+    const passwordHash = await bcrypt.hash(plainPassword, 10);
+
+    try {
+        await prisma.$transaction(async (tx) => {
+            const user = await tx.user.create({
+                data: {
+                    ...userData,
+                    passwordHash,
+                },
+            });
+            
+            const worldCount = await tx.world.count();
+            if (worldCount > 0) {
+                await tx.world.update({
+                    where: { id: worldId },
+                    data: {
+                        occupants: {
+                            connect: { id: user.id },
+                        },
+                    },
+                });
+            }
+        });
+    } catch (err: any) {
+        if (err.code === "P2002") {
+            throw new Error(`User with email ${data.email} already exists.`);
+        }
+        throw err;
+    }
 }
 
 // ============================================================================
@@ -45,7 +73,7 @@ export async function createSeason(data: Prisma.SeasonCreateInput, seeded: boole
     });
 }
 
-export async function createMonth(data: Prisma.MonthUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.MonthGetPayload<{}>> {
+export async function createMonth(data: Prisma.MonthUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.MonthGetPayload<{}>> {        
     return await prisma.month.upsert({
         where: { id: data.id },
         update: data,
@@ -53,23 +81,8 @@ export async function createMonth(data: Prisma.MonthUncheckedCreateInput, seeded
     });
 }
 
-export async function createDate(data: Prisma.DateUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.DateGetPayload<{}>> {
-    let month = undefined;
-    if (data.monthId) {
-        month = await prisma.month.findUnique({
-            where: { id: data.monthId },
-        });
-        if (!month) {
-            throw new Error(`Missing month FK: ${data.monthId}`);
-        }
-        if (data.day && (data.day < 0 || data.day > month.daysInMonth)) {
-            data.day = undefined;
-        }
-    }
-    if (!data.id) {
-        data.id = `date-${data.cycle ?? "unknown"}-${month?.name ?? "unknown"}-${data.day ?? "unknown"}`;
-    }
-    return await prisma.date.upsert({
+export async function createWeekDay(data: Prisma.WeekDayCreateInput, seeded: boolean = false): Promise<Prisma.WeekDayGetPayload<{}>> {
+    return await prisma.weekDay.upsert({
         where: { id: data.id },
         update: data,
         create: { ...data, seeded },
@@ -77,6 +90,21 @@ export async function createDate(data: Prisma.DateUncheckedCreateInput, seeded: 
 }
 
 export async function createWorld(data: Prisma.WorldUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.WorldGetPayload<{}>> {
+    if (!data.ownerId) {
+		if (!process.env.DEFAULT_ADMIN_EMAIL) {
+			throw new Error(
+				'Missing DEFAULT_ADMIN_EMAIL in environment variables.'
+			);
+		}
+		const defaultUser = await prisma.user.findUnique({
+			where: { email: process.env.DEFAULT_ADMIN_EMAIL },
+		});
+        if (!defaultUser) {
+            throw new Error(`Default admin user with email ${process.env.DEFAULT_ADMIN_EMAIL} not found.`);
+        }
+        data.ownerId = defaultUser.id;
+	}
+    
     return await prisma.world.upsert({
         where: { id: data.id },
         update: data,
@@ -262,22 +290,6 @@ export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUnch
 // RACES
 // ============================================================================
 
-/* export async function createRaceAbilityScore(data: Prisma.RaceAbilityScoreCreateInput, seeded: boolean = false): Promise<Prisma.RaceAbilityScoreGetPayload<{}>> {
-    return await prisma.raceAbilityScore.upsert({
-        where: { id: data.id },
-        update: data,
-        create: { ...data, seeded },
-    });
-} */
-
-/* export async function createRaceTrait(data: Prisma.RaceTraitCreateInput, seeded: boolean = false): Promise<Prisma.RaceTraitGetPayload<{}>> {
-    return await prisma.raceTrait.upsert({
-        where: { id: data.id },
-        update: data,
-        create: { ...data, seeded },
-    });
-} */
-
 export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.RaceNameGetPayload<{}>> {
     return await prisma.raceName.upsert({
         where: { id: data.id },
@@ -356,14 +368,6 @@ export async function createClassRole(data: Prisma.ClassRoleCreateInput, seeded:
         create: { ...data, seeded },
     });
 }
-
-/* export async function createClassFeature(data: Prisma.ClassFeatureCreateInput, seeded: boolean = false): Promise<Prisma.ClassFeatureGetPayload<{}>> {
-    return await prisma.classFeature.upsert({
-        where: { id: data.id },
-        update: data,
-        create: { ...data, seeded },
-    });
-} */
 
 export async function createClass(data: Prisma.ClassCreateInput, seeded: boolean = false): Promise<Prisma.ClassGetPayload<{}>> {
     return await prisma.class.upsert({

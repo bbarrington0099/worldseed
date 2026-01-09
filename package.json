@@ -19,6 +19,7 @@
         "prisma:migrate:fresh": "npx prisma migrate reset",
         "prisma:seed": "npx prisma db seed",
         "prisma:update": "npm run prisma:generate && npm run prisma:migrate && npm run prisma:seed",
+        "prisma:reset": "npm run prisma:migrate:fresh && npm run prisma:update",
         "prisma:studio": "npx prisma studio --port 5555 --browser none",
         "docker:dev:build": "docker compose -f docker-compose.dev.yml up --build -d",
         "docker:dev:build:logs": "docker compose -f docker-compose.dev.yml up --build",

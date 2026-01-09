@@ -222,10 +222,10 @@ async function main() {
     // World Creation
     const seasons: seed.Seasons = await seed.seedSeasons();
     const months: seed.Months = await seed.seedMonths({ seasons });
-    //const dates: seed.Dates = await seed.seedDate({ months });
-    const worlds: seed.Worlds = await seed.seedWorlds(/* { dates } */);
+    const worlds: seed.Worlds = await seed.seedWorlds();
     await seed.setWorldsMonths({ worlds, months });
-    const kingdoms: seed.Kingdoms = await seed.seedKingdoms({ worlds /*, dates */ });
+    const weekDays: seed.WeekDays = await seed.seedWeekDays();
+    const kingdoms: seed.Kingdoms = await seed.seedKingdoms({ worlds });
     const continents: seed.Continents = await seed.seedContinents({ worlds, kingdoms });
     await seed.setKingdomsCapitals({ kingdoms, continents });
     const towns: seed.Towns = await seed.seedTowns({ continents });
@@ -236,7 +236,7 @@ async function main() {
     const languages: seed.Languages = await seed.seedLanguages();
     await seed.setContinentLanguages({ continents, languages });
     const warConflicts: seed.WarConflicts = await seed.seedWarConflicts({ continents });
-    const treaties: seed.Treaties = await seed.seedTreaties({ continents /*, dates */ });
+    const treaties: seed.Treaties = await seed.seedTreaties({ continents });
     const historicalPeriods: seed.HistoricalPeriods = await seed.createHistoricalPeriods({ worlds });
     // Creatures
     const creatureSizes: seed.CreatureSizes = await seed.seedCreatureSizes();
@@ -244,20 +244,17 @@ async function main() {
     await seed.setContinentCreatureTypes({ continents, creatureTypes });
     const legendaryCreatures: seed.LegendaryCreatures = await seed.seedLegendaryCreatures({ continents, creatureSizes, creatureTypes });
     // Races
-    //const raceAbilityScores: seed.RaceAbilityScores = await seed.seedRaceAbilityScores();
-    //const raceTraits: seed.RaceTraits = await seed.seedRaceTraits();
     const raceNames: seed.RaceNames = await seed.seedRaceNames();
-    const races: seed.Races = await seed.seedRaces({ creatureSizes, languages, /* raceTraits, */ raceNames /*, raceAbilityScores */ });
-    const subraces: seed.Subraces = await seed.seedSubraces({ races, /* raceTraits, */ /* raceAbilityScores */ });
+    const races: seed.Races = await seed.seedRaces({ creatureSizes, languages, raceNames  });
+    const subraces: seed.Subraces = await seed.seedSubraces({ races });
     // Classes
     const classRoles: seed.ClassRoles = await seed.seedClassRoles();
-    //const classFeatures: seed.ClassFeatures = await seed.seedClassFeatures();
-    const classes: seed.Classes = await seed.seedClasses({ classRoles, /* classFeatures */ });
-	const subclasses: seed.Subclasses = await seed.seedSubclasses({ classes, /* classFeatures */ });
+    const classes: seed.Classes = await seed.seedClasses({ classRoles });
+	const subclasses: seed.Subclasses = await seed.seedSubclasses({ classes });
     // Deities
     const pantheons: seed.Pantheons = await seed.seedPantheons();
     const deities: seed.Deities = await seed.seedDeities({ pantheons });
-    //const deityHolyDays: seed.DeityHolyDays = await seed.seedDeityHolyDays({ deities, dates });
+    const deityHolyDays: seed.DeityHolyDays = await seed.seedDeityHolyDays({ deities });
     const deityHistories: seed.DeityHistories = await seed.seedDeityHistories({ deities, historicalPeriods });
     const deityRelationships: seed.DeityRelationships = await seed.seedDeityRelationships({ deities });
     // Recommendations

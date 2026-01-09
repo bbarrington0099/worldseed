@@ -1,0 +1,10 @@
+date strings: 
+    ideal: "year Month day" ex: "800 Highsun 15"
+    possibilities: "year Month day" "year Month", "Month day", "year", ""
+    split by " "
+        if length 3 0: year (int), 1: Month (string), 2: day (int)
+        else if length 2
+            if 0 parse to int 0: year, 1: Month else 0: Month, 1: day;
+        else if length 1 0: year
+        else date unknown
+
