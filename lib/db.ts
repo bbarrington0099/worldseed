@@ -16,9 +16,17 @@ export { CACHE_TAGS };
 // USER MANAGEMENT
 // ============================================================================
 
+export async function createUserRole(data: Prisma.UserRoleCreateInput): Promise<Prisma.UserRoleGetPayload<{}>> {
+    return await prisma.userRole.upsert({
+        where: { id: data.id },
+        update: data,
+        create: data,
+    });
+}
+
 export async function createUser(
     data: Prisma.UserCreateInput & { plainPassword: string }
-): Promise<void> {
+): Promise<Prisma.UserGetPayload<{}>> {
     const { plainPassword, ...userData } = data;
 
     if (!userData.email || !plainPassword) {
@@ -53,6 +61,9 @@ export async function createUser(
                 });
             }
         });
+        return await prisma.user.findUnique({
+            where: { email: data.email },
+        }) as Prisma.UserGetPayload<{}>;
     } catch (err: any) {
         if (err.code === "P2002") {
             throw new Error(`User with email ${data.email} already exists.`);
@@ -106,14 +117,6 @@ export async function createWorld(data: Prisma.WorldUncheckedCreateInput, seeded
 	}
     
     return await prisma.world.upsert({
-        where: { id: data.id },
-        update: data,
-        create: { ...data, seeded },
-    });
-}
-
-export async function createWorldConnection(data: Prisma.WorldConnectionUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.WorldConnectionGetPayload<{}>> {
-    return await prisma.worldConnection.upsert({
         where: { id: data.id },
         update: data,
         create: { ...data, seeded },

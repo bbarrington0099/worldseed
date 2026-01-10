@@ -26,10 +26,21 @@ export async function createMonth(data: Prisma.MonthUncheckedCreateInput): Promi
 
 export async function createWeekDay(data: Prisma.WeekDayCreateInput): Promise<Prisma.WeekDayGetPayload<{}>> {
     const weekDay = await db.createWeekDay(data, true);
-    await createWorldConnection({
-        id: `weekday-alabastria-connection-${weekDay.id}`,
-        worldId: 'alabastria',
-        weekDayId: weekDay.id,
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+
+        if (world) {
+            await prisma.weekDay.update({
+                where: { id: weekDay.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return weekDay;
 }
@@ -57,10 +68,6 @@ export async function createWorld(data: Prisma.WorldUncheckedCreateInput): Promi
     });
 
     return world;
-}
-
-export async function createWorldConnection(data: Prisma.WorldConnectionUncheckedCreateInput): Promise<Prisma.WorldConnectionGetPayload<{}>> {
-    return await db.createWorldConnection(data, true);
 }
 
 export async function createKingdom(data: Prisma.KingdomUncheckedCreateInput): Promise<Prisma.KingdomGetPayload<{}>> {
@@ -125,10 +132,20 @@ export async function createCreatureSize(data: Prisma.CreatureSizeCreateInput): 
 
 export async function createCreatureType(data: Prisma.CreatureTypeCreateInput): Promise<Prisma.CreatureTypeGetPayload<{}>> {
     const creatureType = await db.createCreatureType(data, true);
-    createWorldConnection({
-        id: `creature-type-alabastria-connection-${creatureType.id}`,
-        worldId: 'alabastria',
-        creatureTypeId: creatureType.id,
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.creatureType.update({
+                where: { id: creatureType.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return creatureType;
 }
@@ -139,10 +156,20 @@ export async function createContinentCreatureType(data: Prisma.ContinentCreature
 
 export async function createLegendaryCreature(data: Prisma.LegendaryCreatureUncheckedCreateInput): Promise<Prisma.LegendaryCreatureGetPayload<{}>> {
     const legendaryCreature = await db.createLegendaryCreature(data, true);
-    createWorldConnection({
-        id: `legendary-creature-alabastria-connection-${legendaryCreature.id}`,
-        worldId: 'alabastria',
-        legendaryCreatureId: legendaryCreature.id,
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.legendaryCreature.update({
+                where: { id: legendaryCreature.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return legendaryCreature;
 }
@@ -158,23 +185,40 @@ export async function createRaceName(data: Prisma.RaceNameUncheckedCreateInput):
 export async function createRace(data: Prisma.RaceUncheckedCreateInput & { alabastriaLore: string }): Promise<Prisma.RaceGetPayload<{}>> {
     const { alabastriaLore, ...raceData } = data;
     const race = await db.createRace(raceData, true);
-    createWorldConnection({
-        id: `race-alabastria-connection-${race.id}`,
-        worldId: 'alabastria',
-        raceId: race.id,
-        connection: data.alabastriaLore,
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.race.update({
+                where: { id: race.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return race;
 }
 
-export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput & { alabastriaContext: string }): Promise<Prisma.SubraceGetPayload<{}>> {
-    const { alabastriaContext, ...subraceData } = data;
-    const subrace = await db.createSubrace(subraceData, true);
-    createWorldConnection({
-        id: `subrace-alabastria-connection-${subrace.id}`,
-        worldId: 'alabastria',
-        subraceId: subrace.id,
-        connection: data.alabastriaContext,
+export async function createSubrace(data: Prisma.SubraceUncheckedCreateInput): Promise<Prisma.SubraceGetPayload<{}>> {
+    const subrace = await db.createSubrace(data, true);
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.subrace.update({
+                where: { id: subrace.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return subrace;
 }
@@ -187,26 +231,42 @@ export async function createClassRole(data: Prisma.ClassRoleCreateInput): Promis
     return db.createClassRole(data, true);
 }
 
-export async function createClass(data: Prisma.ClassCreateInput & { alabastriaLore: string }) : Promise<Prisma.ClassGetPayload<{}>> {
-    const { alabastriaLore, ...classData } = data;
-    const clazz = await db.createClass(classData, true);
-    createWorldConnection({
-        id: `class-alabastria-connection-${clazz.id}`,
-        worldId: 'alabastria',
-        classId: clazz.id,
-        connection: data.alabastriaLore,
+export async function createClass(data: Prisma.ClassCreateInput ) : Promise<Prisma.ClassGetPayload<{}>> {
+    const clazz = await db.createClass(data, true);
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.class.update({
+                where: { id: clazz.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return clazz;
 }
 
-export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput & { alabastriaContext: string }) : Promise<Prisma.SubclassGetPayload<{}>> {
-    const { alabastriaContext, ...subclassData } = data;
-    const subclass = await db.createSubclass(subclassData, true);
-    createWorldConnection({
-        id: `subclass-alabastria-connection-${subclass.id}`,
-        worldId: 'alabastria',
-        subclassId: subclass.id,
-        connection: data.alabastriaContext,
+export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput) : Promise<Prisma.SubclassGetPayload<{}>> {
+    const subclass = await db.createSubclass(data, true);
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.subclass.update({
+                where: { id: subclass.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return subclass;
 }
@@ -216,7 +276,23 @@ export async function createSubclass(data: Prisma.SubclassUncheckedCreateInput &
 // ============================================================================
 
 export async function createPantheon(data: Prisma.PantheonCreateInput): Promise<Prisma.PantheonGetPayload<{}>> {
-    return db.createPantheon(data, true);
+    const pantheon = await db.createPantheon(data, true);
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.pantheon.update({
+                where: { id: pantheon.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
+    });
+    return pantheon;
 }
 
 export async function createDeityHolyDay(data: Prisma.DeityHolyDayUncheckedCreateInput): Promise<Prisma.DeityHolyDayGetPayload<{}>> {
@@ -227,14 +303,22 @@ export async function createDeityHistory(data: Prisma.DeityHistoryUncheckedCreat
     return db.createDeityHistory(data, true);
 }
 
-export async function createDeity(data: Prisma.DeityUncheckedCreateInput & { alabastriaContext: string }): Promise<Prisma.DeityGetPayload<{}>> {
-    const { alabastriaContext, ...deityData } = data;
-    const deity = await db.createDeity(deityData, true);
-    createWorldConnection({
-        id: `deity-alabastria-connection-${deity.id}`,
-        worldId: 'alabastria',
-        deityId: deity.id,
-        connection: data.alabastriaContext,
+export async function createDeity(data: Prisma.DeityUncheckedCreateInput): Promise<Prisma.DeityGetPayload<{}>> {
+    const deity = await db.createDeity(data, true);
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.deity.update({
+                where: { id: deity.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return deity;
 }
@@ -273,10 +357,20 @@ export async function createSubclassContinent(data: Prisma.SubclassContinentUnch
 
 export async function createCharacter(data: Prisma.CharacterUncheckedCreateInput): Promise<Prisma.CharacterGetPayload<{}>> {
     const character = await db.createCharacter(data, true);
-    createWorldConnection({
-        id: `character-alabastria-connection-${character.id}`,
-        worldId: 'alabastria',
-        characterId: character.id,
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.character.update({
+                where: { id: character.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
     });
     return character;
 }
@@ -473,6 +567,10 @@ export async function createComplexityLevel(data: {
 // USERS
 // ============================================================================
 
-export async function createUser(data: Prisma.UserCreateInput & { plainPassword: string }): Promise<void> {
-    await db.createUser(data);
+export async function createUserRole(data: Prisma.UserRoleCreateInput): Promise<Prisma.UserRoleGetPayload<{}>> {
+    return await db.createUserRole(data);
+}
+
+export async function createUser(data: Prisma.UserCreateInput & { plainPassword: string }): Promise<Prisma.UserGetPayload<{}>> {
+    return await db.createUser(data);
 }

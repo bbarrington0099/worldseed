@@ -37,11 +37,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.utility.id },
 				],
 			},
-			alabastriaLore:
-				'In the volcanic forges of Alatman and the mountain workshops of Maltman, Artificers represent the pinnacle of magical engineering. These innovative creators bridge the gap between ancient magic and emerging technology, crafting wonders that aid adventurers and defend settlements across Kamalatman.',
 			playstyle:
-				'Versatile support character who excels at problem-solving through magical items and utility spells. Best for players who enjoy creative solutions and helping the party with magical gadgets.',
+            'Versatile support character who excels at problem-solving through magical items and utility spells. Best for players who enjoy creative solutions and helping the party with magical gadgets.',
 			additionalProperties: {
+                alabastriaLore:
+                    'In the volcanic forges of Alatman and the mountain workshops of Maltman, Artificers represent the pinnacle of magical engineering. These innovative creators bridge the gap between ancient magic and emerging technology, crafting wonders that aid adventurers and defend settlements across Kamalatman.',
 				primaryAbility: 'Int',
 				hitDie: 'd8',
 				savingThrows: ['Con', 'Int'],
@@ -76,11 +76,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.damage_dealer.id },
 				],
 			},
-			alabastriaLore:
-				"From the frozen peaks of Bulsania to the swampy strongholds of Katman, Barbarians embody the untamed spirit of Alabastria's wildest places. These warriors reject civilization's constraints, drawing power from ancestral spirits, primal totems, and the raw fury of the natural world.",
 			playstyle:
-				'High-damage, high-durability front-line fighter. Best for players who want to charge into battle and deal massive damage while shrugging off enemy attacks.',
+            'High-damage, high-durability front-line fighter. Best for players who want to charge into battle and deal massive damage while shrugging off enemy attacks.',
 			additionalProperties: {
+                alabastriaLore:
+                    "From the frozen peaks of Bulsania to the swampy strongholds of Katman, Barbarians embody the untamed spirit of Alabastria's wildest places. These warriors reject civilization's constraints, drawing power from ancestral spirits, primal totems, and the raw fury of the natural world.",
 				primaryAbility: 'Str',
 				hitDie: 'd12',
 				savingThrows: ['Str', 'Con'],
@@ -105,11 +105,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.utility.id },
 				],
 			},
-			alabastriaLore:
-				"In Skratonia's diverse city-states and Kuriguer's magical courts, Bards serve as diplomats, entertainers, and keepers of lore. Their songs preserve the history of The Bringing, weave magic through performance, and inspire heroes across all continents of Alabastria.",
 			playstyle:
-				'Ultimate support character with unmatched versatility. Best for players who enjoy helping others succeed and having options for every situation.',
+            'Ultimate support character with unmatched versatility. Best for players who enjoy helping others succeed and having options for every situation.',
 			additionalProperties: {
+                alabastriaLore:
+                    "In Skratonia's diverse city-states and Kuriguer's magical courts, Bards serve as diplomats, entertainers, and keepers of lore. Their songs preserve the history of The Bringing, weave magic through performance, and inspire heroes across all continents of Alabastria.",
 				primaryAbility: 'Cha',
 				hitDie: 'd8',
 				savingThrows: ['Dex', 'Cha'],
@@ -141,11 +141,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.healer.id },
 				],
 			},
-			alabastriaLore:
-				"Across Alabastria's diverse continents, Clerics serve as the primary connection between mortals and the divine. From Tempus-worshipping War Clerics like Tharos Raggenthraw to forge-priests in Maltman's workshops, these holy servants adapt their faith to serve their communities' needs.",
 			playstyle:
-				'Primary healer and support with strong defensive capabilities. Best for players who want to keep the party alive while contributing meaningful combat support.',
+            'Primary healer and support with strong defensive capabilities. Best for players who want to keep the party alive while contributing meaningful combat support.',
 			additionalProperties: {
+                alabastriaLore:
+                    "Across Alabastria's diverse continents, Clerics serve as the primary connection between mortals and the divine. From Tempus-worshipping War Clerics like Tharos Raggenthraw to forge-priests in Maltman's workshops, these holy servants adapt their faith to serve their communities' needs.",
 				primaryAbility: 'Wis',
 				hitDie: 'd8',
 				savingThrows: ['Wis', 'Cha'],
@@ -170,11 +170,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.shapeshifter.id },
 				],
 			},
-			alabastriaLore:
-				"In Kuriguer's magical forests and Skratonia's fertile plains, Druids maintain the balance between civilization and wilderness. These primal spellcasters guard ancient groves, tend to wounded lands, and serve as bridges between the natural and civilized worlds.",
 			playstyle:
-				"Versatile nature-based caster with shapeshifting abilities. Best for players who want to embody nature's power and have unique utility options.",
+            "Versatile nature-based caster with shapeshifting abilities. Best for players who want to embody nature's power and have unique utility options.",
 			additionalProperties: {
+                alabastriaLore:
+                    "In Kuriguer's magical forests and Skratonia's fertile plains, Druids maintain the balance between civilization and wilderness. These primal spellcasters guard ancient groves, tend to wounded lands, and serve as bridges between the natural and civilized worlds.",
 				primaryAbility: 'Wis',
 				hitDie: 'd8',
 				savingThrows: ['Int', 'Wis'],
@@ -215,11 +215,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.damage_dealer.id },
 				],
 			},
-			alabastriaLore:
-				"From Skratonia's diverse city militias to Bulsania's elite dragon-riders, Fighters represent the pinnacle of martial training. These versatile warriors adapt their techniques to serve as guards, soldiers, duelists, and champions across all of Alabastria's continents.",
 			playstyle:
-				'Reliable physical combatant with excellent survivability. Best for players who want consistent performance in combat with tactical options.',
+            'Reliable physical combatant with excellent survivability. Best for players who want consistent performance in combat with tactical options.',
 			additionalProperties: {
+                alabastriaLore:
+                    "From Skratonia's diverse city militias to Bulsania's elite dragon-riders, Fighters represent the pinnacle of martial training. These versatile warriors adapt their techniques to serve as guards, soldiers, duelists, and champions across all of Alabastria's continents.",
 				primaryAbility: ['Str', 'Dex'],
 				hitDie: 'd10',
 				savingThrows: ['Str', 'Con'],
@@ -249,11 +249,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.utility.id },
 				],
 			},
-			alabastriaLore:
-				"In hidden monasteries across Alabastria's mountains and secluded valleys, Monks pursue physical and spiritual perfection. These disciplined warriors combine ancient martial techniques with mystical ki manipulation, serving as guardians, seekers, and enlightened warriors.",
 			playstyle:
-				'Mobile striker with unique abilities and excellent utility. Best for players who want to be agile, versatile, and different from traditional warriors.',
+            'Mobile striker with unique abilities and excellent utility. Best for players who want to be agile, versatile, and different from traditional warriors.',
 			additionalProperties: {
+                alabastriaLore:
+                    "In hidden monasteries across Alabastria's mountains and secluded valleys, Monks pursue physical and spiritual perfection. These disciplined warriors combine ancient martial techniques with mystical ki manipulation, serving as guardians, seekers, and enlightened warriors.",
 				primaryAbility: ['Dex', 'Wis'],
 				hitDie: 'd8',
 				savingThrows: ['Str', 'Dex'],
@@ -280,11 +280,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.support.id },
 				],
 			},
-			alabastriaLore:
-				"Across Alabastria's realms, Paladins stand as beacons of hope and justice. These oath-bound warriors serve various causes, from protecting ancient forests to conquering evil, their divine magic powered by unwavering conviction and righteous purpose.",
 			playstyle:
-				"Durable front-line fighter with healing and support abilities. Best for players who want to be the party's moral compass and protector.",
+            "Durable front-line fighter with healing and support abilities. Best for players who want to be the party's moral compass and protector.",
 			additionalProperties: {
+                alabastriaLore:
+                    "Across Alabastria's realms, Paladins stand as beacons of hope and justice. These oath-bound warriors serve various causes, from protecting ancient forests to conquering evil, their divine magic powered by unwavering conviction and righteous purpose.",
 				primaryAbility: ['Str', 'Cha'],
 				hitDie: 'd10',
 				savingThrows: ['Wis', 'Cha'],
@@ -314,11 +314,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.scout.id },
 				],
 			},
-			alabastriaLore:
-				"From Kuriguer's magical forests to Bulsania's frozen peaks, Rangers serve as guardians of the wild places. These skilled trackers and hunters protect travelers, hunt dangerous beasts, and maintain the balance between civilization and wilderness.",
 			playstyle:
-				'Versatile scout and ranged combatant with survival expertise. Best for players who want to excel in exploration and outdoor adventures.',
+            'Versatile scout and ranged combatant with survival expertise. Best for players who want to excel in exploration and outdoor adventures.',
 			additionalProperties: {
+                alabastriaLore:
+                    "From Kuriguer's magical forests to Bulsania's frozen peaks, Rangers serve as guardians of the wild places. These skilled trackers and hunters protect travelers, hunt dangerous beasts, and maintain the balance between civilization and wilderness.",
 				primaryAbility: ['Dex', 'Wis'],
 				hitDie: 'd10',
 				savingThrows: ['Str', 'Dex'],
@@ -343,11 +343,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.utility.id },
 				],
 			},
-			alabastriaLore:
-				"In Skratonia's bustling cities and Kuriguer's diverse ports, Rogues operate in the shadows of society. These skilled individuals serve as spies, thieves, investigators, and scouts, using cunning and agility to accomplish what others cannot through force.",
 			playstyle:
-				'High-damage striker with excellent utility and mobility. Best for players who enjoy stealth, problem-solving, and precise strikes.',
+            'High-damage striker with excellent utility and mobility. Best for players who enjoy stealth, problem-solving, and precise strikes.',
 			additionalProperties: {
+                alabastriaLore:
+                    "In Skratonia's bustling cities and Kuriguer's diverse ports, Rogues operate in the shadows of society. These skilled individuals serve as spies, thieves, investigators, and scouts, using cunning and agility to accomplish what others cannot through force.",
 				primaryAbility: 'Dex',
 				hitDie: 'd8',
 				savingThrows: ['Dex', 'Int'],
@@ -379,11 +379,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.controller.id },
 				],
 			},
-			alabastriaLore:
-				'Across Alabastria, Sorcerers represent the raw power of magic made manifest. From Dragonborn with draconic heritage in Bulsania to Tieflings channeling infernal chaos in Skratonia, these spellcasters wield power that flows from their very being.',
 			playstyle:
-				'Flexible spellcaster with powerful magical effects. Best for players who want to specialize in magic and customize their spells.',
+            'Flexible spellcaster with powerful magical effects. Best for players who want to specialize in magic and customize their spells.',
 			additionalProperties: {
+                alabastriaLore:
+                    'Across Alabastria, Sorcerers represent the raw power of magic made manifest. From Dragonborn with draconic heritage in Bulsania to Tieflings channeling infernal chaos in Skratonia, these spellcasters wield power that flows from their very being.',
 				primaryAbility: 'Cha',
 				hitDie: 'd6',
 				savingThrows: ['Con', 'Cha'],
@@ -413,11 +413,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.utility.id },
 				],
 			},
-			alabastriaLore:
-				"In Alabastria's shadowed corners and desperate places, Warlocks forge pacts with beings beyond mortal understanding. From Tieflings embracing their fiendish heritage to Humans seeking forbidden power, these spellcasters trade pieces of their souls for eldritch might.",
 			playstyle:
-				"Customizable spellcaster with consistent power. Best for players who want unique abilities and don't mind role-playing otherworldly obligations.",
+            "Customizable spellcaster with consistent power. Best for players who want unique abilities and don't mind role-playing otherworldly obligations.",
 			additionalProperties: {
+                alabastriaLore:
+                    "In Alabastria's shadowed corners and desperate places, Warlocks forge pacts with beings beyond mortal understanding. From Tieflings embracing their fiendish heritage to Humans seeking forbidden power, these spellcasters trade pieces of their souls for eldritch might.",
 				primaryAbility: 'Cha',
 				hitDie: 'd8',
 				savingThrows: ['Wis', 'Cha'],
@@ -442,11 +442,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.utility.id },
 				],
 			},
-			alabastriaLore:
-				"In Kuriguer's magical academies and Skratonia's scholarly institutions, Wizards represent the pinnacle of magical learning. These dedicated researchers unlock the secrets of arcane power through study, experimentation, and careful documentation of magical phenomena.",
 			playstyle:
-				'Ultimate magical versatility with preparation-based casting. Best for players who enjoy strategic planning and having the right spell for every situation.',
+            'Ultimate magical versatility with preparation-based casting. Best for players who enjoy strategic planning and having the right spell for every situation.',
 			additionalProperties: {
+                alabastriaLore:
+                    "In Kuriguer's magical academies and Skratonia's scholarly institutions, Wizards represent the pinnacle of magical learning. These dedicated researchers unlock the secrets of arcane power through study, experimentation, and careful documentation of magical phenomena.",
 				primaryAbility: 'Int',
 				hitDie: 'd6',
 				savingThrows: ['Int', 'Wis'],
@@ -476,11 +476,11 @@ export async function seedClasses(params: SeedClassesParams): Promise<Classes> {
 					{ id: classRoles.controller.id },
 				],
 			},
-			alabastriaLore:
-				"In the complex political landscape of Alabastria, Tacticians serve as military advisors, guild strategists, and battlefield commanders. Their analytical minds and strategic thinking make them invaluable in the Huntbound Order's most dangerous missions, where proper planning can mean the difference between victory and disaster.",
 			playstyle:
-				'Support character who excels at battlefield control and enhancing allies through strategic planning. Best for players who enjoy tactical thinking and coordinating team efforts.',
+            'Support character who excels at battlefield control and enhancing allies through strategic planning. Best for players who enjoy tactical thinking and coordinating team efforts.',
 			additionalProperties: {
+                alabastriaLore:
+                    "In the complex political landscape of Alabastria, Tacticians serve as military advisors, guild strategists, and battlefield commanders. Their analytical minds and strategic thinking make them invaluable in the Huntbound Order's most dangerous missions, where proper planning can mean the difference between victory and disaster.",
 				primaryAbility: 'Int',
 				hitDie: 'd8',
 				savingThrows: ['Int', 'Wis'],

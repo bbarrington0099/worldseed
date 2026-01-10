@@ -1,4 +1,4 @@
-import * as db from "@lib/db-seed";
+import { prisma } from "@lib/prisma";
 import { Worlds, Months } from "../index";
 
 interface WorldsMonthsParams {
@@ -9,10 +9,17 @@ export async function setWorldsMonths(params: WorldsMonthsParams) {
     const { worlds, months } = params;
     try {
         for (const month of Object.values(months)) {
-            await db.createWorldConnection({
-                id: `world-month-alabastria-connection-${month.id}`,
-                worldId: worlds.alabastria.id,
-                monthId: month.id,
+            await prisma.month.update({
+                where: { id: month.id },
+                data: {
+                    worlds: {
+                        connect: [
+                            {
+                                id: worlds.alabastria.id,
+                            },
+                        ],
+                    },
+                },
             });
         }
     } catch (error) {

@@ -14,37 +14,9 @@
 import { prisma } from "../lib/prisma";
 import * as db from "../lib/db-seed";
 import * as seed from "./seeds"
-import { UserRole } from "@prismagen/client";
 
 async function main() {
     console.log("🌱 Starting database seed...\n");
-    // ============================================================================
-    // CREATE ADMIN USER
-    // ============================================================================
-    console.log("👤 Creating admin user...");
-
-    const ADMIN_EMAIL = process.env.DEFAULT_ADMIN_EMAIL;
-    if (!ADMIN_EMAIL) {
-        throw new Error("DEFAULT_ADMIN_EMAIL environment variable is not set.");
-    }
-    const ADMIN_PASSWORD = process.env.DEFAULT_ADMIN_PASSWORD;
-    if (!ADMIN_PASSWORD) {
-        throw new Error("DEFAULT_ADMIN_PASSWORD environment variable is not set.");
-    }
-    try {
-        await db.createUser({
-            email: ADMIN_EMAIL,
-            name: process.env.DEFAULT_ADMIN_NAME,
-            passwordHash: '',
-            plainPassword: ADMIN_PASSWORD,
-            role: UserRole.ADMIN,
-            mustChangePassword: true,
-        });
-        console.log(`   ✓ Admin user created\n`);
-    } catch (error) {
-        console.error(`   ✗ Failed to create admin user: ${(error as Error).message}\n`);
-    }
-
     // ============================================================================
     // NPC PROFESSIONS
     // ============================================================================
@@ -220,52 +192,58 @@ async function main() {
     console.log("🔄 Migrating legacy data...");
 
     // World Creation
-    const seasons: seed.Seasons = await seed.seedSeasons();
-    const months: seed.Months = await seed.seedMonths({ seasons });
-    const worlds: seed.Worlds = await seed.seedWorlds();
-    await seed.setWorldsMonths({ worlds, months });
-    const weekDays: seed.WeekDays = await seed.seedWeekDays();
-    const kingdoms: seed.Kingdoms = await seed.seedKingdoms({ worlds });
-    const continents: seed.Continents = await seed.seedContinents({ worlds, kingdoms });
-    await seed.setKingdomsCapitals({ kingdoms, continents });
-    const towns: seed.Towns = await seed.seedTowns({ continents });
-    await seed.setContinentCapitals({ continents, towns });
-    const regions: seed.Regions = await seed.seedRegions({ continents });
-    const voyages: seed.Voyages = await seed.seedVoyages({ continents });
-    const tradeRoutes: seed.TradeRoutes = await seed.seedTradeRoutes({ voyages, continents, towns });
-    const languages: seed.Languages = await seed.seedLanguages();
-    await seed.setContinentLanguages({ continents, languages });
-    const warConflicts: seed.WarConflicts = await seed.seedWarConflicts({ continents });
-    const treaties: seed.Treaties = await seed.seedTreaties({ continents });
-    const historicalPeriods: seed.HistoricalPeriods = await seed.createHistoricalPeriods({ worlds });
-    // Creatures
-    const creatureSizes: seed.CreatureSizes = await seed.seedCreatureSizes();
-    const creatureTypes: seed.CreatureTypes = await seed.seedCreatureTypes({ creatureSizes });
-    await seed.setContinentCreatureTypes({ continents, creatureTypes });
-    const legendaryCreatures: seed.LegendaryCreatures = await seed.seedLegendaryCreatures({ continents, creatureSizes, creatureTypes });
-    // Races
-    const raceNames: seed.RaceNames = await seed.seedRaceNames();
-    const races: seed.Races = await seed.seedRaces({ creatureSizes, languages, raceNames  });
-    const subraces: seed.Subraces = await seed.seedSubraces({ races });
-    // Classes
-    const classRoles: seed.ClassRoles = await seed.seedClassRoles();
-    const classes: seed.Classes = await seed.seedClasses({ classRoles });
-	const subclasses: seed.Subclasses = await seed.seedSubclasses({ classes });
-    // Deities
-    const pantheons: seed.Pantheons = await seed.seedPantheons();
-    const deities: seed.Deities = await seed.seedDeities({ pantheons });
-    const deityHolyDays: seed.DeityHolyDays = await seed.seedDeityHolyDays({ deities });
-    const deityHistories: seed.DeityHistories = await seed.seedDeityHistories({ deities, historicalPeriods });
-    const deityRelationships: seed.DeityRelationships = await seed.seedDeityRelationships({ deities });
-    // Recommendations
-    const racesContinents: seed.RacesContinents = await seed.setRacesContinents({ races, continents });
-    const subracesContinents: seed.SubracesContinents = await seed.setSubracesContinents({ subraces, continents });
-    const racesSubclasses: seed.RacesSubclasses = await seed.setRacesSubclasses({ races, subclasses });
-    const subclassesContinents: seed.SubclassesContinents = await seed.setSubclassesContinents({ subclasses, continents });
-    const subracesSubclasses: seed.SubracesSubclasses = await seed.setSubracesSubclasses({ subraces, subclasses });
-
-    // Characters
-    const characters: seed.Characters = await seed.seedCharacters({ races, subraces, classes, subclasses, languages, deities, continents, towns, creatureSizes, creatureTypes });
+    try {
+        const userRoles: seed.UserRoles = await seed.seedUserRoles();
+        const users: seed.Users = await seed.seedUsers({ userRoles });
+        const seasons: seed.Seasons = await seed.seedSeasons();
+        const months: seed.Months = await seed.seedMonths({ seasons });
+        const worlds: seed.Worlds = await seed.seedWorlds();
+        await seed.setWorldsMonths({ worlds, months });
+        const weekDays: seed.WeekDays = await seed.seedWeekDays();
+        const kingdoms: seed.Kingdoms = await seed.seedKingdoms({ worlds });
+        const continents: seed.Continents = await seed.seedContinents({ worlds, kingdoms });
+        await seed.setKingdomsCapitals({ kingdoms, continents });
+        const towns: seed.Towns = await seed.seedTowns({ continents });
+        await seed.setContinentCapitals({ continents, towns });
+        const regions: seed.Regions = await seed.seedRegions({ continents });
+        const voyages: seed.Voyages = await seed.seedVoyages({ continents });
+        const tradeRoutes: seed.TradeRoutes = await seed.seedTradeRoutes({ voyages, continents, towns });
+        const languages: seed.Languages = await seed.seedLanguages();
+        await seed.setContinentLanguages({ continents, languages });
+        const warConflicts: seed.WarConflicts = await seed.seedWarConflicts({ continents });
+        const treaties: seed.Treaties = await seed.seedTreaties({ continents });
+        const historicalPeriods: seed.HistoricalPeriods = await seed.createHistoricalPeriods({ worlds });
+        // Creatures
+        const creatureSizes: seed.CreatureSizes = await seed.seedCreatureSizes();
+        const creatureTypes: seed.CreatureTypes = await seed.seedCreatureTypes({ creatureSizes });
+        await seed.setContinentCreatureTypes({ continents, creatureTypes });
+        const legendaryCreatures: seed.LegendaryCreatures = await seed.seedLegendaryCreatures({ continents, creatureSizes, creatureTypes });
+        // Races
+        const raceNames: seed.RaceNames = await seed.seedRaceNames();
+        const races: seed.Races = await seed.seedRaces({ creatureSizes, languages, raceNames  });
+        const subraces: seed.Subraces = await seed.seedSubraces({ races });
+        // Classes
+        const classRoles: seed.ClassRoles = await seed.seedClassRoles();
+        const classes: seed.Classes = await seed.seedClasses({ classRoles });
+        const subclasses: seed.Subclasses = await seed.seedSubclasses({ classes });
+        // Deities
+        const pantheons: seed.Pantheons = await seed.seedPantheons();
+        const deities: seed.Deities = await seed.seedDeities({ pantheons });
+        const deityHolyDays: seed.DeityHolyDays = await seed.seedDeityHolyDays({ deities });
+        const deityHistories: seed.DeityHistories = await seed.seedDeityHistories({ deities, historicalPeriods });
+        const deityRelationships: seed.DeityRelationships = await seed.seedDeityRelationships({ deities });
+        // Recommendations
+        const racesContinents: seed.RacesContinents = await seed.setRacesContinents({ races, continents });
+        const subracesContinents: seed.SubracesContinents = await seed.setSubracesContinents({ subraces, continents });
+        const racesSubclasses: seed.RacesSubclasses = await seed.setRacesSubclasses({ races, subclasses });
+        const subclassesContinents: seed.SubclassesContinents = await seed.setSubclassesContinents({ subclasses, continents });
+        const subracesSubclasses: seed.SubracesSubclasses = await seed.setSubracesSubclasses({ subraces, subclasses });
+        // Characters
+        const characters: seed.Characters = await seed.seedCharacters({ races, subraces, classes, subclasses, languages, deities, continents, towns, creatureSizes, creatureTypes });
+    } catch (error) {
+        console.error(`   ❌ Error migrating legacy data:`, error);
+        process.exit(1);
+    }
 
     console.log("   ✓ Migrated legacy data\n");
 
