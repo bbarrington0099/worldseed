@@ -1,6 +1,5 @@
 export * from './userRole';
 export * from './user';
-export * from './color';
 export * from './season';
 export * from './month';
 export * from './weekDay';
@@ -41,3 +40,5 @@ export * from './connections/racesSubclasses';
 export * from './connections/subclassesContinents';
 export * from './connections/subracesSubclasses';
 export * from './connections/worldsMonths';
+
+export * from './constants/color';

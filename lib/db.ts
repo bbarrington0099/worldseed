@@ -76,14 +76,6 @@ export async function createUser(
 // WORLD & GEOGRAPHY
 // ============================================================================
 
-export async function createColor(data: Prisma.ColorCreateInput, seeded: boolean = false): Promise<Prisma.ColorGetPayload<{}>> {
-    return await prisma.color.upsert({
-        where: { id: data.id },
-        update: data,
-        create: { ...data, seeded },
-    });
-}
-
 export async function createSeason(data: Prisma.SeasonCreateInput, seeded: boolean = false): Promise<Prisma.SeasonGetPayload<{}>> {
     return await prisma.season.upsert({
         where: { id: data.id },

@@ -1,5 +1,4 @@
 // WorldSeed Prisma Schema
-// Full data model for D&D world management application
 
 generator client {
   provider = "prisma-client-js"
@@ -14,17 +13,8 @@ datasource db {
 // USER & AUTHENTICATION (Auth.js Compatible)
 // ============================================================================
 
-/**
- * enum UserRole {
- * ADMIN
- * ARCHITECT
- * DESIGNER
- * DRAFTER
- * }
- */
-
 model UserRole {
-  id                               String @id @unique @default(cuid())
+  id                               String @id @default(cuid())
   name                             String @unique
   users                            User[]
   // Limits; set to -1 for unlimited
@@ -37,7 +27,7 @@ model UserRole {
 }
 
 model User {
-  id                 String    @id @unique @default(cuid())
+  id                 String    @id @default(cuid())
   name               String?
   email              String    @unique
   emailVerified      DateTime?
@@ -101,7 +91,7 @@ model VerificationToken {
 }
 
 model ApiKey {
-  id        String   @id @unique @default(cuid())
+  id        String   @id @default(cuid())
   key       String   @unique
   createdAt DateTime @default(now())
   revoked   Boolean  @default(false)
@@ -111,6 +101,8 @@ model ApiKey {
 
   worldId String
   world   World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, worldId])
 }
 
 // ============================================================================
@@ -120,7 +112,7 @@ model ApiKey {
 model World {
   id                   String  @id @default(uuid())
   seeded               Boolean @default(false)
-  name                 String  @unique
+  name                 String
   description          String  @db.Text
   measurementUnit      String  @default("miles")
   circumference        Int?
@@ -152,7 +144,6 @@ model World {
   months             Month[]
   weekDays           WeekDay[]
   familyTrees        FamilyTree[]
-  colors             Color[]
 
   ownerId              String
   owner                User     @relation(fields: [ownerId], references: [id])
@@ -167,7 +158,7 @@ model World {
 model Continent {
   id                String  @id @default(uuid())
   seeded            Boolean @default(false)
-  name              String  @unique
+  name              String
   description       String  @db.Text
   widthMi           Int?
   heightMi          Int?
@@ -175,14 +166,12 @@ model Continent {
   languageReasoning String? @db.Text
 
   // Flag/Colors
-  primaryColorId   String?
-  primaryColor     Color?  @relation("primaryColor", fields: [primaryColorId], references: [id])
-  secondaryColorId String?
-  secondaryColor   Color?  @relation("secondaryColor", fields: [secondaryColorId], references: [id])
-  flagSymbol       String?
-  flagDescription  String? @db.Text
-  mapImagePath     String?
-  flagImagePath    String?
+  primaryColor    String?
+  secondaryColor  String?
+  flagSymbol      String?
+  flagDescription String? @db.Text
+  mapImagePath    String?
+  flagImagePath   String?
 
   // Politics
   governmentType      GovernmentType
@@ -226,7 +215,8 @@ model Continent {
   historicalEvents       HistoricalEvent[]
   professionRestrictions ProfessionContinentRestriction[]
   factionPresence        FactionContinentPresence[]
-  ruler                  CharacterContinentRuler?
+  rulerId                String?
+  ruler                  CharacterContinentRuler?         @relation(fields: [rulerId], references: [id])
   charactersFrom         Character[]
   landmarks              Landmark[]
   quests                 Quest[]
@@ -235,7 +225,7 @@ model Continent {
 model Landmark {
   id           String  @id @default(uuid())
   seeded       Boolean @default(false)
-  name         String  @unique
+  name         String
   description  String  @db.Text
   location     String?
   significance String? @db.Text
@@ -253,17 +243,15 @@ enum ContinentLanguagePrevalence {
 }
 
 model Kingdom {
-  id               String  @id @default(uuid())
-  seeded           Boolean @default(false)
-  name             String  @unique
-  description      String? @db.Text
-  surfaceAreaSqMi  BigInt?
-  primaryColorId   String?
-  primaryColor     Color?  @relation("primaryColor", fields: [primaryColorId], references: [id])
-  secondaryColorId String?
-  secondaryColor   Color?  @relation("secondaryColor", fields: [secondaryColorId], references: [id])
-  flagSymbol       String?
-  flagDescription  String? @db.Text
+  id              String  @id @default(uuid())
+  seeded          Boolean @default(false)
+  name            String
+  description     String? @db.Text
+  surfaceAreaSqMi BigInt?
+  primaryColor    String?
+  secondaryColor  String?
+  flagSymbol      String?
+  flagDescription String? @db.Text
 
   additionalProperties Json?
 
@@ -284,7 +272,8 @@ model Kingdom {
   capitalContinentId String?    @unique
   capitalContinent   Continent? @relation("KingdomCapital", fields: [capitalContinentId], references: [id])
 
-  ruler CharacterKingdomRuler?
+  rulerId String?
+  ruler   CharacterKingdomRuler? @relation(fields: [rulerId], references: [id])
 }
 
 enum TownType {
@@ -320,7 +309,8 @@ model Town {
   factionBases           FactionBase[]
   characterJobs          CharacterTownJob[]
   factionRelationships   FactionTownRelationship[]
-  graveyard              Graveyard?
+  graveyardId            String?
+  graveyard              Graveyard?                  @relation(fields: [graveyardId], references: [id], onDelete: Cascade)
   tripsFrom              Road[]                      @relation("FromTown")
   tripsTo                Road[]                      @relation("ToTown")
   tradeRoutes            TradeRoute[]
@@ -364,7 +354,7 @@ model Shop {
 model Region {
   id                   String               @id @default(uuid())
   seeded               Boolean              @default(false)
-  name                 String               @unique
+  name                 String
   description          String?              @db.Text
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
@@ -380,7 +370,7 @@ model Region {
 model Voyage {
   id          String  @id @default(uuid())
   seeded      Boolean @default(false)
-  name        String  @unique
+  name        String
   distanceMi  Int?
   travelDays  Int?
   travelHours Float?
@@ -502,12 +492,12 @@ model TradeRoute {
 model HistoricalPeriod {
   id                   String  @id @default(uuid())
   seeded               Boolean @default(false)
-  name                 String  @unique
+  name                 String
   startCycle           Int
   endCycle             Int?
   description          String  @db.Text
   significance         String? @db.Text
-  sortOrder            Int     @default(0)
+  sortOrder            Int     @default(autoincrement())
   additionalProperties Json?
 
   worldId String
@@ -544,7 +534,7 @@ model HistoricalEvent {
   additionalProperties Json?
   description          String  @db.Text
   impact               String? @db.Text
-  sortOrder            Int     @unique
+  sortOrder            Int     @default(autoincrement())
 
   worldId     String?
   world       World?            @relation(fields: [worldId], references: [id])
@@ -552,34 +542,18 @@ model HistoricalEvent {
   period      HistoricalPeriod? @relation(fields: [periodId], references: [id])
   continentId String?
   continent   Continent?        @relation(fields: [continentId], references: [id])
+
+  @@unique([periodId, sortOrder])
 }
 
 // ============================================================================
 // RACES & CLASSES
 // ============================================================================
 
-model Color {
-  id                      String      @id @default(uuid())
-  seeded                  Boolean     @default(false)
-  name                    String      
-  hexValue                String
-  additionalProperties    Json?
-  continentPrimaryColor   Continent[] @relation("primaryColor")
-  continentSecondaryColor Continent[] @relation("secondaryColor")
-  kingdomPrimaryColor     Kingdom[]   @relation("primaryColor")
-  kingdomSecondaryColor   Kingdom[]   @relation("secondaryColor")
-  raceSkinTones           Race[]      @relation("RaceSkinTones")
-  raceHairColors          Race[]      @relation("RaceHairColors")
-  subraceSkinTones        Subrace[]   @relation("SubraceSkinTones")
-  subraceHairColors       Subrace[]   @relation("SubraceHairColors")
-  deities                 Deity[]     @relation("DeityColors")
-  worlds                  World[]
-}
-
 model Race {
   id           String  @id @default(uuid())
   seeded       Boolean @default(false)
-  name         String  @unique
+  name         String
   description  String  @db.Text
   ageAdulthood Int // 0 created/spawned as adult
   ageLifespan  Int // 0 for indefinite, - for up to that many years with immortal potential
@@ -588,17 +562,17 @@ model Race {
   heightRangeHigh Float
   weightRangeLow  Int
   weightRangeHigh Int
-  skinTexture     String? @db.Text
-  skinTones       Color[] @relation("RaceSkinTones")
-  hairTexture     String? @db.Text
-  hairColors      Color[] @relation("RaceHairColors")
+  skinTexture     String?  @db.Text
+  skinTones       String[]
+  hairTexture     String?  @db.Text
+  hairColors      String[]
 
   playstyle String? @db.Text
 
   defaultCreatureSizeId String
   defaultCreatureSize   CreatureSize @relation(fields: [defaultCreatureSizeId], references: [id])
 
-  namesId              String?    @unique
+  namesId              String?
   names                RaceName?  @relation(fields: [namesId], references: [id], onDelete: Cascade)
   additionalProperties Json?
   languages            Language[]
@@ -619,11 +593,9 @@ model RaceName {
   unisex  String[]
   surname String[]
 
-  raceId String?
-  race   Race?
+  races Race[]
 
-  subraceId            String?
-  subrace              Subrace?
+  subraces             Subrace[]
   additionalProperties Json?
 }
 
@@ -696,15 +668,15 @@ model Subrace {
   heightRangeLowOverride   Float?
   weightRangeHighOverride  Int?
   weightRangeLowOverride   Int?
-  skinTonesOverrideAppend  Boolean @default(false)
-  skinTonesOverride        Color[] @relation("SubraceSkinTones")
-  skinTextureOverride      String? @db.Text
-  hairColorsOverrideAppend Boolean @default(false)
-  hairColorsOverride       Color[] @relation("SubraceHairColors")
-  hairTextureOverride      String? @db.Text
+  skinTonesOverrideAppend  Boolean  @default(false)
+  skinTonesOverride        String[]
+  skinTextureOverride      String?  @db.Text
+  hairColorsOverrideAppend Boolean  @default(false)
+  hairColorsOverride       String[]
+  hairTextureOverride      String?  @db.Text
 
   namesOverrideAppend  Boolean   @default(false)
-  namesIdOverride      String?   @unique
+  namesIdOverride      String?
   namesOverride        RaceName? @relation(fields: [namesIdOverride], references: [id], onDelete: Cascade)
   additionalProperties Json?
   raceId               String
@@ -718,8 +690,8 @@ model Subrace {
 }
 
 model ClassRole {
-  id                   String   @id @unique @default(uuid())
-  name                 String   @unique
+  id                   String   @id @default(uuid())
+  name                 String
   seeded               Boolean  @default(false)
   purpose              String?
   keyTraits            String[]
@@ -729,7 +701,7 @@ model ClassRole {
 
 model Class {
   id                   String      @id @default(uuid())
-  name                 String      @unique
+  name                 String
   description          String      @db.Text
   roles                ClassRole[]
   playstyle            String?     @db.Text
@@ -792,7 +764,7 @@ model SubraceSubclassRecommendation {
 
 model Pantheon {
   id                   String  @id @default(uuid())
-  name                 String  @unique
+  name                 String
   description          String  @db.Text
   symbol               String?
   seeded               Boolean @default(false)
@@ -803,7 +775,7 @@ model Pantheon {
 
 model Deity {
   id                   String         @id @default(uuid())
-  name                 String         @unique
+  name                 String
   title                String?
   symbol               String?
   description          String         @db.Text
@@ -817,7 +789,7 @@ model Deity {
   followers            String[]
   holyDays             DeityHolyDay[]
   symbols              String[]
-  colors               Color[]        @relation("DeityColors")
+  colors               String[]
   history              DeityHistory[]
 
   alliesFrom DeityRelationship[] @relation("DeityFrom")
@@ -866,8 +838,6 @@ model DeityRelationship {
   deity                Deity                     @relation("DeityFrom", fields: [deityId], references: [id], onDelete: Cascade)
   relatedDeityId       String
   relatedDeity         Deity                     @relation("DeityTo", fields: [relatedDeityId], references: [id], onDelete: Cascade)
-
-  @@unique([deityId, relatedDeityId, type])
 }
 
 model DeityRecommendation {
@@ -894,11 +864,11 @@ model DeityRecommendation {
 // ============================================================================
 
 model GuildRank {
-  id                   String             @id @unique @default(uuid())
-  name                 String             @unique
+  id                   String             @id @default(uuid())
+  name                 String
   imagePath            String?
-  levelLow             Int                @unique
-  levelHigh            Int                @unique
+  levelLow             Int
+  levelHigh            Int
   additionalProperties Json?
   guild                Guild[]
   guildStaff           GuildStaff[]
@@ -920,7 +890,7 @@ enum MemberStatus {
 
 model Guild {
   id                   String        @id @default(uuid())
-  name                 String        @unique
+  name                 String
   description          String        @db.Text
   emblemPath           String?
   foundedDate          String?
@@ -956,7 +926,7 @@ model GuildStaff {
   additionalProperties Json?
   guildRoleId          String
   guildRole            GuildRole  @relation(fields: [guildRoleId], references: [id], onDelete: Cascade)
-  characterId          String     @unique
+  characterId          String
   character            Character  @relation(fields: [characterId], references: [id], onDelete: Cascade)
   guildId              String
   guild                Guild      @relation(fields: [guildId], references: [id], onDelete: Cascade)
@@ -972,7 +942,7 @@ model GuildMember {
   specialization       String?
   seeded               Boolean      @default(false)
   additionalProperties Json?
-  characterId          String       @unique
+  characterId          String
   character            Character    @relation(fields: [characterId], references: [id], onDelete: Cascade)
   guildId              String
   guild                Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
@@ -984,7 +954,7 @@ model GuildMember {
 }
 
 model GuildMemberTag {
-  id                   String        @id @unique @default(uuid())
+  id                   String        @id @default(uuid())
   tag                  String
   additionalProperties Json?
   members              GuildMember[] @relation("GuildMemberTag")
@@ -1000,7 +970,7 @@ model GuildMemberAchievement {
 
 model GuildHall {
   id                   String       @id @default(uuid())
-  name                 String       @unique
+  name                 String
   description          String?      @db.Text
   imagePath            String?
   services             String[]
@@ -1011,8 +981,8 @@ model GuildHall {
   guildId              String
   guild                Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
   staff                GuildStaff[]
-  graveyard            Graveyard?
-  graveyardId          String?      @unique
+  graveyard            Graveyard?   @relation(fields: [graveyardId], references: [id])
+  graveyardId          String?
   townId               String
   town                 Town         @relation(fields: [townId], references: [id], onDelete: Cascade)
 }
@@ -1022,18 +992,19 @@ model GuildHall {
 // ============================================================================
 
 model Season {
-  id                   String  @id @unique @default(uuid())
-  name                 String  @unique
+  id                   String  @id @default(uuid())
+  name                 String
   description          String  @db.Text
   seeded               Boolean @default(false)
   additionalProperties Json?
+  order                Int     @unique @default(autoincrement())
   months               Month[]
   worlds               World[]
 }
 
 model Month {
-  id                   String  @id @unique @default(uuid())
-  name                 String  @unique
+  id                   String  @id @default(uuid())
+  name                 String
   description          String? @db.Text
   seeded               Boolean @default(false)
   daysInMonth          Int
@@ -1046,8 +1017,8 @@ model Month {
 }
 
 model WeekDay {
-  id                   String  @id @unique @default(uuid())
-  name                 String  @unique
+  id                   String  @id @default(uuid())
+  name                 String
   seeded               Boolean @default(false)
   order                Int     @unique @default(autoincrement())
   additionalProperties Json?
@@ -1112,8 +1083,8 @@ model Character {
   creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id])
 
   // Character Role Links
-  guildMember                 GuildMember?
-  guildStaff                  GuildStaff?
+  guildMemberships            GuildMember[]
+  guildStaffings              GuildStaff[]
   questAuthor                 Quest[]
   continentRuler              CharacterContinentRuler?
   kingdomRuler                CharacterKingdomRuler?
@@ -1171,7 +1142,7 @@ model CharacterTownJob {
 
 model CharacterKingdomRuler {
   id                   String    @id @default(uuid())
-  name                 String    @unique
+  name                 String
   title                String?
   rulingStyle          String?   @db.Text
   startedRulingCycle   Int?
@@ -1179,21 +1150,19 @@ model CharacterKingdomRuler {
   seeded               Boolean   @default(false)
   characterId          String    @unique
   character            Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
-  kingdomId            String    @unique
-  kingdom              Kingdom   @relation(fields: [kingdomId], references: [id], onDelete: Cascade)
+  kingdoms             Kingdom[]
 }
 
 model CharacterContinentRuler {
-  id                   String    @id @default(uuid())
-  name                 String    @unique
+  id                   String      @id @default(uuid())
+  name                 String
   title                String?
-  rulingStyle          String?   @db.Text
+  rulingStyle          String?     @db.Text
   startedRulingCycle   Int?
   additionalProperties Json?
-  characterId          String    @unique
-  character            Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
-  continentId          String    @unique
-  continent            Continent @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  characterId          String      @unique
+  character            Character   @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  continents           Continent[]
 }
 
 // Character Relationships
@@ -1216,16 +1185,13 @@ model CharacterRelationship {
 
 // Graveyard
 model Graveyard {
-  id                   String     @id @default(uuid())
+  id                   String      @id @default(uuid())
   name                 String?
-  description          String?    @db.Text
+  description          String?     @db.Text
   additionalProperties Json?
-  townId               String?    @unique
-  town                 Town?      @relation(fields: [townId], references: [id], onDelete: Cascade)
-  factionId            String?    @unique
-  faction              Faction?   @relation(fields: [factionId], references: [id], onDelete: Cascade)
-  guildHallId          String?    @unique
-  guildHall            GuildHall? @relation(fields: [guildHallId], references: [id])
+  towns                Town[]
+  factions             Faction[]
+  guildHalls           GuildHall[]
 
   entries GraveyardEntry[]
 }
@@ -1347,7 +1313,7 @@ model QuestFallenMember {
 
 model CharacterProfession {
   id                     String                           @id @default(uuid())
-  name                   String                           @unique
+  name                   String
   description            String?                          @db.Text
   category               String?
   seeded                 Boolean                          @default(false)
@@ -1358,7 +1324,7 @@ model CharacterProfession {
 }
 
 model ProfessionContinentRestriction {
-  id                   String              @id @unique @default(uuid())
+  id                   String              @id @default(uuid())
   additionalProperties Json?
   professionId         String
   profession           CharacterProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
@@ -1369,7 +1335,7 @@ model ProfessionContinentRestriction {
 }
 
 model ProfessionTownRestriction {
-  id                   String              @id @unique @default(uuid())
+  id                   String              @id @default(uuid())
   additionalProperties Json?
   professionId         String
   profession           CharacterProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
@@ -1381,7 +1347,7 @@ model ProfessionTownRestriction {
 
 model CharacterRelationshipType {
   id                     String                  @id @default(uuid())
-  name                   String                  @unique
+  name                   String
   description            String?
   seeded                 Boolean                 @default(false)
   additionalProperties   Json?
@@ -1413,7 +1379,7 @@ enum CharacterFactionRelationshipType {
 
 model Faction {
   id                     String                         @id @default(uuid())
-  name                   String                         @unique
+  name                   String
   description            String                         @db.Text
   mainPurpose            String                         @db.Text
   emblemPath             String?
@@ -1432,7 +1398,8 @@ model Faction {
   relationshipsTo        FactionRelationship[]          @relation("FactionTo")
   townRelationships      FactionTownRelationship[]
   historicEvents         FactionHistoricEvent[]
-  graveyard              Graveyard?
+  graveyardId            String?
+  graveyard              Graveyard?                     @relation(fields: [graveyardId], references: [id], onDelete: Cascade)
 }
 
 model FactionContinentPresence {
@@ -1470,7 +1437,7 @@ model FactionBase {
 
 model FactionRole {
   id                   String                         @id @default(uuid())
-  name                 String                         @unique
+  name                 String
   description          String?                        @db.Text
   rankOrder            Int                            @default(0)
   seeded               Boolean                        @default(false)
@@ -1520,7 +1487,7 @@ model FactionGuildMemberMembership {
 
 model FactionRelationshipType {
   id                   String                @id @default(uuid())
-  name                 String                @unique
+  name                 String
   description          String?               @db.Text
   seeded               Boolean               @default(false)
   additionalProperties Json?
@@ -1573,7 +1540,7 @@ model FactionTownRelationship {
 
 // Faction Historic Events
 model FactionHistoricEvent {
-  id                   String  @id @unique @default(uuid())
+  id                   String  @id @default(uuid())
   name                 String
   description          String  @db.Text
   eventType            String // e.g., "FOUNDING", "LEADERSHIP_CHANGE", "ENEMY_DECLARED", "ALLY_FORMED", "ACHIEVEMENT", "MILESTONE"
@@ -1625,7 +1592,7 @@ model RegionCreatureType {
 
 model CreatureType {
   id                   String                  @id @default(uuid())
-  name                 String                  @unique
+  name                 String
   description          String                  @db.Text
   habits               String?                 @db.Text
   tactics              String?                 @db.Text
@@ -1643,7 +1610,7 @@ model CreatureType {
 model CreatureSize {
   id                   String              @id @default(uuid())
   seeded               Boolean             @default(false)
-  name                 String              @unique
+  name                 String
   occupiedSpace        String
   heightRange          String
   weightRange          String

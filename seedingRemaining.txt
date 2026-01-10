@@ -54,7 +54,6 @@ Models complete needing additional data:
     Race/Subrace/Color skin tones and hair colors
 
 Seeded:
-    Color
     CreatureType 
     CreatureSize 
     LegendaryCreature 

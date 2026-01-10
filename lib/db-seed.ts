@@ -16,26 +16,6 @@ import type {
 // WORLD & GEOGRAPHY
 // ============================================================================
 
-export async function createColor(data: Prisma.ColorCreateInput): Promise<Prisma.ColorGetPayload<{}>> {
-    const color = await db.createColor(data, true);
-    await prisma.$transaction(async (prisma) => {
-        const world = await prisma.world.findUnique({
-            where: { id: 'alabastria' },
-        });
-        if (world) {
-            await prisma.color.update({
-                where: { id: color.id },
-                data: {
-                    worlds: {
-                        connect: { id: world.id },
-                    },
-                },
-            });
-        }
-    });
-    return color;
-}
-
 export async function createSeason(data: Prisma.SeasonCreateInput): Promise<Prisma.SeasonGetPayload<{}>> {
     return await db.createSeason(data, true);
 }

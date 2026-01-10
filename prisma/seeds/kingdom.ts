@@ -9,10 +9,9 @@ export interface Kingdoms {
 
 interface SeedKingdomsParams {
     worlds: Worlds;
-    colors: Colors;
 }
 export async function seedKingdoms(params: SeedKingdomsParams): Promise<Kingdoms> {
-    const { worlds, colors } = params;
+    const { worlds } = params;
     return {
         kamalatman: await db.createKingdom({
             id: "kamalatman-alabastria",
@@ -20,8 +19,8 @@ export async function seedKingdoms(params: SeedKingdomsParams): Promise<Kingdoms
             worldId: worlds.alabastria.id,
             description: "The unified kingdom encompassing the three continents of Alatman, Maltman, and Katman, ruled by a single royal family with regional princes governing each continent.",
             surfaceAreaSqMi: BigInt(2130000),
-            primaryColorId: colors.purple.id,
-            secondaryColorId: colors.crimson.id,
+            primaryColor: Colors.GOLD.toString(),
+            secondaryColor: Colors.CRIMSON.toString(),
             flagSymbol: "Triple Crown",
             flagDescription: "Three interlocked crowns representing the unified rule of the three Kamalatman continents.",
             dateFounded: "183",
