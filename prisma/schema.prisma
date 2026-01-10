@@ -28,12 +28,12 @@ model UserRole {
   name                             String @unique
   users                            User[]
   // Limits; set to -1 for unlimited
-  worldOwnedLimit                  Int     // number of worlds a user can own
-  worldForgerLimit                 Int     // number of worlds a user can forge not including their owned worlds (i.e., contribute to)
-  contentPillarsPerWorldLimit      Int     // e.g., races, classes, continents, pantheons, guilds, etc.
-  contentStructuresPerPillarLimit  Int     // e.g., towns, factions, landmarks, deities, quests, creature types, etc.
-  contentElementsPerStructureLimit Int     // e.g., shops, legendary creatures, family trees, historical events, etc.
-  contentItemsPerWorldLimit        Int     // e.g., shop items, characters, etc.
+  worldOwnedLimit                  Int // number of worlds a user can own
+  worldForgerLimit                 Int // number of worlds a user can forge not including their owned worlds (i.e., contribute to)
+  contentPillarsPerWorldLimit      Int // e.g., races, classes, continents, pantheons, guilds, etc.
+  contentStructuresPerPillarLimit  Int // e.g., towns, factions, landmarks, deities, quests, creature types, etc.
+  contentElementsPerStructureLimit Int // e.g., shops, legendary creatures, family trees, historical events, etc.
+  contentItemsPerWorldLimit        Int // e.g., shop items, characters, etc.
 }
 
 model User {
@@ -667,15 +667,15 @@ model Subrace {
   playstyle   String? @db.Text
   seeded      Boolean @default(false)
 
-  ageAdulthoodOverride    Int?
-  ageLifespanOverride     Int?
-  heightRangeHighOverride Float?
-  heightRangeLowOverride  Float?
-  weightRangeHighOverride Int?
-  weightRangeLowOverride  Int?
-  skinTonesOverrideAppend  Boolean   @default(false)
+  ageAdulthoodOverride     Int?
+  ageLifespanOverride      Int?
+  heightRangeHighOverride  Float?
+  heightRangeLowOverride   Float?
+  weightRangeHighOverride  Int?
+  weightRangeLowOverride   Int?
+  skinTonesOverrideAppend  Boolean  @default(false)
   skinTonesOverride        String[]
-  hairColorsOverrideAppend Boolean   @default(false)
+  hairColorsOverrideAppend Boolean  @default(false)
   hairColorsOverride       String[]
 
   namesOverrideAppend  Boolean   @default(false)
@@ -713,8 +713,7 @@ model Class {
 
   worlds               World[]
   subclasses           Subclass[]
-  playstyleCategories  PlaystyleClassRecommendation[]
-  deityRecommendations DeityRecommendation[]          @relation("ClassDeityRecs")
+  deityRecommendations DeityRecommendation[] @relation("ClassDeityRecs")
   characters           Character[]
 }
 
@@ -731,7 +730,7 @@ model Subclass {
   worlds                 World[]
   raceRecommendations    RaceSubclassRecommendation[]
   subraceRecommendations SubraceSubclassRecommendation[]
-  contientLocations      SubclassContinent[]
+  continentLocations     SubclassContinent[]
   deityRecommendations   DeityRecommendation[]           @relation("SubclassDeityRecs")
   characters             Character[]
 }
@@ -1088,17 +1087,17 @@ model Character {
   creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id])
 
   // Character Role Links
-  guildMember             GuildMember?
-  guildStaff              GuildStaff?
-  questAuthor             Quest[]
-  continentRuler          CharacterContinentRuler?
-  kingdomRuler            CharacterKingdomRuler?
-  townJobs                CharacterTownJob[]
-  factionRelationships    CharacterFactionRelationship[]
-  npcFactionMemberships   FactionNPCMembership[]
-  guildFactionMemberships FactionGuildMemberMembership[] @relation("FactionGuildMemberChar")
-  relationshipsFrom       CharacterRelationship[]        @relation("CharacterFrom")
-  relationshipsTo         CharacterRelationship[]        @relation("CharacterTo")
+  guildMember                 GuildMember?
+  guildStaff                  GuildStaff?
+  questAuthor                 Quest[]
+  continentRuler              CharacterContinentRuler?
+  kingdomRuler                CharacterKingdomRuler?
+  townJobs                    CharacterTownJob[]
+  factionRelationships        CharacterFactionRelationship[]
+  characterFactionMemberships FactionCharacterMembership[]
+  guildFactionMemberships     FactionGuildMemberMembership[] @relation("FactionGuildMemberChar")
+  relationshipsFrom           CharacterRelationship[]        @relation("CharacterFrom")
+  relationshipsTo             CharacterRelationship[]        @relation("CharacterTo")
 
   // Quest & Gameplay
   quests QuestMemberReport[]
@@ -1131,18 +1130,18 @@ model FamilyTree {
 
 // Character Role Links
 model CharacterTownJob {
-  id                   String        @id @default(uuid())
+  id                   String              @id @default(uuid())
   jobTitle             String?
-  description          String?       @db.Text
+  description          String?             @db.Text
   additionalProperties Json?
   characterId          String
-  character            Character     @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character           @relation(fields: [characterId], references: [id], onDelete: Cascade)
   townId               String?
-  town                 Town?         @relation(fields: [townId], references: [id], onDelete: Cascade)
+  town                 Town?               @relation(fields: [townId], references: [id], onDelete: Cascade)
   professionId         String
-  profession           NPCProfession @relation(fields: [professionId], references: [id])
+  profession           CharacterProfession @relation(fields: [professionId], references: [id])
   shopId               String?
-  shop                 Shop?         @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  shop                 Shop?               @relation(fields: [shopId], references: [id], onDelete: Cascade)
 }
 
 model CharacterKingdomRuler {
@@ -1318,10 +1317,10 @@ model QuestFallenMember {
 }
 
 // ============================================================================
-// NPCs & PROFESSIONS
+// CHARACTERS & PROFESSIONS
 // ============================================================================
 
-model NPCProfession {
+model CharacterProfession {
   id                     String                           @id @default(uuid())
   name                   String                           @unique
   description            String?                          @db.Text
@@ -1334,23 +1333,23 @@ model NPCProfession {
 }
 
 model ProfessionContinentRestriction {
-  id                   String        @id @unique @default(uuid())
+  id                   String              @id @unique @default(uuid())
   additionalProperties Json?
   professionId         String
-  profession           NPCProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  profession           CharacterProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   continentId          String
-  continent            Continent     @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  continent            Continent           @relation(fields: [continentId], references: [id], onDelete: Cascade)
 
   @@unique([professionId, continentId])
 }
 
 model ProfessionTownRestriction {
-  id                   String        @id @unique @default(uuid())
+  id                   String              @id @unique @default(uuid())
   additionalProperties Json?
   professionId         String
-  profession           NPCProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  profession           CharacterProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
   townId               String
-  town                 Town          @relation(fields: [townId], references: [id], onDelete: Cascade)
+  town                 Town                @relation(fields: [townId], references: [id], onDelete: Cascade)
 
   @@unique([professionId, townId])
 }
@@ -1401,7 +1400,7 @@ model Faction {
   worlds                 World[]
   continentPresence      FactionContinentPresence[]
   bases                  FactionBase[]
-  npcMembers             FactionNPCMembership[]
+  characterMembers       FactionCharacterMembership[]
   guildMembers           FactionGuildMemberMembership[]
   characterRelationships CharacterFactionRelationship[]
   relationshipsFrom      FactionRelationship[]          @relation("FactionFrom")
@@ -1438,8 +1437,8 @@ model FactionBase {
   townId               String
   town                 Town    @relation(fields: [townId], references: [id])
 
-  npcMembers   FactionNPCMembership[]
-  guildMembers FactionGuildMemberMembership[]
+  characterMembers FactionCharacterMembership[]
+  guildMembers     FactionGuildMemberMembership[]
 
   @@unique([factionId, townId, name])
 }
@@ -1451,11 +1450,11 @@ model FactionRole {
   rankOrder            Int                            @default(0)
   seeded               Boolean                        @default(false)
   additionalProperties Json?
-  npcMemberships       FactionNPCMembership[]
+  characterMemberships FactionCharacterMembership[]
   guildMemberships     FactionGuildMemberMembership[]
 }
 
-model FactionNPCMembership {
+model FactionCharacterMembership {
   id                   String       @id @default(uuid())
   joinedCycle          Int?
   notes                String?      @db.Text
@@ -1560,101 +1559,6 @@ model FactionHistoricEvent {
   faction   Faction @relation(fields: [factionId], references: [id], onDelete: Cascade)
 
   @@index([factionId])
-}
-
-// ============================================================================
-// PLAYSTYLE GUIDE
-// ============================================================================
-
-model PlaystyleCategory {
-  id                   String                         @id @default(uuid())
-  name                 String                         @unique
-  description          String                         @db.Text
-  seeded               Boolean                        @default(false)
-  additionalProperties Json?
-  recommendations      PlaystyleClassRecommendation[]
-}
-
-model PlaystyleClassRecommendation {
-  id                   String            @id @default(uuid())
-  reasoning            String?           @db.Text
-  additionalProperties Json?
-  playstyleId          String
-  playstyle            PlaystyleCategory @relation(fields: [playstyleId], references: [id], onDelete: Cascade)
-  classId              String
-  class                Class             @relation(fields: [classId], references: [id], onDelete: Cascade)
-
-  @@unique([playstyleId, classId])
-}
-
-model AbilityScorePriority {
-  id                   String                   @id @default(uuid())
-  ability              String                   @unique
-  description          String                   @db.Text
-  seeded               Boolean                  @default(false)
-  additionalProperties Json?
-  bestClasses          AbilityScoreClass[]
-  importantFor         AbilityScoreImportance[]
-}
-
-model AbilityScoreClass {
-  id                   String               @id @unique @default(uuid())
-  additionalProperties Json?
-  abilityId            String
-  ability              AbilityScorePriority @relation(fields: [abilityId], references: [id], onDelete: Cascade)
-  className            String
-}
-
-model AbilityScoreImportance {
-  id                   String               @id @default(uuid())
-  importance           String
-  description          String?              @db.Text
-  additionalProperties Json?
-  abilityId            String
-  ability              AbilityScorePriority @relation(fields: [abilityId], references: [id], onDelete: Cascade)
-}
-
-model RoleDescription {
-  id                   String           @id @default(uuid())
-  name                 String           @unique
-  description          String           @db.Text
-  seeded               Boolean          @default(false)
-  additionalProperties Json?
-  keyAbilities         RoleKeyAbility[]
-  bestClasses          RoleBestClass[]
-}
-
-model RoleKeyAbility {
-  id                   String          @id @unique @default(uuid())
-  ability              String
-  additionalProperties Json?
-  roleId               String
-  role                 RoleDescription @relation(fields: [roleId], references: [id], onDelete: Cascade)
-}
-
-model RoleBestClass {
-  id                   String          @id @unique @default(uuid())
-  className            String
-  additionalProperties Json?
-  roleId               String
-  role                 RoleDescription @relation(fields: [roleId], references: [id], onDelete: Cascade)
-}
-
-model ComplexityLevel {
-  id                   String            @id @default(uuid())
-  level                String            @unique
-  description          String            @db.Text
-  seeded               Boolean           @default(false)
-  additionalProperties Json?
-  classes              ComplexityClass[]
-}
-
-model ComplexityClass {
-  id                   String          @id @unique @default(uuid())
-  className            String
-  additionalProperties Json?
-  complexityId         String
-  complexity           ComplexityLevel @relation(fields: [complexityId], references: [id], onDelete: Cascade)
 }
 
 // ============================================================================

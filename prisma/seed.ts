@@ -1,26 +1,12 @@
-/**
- * Alabastria Database Seed Script
- * 
- * Seeds the database with:
- * 1. Admin user (admin@alabastria.local / admin123)
- * 2. NPC Professions
- * 3. NPC Relationship Types
- * 4. Faction Roles
- * 5. Faction Relationship Types
- * 
- * Legacy data migration will be added in Phase 3
- */
-
-import { prisma } from "../lib/prisma";
-import * as db from "../lib/db-seed";
-import * as seed from "./seeds"
+import { prisma } from "@lib/prisma";
+import * as seed from "./seeds";
 
 async function main() {
     console.log("🌱 Starting database seed...\n");
     // ============================================================================
     // NPC PROFESSIONS
     // ============================================================================
-    console.log("💼 Seeding NPC professions...");
+   /*  console.log("💼 Seeding NPC professions...");
 
     const professions = [
         // Trade
@@ -135,9 +121,9 @@ async function main() {
         { name: "Neighbor", description: "Someone who lives nearby." },
     ];
 
-    /* for (const type of npcRelationshipTypes) {
+     for (const type of npcRelationshipTypes) {
         await db.createNPCRelationshipType(type);
-    } */
+    } 
     console.log(`   ✓ Created ${npcRelationshipTypes.length} NPC relationship types\n`);
 
     // ============================================================================
@@ -184,22 +170,18 @@ async function main() {
     for (const type of factionRelationshipTypes) {
         await db.createFactionRelationshipType(type);
     }
-    console.log(`   ✓ Created ${factionRelationshipTypes.length} faction relationship types\n`);
-
-    // ============================================================================
-    // MIGRATE LEGACY DATA
-    // ============================================================================
-    console.log("🔄 Migrating legacy data...");
-
-    // World Creation
+    console.log(`   ✓ Created ${factionRelationshipTypes.length} faction relationship types\n`); */
     try {
+        console.log('🎭 Seeding Users Information...');
         const userRoles: seed.UserRoles = await seed.seedUserRoles();
         const users: seed.Users = await seed.seedUsers({ userRoles });
+        console.log('🌍 Seeding World Information...');
         const seasons: seed.Seasons = await seed.seedSeasons();
         const months: seed.Months = await seed.seedMonths({ seasons });
         const worlds: seed.Worlds = await seed.seedWorlds();
         await seed.setWorldsMonths({ worlds, months });
         const weekDays: seed.WeekDays = await seed.seedWeekDays();
+        console.log('🏛️  Seeding Geographical Information...');
         const kingdoms: seed.Kingdoms = await seed.seedKingdoms({ worlds });
         const continents: seed.Continents = await seed.seedContinents({ worlds, kingdoms });
         await seed.setKingdomsCapitals({ kingdoms, continents });
@@ -213,43 +195,36 @@ async function main() {
         const warConflicts: seed.WarConflicts = await seed.seedWarConflicts({ continents });
         const treaties: seed.Treaties = await seed.seedTreaties({ continents });
         const historicalPeriods: seed.HistoricalPeriods = await seed.createHistoricalPeriods({ worlds });
-        // Creatures
+        console.log('🐉 Seeding Creature Information...');
         const creatureSizes: seed.CreatureSizes = await seed.seedCreatureSizes();
         const creatureTypes: seed.CreatureTypes = await seed.seedCreatureTypes({ creatureSizes });
         await seed.setContinentCreatureTypes({ continents, creatureTypes });
         const legendaryCreatures: seed.LegendaryCreatures = await seed.seedLegendaryCreatures({ continents, creatureSizes, creatureTypes });
-        // Races
+        console.log('🧙‍♂️ Seeding Cultural Information...');
         const raceNames: seed.RaceNames = await seed.seedRaceNames();
         const races: seed.Races = await seed.seedRaces({ creatureSizes, languages, raceNames  });
         const subraces: seed.Subraces = await seed.seedSubraces({ races });
-        // Classes
         const classRoles: seed.ClassRoles = await seed.seedClassRoles();
         const classes: seed.Classes = await seed.seedClasses({ classRoles });
         const subclasses: seed.Subclasses = await seed.seedSubclasses({ classes });
-        // Deities
+        console.log('⛪ Seeding Deity Information...');
         const pantheons: seed.Pantheons = await seed.seedPantheons();
         const deities: seed.Deities = await seed.seedDeities({ pantheons });
         const deityHolyDays: seed.DeityHolyDays = await seed.seedDeityHolyDays({ deities });
         const deityHistories: seed.DeityHistories = await seed.seedDeityHistories({ deities, historicalPeriods });
         const deityRelationships: seed.DeityRelationships = await seed.seedDeityRelationships({ deities });
-        // Recommendations
+        console.log('🔗 Seeding Connection Information...');
         const racesContinents: seed.RacesContinents = await seed.setRacesContinents({ races, continents });
         const subracesContinents: seed.SubracesContinents = await seed.setSubracesContinents({ subraces, continents });
         const racesSubclasses: seed.RacesSubclasses = await seed.setRacesSubclasses({ races, subclasses });
         const subclassesContinents: seed.SubclassesContinents = await seed.setSubclassesContinents({ subclasses, continents });
         const subracesSubclasses: seed.SubracesSubclasses = await seed.setSubracesSubclasses({ subraces, subclasses });
-        // Characters
+        console.log('🧝‍♂️ Seeding Character Information...');
         const characters: seed.Characters = await seed.seedCharacters({ races, subraces, classes, subclasses, languages, deities, continents, towns, creatureSizes, creatureTypes });
     } catch (error) {
-        console.error(`   ❌ Error migrating legacy data:`, error);
+        console.error(`   ❌ Error seeding data:`, error);
         process.exit(1);
     }
-
-    console.log("   ✓ Migrated legacy data\n");
-
-    // ============================================================================
-    // COMPLETE
-    // ============================================================================
     console.log("✨ Database seed complete!\n");
 }
 
