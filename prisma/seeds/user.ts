@@ -26,10 +26,8 @@ export async function seedUsers(params: SeedUsersParams): Promise<Users> {
             defaultAdmin: await db.createUser({
                 email: ADMIN_EMAIL,
                 name: process.env.DEFAULT_ADMIN_NAME,
-                passwordHash: '',
                 plainPassword: ADMIN_PASSWORD,
                 role: { connect: { id: userRoles.admin.id } },
-                mustChangePassword: true,
             }),
         }
     } catch (error) {

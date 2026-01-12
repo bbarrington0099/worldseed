@@ -24,7 +24,7 @@ export async function createUserRole(data: Prisma.UserRoleCreateInput): Promise<
     });
 }
 
-export async function createUser(
+export async function createCredentialUser(
     data: Prisma.UserCreateInput & { plainPassword: string }
 ): Promise<Prisma.UserGetPayload<{}>> {
     const { plainPassword, ...userData } = data;
@@ -44,7 +44,16 @@ export async function createUser(
         await prisma.$transaction(async (tx) => {
             const user = await tx.user.create({
                 data: {
-                    ...userData,
+                    ...userData
+                },
+            });
+
+            await tx.account.create({
+                data: {
+                    userId: user.id,
+                    type: "credentials",
+                    provider: "credentials",
+                    providerAccountId: user.email,
                     passwordHash,
                 },
             });

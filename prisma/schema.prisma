@@ -32,10 +32,10 @@ model User {
   email              String    @unique
   emailVerified      DateTime?
   image              String?
-  passwordHash       String
+
   roleId             String
   role               UserRole  @relation(fields: [roleId], references: [id])
-  mustChangePassword Boolean   @default(true)
+  
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 
@@ -70,6 +70,10 @@ model Account {
   type              String
   provider          String
   providerAccountId String
+
+  passwordHash       String? @db.Text
+  mustChangePassword Boolean?
+
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -122,7 +126,7 @@ model ApiKey {
 model World {
   id                   String  @id @default(uuid())
   seeded               Boolean @default(false)
-  public               Boolean @default(false)
+  public               Boolean @default(false) // if false, only owner, forgers, and occupants can access, for true, anyone can see the world and explore it's content
   name                 String
   description          String  @db.Text
   measurementUnit      String  @default("miles")
@@ -163,7 +167,8 @@ model World {
   forgersCanSeedFrom   Boolean  @default(true) // allows forgers to use data from this world when seeding their own worlds
   forgersCanSeedTo     Boolean  @default(true) // allows forgers to seed this world using data from their own worlds
   forgers              User[]   @relation("WorldForgers")
-  occupantsCanSeedFrom Boolean  @default(false)
+  occupantsCanSeedFrom Boolean  @default(false) // allows occupants to use data from this world when seeding their own worlds
+  occupantsCharacterCreationLimit Int     @default(1) // number of characters an occupant can create in this world, occupants can only create characters and connections for those characters, no other content
   occupants            User[]   @relation("WorldOccupants")
 
   importedRaceCollections  RaceCollection[]

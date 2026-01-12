@@ -8,7 +8,6 @@ import { Prisma, ContinentLanguagePrevalence } from "@prismagen/client";
 import * as db from "./db";
 import { slugify } from './utils';
 import type {
-    GuildRank,
     MemberStatus
 } from "@prismagen/client";
 
@@ -591,5 +590,5 @@ export async function createUserRole(data: Prisma.UserRoleCreateInput): Promise<
 }
 
 export async function createUser(data: Prisma.UserCreateInput & { plainPassword: string }): Promise<Prisma.UserGetPayload<{}>> {
-    return await db.createUser(data);
+    return await db.createCredentialUser(data);
 }
