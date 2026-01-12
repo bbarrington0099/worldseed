@@ -34,8 +34,8 @@ export async function seedUserRoles(): Promise<UserRoles> {
         designer: await db.createUserRole({
             id: 'designer',
             name: 'World Designer',
-            worldOwnedLimit: 5,
-            worldForgerLimit: 10,
+            worldOwnedLimit: 3,
+            worldForgerLimit: 5,
             contentPillarsPerWorldLimit: 30,
             contentStructuresPerPillarLimit: 60,
             contentElementsPerStructureLimit: 200,
@@ -44,7 +44,7 @@ export async function seedUserRoles(): Promise<UserRoles> {
         drafter: await db.createUserRole({
             id: 'drafter',
             name: 'World Drafter',
-            worldOwnedLimit: 3,
+            worldOwnedLimit: 1,
             worldForgerLimit: 2,
             contentPillarsPerWorldLimit: 5,
             contentStructuresPerPillarLimit: 15,

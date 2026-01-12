@@ -49,6 +49,16 @@ model User {
   memberOfFactions Faction[]   @relation("FactionMembers")
   characters       Character[]
 
+  createdClasses           Class[]
+  createdClassCollections  ClassCollection[] @relation("UserCreatedClassCollections")
+  importedClassCollections ClassCollection[] @relation("UserImportedClassCollections")
+  createdRaces             Race[]
+  createdRaceCollections   RaceCollection[]  @relation("UserCreatedRaceCollections")
+  importedRaceCollections  RaceCollection[]  @relation("UserImportedRaceCollections")
+  createdDeities           Deity[]
+  createdDeityCollections  DeityCollection[] @relation("UserCreatedDeityCollections")
+  importedDeityCollections DeityCollection[] @relation("UserImportedDeityCollections")
+
   ownedWorlds    World[]
   forgedWorlds   World[] @relation("WorldForgers")
   occupiedWorlds World[] @relation("WorldOccupants")
@@ -68,7 +78,7 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerAccountId])
 }
@@ -79,7 +89,7 @@ model Session {
   userId       String
   expires      DateTime
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
 }
 
 model VerificationToken {
@@ -97,10 +107,10 @@ model ApiKey {
   revoked   Boolean  @default(false)
 
   userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id])
 
   worldId String
-  world   World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  world   World  @relation(fields: [worldId], references: [id])
 
   @@unique([userId, worldId])
 }
@@ -112,6 +122,7 @@ model ApiKey {
 model World {
   id                   String  @id @default(uuid())
   seeded               Boolean @default(false)
+  public               Boolean @default(false)
   name                 String
   description          String  @db.Text
   measurementUnit      String  @default("miles")
@@ -122,6 +133,7 @@ model World {
   yearCalled           String  @default("years")
   imagePath            String?
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   historicalPeriods HistoricalPeriod[]
   historyEvents     HistoricalEvent[]
@@ -153,6 +165,10 @@ model World {
   forgers              User[]   @relation("WorldForgers")
   occupantsCanSeedFrom Boolean  @default(false)
   occupants            User[]   @relation("WorldOccupants")
+
+  importedRaceCollections  RaceCollection[]
+  importedClassCollections ClassCollection[]
+  importedDeityCollections DeityCollection[]
 }
 
 model Continent {
@@ -180,6 +196,7 @@ model Continent {
   foreignRelations    String?        @db.Text
 
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   // Relations
   worldId   String
@@ -230,6 +247,7 @@ model Landmark {
   significance String? @db.Text
 
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   continentId String
   continent   Continent @relation(fields: [continentId], references: [id])
@@ -254,6 +272,7 @@ model Kingdom {
   mapImagePath         String?
   flagImagePath        String?
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   dateFounded   String?
   dateDissolved String?
@@ -298,6 +317,7 @@ model Town {
 
   imagePath            String?
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   continentId String
   continent   Continent @relation("PartOfContient", fields: [continentId], references: [id])
@@ -310,7 +330,7 @@ model Town {
   characterJobs          CharacterProfession[]
   factionRelationships   FactionTownRelationship[]
   graveyardId            String?
-  graveyard              Graveyard?                  @relation(fields: [graveyardId], references: [id], onDelete: Cascade)
+  graveyard              Graveyard?                  @relation(fields: [graveyardId], references: [id])
   tripsFrom              Road[]                      @relation("FromTown")
   tripsTo                Road[]                      @relation("ToTown")
   tradeRoutes            TradeRoute[]
@@ -330,9 +350,10 @@ model Shop {
   // When creating a new shop, query for shops with the same type to generate inventory recommendations
 
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   townId  String?
-  town    Town?                 @relation(fields: [townId], references: [id], onDelete: Cascade)
+  town    Town?                 @relation(fields: [townId], references: [id])
   workers CharacterProfession[]
 }
 
@@ -349,7 +370,9 @@ model Region {
   continent            Continent            @relation(fields: [continentId], references: [id])
   creatureTypes        RegionCreatureType[]
   towns                Town[]               @relation("RegionTowns")
+  quests               Quest[]
   additionalProperties Json?
+  deleted              Boolean              @default(false)
 }
 
 model Voyage {
@@ -361,6 +384,7 @@ model Voyage {
   travelHours Float?
 
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   tradeRoutes     TradeRoute[]
   fromContinentId String
@@ -379,12 +403,13 @@ model Road {
   travelHours          Int?
   travelMinutes        Int?
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   tradeRoutes TradeRoute[]
   fromTownId  String
-  fromTown    Town         @relation("FromTown", fields: [fromTownId], references: [id], onDelete: Cascade)
+  fromTown    Town         @relation("FromTown", fields: [fromTownId], references: [id])
   toTownId    String
-  toTown      Town         @relation("ToTown", fields: [toTownId], references: [id], onDelete: Cascade)
+  toTown      Town         @relation("ToTown", fields: [toTownId], references: [id])
 
   @@unique([fromTownId, toTownId])
 }
@@ -419,6 +444,7 @@ model WarConflict {
   outcome              String?           @db.Text
   status               WarConflictStatus
   additionalProperties Json?
+  deleted              Boolean           @default(false)
 
   continentsInvolved Continent[]
 }
@@ -430,6 +456,7 @@ model Treaty {
   signedDate           String?
   terms                String? @db.Text
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   continentsInvolved Continent[]
 }
@@ -463,6 +490,7 @@ model TradeRoute {
   routeType            TradeRouteType
   frequency            TradeRouteFrequency
   additionalProperties Json?
+  deleted              Boolean             @default(false)
 
   continentStops Continent[]
   voyages        Voyage[]
@@ -484,6 +512,7 @@ model HistoricalPeriod {
   significance         String? @db.Text
   sortOrder            Int     @default(autoincrement())
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   worldId String
   world   World  @relation(fields: [worldId], references: [id])
@@ -501,12 +530,13 @@ model ContinentHistory {
   description          String? @db.Text
   date                 String?
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   continentId String
-  continent   Continent @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  continent   Continent @relation(fields: [continentId], references: [id])
 
   periodId String
-  period   HistoricalPeriod @relation(fields: [periodId], references: [id], onDelete: Cascade)
+  period   HistoricalPeriod @relation(fields: [periodId], references: [id])
 
   @@unique([continentId, periodId])
 }
@@ -517,6 +547,7 @@ model HistoricalEvent {
   name                 String
   date                 String?
   additionalProperties Json?
+  deleted              Boolean @default(false)
   description          String  @db.Text
   impact               String? @db.Text
   sortOrder            Int     @default(autoincrement())
@@ -558,8 +589,9 @@ model Race {
   defaultCreatureSize   CreatureSize @relation(fields: [defaultCreatureSizeId], references: [id])
 
   namesId              String?
-  names                RaceName?  @relation(fields: [namesId], references: [id], onDelete: Cascade)
+  names                RaceName?  @relation(fields: [namesId], references: [id])
   additionalProperties Json?
+  deleted              Boolean    @default(false)
   languages            Language[]
 
   subraces                Subrace[]
@@ -568,6 +600,21 @@ model Race {
   deityRecommendations    RaceDeity[]
   characters              Character[]
   worlds                  World[]
+  collections             RaceCollection[]
+  creatorId               String?
+  creator                 User?                        @relation(fields: [creatorId], references: [id])
+}
+
+model RaceCollection {
+  id               String  @id @default(uuid())
+  name             String
+  seeded           Boolean @default(false)
+  races            Race[]
+  importedToWorlds World[]
+
+  creatorId String
+  creator   User   @relation("UserCreatedRaceCollections", fields: [creatorId], references: [id])
+  importers User[] @relation("UserImportedRaceCollections")
 }
 
 model RaceName {
@@ -582,6 +629,7 @@ model RaceName {
 
   subraces             Subrace[]
   additionalProperties Json?
+  deleted              Boolean   @default(false)
 }
 
 model RaceContinent {
@@ -590,10 +638,11 @@ model RaceContinent {
   seeded    Boolean @default(false)
 
   raceId               String
-  race                 Race      @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  race                 Race      @relation(fields: [raceId], references: [id])
   continentId          String
   continent            Continent @relation(fields: [continentId], references: [id])
   additionalProperties Json?
+  deleted              Boolean   @default(false)
 
   @@unique([raceId, continentId])
 }
@@ -604,10 +653,11 @@ model SubraceContinent {
   seeded    Boolean @default(false)
 
   subraceId            String
-  subrace              Subrace   @relation(fields: [subraceId], references: [id], onDelete: Cascade)
+  subrace              Subrace   @relation(fields: [subraceId], references: [id])
   continentId          String
   continent            Continent @relation(fields: [continentId], references: [id])
   additionalProperties Json?
+  deleted              Boolean   @default(false)
 
   @@unique([subraceId, continentId])
 }
@@ -618,10 +668,11 @@ model SubclassContinent {
   seeded    Boolean @default(false)
 
   subclassId           String
-  subclass             Subclass  @relation(fields: [subclassId], references: [id], onDelete: Cascade)
+  subclass             Subclass  @relation(fields: [subclassId], references: [id])
   continentId          String
   continent            Continent @relation(fields: [continentId], references: [id])
   additionalProperties Json?
+  deleted              Boolean   @default(false)
 
   @@unique([subclassId, continentId])
 }
@@ -638,6 +689,7 @@ model Language {
   continentsRare       Continent[] @relation("RareLanguages")
   characters           Character[]
   additionalProperties Json?
+  deleted              Boolean     @default(false)
 }
 
 model Subrace {
@@ -662,10 +714,11 @@ model Subrace {
 
   namesOverrideAppend  Boolean   @default(false)
   namesIdOverride      String?
-  namesOverride        RaceName? @relation(fields: [namesIdOverride], references: [id], onDelete: Cascade)
+  namesOverride        RaceName? @relation(fields: [namesIdOverride], references: [id])
   additionalProperties Json?
+  deleted              Boolean   @default(false)
   raceId               String
-  race                 Race      @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  race                 Race      @relation(fields: [raceId], references: [id])
 
   worlds                  World[]
   continentLocations      SubraceContinent[]
@@ -681,6 +734,7 @@ model ClassRole {
   purpose              String?
   keyTraits            String[]
   additionalProperties Json?
+  deleted              Boolean  @default(false)
   classes              Class[]
 }
 
@@ -692,11 +746,28 @@ model Class {
   playstyle            String?     @db.Text
   seeded               Boolean     @default(false)
   additionalProperties Json?
+  deleted              Boolean     @default(false)
 
   worlds               World[]
   subclasses           Subclass[]
   deityRecommendations ClassDeity[]
   characters           Character[]
+  creatorId            String?
+  creator              User?             @relation(fields: [creatorId], references: [id])
+  collections          ClassCollection[]
+}
+
+model ClassCollection {
+  id      String  @id @default(uuid())
+  name    String
+  seeded  Boolean @default(false)
+  classes Class[]
+
+  createrId String
+  creator   User   @relation("UserCreatedClassCollections", fields: [createrId], references: [id])
+  importers User[] @relation("UserImportedClassCollections")
+
+  importedToWorlds World[]
 }
 
 model Subclass {
@@ -706,9 +777,10 @@ model Subclass {
   playstyle            String? @db.Text
   seeded               Boolean @default(false)
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   classId                String
-  class                  Class                           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  class                  Class                           @relation(fields: [classId], references: [id])
   worlds                 World[]
   raceRecommendations    RaceSubclassRecommendation[]
   subraceRecommendations SubraceSubclassRecommendation[]
@@ -722,10 +794,11 @@ model RaceSubclassRecommendation {
   reasoning            String   @db.Text
   seeded               Boolean  @default(false)
   additionalProperties Json?
+  deleted              Boolean  @default(false)
   raceId               String
-  race                 Race     @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  race                 Race     @relation(fields: [raceId], references: [id])
   subclassId           String
-  subclass             Subclass @relation(fields: [subclassId], references: [id], onDelete: Cascade)
+  subclass             Subclass @relation(fields: [subclassId], references: [id])
 
   @@unique([raceId, subclassId])
 }
@@ -735,10 +808,11 @@ model SubraceSubclassRecommendation {
   reasoning            String   @db.Text
   seeded               Boolean  @default(false)
   additionalProperties Json?
+  deleted              Boolean  @default(false)
   subraceId            String
-  subrace              Subrace  @relation(fields: [subraceId], references: [id], onDelete: Cascade)
+  subrace              Subrace  @relation(fields: [subraceId], references: [id])
   subclassId           String
-  subclass             Subclass @relation(fields: [subclassId], references: [id], onDelete: Cascade)
+  subclass             Subclass @relation(fields: [subclassId], references: [id])
 
   @@unique([subraceId, subclassId])
 }
@@ -754,6 +828,7 @@ model Pantheon {
   symbol               String?
   seeded               Boolean @default(false)
   additionalProperties Json?
+  deleted              Boolean @default(false)
   deities              Deity[]
   worlds               World[]
 }
@@ -767,6 +842,7 @@ model Deity {
   temples              String?        @db.Text
   seeded               Boolean        @default(false)
   additionalProperties Json?
+  deleted              Boolean        @default(false)
   pantheonId           String
   pantheon             Pantheon       @relation(fields: [pantheonId], references: [id])
   worlds               World[]
@@ -780,12 +856,26 @@ model Deity {
   alliesFrom DeityRelationship[] @relation("DeityFrom")
   alliesTo   DeityRelationship[] @relation("DeityTo")
 
-  races      RaceDeity[]
-  subraces   SubraceDeity[]
-  classes    ClassDeity[]
-  subclasses SubclassDeity[]
-  continents ContinentDeity[]
-  characters Character[]
+  races       RaceDeity[]
+  subraces    SubraceDeity[]
+  classes     ClassDeity[]
+  subclasses  SubclassDeity[]
+  continents  ContinentDeity[]
+  characters  Character[]
+  collections DeityCollection[]
+  creatorId   String?
+  creator     User?             @relation(fields: [creatorId], references: [id])
+}
+
+model DeityCollection {
+  id               String  @id @default(uuid())
+  name             String
+  seeded           Boolean @default(false)
+  deities          Deity[]
+  creatorId        String?
+  creator          User?   @relation("UserCreatedDeityCollections", fields: [creatorId], references: [id])
+  importers        User[]  @relation("UserImportedDeityCollections")
+  importedToWorlds World[]
 }
 
 model DeityHolyDay {
@@ -794,21 +884,23 @@ model DeityHolyDay {
   description          String? @db.Text
   seeded               Boolean @default(false)
   additionalProperties Json?
+  deleted              Boolean @default(false)
   date                 String?
 
   deityId String
-  deity   Deity  @relation(fields: [deityId], references: [id], onDelete: Cascade)
+  deity   Deity  @relation(fields: [deityId], references: [id])
 }
 
 model DeityHistory {
   id                   String           @id @default(uuid())
   eraId                String
-  era                  HistoricalPeriod @relation(fields: [eraId], references: [id], onDelete: Cascade)
+  era                  HistoricalPeriod @relation(fields: [eraId], references: [id])
   description          String?          @db.Text
   seeded               Boolean          @default(false)
   additionalProperties Json?
+  deleted              Boolean          @default(false)
   deityId              String
-  deity                Deity            @relation(fields: [deityId], references: [id], onDelete: Cascade)
+  deity                Deity            @relation(fields: [deityId], references: [id])
 }
 
 enum DeityRelationshipCategory {
@@ -823,10 +915,11 @@ model DeityRelationship {
   reasoning            String?                   @db.Text
   seeded               Boolean                   @default(false)
   additionalProperties Json?
+  deleted              Boolean                   @default(false)
   deityId              String
-  deity                Deity                     @relation("DeityFrom", fields: [deityId], references: [id], onDelete: Cascade)
+  deity                Deity                     @relation("DeityFrom", fields: [deityId], references: [id])
   relatedDeityId       String
-  relatedDeity         Deity                     @relation("DeityTo", fields: [relatedDeityId], references: [id], onDelete: Cascade)
+  relatedDeity         Deity                     @relation("DeityTo", fields: [relatedDeityId], references: [id])
 }
 
 enum DeityRecommendationType {
@@ -841,10 +934,11 @@ model RaceDeity {
   seeded       Boolean                 @default(false)
 
   raceId               String
-  race                 Race   @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  race                 Race    @relation(fields: [raceId], references: [id])
   deityId              String
-  deity                Deity  @relation(fields: [deityId], references: [id])
+  deity                Deity   @relation(fields: [deityId], references: [id])
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   @@unique([raceId, deityId])
 }
@@ -856,10 +950,11 @@ model SubraceDeity {
   seeded       Boolean                 @default(false)
 
   subraceId            String
-  subrace              Subrace @relation(fields: [subraceId], references: [id], onDelete: Cascade)
+  subrace              Subrace @relation(fields: [subraceId], references: [id])
   deityId              String
   deity                Deity   @relation(fields: [deityId], references: [id])
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   @@unique([subraceId, deityId])
 }
@@ -871,10 +966,11 @@ model ClassDeity {
   seeded       Boolean                 @default(false)
 
   classId              String
-  class                Class  @relation(fields: [classId], references: [id], onDelete: Cascade)
+  class                Class   @relation(fields: [classId], references: [id])
   deityId              String
-  deity                Deity  @relation(fields: [deityId], references: [id])
+  deity                Deity   @relation(fields: [deityId], references: [id])
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   @@unique([classId, deityId])
 }
@@ -886,10 +982,11 @@ model SubclassDeity {
   seeded       Boolean                 @default(false)
 
   subclassId           String
-  subclass             Subclass @relation(fields: [subclassId], references: [id], onDelete: Cascade)
+  subclass             Subclass @relation(fields: [subclassId], references: [id])
   deityId              String
   deity                Deity    @relation(fields: [deityId], references: [id])
   additionalProperties Json?
+  deleted              Boolean  @default(false)
 
   @@unique([subclassId, deityId])
 }
@@ -901,10 +998,11 @@ model ContinentDeity {
   seeded       Boolean                 @default(false)
 
   continentId          String
-  continent            Continent @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  continent            Continent @relation(fields: [continentId], references: [id])
   deityId              String
   deity                Deity     @relation(fields: [deityId], references: [id])
   additionalProperties Json?
+  deleted              Boolean   @default(false)
 
   @@unique([continentId, deityId])
 }
@@ -919,6 +1017,7 @@ model Season {
   description          String  @db.Text
   seeded               Boolean @default(false)
   additionalProperties Json?
+  deleted              Boolean @default(false)
   order                Int     @unique @default(autoincrement())
   months               Month[]
   worlds               World[]
@@ -932,6 +1031,7 @@ model Month {
   daysInMonth          Int
   order                Int     @unique @default(autoincrement())
   additionalProperties Json?
+  deleted              Boolean @default(false)
   seasonId             String
   season               Season  @relation(fields: [seasonId], references: [id])
 
@@ -944,6 +1044,7 @@ model WeekDay {
   seeded               Boolean @default(false)
   order                Int     @unique @default(autoincrement())
   additionalProperties Json?
+  deleted              Boolean @default(false)
   worlds               World[]
 }
 
@@ -955,6 +1056,7 @@ model Character {
   postNominalHonorifics String[]
   imagePath             String?
   additionalProperties  Json?
+  deleted               Boolean  @default(false)
   // Demographics
   gender                String?
   age                   Int?
@@ -975,7 +1077,7 @@ model Character {
 
   // Relations to Core Data
   userId String?
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User?   @relation(fields: [userId], references: [id])
 
   raceId    String?
   race      Race?    @relation(fields: [raceId], references: [id])
@@ -1029,8 +1131,9 @@ model FamilyGeneration {
   id                   String     @id @default(uuid())
   generationNumber     Int
   additionalProperties Json?
+  deleted              Boolean    @default(false)
   familyTreeId         String
-  familyTree           FamilyTree @relation(fields: [familyTreeId], references: [id], onDelete: Cascade)
+  familyTree           FamilyTree @relation(fields: [familyTreeId], references: [id])
 
   characters Character[]
 
@@ -1042,6 +1145,7 @@ model FamilyTree {
   name                 String?
   description          String?                 @db.Text
   additionalProperties Json?
+  deleted              Boolean                 @default(false)
   generations          FamilyGeneration[]
   memberRelationships  CharacterRelationship[]
   worlds               World[]
@@ -1056,9 +1160,10 @@ model CharacterKingdomRuler {
   rulingStyle          String?   @db.Text
   startedRulingCycle   Int?
   additionalProperties Json?
+  deleted              Boolean   @default(false)
   seeded               Boolean   @default(false)
   characterId          String    @unique
-  character            Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character @relation(fields: [characterId], references: [id])
   kingdoms             Kingdom[]
 }
 
@@ -1069,8 +1174,9 @@ model CharacterContinentRuler {
   rulingStyle          String?     @db.Text
   startedRulingCycle   Int?
   additionalProperties Json?
+  deleted              Boolean     @default(false)
   characterId          String      @unique
-  character            Character   @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character   @relation(fields: [characterId], references: [id])
   continents           Continent[]
 }
 
@@ -1079,15 +1185,16 @@ model CharacterRelationship {
   id                   String    @id @default(uuid())
   description          String?   @db.Text
   additionalProperties Json?
+  deleted              Boolean   @default(false)
   fromCharacterId      String
-  fromCharacter        Character @relation("CharacterFrom", fields: [fromCharacterId], references: [id], onDelete: Cascade)
+  fromCharacter        Character @relation("CharacterFrom", fields: [fromCharacterId], references: [id])
   toCharacterId        String
-  toCharacter          Character @relation("CharacterTo", fields: [toCharacterId], references: [id], onDelete: Cascade)
+  toCharacter          Character @relation("CharacterTo", fields: [toCharacterId], references: [id])
 
   relationshipTypeId String
   relationshipType   CharacterRelationshipType @relation(fields: [relationshipTypeId], references: [id])
   familyTreeId       String?
-  familyTree         FamilyTree?               @relation(fields: [familyTreeId], references: [id], onDelete: Cascade)
+  familyTree         FamilyTree?               @relation(fields: [familyTreeId], references: [id])
 
   @@unique([fromCharacterId, toCharacterId, relationshipTypeId])
 }
@@ -1098,6 +1205,7 @@ model Graveyard {
   name                 String?
   description          String?       @db.Text
   additionalProperties Json?
+  deleted              Boolean       @default(false)
   towns                Town[]
   factionBases         FactionBase[]
 
@@ -1111,10 +1219,11 @@ model GraveyardEntry {
 
   deathDate            String?
   additionalProperties Json?
+  deleted              Boolean   @default(false)
   characterId          String    @unique
-  character            Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character @relation(fields: [characterId], references: [id])
   graveyardId          String
-  graveyard            Graveyard @relation(fields: [graveyardId], references: [id], onDelete: Cascade)
+  graveyard            Graveyard @relation(fields: [graveyardId], references: [id])
 }
 
 // ============================================================================
@@ -1137,20 +1246,24 @@ model Quest {
   extraNotes           String?      @db.Text
   seeded               Boolean      @default(false)
   additionalProperties Json?
+  deleted              Boolean      @default(false)
   imagePath            String?
   factionId            String
-  faction              Faction      @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction      @relation(fields: [factionId], references: [id])
   townId               String?
-  town                 Town?        @relation(fields: [townId], references: [id], onDelete: Cascade)
+  town                 Town?        @relation(fields: [townId], references: [id])
+  regionId             String?
+  region               Region?      @relation(fields: [regionId], references: [id])
   continentId          String?
-  continent            Continent?   @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  continent            Continent?   @relation(fields: [continentId], references: [id])
 
-  participants  QuestParticipant[]
-  enemies       QuestEnemy[]
-  awards        QuestAward[]
-  loot          QuestLoot[]
-  memberReports QuestMemberReport[]
-  fallenMembers QuestFallenMember[]
+  legendaryCreatues LegendaryCreature[]
+  participants      QuestParticipant[]
+  enemies           QuestEnemy[]
+  awards            QuestAward[]
+  loot              QuestLoot[]
+  memberReports     QuestMemberReport[]
+  fallenMembers     QuestFallenMember[]
 }
 
 model QuestParticipant {
@@ -1159,10 +1272,11 @@ model QuestParticipant {
   rankAtTime           FactionRank   @relation(fields: [rankAtTimeId], references: [id])
   role                 String?
   additionalProperties Json?
+  deleted              Boolean       @default(false)
   questId              String
-  quest                Quest         @relation(fields: [questId], references: [id], onDelete: Cascade)
+  quest                Quest         @relation(fields: [questId], references: [id])
   memberId             String
-  member               FactionMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member               FactionMember @relation(fields: [memberId], references: [id])
 
   @@unique([questId, memberId])
 }
@@ -1173,8 +1287,9 @@ model QuestEnemy {
   description          String? @db.Text
   quantity             Int?
   additionalProperties Json?
+  deleted              Boolean @default(false)
   questId              String
-  quest                Quest   @relation(fields: [questId], references: [id], onDelete: Cascade)
+  quest                Quest   @relation(fields: [questId], references: [id])
 }
 
 model QuestAward {
@@ -1182,8 +1297,9 @@ model QuestAward {
   name                 String
   description          String? @db.Text
   additionalProperties Json?
+  deleted              Boolean @default(false)
   questId              String
-  quest                Quest   @relation(fields: [questId], references: [id], onDelete: Cascade)
+  quest                Quest   @relation(fields: [questId], references: [id])
 }
 
 model QuestLoot {
@@ -1192,8 +1308,9 @@ model QuestLoot {
   description          String? @db.Text
   quantity             Int?
   additionalProperties Json?
+  deleted              Boolean @default(false)
   questId              String
-  quest                Quest   @relation(fields: [questId], references: [id], onDelete: Cascade)
+  quest                Quest   @relation(fields: [questId], references: [id])
 }
 
 model QuestMemberReport {
@@ -1201,8 +1318,9 @@ model QuestMemberReport {
   report               String     @db.Text
   memberName           String?
   additionalProperties Json?
+  deleted              Boolean    @default(false)
   questId              String
-  quest                Quest      @relation(fields: [questId], references: [id], onDelete: Cascade)
+  quest                Quest      @relation(fields: [questId], references: [id])
   characterId          String?
   character            Character? @relation(fields: [characterId], references: [id])
 }
@@ -1212,8 +1330,9 @@ model QuestFallenMember {
   memberName           String
   cause                String? @db.Text
   additionalProperties Json?
+  deleted              Boolean @default(false)
   questId              String
-  quest                Quest   @relation(fields: [questId], references: [id], onDelete: Cascade)
+  quest                Quest   @relation(fields: [questId], references: [id])
 }
 
 // ============================================================================
@@ -1227,6 +1346,7 @@ model CharacterProfession {
   category               String?
   seeded                 Boolean                          @default(false)
   additionalProperties   Json?
+  deleted                Boolean                          @default(false)
   restrictedToContinents ProfessionContinentRestriction[]
   restrictedToTowns      ProfessionTownRestriction[]
   towns                  Town[]
@@ -1237,10 +1357,11 @@ model CharacterProfession {
 model ProfessionContinentRestriction {
   id                   String              @id @default(uuid())
   additionalProperties Json?
+  deleted              Boolean             @default(false)
   professionId         String
-  profession           CharacterProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  profession           CharacterProfession @relation(fields: [professionId], references: [id])
   continentId          String
-  continent            Continent           @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  continent            Continent           @relation(fields: [continentId], references: [id])
 
   @@unique([professionId, continentId])
 }
@@ -1248,10 +1369,11 @@ model ProfessionContinentRestriction {
 model ProfessionTownRestriction {
   id                   String              @id @default(uuid())
   additionalProperties Json?
+  deleted              Boolean             @default(false)
   professionId         String
-  profession           CharacterProfession @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  profession           CharacterProfession @relation(fields: [professionId], references: [id])
   townId               String
-  town                 Town                @relation(fields: [townId], references: [id], onDelete: Cascade)
+  town                 Town                @relation(fields: [townId], references: [id])
 
   @@unique([professionId, townId])
 }
@@ -1262,6 +1384,7 @@ model CharacterRelationshipType {
   description            String?
   seeded                 Boolean                 @default(false)
   additionalProperties   Json?
+  deleted                Boolean                 @default(false)
   characterRelationships CharacterRelationship[]
 }
 
@@ -1278,6 +1401,7 @@ model Faction {
   foundedDate          String?
   seeded               Boolean @default(false)
   additionalProperties Json?
+  deleted              Boolean @default(false)
 
   worlds            World[]
   continentPresence FactionContinentPresence[]
@@ -1305,6 +1429,7 @@ model FactionRank {
   levelLow             Int
   levelHigh            Int
   additionalProperties Json?
+  deleted              Boolean            @default(false)
   faction              Faction[]
   factionStaff         FactionStaff[]
   factionMembers       FactionMember[]
@@ -1333,10 +1458,11 @@ model FactionMember {
   specialization       String?
   seeded               Boolean      @default(false)
   additionalProperties Json?
+  deleted              Boolean      @default(false)
   characterId          String
-  character            Character    @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character    @relation(fields: [characterId], references: [id])
   factionId            String
-  faction              Faction      @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction      @relation(fields: [factionId], references: [id])
 
   tags                String[]
   achievements        String[]
@@ -1352,11 +1478,12 @@ model FactionStaff {
   responsibilities     String?       @db.Text
   seeded               Boolean       @default(false)
   additionalProperties Json?
+  deleted              Boolean       @default(false)
   factionBases         FactionBase[]
   characterId          String
-  character            Character     @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character     @relation(fields: [characterId], references: [id])
   factionId            String
-  faction              Faction       @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction       @relation(fields: [factionId], references: [id])
 }
 
 model FactionContinentPresence {
@@ -1364,8 +1491,9 @@ model FactionContinentPresence {
   influenceLevel       String? // Example: "MINOR", "MODERATE", "MAJOR", "DOMINANT", "HIDDEN"
   description          String?   @db.Text
   additionalProperties Json?
+  deleted              Boolean   @default(false)
   factionId            String
-  faction              Faction   @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction   @relation(fields: [factionId], references: [id])
   continentId          String
   continent            Continent @relation(fields: [continentId], references: [id])
 
@@ -1381,8 +1509,9 @@ model FactionBase {
   isSecret             Boolean    @default(false)
   seeded               Boolean    @default(false)
   additionalProperties Json?
+  deleted              Boolean    @default(false)
   factionId            String
-  faction              Faction    @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction    @relation(fields: [factionId], references: [id])
   townId               String?
   town                 Town?      @relation(fields: [townId], references: [id])
   graveyardId          String?
@@ -1399,10 +1528,11 @@ model FactionRelationship {
   description          String? @db.Text
   since                Int?
   additionalProperties Json?
+  deleted              Boolean @default(false)
   fromFactionId        String
-  fromFaction          Faction @relation("FactionFrom", fields: [fromFactionId], references: [id], onDelete: Cascade)
+  fromFaction          Faction @relation("FactionFrom", fields: [fromFactionId], references: [id])
   toFactionId          String
-  toFaction            Faction @relation("FactionTo", fields: [toFactionId], references: [id], onDelete: Cascade)
+  toFaction            Faction @relation("FactionTo", fields: [toFactionId], references: [id])
 
   relationshipType String // e.g., "ALLIED", "HOSTILE", "NEUTRAL", "TRADE_PARTNER", "RIVAL", "PROTECTOR", "SUBSERVIENT", "ENEMY"
 
@@ -1415,10 +1545,11 @@ model CharacterFactionRelationship {
   type                 String // e.g., "ALLY", "ENEMY", "SUPPORTER", "TRADE_PARTNER"
   notes                String?   @db.Text
   additionalProperties Json?
+  deleted              Boolean   @default(false)
   characterId          String
-  character            Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  character            Character @relation(fields: [characterId], references: [id])
   factionId            String
-  faction              Faction   @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction   @relation(fields: [factionId], references: [id])
 
   @@unique([characterId, factionId, type])
 }
@@ -1429,10 +1560,11 @@ model FactionTownRelationship {
   description          String? @db.Text
   relationshipType     String // e.g., "ALLIED", "HOSTILE", "NEUTRAL", "CONTROLS", etc.
   additionalProperties Json?
+  deleted              Boolean @default(false)
   factionId            String
-  faction              Faction @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction              Faction @relation(fields: [factionId], references: [id])
   townId               String
-  town                 Town    @relation(fields: [townId], references: [id], onDelete: Cascade)
+  town                 Town    @relation(fields: [townId], references: [id])
 
   @@unique([factionId, townId])
 }
@@ -1444,10 +1576,11 @@ model FactionHistoricEvent {
   description          String  @db.Text
   eventType            String // e.g., "FOUNDING", "LEADERSHIP_CHANGE", "ENEMY_DECLARED", "ALLY_FORMED", "ACHIEVEMENT", "MILESTONE"
   additionalProperties Json?
+  deleted              Boolean @default(false)
   eventDate            String?
 
   factionId String
-  faction   Faction @relation(fields: [factionId], references: [id], onDelete: Cascade)
+  faction   Faction @relation(fields: [factionId], references: [id])
 
   @@index([factionId])
 }
@@ -1468,10 +1601,11 @@ model ContinentCreatureType {
   relation             ContinentCreatureRelation
   reasoning            String?                   @db.Text
   additionalProperties Json?
+  deleted              Boolean                   @default(false)
   continentId          String
-  continent            Continent                 @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  continent            Continent                 @relation(fields: [continentId], references: [id])
   creatureTypeId       String
-  creatureType         CreatureType              @relation(fields: [creatureTypeId], references: [id], onDelete: Cascade)
+  creatureType         CreatureType              @relation(fields: [creatureTypeId], references: [id])
 
   @@unique([continentId, creatureTypeId])
 }
@@ -1481,10 +1615,11 @@ model RegionCreatureType {
   seeded               Boolean      @default(false)
   reasoning            String?      @db.Text
   additionalProperties Json?
+  deleted              Boolean      @default(false)
   regionId             String
-  region               Region       @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  region               Region       @relation(fields: [regionId], references: [id])
   creatureTypeId       String
-  creatureType         CreatureType @relation(fields: [creatureTypeId], references: [id], onDelete: Cascade)
+  creatureType         CreatureType @relation(fields: [creatureTypeId], references: [id])
 
   @@unique([regionId, creatureTypeId])
 }
@@ -1498,6 +1633,7 @@ model CreatureType {
   weaknesses           String?                 @db.Text
   seeded               Boolean                 @default(false)
   additionalProperties Json?
+  deleted              Boolean                 @default(false)
   commonSizes          CreatureSize[]          @relation("CreatureTypeCommonSizes")
   worlds               World[]
   continents           ContinentCreatureType[]
@@ -1515,6 +1651,7 @@ model CreatureSize {
   weightRange          String
   description          String?             @db.Text
   additionalProperties Json?
+  deleted              Boolean             @default(false)
   creatureTypes        CreatureType[]      @relation("CreatureTypeCommonSizes")
   races                Race[]
   characters           Character[]
@@ -1542,14 +1679,16 @@ model LegendaryCreature {
   legacy               String?                      @db.Text
   seeded               Boolean                      @default(false)
   additionalProperties Json?
+  deleted              Boolean                      @default(false)
   creatureSizeId       String
-  creatureSize         CreatureSize                 @relation(fields: [creatureSizeId], references: [id], onDelete: Cascade)
+  creatureSize         CreatureSize                 @relation(fields: [creatureSizeId], references: [id])
 
   creatureTypeId String
-  creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id], onDelete: Cascade)
+  creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id])
 
   continentId String
   continent   Continent @relation(fields: [continentId], references: [id])
 
+  quests Quest[]
   worlds World[]
 }
