@@ -24,20 +24,21 @@ model UserRole {
   contentStructuresPerPillarLimit  Int // e.g., towns, factions, landmarks, deities, quests, creature types, etc.
   contentElementsPerStructureLimit Int // e.g., shops, legendary creatures, family trees, historical events, etc.
   contentItemsPerWorldLimit        Int // e.g., quests, characters, etc.
+  apiCallLimitPerDay               Int // number of API calls a user can make per day
 }
 
 model User {
-  id                 String    @id @default(cuid())
-  name               String?
-  email              String    @unique
-  emailVerified      DateTime?
-  image              String?
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
 
-  roleId             String
-  role               UserRole  @relation(fields: [roleId], references: [id])
-  
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  roleId String
+  role   UserRole @relation(fields: [roleId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Auth.js relations
   accounts Account[]
@@ -65,22 +66,22 @@ model User {
 }
 
 model Account {
-  id                String  @id @default(cuid())
+  id                String @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
 
-  passwordHash       String? @db.Text
+  passwordHash       String?  @db.Text
   mustChangePassword Boolean?
 
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+  refresh_token String? @db.Text
+  access_token  String? @db.Text
+  expires_at    Int?
+  token_type    String?
+  scope         String?
+  id_token      String? @db.Text
+  session_state String?
 
   user User @relation(fields: [userId], references: [id])
 
@@ -135,7 +136,8 @@ model World {
   surfaceAreaSq        BigInt?
   currentDate          String?
   yearCalled           String  @default("years")
-  imagePath            String?
+  mapPath              String?
+  emblemPath           String?
   additionalProperties Json?
   deleted              Boolean @default(false)
 
@@ -154,26 +156,62 @@ model World {
   deities            Deity[]
   characters         Character[]
   creatureTypes      CreatureType[]
+  creatures          Creature[]
   legendaryCreatures LegendaryCreature[]
   factions           Faction[]
   seasons            Season[]
   months             Month[]
   weekDays           WeekDay[]
   familyTrees        FamilyTree[]
+  powerSystems       PowerSystem[]
 
-  ownerId              String
-  owner                User     @relation(fields: [ownerId], references: [id])
-  apiKeys              ApiKey[]
-  forgersCanSeedFrom   Boolean  @default(true) // allows forgers to use data from this world when seeding their own worlds
-  forgersCanSeedTo     Boolean  @default(true) // allows forgers to seed this world using data from their own worlds
-  forgers              User[]   @relation("WorldForgers")
-  occupantsCanSeedFrom Boolean  @default(false) // allows occupants to use data from this world when seeding their own worlds
-  occupantsCharacterCreationLimit Int     @default(1) // number of characters an occupant can create in this world, occupants can only create characters and connections for those characters, no other content
-  occupants            User[]   @relation("WorldOccupants")
+  ownerId                         String
+  owner                           User     @relation(fields: [ownerId], references: [id])
+  apiKeys                         ApiKey[]
+  forgersCanConnectTo             Boolean  @default(true) // allows forgers to connect their worlds to this world
+  forgersCanSeedFrom              Boolean  @default(true) // allows forgers to use data from this world when seeding their own worlds
+  forgersCanSeedTo                Boolean  @default(true) // allows forgers to seed this world using data from their own worlds
+  forgers                         User[]   @relation("WorldForgers")
+  occupantsCanConnectTo           Boolean  @default(false) // allows occupants to connect their worlds to this world
+  occupantsCanSeedFrom            Boolean  @default(false) // allows occupants to use data from this world when seeding their own worlds
+  occupantsCharacterCreationLimit Int      @default(1) // number of characters an occupant can create in this world, occupants can only create characters and connections for those characters, no other content
+  occupants                       User[]   @relation("WorldOccupants")
 
   importedRaceCollections  RaceCollection[]
   importedClassCollections ClassCollection[]
   importedDeityCollections DeityCollection[]
+}
+
+model PowerSystem {
+  id                   String  @id @default(uuid())
+  name                 String
+  description          String  @db.Text
+  seeded               Boolean @default(false)
+  additionalProperties Json?
+  deleted              Boolean @default(false)
+
+  worlds World[]
+
+  powers Power[]
+}
+
+model Power {
+  id                   String  @id @default(uuid())
+  name                 String
+  description          String  @db.Text
+  type                 String
+  magnitude            Int?
+  frequency            String?
+  limitations          String? @db.Text
+  additionalProperties Json?
+  deleted              Boolean @default(false)
+
+  powerSystemId String
+  powerSystem   PowerSystem @relation(fields: [powerSystemId], references: [id])
+
+  characters         Character[]
+  creatures          Creature[]
+  legendaryCreatures LegendaryCreature[]
 }
 
 model Continent {
@@ -231,13 +269,15 @@ model Continent {
   subraceLocations       SubraceContinent[]
   subclassLocations      SubclassContinent[]
   creatureTypes          ContinentCreatureType[]
+  creatures              Creature[]
   legendaryCreatures     LegendaryCreature[]
   deityRecommendations   ContinentDeity[]
   historicalEvents       HistoricalEvent[]
   professionRestrictions ProfessionContinentRestriction[]
+  factionBases           FactionBase[]
   factionPresence        FactionContinentPresence[]
   rulerId                String?
-  ruler                  CharacterContinentRuler?         @relation(fields: [rulerId], references: [id])
+  ruler                  CharacterContinentRuler?
   charactersFrom         Character[]
   landmarks              Landmark[]
   quests                 Quest[]
@@ -297,7 +337,7 @@ model Kingdom {
   capitalContinent   Continent? @relation("KingdomCapital", fields: [capitalContinentId], references: [id])
 
   rulerId String?
-  ruler   CharacterKingdomRuler? @relation(fields: [rulerId], references: [id])
+  ruler   CharacterKingdomRuler?
 }
 
 enum TownType {
@@ -363,21 +403,24 @@ model Shop {
 }
 
 model Region {
-  id                   String               @id @default(uuid())
-  seeded               Boolean              @default(false)
+  id                   String                      @id @default(uuid())
+  seeded               Boolean                     @default(false)
   name                 String
-  description          String?              @db.Text
-  createdAt            DateTime             @default(now())
-  updatedAt            DateTime             @updatedAt
+  description          String?                     @db.Text
+  createdAt            DateTime                    @default(now())
+  updatedAt            DateTime                    @updatedAt
   kingdomId            String?
-  kingdom              Kingdom?             @relation(fields: [kingdomId], references: [id])
+  kingdom              Kingdom?                    @relation(fields: [kingdomId], references: [id])
   continentId          String
-  continent            Continent            @relation(fields: [continentId], references: [id])
+  continent            Continent                   @relation(fields: [continentId], references: [id])
   creatureTypes        RegionCreatureType[]
-  towns                Town[]               @relation("RegionTowns")
+  creatures            Creature[]
+  factions             FactionRegionRelationship[]
+  factionBases         FactionBase[]
+  towns                Town[]                      @relation("RegionTowns")
   quests               Quest[]
   additionalProperties Json?
-  deleted              Boolean              @default(false)
+  deleted              Boolean                     @default(false)
 }
 
 model Voyage {
@@ -1076,6 +1119,7 @@ model Character {
   bonds         String? @db.Text
   flaws         String? @db.Text
   backstory     String? @db.Text
+  powers        Power[]
 
   // Languages
   languages Language[]
@@ -1162,29 +1206,30 @@ model FamilyTree {
 
 model CharacterKingdomRuler {
   id                   String    @id @default(uuid())
-  name                 String
   title                String?
   rulingStyle          String?   @db.Text
-  startedRulingCycle   Int?
+  startedRulingDate    String?
   additionalProperties Json?
   deleted              Boolean   @default(false)
   seeded               Boolean   @default(false)
   characterId          String    @unique
   character            Character @relation(fields: [characterId], references: [id])
-  kingdoms             Kingdom[]
+  kingdomId            String    @unique
+  kingdom              Kingdom   @relation(fields: [kingdomId], references: [id])
 }
 
 model CharacterContinentRuler {
-  id                   String      @id @default(uuid())
-  name                 String
+  id                   String    @id @default(uuid())
+  seeded               Boolean   @default(false)
   title                String?
-  rulingStyle          String?     @db.Text
-  startedRulingCycle   Int?
+  rulingStyle          String?   @db.Text
+  startedRulingDate    String?
   additionalProperties Json?
-  deleted              Boolean     @default(false)
-  characterId          String      @unique
-  character            Character   @relation(fields: [characterId], references: [id])
-  continents           Continent[]
+  deleted              Boolean   @default(false)
+  characterId          String    @unique
+  character            Character @relation(fields: [characterId], references: [id])
+  continentId          String    @unique
+  continent            Continent @relation(fields: [continentId], references: [id])
 }
 
 // Character Relationships
@@ -1201,9 +1246,9 @@ model CharacterRelationship {
   toCharacterId        String
   toCharacter          Character @relation("CharacterTo", fields: [toCharacterId], references: [id])
 
-  relationshipType   String
-  familyTreeId       String?
-  familyTree         FamilyTree?               @relation(fields: [familyTreeId], references: [id])
+  relationshipType String
+  familyTreeId     String?
+  familyTree       FamilyTree? @relation(fields: [familyTreeId], references: [id])
 }
 
 // Graveyard
@@ -1395,17 +1440,21 @@ model Faction {
   description          String  @db.Text
   mainPurpose          String  @db.Text
   emblemPath           String?
+  emblemDescription    String? @db.Text
   foundedDate          String?
   seeded               Boolean @default(false)
   additionalProperties Json?
   deleted              Boolean @default(false)
+  motto                String?
+  philosophy           String? @db.Text
 
-  worlds            World[]
-  continentPresence FactionContinentPresence[]
-  townRelationships FactionTownRelationship[]
-  relationshipsFrom FactionRelationship[]      @relation("FactionFrom")
-  relationshipsTo   FactionRelationship[]      @relation("FactionTo")
-  historicEvents    FactionHistoricEvent[]
+  worlds              World[]
+  continentPresence   FactionContinentPresence[]
+  regionRelationships FactionRegionRelationship[]
+  townRelationships   FactionTownRelationship[]
+  relationshipsFrom   FactionRelationship[]       @relation("FactionFrom")
+  relationshipsTo     FactionRelationship[]       @relation("FactionTo")
+  historicEvents      FactionHistoricEvent[]
 
   quests Quest[]
 
@@ -1421,7 +1470,10 @@ model Faction {
 
 model FactionRank {
   id                   String             @id @default(uuid())
+  seeded               Boolean            @default(false)
   name                 String
+  description          String?            @db.Text
+  color                String?
   imagePath            String?
   levelLow             Int
   levelHigh            Int
@@ -1487,6 +1539,8 @@ model FactionContinentPresence {
   id                   String    @id @default(uuid())
   influenceLevel       String? // Example: "MINOR", "MODERATE", "MAJOR", "DOMINANT", "HIDDEN"
   description          String?   @db.Text
+  seeded               Boolean   @default(false)
+  activities           String[]
   additionalProperties Json?
   deleted              Boolean   @default(false)
   factionId            String
@@ -1495,6 +1549,22 @@ model FactionContinentPresence {
   continent            Continent @relation(fields: [continentId], references: [id])
 
   @@unique([factionId, continentId])
+}
+
+model FactionRegionRelationship {
+  id                   String   @id @default(uuid())
+  description          String?  @db.Text
+  seeded               Boolean  @default(false)
+  activites            String[]
+  relationshipType     String // e.g., "ALLIED", "HOSTILE", "NEUTRAL", "CONTROLS", etc.
+  additionalProperties Json?
+  deleted              Boolean  @default(false)
+  factionId            String
+  faction              Faction  @relation(fields: [factionId], references: [id])
+  regionId             String
+  region               Region   @relation(fields: [regionId], references: [id])
+
+  @@unique([factionId, regionId])
 }
 
 model FactionBase {
@@ -1509,6 +1579,10 @@ model FactionBase {
   deleted              Boolean    @default(false)
   factionId            String
   faction              Faction    @relation(fields: [factionId], references: [id])
+  continentId          String?
+  continent            Continent? @relation(fields: [continentId], references: [id])
+  regionId             String?
+  region               Region?    @relation(fields: [regionId], references: [id])
   townId               String?
   town                 Town?      @relation(fields: [townId], references: [id])
   graveyardId          String?
@@ -1553,15 +1627,17 @@ model CharacterFactionRelationship {
 
 // Faction-Town Relationships
 model FactionTownRelationship {
-  id                   String  @id @default(uuid())
-  description          String? @db.Text
+  id                   String   @id @default(uuid())
+  description          String?  @db.Text
+  activites            String[]
+  seeded               Boolean  @default(false)
   relationshipType     String // e.g., "ALLIED", "HOSTILE", "NEUTRAL", "CONTROLS", etc.
   additionalProperties Json?
-  deleted              Boolean @default(false)
+  deleted              Boolean  @default(false)
   factionId            String
-  faction              Faction @relation(fields: [factionId], references: [id])
+  faction              Faction  @relation(fields: [factionId], references: [id])
   townId               String
-  town                 Town    @relation(fields: [townId], references: [id])
+  town                 Town     @relation(fields: [townId], references: [id])
 
   @@unique([factionId, townId])
 }
@@ -1569,12 +1645,14 @@ model FactionTownRelationship {
 // Faction Historic Events
 model FactionHistoricEvent {
   id                   String  @id @default(uuid())
+  seeded               Boolean @default(false)
   name                 String
   description          String  @db.Text
   eventType            String // e.g., "FOUNDING", "LEADERSHIP_CHANGE", "ENEMY_DECLARED", "ALLY_FORMED", "ACHIEVEMENT", "MILESTONE"
   additionalProperties Json?
   deleted              Boolean @default(false)
   eventDate            String?
+  eventDateRange       String?
 
   factionId String
   faction   Faction @relation(fields: [factionId], references: [id])
@@ -1636,6 +1714,7 @@ model CreatureType {
   continents           ContinentCreatureType[]
   regions              RegionCreatureType[]
   characters           Character[]
+  creatures            Creature[]
   legendaryCreatures   LegendaryCreature[]
 }
 
@@ -1652,7 +1731,47 @@ model CreatureSize {
   creatureTypes        CreatureType[]      @relation("CreatureTypeCommonSizes")
   races                Race[]
   characters           Character[]
+  creatures            Creature[]
   legendaryCreatures   LegendaryCreature[]
+}
+
+model Creature {
+  id                   String              @id @default(uuid())
+  name                 String
+  description          String              @db.Text
+  packSize             Int?
+  habitat              String?
+  behavior             String?             @db.Text
+  diet                 String?
+  averageSize          String?
+  averageWeight        String?
+  creatureSizeId       String?
+  creatureSize         CreatureSize?       @relation(fields: [creatureSizeId], references: [id])
+  lifespan             String?
+  dangerLevel          Int?
+  seeded               Boolean             @default(false)
+  additionalProperties Json?
+  deleted              Boolean             @default(false)
+  creatureTypeId       String
+  creatureType         CreatureType        @relation(fields: [creatureTypeId], references: [id])
+  legendaryCreatures   LegendaryCreature[]
+  worlds               World[]
+  continents           Continent[]
+  regions              Region[]
+  powers               Power[]
+  predatorLinks        CreatureFoodChain[] @relation("predatorLinks")
+  preyLinks            CreatureFoodChain[] @relation("preyLinks")
+}
+
+model CreatureFoodChain {
+  id         String @id @default(uuid())
+  predatorId String
+  preyId     String
+
+  predator Creature @relation("predatorLinks", fields: [predatorId], references: [id], map: "creaturefoodchain_predator_fkey")
+  prey     Creature @relation("preyLinks", fields: [preyId], references: [id], map: "creaturefoodchain_prey_fkey")
+
+  @@unique([predatorId, preyId])
 }
 
 enum LegendaryCreatureThreatLevel {
@@ -1675,6 +1794,7 @@ model LegendaryCreature {
   defeatStory          String?                      @db.Text
   legacy               String?                      @db.Text
   seeded               Boolean                      @default(false)
+  powers               Power[]
   additionalProperties Json?
   deleted              Boolean                      @default(false)
   creatureSizeId       String
@@ -1682,6 +1802,9 @@ model LegendaryCreature {
 
   creatureTypeId String
   creatureType   CreatureType @relation(fields: [creatureTypeId], references: [id])
+
+  creatureId String?
+  creature   Creature? @relation(fields: [creatureId], references: [id])
 
   continentId String
   continent   Continent @relation(fields: [continentId], references: [id])

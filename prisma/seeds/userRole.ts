@@ -20,6 +20,7 @@ export async function seedUserRoles(): Promise<UserRoles> {
             contentStructuresPerPillarLimit: -1,
             contentElementsPerStructureLimit: -1,
             contentItemsPerWorldLimit: -1,
+            apiCallLimitPerDay: -1,
         }),
         architect: await db.createUserRole({
             id: 'architect',
@@ -30,6 +31,7 @@ export async function seedUserRoles(): Promise<UserRoles> {
             contentStructuresPerPillarLimit: 100,
             contentElementsPerStructureLimit: 500,
             contentItemsPerWorldLimit: 1000,
+            apiCallLimitPerDay: 5000,
         }),
         designer: await db.createUserRole({
             id: 'designer',
@@ -40,6 +42,7 @@ export async function seedUserRoles(): Promise<UserRoles> {
             contentStructuresPerPillarLimit: 60,
             contentElementsPerStructureLimit: 200,
             contentItemsPerWorldLimit: 400,
+            apiCallLimitPerDay: 1000,
         }),
         drafter: await db.createUserRole({
             id: 'drafter',
@@ -50,6 +53,7 @@ export async function seedUserRoles(): Promise<UserRoles> {
             contentStructuresPerPillarLimit: 15,
             contentElementsPerStructureLimit: 20,
             contentItemsPerWorldLimit: 50,
+            apiCallLimitPerDay: 0,
         }),
     };
 }

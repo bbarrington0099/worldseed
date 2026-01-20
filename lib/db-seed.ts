@@ -425,6 +425,80 @@ export async function setCharacterFamilyGeneration(characterId: string, familyGe
     return db.setCharacterFamilyGeneration(characterId, familyGenerationId);
 }
 
+export async function setCharacterKingdomRuler(data: Prisma.CharacterKingdomRulerCreateInput): Promise<Prisma.CharacterKingdomRulerGetPayload<{}>> {
+    return db.setCharacterKingdomRuler(data, true);
+}
+
+export async function setCharacterContinentRuler(data: Prisma.CharacterContinentRulerCreateInput): Promise<Prisma.CharacterContinentRulerGetPayload<{}>> {
+    return db.setCharacterContinentRuler(data, true);
+}
+
+// ============================================================================
+// FACTIONS
+// ============================================================================
+
+export async function createFaction(data: Prisma.FactionCreateInput): Promise<Prisma.FactionGetPayload<{}>> {
+    const faction = await db.createFaction(data, true);
+    await prisma.$transaction(async (prisma) => {
+        const world = await prisma.world.findUnique({
+            where: { id: 'alabastria' },
+        });
+        if (world) {
+            await prisma.faction.update({
+                where: { id: faction.id },
+                data: {
+                    worlds: {
+                        connect: { id: world.id },
+                    },
+                },
+            });
+        }
+    });
+    return faction;
+}
+
+export async function createFactionRank(data: Prisma.FactionRankCreateInput): Promise<Prisma.FactionRankGetPayload<{}>> {
+    const factionRank = await prisma.factionRank.upsert({
+        where: { id: data.id },
+        create: { ...data, seeded: true },
+        update: data,
+    });
+    const faction = await prisma.faction.findUnique({
+		where: { id: 'huntbound-order' },
+	});
+    if (faction) {
+        await prisma.faction.update({
+			where: { id: faction.id },
+			data: {
+				factionRanks: {
+					connect: { id: factionRank.id },
+				},
+			},
+		});
+    }
+    return factionRank;
+}
+
+export async function createFactionHistoricEvent(data: Prisma.FactionHistoricEventCreateInput): Promise<Prisma.FactionHistoricEventGetPayload<{}>> {
+    return db.createFactionHistoricEvent(data, true);
+}
+
+export async function createFactionBase(data: Prisma.FactionBaseCreateInput): Promise<Prisma.FactionBaseGetPayload<{}>> {
+    return db.createFactionBase(data, true);
+}
+
+export async function createFactionContinentPresence(data: Prisma.FactionContinentPresenceUncheckedCreateInput): Promise<Prisma.FactionContinentPresenceGetPayload<{}>> {
+    return db.createFactionContinentPresence(data, true);
+}
+
+export async function createFactionRegionRelationship(data: Prisma.FactionRegionRelationshipUncheckedCreateInput): Promise<Prisma.FactionRegionRelationshipGetPayload<{}>> {
+    return db.createFactionRegionRelationship(data, true);
+}
+
+export async function createFactionTownRelationship(data: Prisma.FactionTownRelationshipUncheckedCreateInput): Promise<Prisma.FactionTownRelationshipGetPayload<{}>> {
+    return db.createFactionTownRelationship(data, true);
+}
+
 // ============================================================================
 // USERS
 // ============================================================================

@@ -224,12 +224,21 @@ async function main() {
         const racesSubclasses: seed.RacesSubclasses = await seed.setRacesSubclasses({ races, subclasses });
         const subclassesContinents: seed.SubclassesContinents = await seed.setSubclassesContinents({ subclasses, continents });
         const subracesSubclasses: seed.SubracesSubclasses = await seed.setSubracesSubclasses({ subraces, subclasses });
+        console.log('🏰 Seeding Faction Information...');
+        const factions: seed.Factions = await seed.seedFactions();
+        const factionRanks: seed.FactionRanks = await seed.seedFactionRanks();
+        const factionHistoricEvents: seed.FactionHistoricEvents = await seed.seedFactionHistoricEvents({ factions });
+        const factionBases: seed.FactionBases = await seed.seedFactionBases({ factions, continents, regions, towns });
+        await seed.setFactionContinentPresences({ factions, continents });
+        await seed.setFactionRegionRelationships({ factions, regions });
         console.log('🧝‍♂️ Seeding Character Information...');
         const characters: seed.Characters = await seed.seedCharacters({ races, subraces, classes, subclasses, languages, deities, continents, towns, creatureSizes, creatureTypes });
         const familyTrees: seed.FamilyTrees = await seed.seedFamilyTrees();
         const familyGenerations: seed.FamilyGenerations = await seed.seedFamilyGenerations({ familyTrees });
         await seed.setCharacterFamilyGenerations({ characters, familyGenerations });
         const characterRelationships: seed.CharacterRelationships = await seed.seedCharacterRelationships({ characters, familyTrees });
+        await seed.setCharacterKingdomRulers({ characters, kingdoms });
+        await seed.setCharacterContinentRulers({ characters, continents });
     } catch (error) {
         console.error(`   ❌ Error seeding data:`, error);
         process.exit(1);

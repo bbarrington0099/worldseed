@@ -609,3 +609,79 @@ export async function setCharacterFamilyGeneration(characterId: string, familyGe
     }
     return true;
 }
+
+export async function setCharacterKingdomRuler(data: Prisma.CharacterKingdomRulerCreateInput, seeded: boolean = false): Promise<Prisma.CharacterKingdomRulerGetPayload<{}>> {
+    return await prisma.characterKingdomRuler.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function setCharacterContinentRuler(data: Prisma.CharacterContinentRulerCreateInput, seeded: boolean = false): Promise<Prisma.CharacterContinentRulerGetPayload<{}>> {
+    return await prisma.characterContinentRuler.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+// ============================================================================
+// FACTIONS
+// ============================================================================
+
+export async function createFaction(data: Prisma.FactionCreateInput, seeded: boolean = false): Promise<Prisma.FactionGetPayload<{}>> {
+    return await prisma.faction.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createFactionRank(data: Prisma.FactionRankCreateInput, seeded: boolean = false): Promise<Prisma.FactionRankGetPayload<{}>> {
+    return await prisma.factionRank.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createFactionHistoricEvent(data: Prisma.FactionHistoricEventCreateInput, seeded: boolean = false): Promise<Prisma.FactionHistoricEventGetPayload<{}>> {
+    return await prisma.factionHistoricEvent.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createFactionBase(data: Prisma.FactionBaseCreateInput, seeded: boolean = false): Promise<Prisma.FactionBaseGetPayload<{}>> {
+    return await prisma.factionBase.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createFactionContinentPresence(data: Prisma.FactionContinentPresenceUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.FactionContinentPresenceGetPayload<{}>> {
+    return await prisma.factionContinentPresence.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createFactionRegionRelationship(data: Prisma.FactionRegionRelationshipUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.FactionRegionRelationshipGetPayload<{}>> {
+    return await prisma.factionRegionRelationship.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}
+
+export async function createFactionTownRelationship(data: Prisma.FactionTownRelationshipUncheckedCreateInput, seeded: boolean = false): Promise<Prisma.FactionTownRelationshipGetPayload<{}>> {
+    return await prisma.factionTownRelationship.upsert({
+        where: { id: data.id },
+        update: data,
+        create: { ...data, seeded },
+    });
+}

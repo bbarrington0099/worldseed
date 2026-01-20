@@ -32,6 +32,10 @@ export * from './character';
 export * from './familyTree';
 export * from './familyGeneration';
 export * from './characterRelationship';
+export * from './faction'
+export * from './factionRank';
+export * from './factionHistoricEvent';
+export * from './factionBase';
 
 export * from './connections/kingdomCapitals';
 export * from './connections/continentCaptials';
@@ -49,5 +53,9 @@ export * from './connections/classDeities';
 export * from './connections/subclassDeities';
 export * from './connections/continentDeities';
 export * from './connections/characterFamilyGenerations';
+export * from './connections/characterKingdomRuler';
+export * from './connections/characterContinentRuler';
+export * from './connections/factionContinentPresence';
+export * from './connections/factionRegionRelationship';
 
 export * from './constants/color';

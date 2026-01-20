@@ -80,4 +80,11 @@ export const Colors = {
 	PINK: new Color('FFC0CB'),
 	YELLOW: new Color('FFFF00'),
 	WHITE: new Color('FFFFFF'),
+	COAL_RANK: new Color('2C2C2C'),
+	COPPER_RANK: new Color('B87333'),
+	IRON_RANK: new Color('708090'),
+	SILVER_RANK: new Color('C0C0C0'),
+	GOLD_RANK: new Color('FFD700'),
+	PLATINUM_RANK: new Color('E5E4E2'),
+	MITHRAL_RANK: new Color('B0C4DE'),
 }

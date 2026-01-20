@@ -152,7 +152,7 @@ export async function seedWarConflicts(params: SeedWarConflictsParams): Promise<
             name: "Great Mining War",
             description: "Major conflicts over control of the richest mining regions, establishing Maltman as the primary mining center of Kamalatman.",
             startDate: "200",
-            endDate: "300",
+            endDate: "680",
             status: WarConflictStatus.RESOLVED,
             outcome: "Maltman's victory solidified its role as the mining hub of Kamalatman, controlling vital mineral resources and trade routes.",
             continentsInvolved: {
