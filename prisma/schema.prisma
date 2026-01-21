@@ -1475,8 +1475,6 @@ model FactionRank {
   description          String?            @db.Text
   color                String?
   imagePath            String?
-  levelLow             Int
-  levelHigh            Int
   additionalProperties Json?
   deleted              Boolean            @default(false)
   faction              Faction[]
